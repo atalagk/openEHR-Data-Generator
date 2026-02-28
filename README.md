@@ -1,4 +1,4 @@
-# Genkidata
+# openEHR Data Generator
 OpenEHR sample data population tool.
 Uses a provided set of compositions to populate a openEHR CDR by duplicating them. 
 The amount of compositions and EHRs is defined by user input. 
