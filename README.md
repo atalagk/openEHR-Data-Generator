@@ -15,46 +15,71 @@ The amount of Compositions and EHRs is defined by user input.
 * Running openEHR server (e.g. ehrbase) or openEHR v1 API wrapper to store em as canonical json.
 * python3.12
 
-## Setup 
-Assumptions:
+### Assumptions:
+### Assumptions:
 - Project is located on a LOCAL drive (not Google Drive / OneDrive)
 - Python 3.12 is installed
 - requirements.txt exists
 - gen-openehr.py is the entry point
 
+### Setup
 
-1. Open Terminal (Bash /PowerShell)
-
-
+1. Open Terminal (Bash / PowerShell)
 2. Set current location to project directory
-
-
 3. Verify Python 3.12 is available; if not install
 
-   py -3.12 -V
-   Expected: Python 3.12.x
+#### Windows
+
+> `py -3.12 -V`
+
+#### Linux
+
+> `python3.12 -V`
+
+   Expected: Python 3.12.x; if not found install
+
+   **Install Python 3.12**
+
+#### Windows
+
+> Download and install from Web
+
+#### Linux
+
+> sudo apt update
+
+> sudo apt install python3.12 python3.12-venv
 
 
 4. Create a new virtual environment using Python 3.12
 
-   py -3.12 -m venv venv
+#### Windows
+> py -3.12 -m venv venv
+
+#### Linux
+> python3.12 -m venv venv
 
 
 5. Activate the virtual environment
 
-   .\venv\Scripts\Activate.ps1
-   Expected prompt prefix: (venv)
+#### Windows
+
+>  .\venv\Scripts\Activate.ps1
+
+#### Linux
+> source venv/bin/activate
+
+Expected prompt prefix: (venv)
 
 6. Upgrade pip and install dependencies
 
-   python -m pip install --upgrade pip setuptools wheel
+>  python -m pip install --upgrade pip setuptools wheel
 
-   python -m pip install -r requirements.txt
+>  python -m pip install -r requirements.txt
 
 
 7. Run the application
-
-   python gen-openehr.py
+>  python gen-openehr.py
 
 
 Important rules:
