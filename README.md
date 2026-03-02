@@ -6,6 +6,7 @@ It has significant changes:
 - instead of just duplicating existing Compositions, it uses:
     - An NLP library to change text to synonyms for DV_TEXT. While not perfect from a clinical semantics point of view, it's much better than lorem ipsum stuff!
     - For quantities it changes values randomly between -15 <> +15 percent so it's likely to be clinically plausable.
+- in addition a new feature to create canonical Compositions from Webtemplates
 
 Compositions are taken from test data from https://github.com/ehrbase/openEHR_SDK so they pretty much cover all possible variations.
 
@@ -16,11 +17,10 @@ The amount of Compositions and EHRs is defined by user input.
 * python3.12
 
 ### Assumptions:
-### Assumptions:
 - Project is located on a LOCAL drive (not Google Drive / OneDrive)
 - Python 3.12 is installed
 - requirements.txt exists
-- gen-openehr.py is the entry point
+- gen-openehr-wt.py is the entry point
 
 ### Setup
 
@@ -78,9 +78,15 @@ Expected prompt prefix: (venv)
 >  python -m pip install -r requirements.txt
 
 
-7. Run the application
->  python gen-openehr.py
+## Run the application
+>  python gen-openehr-wt.py
 
+It will prompt 3 options:
+1. API Upload
+2. Jitter Existing
+3. Stored (Source Webtemplates) 
+
+Note: option 2 uses existing Compositions (\source_models\compositions) but rather than just duplicating in the original app it creates new values)
 
 Important rules:
 - Do NOT move the venv directory after creation
