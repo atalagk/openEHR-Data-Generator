@@ -1,0 +1,3573 @@
+{
+  "_type": "COMPOSITION",
+  "name": {
+    "_type": "DV_TEXT",
+    "value": "Deterioration assessment"
+  },
+  "archetype_details": {
+    "archetype_id": {
+      "value": "openEHR-EHR-COMPOSITION.encounter.v1"
+    },
+    "template_id": {
+      "value": "EREACT - Deterioriation assessment.v0"
+    },
+    "rm_version": "1.0.4"
+  },
+  "language": {
+    "_type": "CODE_PHRASE",
+    "terminology_id": {
+      "_type": "TERMINOLOGY_ID",
+      "value": "ISO_639-1"
+    },
+    "code_string": "en"
+  },
+  "territory": {
+    "_type": "CODE_PHRASE",
+    "terminology_id": {
+      "_type": "TERMINOLOGY_ID",
+      "value": "ISO_3166-1"
+    },
+    "code_string": "DE"
+  },
+  "category": {
+    "_type": "DV_CODED_TEXT",
+    "value": "event",
+    "defining_code": {
+      "_type": "CODE_PHRASE",
+      "terminology_id": {
+        "_type": "TERMINOLOGY_ID",
+        "value": "openehr"
+      },
+      "code_string": "433"
+    }
+  },
+  "composer": {
+    "_type": "PARTY_IDENTIFIED",
+    "name": "Max Mustermann"
+  },
+  "context": {
+    "_type": "EVENT_CONTEXT",
+    "start_time": {
+      "_type": "DV_DATE_TIME",
+      "value": "2022-02-03T04:05:06"
+    },
+    "end_time": {
+      "_type": "DV_DATE_TIME",
+      "value": "2022-02-03T04:05:06"
+    },
+    "setting": {
+      "_type": "DV_CODED_TEXT",
+      "value": "home",
+      "defining_code": {
+        "_type": "CODE_PHRASE",
+        "terminology_id": {
+          "_type": "TERMINOLOGY_ID",
+          "value": "openehr"
+        },
+        "code_string": "225"
+      }
+    },
+    "health_care_facility": {
+      "_type": "PARTY_IDENTIFIED",
+      "name": "DOE, John"
+    }
+  },
+  "content": [
+    {
+      "_type": "SECTION",
+      "name": {
+        "_type": "DV_TEXT",
+        "value": "Situation"
+      },
+      "archetype_details": {
+        "archetype_id": {
+          "value": "openEHR-EHR-SECTION.adhoc.v1"
+        },
+        "rm_version": "1.0.4"
+      },
+      "items": [
+        {
+          "_type": "OBSERVATION",
+          "name": {
+            "_type": "DV_TEXT",
+            "value": "Story/History"
+          },
+          "archetype_details": {
+            "archetype_id": {
+              "value": "openEHR-EHR-OBSERVATION.story.v1"
+            },
+            "rm_version": "1.0.4"
+          },
+          "language": {
+            "_type": "CODE_PHRASE",
+            "terminology_id": {
+              "_type": "TERMINOLOGY_ID",
+              "value": "ISO_639-1"
+            },
+            "code_string": "en"
+          },
+          "encoding": {
+            "_type": "CODE_PHRASE",
+            "terminology_id": {
+              "_type": "TERMINOLOGY_ID",
+              "value": "IANA_character-sets"
+            },
+            "code_string": "ISO-10646-UTF-1"
+          },
+          "workflow_id": {
+            "_type": "OBJECT_REF",
+            "namespace": "unknown",
+            "type": "ANY",
+            "id": {
+              "_type": "GENERIC_ID",
+              "value": "8555d58d-1289-3da6-b3af-3bc25b103d1f",
+              "scheme": "scheme"
+            }
+          },
+          "subject": {
+            "_type": "PARTY_SELF"
+          },
+          "provider": {
+            "_type": "PARTY_SELF"
+          },
+          "guideline_id": {
+            "_type": "OBJECT_REF",
+            "namespace": "unknown",
+            "type": "ANY",
+            "id": {
+              "_type": "GENERIC_ID",
+              "value": "fba43cb3-bd33-3907-8e4c-73a60b433a9c",
+              "scheme": "scheme"
+            }
+          },
+          "data": {
+            "name": {
+              "_type": "DV_TEXT",
+              "value": "Event Series"
+            },
+            "origin": {
+              "_type": "DV_DATE_TIME",
+              "value": "2022-02-03T04:05:06"
+            },
+            "period": {
+              "_type": "DV_DURATION",
+              "value": "PT0S"
+            },
+            "duration": {
+              "_type": "DV_DURATION",
+              "value": "PT0S"
+            },
+            "events": [
+              {
+                "_type": "INTERVAL_EVENT",
+                "name": {
+                  "_type": "DV_TEXT",
+                  "value": "Any event"
+                },
+                "time": {
+                  "_type": "DV_DATE_TIME",
+                  "value": "2022-02-03T04:05:06"
+                },
+                "data": {
+                  "_type": "ITEM_TREE",
+                  "name": {
+                    "_type": "DV_TEXT",
+                    "value": "Tree"
+                  },
+                  "items": [
+                    {
+                      "_type": "ELEMENT",
+                      "name": {
+                        "_type": "DV_TEXT",
+                        "value": "Soft signs"
+                      },
+                      "value": {
+                        "_type": "DV_TEXT",
+                        "value": "Just not themselves"
+                      },
+                      "archetype_node_id": "at0004"
+                    },
+                    {
+                      "_type": "ELEMENT",
+                      "name": {
+                        "_type": "DV_TEXT",
+                        "value": "Notes"
+                      },
+                      "value": {
+                        "_type": "DV_TEXT",
+                        "value": "Lorem ipsum"
+                      },
+                      "archetype_node_id": "at0004"
+                    }
+                  ],
+                  "archetype_node_id": "at0003"
+                },
+                "width": {
+                  "_type": "DV_DURATION",
+                  "value": "PT42H"
+                },
+                "math_function": {
+                  "_type": "DV_CODED_TEXT",
+                  "value": "minimum",
+                  "defining_code": {
+                    "_type": "CODE_PHRASE",
+                    "terminology_id": {
+                      "_type": "TERMINOLOGY_ID",
+                      "value": "openehr"
+                    },
+                    "code_string": "145"
+                  }
+                },
+                "archetype_node_id": "at0002"
+              }
+            ],
+            "archetype_node_id": "at0001"
+          },
+          "archetype_node_id": "openEHR-EHR-OBSERVATION.story.v1"
+        }
+      ],
+      "archetype_node_id": "openEHR-EHR-SECTION.adhoc.v1"
+    },
+    {
+      "_type": "SECTION",
+      "name": {
+        "_type": "DV_TEXT",
+        "value": "Background"
+      },
+      "archetype_details": {
+        "archetype_id": {
+          "value": "openEHR-EHR-SECTION.adhoc.v1"
+        },
+        "rm_version": "1.0.4"
+      },
+      "items": [
+        {
+          "_type": "OBSERVATION",
+          "name": {
+            "_type": "DV_TEXT",
+            "value": "Height"
+          },
+          "archetype_details": {
+            "archetype_id": {
+              "value": "openEHR-EHR-OBSERVATION.height.v2"
+            },
+            "rm_version": "1.0.4"
+          },
+          "language": {
+            "_type": "CODE_PHRASE",
+            "terminology_id": {
+              "_type": "TERMINOLOGY_ID",
+              "value": "ISO_639-1"
+            },
+            "code_string": "en"
+          },
+          "encoding": {
+            "_type": "CODE_PHRASE",
+            "terminology_id": {
+              "_type": "TERMINOLOGY_ID",
+              "value": "IANA_character-sets"
+            },
+            "code_string": "ISO-10646-UTF-1"
+          },
+          "workflow_id": {
+            "_type": "OBJECT_REF",
+            "namespace": "unknown",
+            "type": "ANY",
+            "id": {
+              "_type": "GENERIC_ID",
+              "value": "b357298b-c916-36f6-8b45-1ad6d1c5b074",
+              "scheme": "scheme"
+            }
+          },
+          "subject": {
+            "_type": "PARTY_SELF"
+          },
+          "provider": {
+            "_type": "PARTY_SELF"
+          },
+          "guideline_id": {
+            "_type": "OBJECT_REF",
+            "namespace": "unknown",
+            "type": "ANY",
+            "id": {
+              "_type": "GENERIC_ID",
+              "value": "2a9a84f6-d1f0-3291-aa27-b177e5345e7e",
+              "scheme": "scheme"
+            }
+          },
+          "data": {
+            "name": {
+              "_type": "DV_TEXT",
+              "value": "history"
+            },
+            "origin": {
+              "_type": "DV_DATE_TIME",
+              "value": "2022-02-03T04:05:06"
+            },
+            "period": {
+              "_type": "DV_DURATION",
+              "value": "PT0S"
+            },
+            "duration": {
+              "_type": "DV_DURATION",
+              "value": "PT0S"
+            },
+            "events": [
+              {
+                "_type": "INTERVAL_EVENT",
+                "name": {
+                  "_type": "DV_TEXT",
+                  "value": "Any event"
+                },
+                "time": {
+                  "_type": "DV_DATE_TIME",
+                  "value": "2022-02-03T04:05:06"
+                },
+                "data": {
+                  "_type": "ITEM_TREE",
+                  "name": {
+                    "_type": "DV_TEXT",
+                    "value": "Simple"
+                  },
+                  "items": [
+                    {
+                      "_type": "ELEMENT",
+                      "name": {
+                        "_type": "DV_TEXT",
+                        "value": "Height/Length"
+                      },
+                      "value": {
+                        "_type": "DV_QUANTITY",
+                        "units": "cm",
+                        "magnitude": 500.0
+                      },
+                      "archetype_node_id": "at0004"
+                    }
+                  ],
+                  "archetype_node_id": "at0003"
+                },
+                "width": {
+                  "_type": "DV_DURATION",
+                  "value": "PT42H"
+                },
+                "math_function": {
+                  "_type": "DV_CODED_TEXT",
+                  "value": "minimum",
+                  "defining_code": {
+                    "_type": "CODE_PHRASE",
+                    "terminology_id": {
+                      "_type": "TERMINOLOGY_ID",
+                      "value": "openehr"
+                    },
+                    "code_string": "145"
+                  }
+                },
+                "archetype_node_id": "at0002"
+              }
+            ],
+            "archetype_node_id": "at0001"
+          },
+          "archetype_node_id": "openEHR-EHR-OBSERVATION.height.v2"
+        },
+        {
+          "_type": "OBSERVATION",
+          "name": {
+            "_type": "DV_TEXT",
+            "value": "Weight"
+          },
+          "archetype_details": {
+            "archetype_id": {
+              "value": "openEHR-EHR-OBSERVATION.body_weight.v2"
+            },
+            "rm_version": "1.0.4"
+          },
+          "language": {
+            "_type": "CODE_PHRASE",
+            "terminology_id": {
+              "_type": "TERMINOLOGY_ID",
+              "value": "ISO_639-1"
+            },
+            "code_string": "en"
+          },
+          "encoding": {
+            "_type": "CODE_PHRASE",
+            "terminology_id": {
+              "_type": "TERMINOLOGY_ID",
+              "value": "IANA_character-sets"
+            },
+            "code_string": "ISO-10646-UTF-1"
+          },
+          "workflow_id": {
+            "_type": "OBJECT_REF",
+            "namespace": "unknown",
+            "type": "ANY",
+            "id": {
+              "_type": "GENERIC_ID",
+              "value": "7280be8e-a611-3164-8b18-344d6b6fa5ad",
+              "scheme": "scheme"
+            }
+          },
+          "subject": {
+            "_type": "PARTY_SELF"
+          },
+          "provider": {
+            "_type": "PARTY_SELF"
+          },
+          "guideline_id": {
+            "_type": "OBJECT_REF",
+            "namespace": "unknown",
+            "type": "ANY",
+            "id": {
+              "_type": "GENERIC_ID",
+              "value": "874e2004-9581-3e8d-82b4-e2039e4a581c",
+              "scheme": "scheme"
+            }
+          },
+          "data": {
+            "name": {
+              "_type": "DV_TEXT",
+              "value": "history"
+            },
+            "origin": {
+              "_type": "DV_DATE_TIME",
+              "value": "2022-02-03T04:05:06"
+            },
+            "period": {
+              "_type": "DV_DURATION",
+              "value": "PT0S"
+            },
+            "duration": {
+              "_type": "DV_DURATION",
+              "value": "PT0S"
+            },
+            "events": [
+              {
+                "_type": "INTERVAL_EVENT",
+                "name": {
+                  "_type": "DV_TEXT",
+                  "value": "Any event"
+                },
+                "time": {
+                  "_type": "DV_DATE_TIME",
+                  "value": "2022-02-03T04:05:06"
+                },
+                "data": {
+                  "_type": "ITEM_TREE",
+                  "name": {
+                    "_type": "DV_TEXT",
+                    "value": "Simple"
+                  },
+                  "items": [
+                    {
+                      "_type": "ELEMENT",
+                      "name": {
+                        "_type": "DV_TEXT",
+                        "value": "Weight"
+                      },
+                      "value": {
+                        "_type": "DV_QUANTITY",
+                        "units": "kg",
+                        "magnitude": 500.0
+                      },
+                      "archetype_node_id": "at0004"
+                    }
+                  ],
+                  "archetype_node_id": "at0001"
+                },
+                "width": {
+                  "_type": "DV_DURATION",
+                  "value": "PT42H"
+                },
+                "math_function": {
+                  "_type": "DV_CODED_TEXT",
+                  "value": "minimum",
+                  "defining_code": {
+                    "_type": "CODE_PHRASE",
+                    "terminology_id": {
+                      "_type": "TERMINOLOGY_ID",
+                      "value": "openehr"
+                    },
+                    "code_string": "145"
+                  }
+                },
+                "archetype_node_id": "at0003"
+              }
+            ],
+            "archetype_node_id": "at0002"
+          },
+          "archetype_node_id": "openEHR-EHR-OBSERVATION.body_weight.v2"
+        },
+        {
+          "_type": "OBSERVATION",
+          "name": {
+            "_type": "DV_TEXT",
+            "value": "Frailty"
+          },
+          "archetype_details": {
+            "archetype_id": {
+              "value": "openEHR-EHR-OBSERVATION.clinical_frailty_scale.v1"
+            },
+            "rm_version": "1.0.4"
+          },
+          "language": {
+            "_type": "CODE_PHRASE",
+            "terminology_id": {
+              "_type": "TERMINOLOGY_ID",
+              "value": "ISO_639-1"
+            },
+            "code_string": "en"
+          },
+          "encoding": {
+            "_type": "CODE_PHRASE",
+            "terminology_id": {
+              "_type": "TERMINOLOGY_ID",
+              "value": "IANA_character-sets"
+            },
+            "code_string": "ISO-10646-UTF-1"
+          },
+          "workflow_id": {
+            "_type": "OBJECT_REF",
+            "namespace": "unknown",
+            "type": "ANY",
+            "id": {
+              "_type": "GENERIC_ID",
+              "value": "d8772b6f-0dde-3dd4-803c-f0f0b29856a5",
+              "scheme": "scheme"
+            }
+          },
+          "subject": {
+            "_type": "PARTY_SELF"
+          },
+          "provider": {
+            "_type": "PARTY_SELF"
+          },
+          "guideline_id": {
+            "_type": "OBJECT_REF",
+            "namespace": "unknown",
+            "type": "ANY",
+            "id": {
+              "_type": "GENERIC_ID",
+              "value": "56b10702-61eb-3215-bf57-a11fd52d1e8d",
+              "scheme": "scheme"
+            }
+          },
+          "data": {
+            "name": {
+              "_type": "DV_TEXT",
+              "value": "History"
+            },
+            "origin": {
+              "_type": "DV_DATE_TIME",
+              "value": "2022-02-03T04:05:06"
+            },
+            "period": {
+              "_type": "DV_DURATION",
+              "value": "PT0S"
+            },
+            "duration": {
+              "_type": "DV_DURATION",
+              "value": "PT0S"
+            },
+            "events": [
+              {
+                "_type": "POINT_EVENT",
+                "name": {
+                  "_type": "DV_TEXT",
+                  "value": "Any point in time event"
+                },
+                "time": {
+                  "_type": "DV_DATE_TIME",
+                  "value": "2022-02-03T04:05:06"
+                },
+                "data": {
+                  "_type": "ITEM_TREE",
+                  "name": {
+                    "_type": "DV_TEXT",
+                    "value": "Tree"
+                  },
+                  "items": [
+                    {
+                      "_type": "ELEMENT",
+                      "name": {
+                        "_type": "DV_TEXT",
+                        "value": "Assessment"
+                      },
+                      "value": {
+                        "_type": "DV_ORDINAL",
+                        "symbol": {
+                          "_type": "DV_CODED_TEXT",
+                          "value": "Very Fit",
+                          "defining_code": {
+                            "_type": "CODE_PHRASE",
+                            "terminology_id": {
+                              "_type": "TERMINOLOGY_ID",
+                              "value": "external"
+                            },
+                            "code_string": "at0005"
+                          }
+                        },
+                        "value": 1
+                      },
+                      "archetype_node_id": "at0004"
+                    }
+                  ],
+                  "archetype_node_id": "at0003"
+                },
+                "archetype_node_id": "at0002"
+              }
+            ],
+            "archetype_node_id": "at0001"
+          },
+          "archetype_node_id": "openEHR-EHR-OBSERVATION.clinical_frailty_scale.v1"
+        },
+        {
+          "_type": "EVALUATION",
+          "name": {
+            "_type": "DV_TEXT",
+            "value": "Past history"
+          },
+          "archetype_details": {
+            "archetype_id": {
+              "value": "openEHR-EHR-EVALUATION.clinical_synopsis.v1"
+            },
+            "rm_version": "1.0.4"
+          },
+          "language": {
+            "_type": "CODE_PHRASE",
+            "terminology_id": {
+              "_type": "TERMINOLOGY_ID",
+              "value": "ISO_639-1"
+            },
+            "code_string": "en"
+          },
+          "encoding": {
+            "_type": "CODE_PHRASE",
+            "terminology_id": {
+              "_type": "TERMINOLOGY_ID",
+              "value": "IANA_character-sets"
+            },
+            "code_string": "ISO-10646-UTF-1"
+          },
+          "workflow_id": {
+            "_type": "OBJECT_REF",
+            "namespace": "unknown",
+            "type": "ANY",
+            "id": {
+              "_type": "GENERIC_ID",
+              "value": "8baa06ab-0aa3-3798-bdd9-12bb28ec78ec",
+              "scheme": "scheme"
+            }
+          },
+          "subject": {
+            "_type": "PARTY_SELF"
+          },
+          "provider": {
+            "_type": "PARTY_SELF"
+          },
+          "guideline_id": {
+            "_type": "OBJECT_REF",
+            "namespace": "unknown",
+            "type": "ANY",
+            "id": {
+              "_type": "GENERIC_ID",
+              "value": "7360b3e6-918c-3758-b633-fe09056bbfb9",
+              "scheme": "scheme"
+            }
+          },
+          "time_asserted": {
+            "_type": "DV_DATE_TIME",
+            "value": "2022-02-03T04:05:06"
+          },
+          "data": {
+            "_type": "ITEM_TREE",
+            "name": {
+              "_type": "DV_TEXT",
+              "value": "List"
+            },
+            "items": [
+              {
+                "_type": "ELEMENT",
+                "name": {
+                  "_type": "DV_TEXT",
+                  "value": "Synopsis"
+                },
+                "value": {
+                  "_type": "DV_TEXT",
+                  "value": "Lorem ipsum"
+                },
+                "archetype_node_id": "at0002"
+              }
+            ],
+            "archetype_node_id": "at0001"
+          },
+          "archetype_node_id": "openEHR-EHR-EVALUATION.clinical_synopsis.v1"
+        },
+        {
+          "_type": "EVALUATION",
+          "name": {
+            "_type": "DV_TEXT",
+            "value": "Medication"
+          },
+          "archetype_details": {
+            "archetype_id": {
+              "value": "openEHR-EHR-EVALUATION.clinical_synopsis.v1"
+            },
+            "rm_version": "1.0.4"
+          },
+          "language": {
+            "_type": "CODE_PHRASE",
+            "terminology_id": {
+              "_type": "TERMINOLOGY_ID",
+              "value": "ISO_639-1"
+            },
+            "code_string": "en"
+          },
+          "encoding": {
+            "_type": "CODE_PHRASE",
+            "terminology_id": {
+              "_type": "TERMINOLOGY_ID",
+              "value": "IANA_character-sets"
+            },
+            "code_string": "ISO-10646-UTF-1"
+          },
+          "workflow_id": {
+            "_type": "OBJECT_REF",
+            "namespace": "unknown",
+            "type": "ANY",
+            "id": {
+              "_type": "GENERIC_ID",
+              "value": "e6f5b6df-3b52-3c1a-a620-0958f3095757",
+              "scheme": "scheme"
+            }
+          },
+          "subject": {
+            "_type": "PARTY_SELF"
+          },
+          "provider": {
+            "_type": "PARTY_SELF"
+          },
+          "guideline_id": {
+            "_type": "OBJECT_REF",
+            "namespace": "unknown",
+            "type": "ANY",
+            "id": {
+              "_type": "GENERIC_ID",
+              "value": "f31fc549-f7c7-3a9d-a5ab-8232c620a7df",
+              "scheme": "scheme"
+            }
+          },
+          "time_asserted": {
+            "_type": "DV_DATE_TIME",
+            "value": "2022-02-03T04:05:06"
+          },
+          "data": {
+            "_type": "ITEM_TREE",
+            "name": {
+              "_type": "DV_TEXT",
+              "value": "List"
+            },
+            "items": [
+              {
+                "_type": "ELEMENT",
+                "name": {
+                  "_type": "DV_TEXT",
+                  "value": "Synopsis"
+                },
+                "value": {
+                  "_type": "DV_TEXT",
+                  "value": "Lorem ipsum"
+                },
+                "archetype_node_id": "at0002"
+              }
+            ],
+            "archetype_node_id": "at0001"
+          },
+          "archetype_node_id": "openEHR-EHR-EVALUATION.clinical_synopsis.v1"
+        },
+        {
+          "_type": "EVALUATION",
+          "name": {
+            "_type": "DV_TEXT",
+            "value": "Allergies"
+          },
+          "archetype_details": {
+            "archetype_id": {
+              "value": "openEHR-EHR-EVALUATION.clinical_synopsis.v1"
+            },
+            "rm_version": "1.0.4"
+          },
+          "language": {
+            "_type": "CODE_PHRASE",
+            "terminology_id": {
+              "_type": "TERMINOLOGY_ID",
+              "value": "ISO_639-1"
+            },
+            "code_string": "en"
+          },
+          "encoding": {
+            "_type": "CODE_PHRASE",
+            "terminology_id": {
+              "_type": "TERMINOLOGY_ID",
+              "value": "IANA_character-sets"
+            },
+            "code_string": "ISO-10646-UTF-1"
+          },
+          "workflow_id": {
+            "_type": "OBJECT_REF",
+            "namespace": "unknown",
+            "type": "ANY",
+            "id": {
+              "_type": "GENERIC_ID",
+              "value": "518b8458-d6cd-3769-a07f-1b249cc32f9a",
+              "scheme": "scheme"
+            }
+          },
+          "subject": {
+            "_type": "PARTY_SELF"
+          },
+          "provider": {
+            "_type": "PARTY_SELF"
+          },
+          "guideline_id": {
+            "_type": "OBJECT_REF",
+            "namespace": "unknown",
+            "type": "ANY",
+            "id": {
+              "_type": "GENERIC_ID",
+              "value": "2f9cdf4f-da3a-3331-95c6-4838eb74dc54",
+              "scheme": "scheme"
+            }
+          },
+          "time_asserted": {
+            "_type": "DV_DATE_TIME",
+            "value": "2022-02-03T04:05:06"
+          },
+          "data": {
+            "_type": "ITEM_TREE",
+            "name": {
+              "_type": "DV_TEXT",
+              "value": "List"
+            },
+            "items": [
+              {
+                "_type": "ELEMENT",
+                "name": {
+                  "_type": "DV_TEXT",
+                  "value": "Synopsis"
+                },
+                "value": {
+                  "_type": "DV_TEXT",
+                  "value": "Lorem ipsum"
+                },
+                "archetype_node_id": "at0002"
+              }
+            ],
+            "archetype_node_id": "at0001"
+          },
+          "archetype_node_id": "openEHR-EHR-EVALUATION.clinical_synopsis.v1"
+        }
+      ],
+      "archetype_node_id": "openEHR-EHR-SECTION.adhoc.v1"
+    },
+    {
+      "_type": "SECTION",
+      "name": {
+        "_type": "DV_TEXT",
+        "value": "Assessment"
+      },
+      "archetype_details": {
+        "archetype_id": {
+          "value": "openEHR-EHR-SECTION.adhoc.v1"
+        },
+        "rm_version": "1.0.4"
+      },
+      "items": [
+        {
+          "_type": "OBSERVATION",
+          "name": {
+            "_type": "DV_TEXT",
+            "value": "DENWIS"
+          },
+          "archetype_details": {
+            "archetype_id": {
+              "value": "openEHR-EHR-OBSERVATION.denwis.v0"
+            },
+            "rm_version": "1.0.4"
+          },
+          "language": {
+            "_type": "CODE_PHRASE",
+            "terminology_id": {
+              "_type": "TERMINOLOGY_ID",
+              "value": "ISO_639-1"
+            },
+            "code_string": "en"
+          },
+          "encoding": {
+            "_type": "CODE_PHRASE",
+            "terminology_id": {
+              "_type": "TERMINOLOGY_ID",
+              "value": "IANA_character-sets"
+            },
+            "code_string": "ISO-10646-UTF-1"
+          },
+          "workflow_id": {
+            "_type": "OBJECT_REF",
+            "namespace": "unknown",
+            "type": "ANY",
+            "id": {
+              "_type": "GENERIC_ID",
+              "value": "8a1e459b-ffec-388d-a404-8c07d6340b7b",
+              "scheme": "scheme"
+            }
+          },
+          "subject": {
+            "_type": "PARTY_SELF"
+          },
+          "provider": {
+            "_type": "PARTY_SELF"
+          },
+          "guideline_id": {
+            "_type": "OBJECT_REF",
+            "namespace": "unknown",
+            "type": "ANY",
+            "id": {
+              "_type": "GENERIC_ID",
+              "value": "e62557fe-f488-3b66-8400-ff53df38243d",
+              "scheme": "scheme"
+            }
+          },
+          "data": {
+            "name": {
+              "_type": "DV_TEXT",
+              "value": "Event Series"
+            },
+            "origin": {
+              "_type": "DV_DATE_TIME",
+              "value": "2022-02-03T04:05:06"
+            },
+            "period": {
+              "_type": "DV_DURATION",
+              "value": "PT0S"
+            },
+            "duration": {
+              "_type": "DV_DURATION",
+              "value": "PT0S"
+            },
+            "events": [
+              {
+                "_type": "POINT_EVENT",
+                "name": {
+                  "_type": "DV_TEXT",
+                  "value": "Point in time"
+                },
+                "time": {
+                  "_type": "DV_DATE_TIME",
+                  "value": "2022-02-03T04:05:06"
+                },
+                "data": {
+                  "_type": "ITEM_TREE",
+                  "name": {
+                    "_type": "DV_TEXT",
+                    "value": "Tree"
+                  },
+                  "items": [
+                    {
+                      "_type": "ELEMENT",
+                      "name": {
+                        "_type": "DV_TEXT",
+                        "value": "Q1 Breathing"
+                      },
+                      "value": {
+                        "_type": "DV_ORDINAL",
+                        "symbol": {
+                          "_type": "DV_CODED_TEXT",
+                          "value": "No change in breathing",
+                          "defining_code": {
+                            "_type": "CODE_PHRASE",
+                            "terminology_id": {
+                              "_type": "TERMINOLOGY_ID",
+                              "value": "external"
+                            },
+                            "code_string": "at0032"
+                          }
+                        },
+                        "value": 0
+                      },
+                      "archetype_node_id": "at0028"
+                    },
+                    {
+                      "_type": "ELEMENT",
+                      "name": {
+                        "_type": "DV_TEXT",
+                        "value": "Breathing indicator"
+                      },
+                      "value": {
+                        "_type": "DV_CODED_TEXT",
+                        "value": "Noisy breathing",
+                        "defining_code": {
+                          "_type": "CODE_PHRASE",
+                          "terminology_id": {
+                            "_type": "TERMINOLOGY_ID",
+                            "value": "local"
+                          },
+                          "code_string": "at0067"
+                        }
+                      },
+                      "archetype_node_id": "at0062"
+                    },
+                    {
+                      "_type": "ELEMENT",
+                      "name": {
+                        "_type": "DV_TEXT",
+                        "value": "Q2 Circulation"
+                      },
+                      "value": {
+                        "_type": "DV_ORDINAL",
+                        "symbol": {
+                          "_type": "DV_CODED_TEXT",
+                          "value": "No change in circulation",
+                          "defining_code": {
+                            "_type": "CODE_PHRASE",
+                            "terminology_id": {
+                              "_type": "TERMINOLOGY_ID",
+                              "value": "external"
+                            },
+                            "code_string": "at0037"
+                          }
+                        },
+                        "value": 0
+                      },
+                      "archetype_node_id": "at0033"
+                    },
+                    {
+                      "_type": "ELEMENT",
+                      "name": {
+                        "_type": "DV_TEXT",
+                        "value": "Circulation indicator"
+                      },
+                      "value": {
+                        "_type": "DV_CODED_TEXT",
+                        "value": "Colour changes: pale, grey",
+                        "defining_code": {
+                          "_type": "CODE_PHRASE",
+                          "terminology_id": {
+                            "_type": "TERMINOLOGY_ID",
+                            "value": "local"
+                          },
+                          "code_string": "at0096"
+                        }
+                      },
+                      "archetype_node_id": "at0071"
+                    },
+                    {
+                      "_type": "ELEMENT",
+                      "name": {
+                        "_type": "DV_TEXT",
+                        "value": "Q3 Temperature"
+                      },
+                      "value": {
+                        "_type": "DV_ORDINAL",
+                        "symbol": {
+                          "_type": "DV_CODED_TEXT",
+                          "value": "No change in temperature",
+                          "defining_code": {
+                            "_type": "CODE_PHRASE",
+                            "terminology_id": {
+                              "_type": "TERMINOLOGY_ID",
+                              "value": "external"
+                            },
+                            "code_string": "at0042"
+                          }
+                        },
+                        "value": 0
+                      },
+                      "archetype_node_id": "at0038"
+                    },
+                    {
+                      "_type": "ELEMENT",
+                      "name": {
+                        "_type": "DV_TEXT",
+                        "value": "Temperature indicator"
+                      },
+                      "value": {
+                        "_type": "DV_CODED_TEXT",
+                        "value": "Rigors",
+                        "defining_code": {
+                          "_type": "CODE_PHRASE",
+                          "terminology_id": {
+                            "_type": "TERMINOLOGY_ID",
+                            "value": "local"
+                          },
+                          "code_string": "at0100"
+                        }
+                      },
+                      "archetype_node_id": "at0076"
+                    },
+                    {
+                      "_type": "ELEMENT",
+                      "name": {
+                        "_type": "DV_TEXT",
+                        "value": "Q4 Mentation"
+                      },
+                      "value": {
+                        "_type": "DV_ORDINAL",
+                        "symbol": {
+                          "_type": "DV_CODED_TEXT",
+                          "value": "No change in mentation",
+                          "defining_code": {
+                            "_type": "CODE_PHRASE",
+                            "terminology_id": {
+                              "_type": "TERMINOLOGY_ID",
+                              "value": "external"
+                            },
+                            "code_string": "at0046"
+                          }
+                        },
+                        "value": 0
+                      },
+                      "archetype_node_id": "at0043"
+                    },
+                    {
+                      "_type": "ELEMENT",
+                      "name": {
+                        "_type": "DV_TEXT",
+                        "value": "Mentation indicator"
+                      },
+                      "value": {
+                        "_type": "DV_TEXT",
+                        "value": "Lorem ipsum"
+                      },
+                      "archetype_node_id": "at0078"
+                    },
+                    {
+                      "_type": "ELEMENT",
+                      "name": {
+                        "_type": "DV_TEXT",
+                        "value": "Q5 Agitation"
+                      },
+                      "value": {
+                        "_type": "DV_ORDINAL",
+                        "symbol": {
+                          "_type": "DV_CODED_TEXT",
+                          "value": "No agitation",
+                          "defining_code": {
+                            "_type": "CODE_PHRASE",
+                            "terminology_id": {
+                              "_type": "TERMINOLOGY_ID",
+                              "value": "external"
+                            },
+                            "code_string": "at0048"
+                          }
+                        },
+                        "value": 0
+                      },
+                      "archetype_node_id": "at0047"
+                    },
+                    {
+                      "_type": "ELEMENT",
+                      "name": {
+                        "_type": "DV_TEXT",
+                        "value": "Agitation indicator"
+                      },
+                      "value": {
+                        "_type": "DV_TEXT",
+                        "value": "Lorem ipsum"
+                      },
+                      "archetype_node_id": "at0081"
+                    },
+                    {
+                      "_type": "ELEMENT",
+                      "name": {
+                        "_type": "DV_TEXT",
+                        "value": "Q6 Pain"
+                      },
+                      "value": {
+                        "_type": "DV_ORDINAL",
+                        "symbol": {
+                          "_type": "DV_CODED_TEXT",
+                          "value": "No change in pain",
+                          "defining_code": {
+                            "_type": "CODE_PHRASE",
+                            "terminology_id": {
+                              "_type": "TERMINOLOGY_ID",
+                              "value": "external"
+                            },
+                            "code_string": "at0051"
+                          }
+                        },
+                        "value": 0
+                      },
+                      "archetype_node_id": "at0050"
+                    },
+                    {
+                      "_type": "ELEMENT",
+                      "name": {
+                        "_type": "DV_TEXT",
+                        "value": "Pain indicator"
+                      },
+                      "value": {
+                        "_type": "DV_CODED_TEXT",
+                        "value": "New pain",
+                        "defining_code": {
+                          "_type": "CODE_PHRASE",
+                          "terminology_id": {
+                            "_type": "TERMINOLOGY_ID",
+                            "value": "local"
+                          },
+                          "code_string": "at0106"
+                        }
+                      },
+                      "archetype_node_id": "at0084"
+                    },
+                    {
+                      "_type": "ELEMENT",
+                      "name": {
+                        "_type": "DV_TEXT",
+                        "value": "Q7 Trajectory"
+                      },
+                      "value": {
+                        "_type": "DV_ORDINAL",
+                        "symbol": {
+                          "_type": "DV_CODED_TEXT",
+                          "value": "No change in trajectory",
+                          "defining_code": {
+                            "_type": "CODE_PHRASE",
+                            "terminology_id": {
+                              "_type": "TERMINOLOGY_ID",
+                              "value": "external"
+                            },
+                            "code_string": "at0054"
+                          }
+                        },
+                        "value": 0
+                      },
+                      "archetype_node_id": "at0053"
+                    },
+                    {
+                      "_type": "ELEMENT",
+                      "name": {
+                        "_type": "DV_TEXT",
+                        "value": "Trajectory indicator"
+                      },
+                      "value": {
+                        "_type": "DV_CODED_TEXT",
+                        "value": "No progress",
+                        "defining_code": {
+                          "_type": "CODE_PHRASE",
+                          "terminology_id": {
+                            "_type": "TERMINOLOGY_ID",
+                            "value": "local"
+                          },
+                          "code_string": "at0108"
+                        }
+                      },
+                      "archetype_node_id": "at0087"
+                    },
+                    {
+                      "_type": "ELEMENT",
+                      "name": {
+                        "_type": "DV_TEXT",
+                        "value": "Q8 Patient subjective"
+                      },
+                      "value": {
+                        "_type": "DV_ORDINAL",
+                        "symbol": {
+                          "_type": "DV_CODED_TEXT",
+                          "value": "No subjective patient indicator",
+                          "defining_code": {
+                            "_type": "CODE_PHRASE",
+                            "terminology_id": {
+                              "_type": "TERMINOLOGY_ID",
+                              "value": "external"
+                            },
+                            "code_string": "at0057"
+                          }
+                        },
+                        "value": 0
+                      },
+                      "archetype_node_id": "at0056"
+                    },
+                    {
+                      "_type": "ELEMENT",
+                      "name": {
+                        "_type": "DV_TEXT",
+                        "value": "Patient indicator"
+                      },
+                      "value": {
+                        "_type": "DV_CODED_TEXT",
+                        "value": "Not feeling well",
+                        "defining_code": {
+                          "_type": "CODE_PHRASE",
+                          "terminology_id": {
+                            "_type": "TERMINOLOGY_ID",
+                            "value": "local"
+                          },
+                          "code_string": "at0110"
+                        }
+                      },
+                      "archetype_node_id": "at0090"
+                    },
+                    {
+                      "_type": "ELEMENT",
+                      "name": {
+                        "_type": "DV_TEXT",
+                        "value": "Q9 Nurse subjective"
+                      },
+                      "value": {
+                        "_type": "DV_ORDINAL",
+                        "symbol": {
+                          "_type": "DV_CODED_TEXT",
+                          "value": "No nurse subjective indicator",
+                          "defining_code": {
+                            "_type": "CODE_PHRASE",
+                            "terminology_id": {
+                              "_type": "TERMINOLOGY_ID",
+                              "value": "external"
+                            },
+                            "code_string": "at0060"
+                          }
+                        },
+                        "value": 0
+                      },
+                      "archetype_node_id": "at0059"
+                    },
+                    {
+                      "_type": "ELEMENT",
+                      "name": {
+                        "_type": "DV_TEXT",
+                        "value": "Nurse subjective indicator"
+                      },
+                      "value": {
+                        "_type": "DV_CODED_TEXT",
+                        "value": "Change in behaviour",
+                        "defining_code": {
+                          "_type": "CODE_PHRASE",
+                          "terminology_id": {
+                            "_type": "TERMINOLOGY_ID",
+                            "value": "local"
+                          },
+                          "code_string": "at0112"
+                        }
+                      },
+                      "archetype_node_id": "at0093"
+                    },
+                    {
+                      "_type": "ELEMENT",
+                      "name": {
+                        "_type": "DV_TEXT",
+                        "value": "Q 10 Other comment"
+                      },
+                      "value": {
+                        "_type": "DV_TEXT",
+                        "value": "Lorem ipsum"
+                      },
+                      "archetype_node_id": "at0027"
+                    },
+                    {
+                      "_type": "ELEMENT",
+                      "name": {
+                        "_type": "DV_TEXT",
+                        "value": "Total score"
+                      },
+                      "value": {
+                        "_type": "DV_COUNT",
+                        "magnitude": 5
+                      },
+                      "archetype_node_id": "at0008"
+                    }
+                  ],
+                  "archetype_node_id": "at0003"
+                },
+                "archetype_node_id": "at0002"
+              }
+            ],
+            "archetype_node_id": "at0001"
+          },
+          "archetype_node_id": "openEHR-EHR-OBSERVATION.denwis.v0"
+        },
+        {
+          "_type": "SECTION",
+          "name": {
+            "_type": "DV_TEXT",
+            "value": "Sepsis screening"
+          },
+          "archetype_details": {
+            "archetype_id": {
+              "value": "openEHR-EHR-SECTION.adhoc.v1"
+            },
+            "rm_version": "1.0.4"
+          },
+          "items": [
+            {
+              "_type": "OBSERVATION",
+              "name": {
+                "_type": "DV_TEXT",
+                "value": "Sepsis clinical screening age 12 plus"
+              },
+              "archetype_details": {
+                "archetype_id": {
+                  "value": "openEHR-EHR-OBSERVATION.sepsis_clinical_screening_age_12_plus.v0"
+                },
+                "rm_version": "1.0.4"
+              },
+              "language": {
+                "_type": "CODE_PHRASE",
+                "terminology_id": {
+                  "_type": "TERMINOLOGY_ID",
+                  "value": "ISO_639-1"
+                },
+                "code_string": "en"
+              },
+              "encoding": {
+                "_type": "CODE_PHRASE",
+                "terminology_id": {
+                  "_type": "TERMINOLOGY_ID",
+                  "value": "IANA_character-sets"
+                },
+                "code_string": "ISO-10646-UTF-1"
+              },
+              "workflow_id": {
+                "_type": "OBJECT_REF",
+                "namespace": "unknown",
+                "type": "ANY",
+                "id": {
+                  "_type": "GENERIC_ID",
+                  "value": "d65c2de3-4306-3cdc-9c23-332636d8fa15",
+                  "scheme": "scheme"
+                }
+              },
+              "subject": {
+                "_type": "PARTY_SELF"
+              },
+              "provider": {
+                "_type": "PARTY_SELF"
+              },
+              "guideline_id": {
+                "_type": "OBJECT_REF",
+                "namespace": "unknown",
+                "type": "ANY",
+                "id": {
+                  "_type": "GENERIC_ID",
+                  "value": "6b563e22-1d85-3144-8f37-bf0ef3d573ca",
+                  "scheme": "scheme"
+                }
+              },
+              "data": {
+                "name": {
+                  "_type": "DV_TEXT",
+                  "value": "History"
+                },
+                "origin": {
+                  "_type": "DV_DATE_TIME",
+                  "value": "2022-02-03T04:05:06"
+                },
+                "period": {
+                  "_type": "DV_DURATION",
+                  "value": "PT0S"
+                },
+                "duration": {
+                  "_type": "DV_DURATION",
+                  "value": "PT0S"
+                },
+                "events": [
+                  {
+                    "_type": "POINT_EVENT",
+                    "name": {
+                      "_type": "DV_TEXT",
+                      "value": "Single point in time"
+                    },
+                    "time": {
+                      "_type": "DV_DATE_TIME",
+                      "value": "2022-02-03T04:05:06"
+                    },
+                    "data": {
+                      "_type": "ITEM_TREE",
+                      "name": {
+                        "_type": "DV_TEXT",
+                        "value": "Tree"
+                      },
+                      "items": [
+                        {
+                          "_type": "CLUSTER",
+                          "name": {
+                            "_type": "DV_TEXT",
+                            "value": "Sepsis risk factors (age 12 plus)"
+                          },
+                          "archetype_details": {
+                            "archetype_id": {
+                              "value": "openEHR-EHR-CLUSTER.sepsis_clinical_risk_factors_age_12_plus.v0"
+                            },
+                            "rm_version": "1.0.4"
+                          },
+                          "items": [
+                            {
+                              "_type": "ELEMENT",
+                              "name": {
+                                "_type": "DV_TEXT",
+                                "value": "Risk factors"
+                              },
+                              "value": {
+                                "_type": "DV_CODED_TEXT",
+                                "value": "Age over 75",
+                                "defining_code": {
+                                  "_type": "CODE_PHRASE",
+                                  "terminology_id": {
+                                    "_type": "TERMINOLOGY_ID",
+                                    "value": "local"
+                                  },
+                                  "code_string": "at0002"
+                                }
+                              },
+                              "archetype_node_id": "at0001"
+                            }
+                          ],
+                          "archetype_node_id": "openEHR-EHR-CLUSTER.sepsis_clinical_risk_factors_age_12_plus.v0"
+                        },
+                        {
+                          "_type": "CLUSTER",
+                          "name": {
+                            "_type": "DV_TEXT",
+                            "value": "Sepsis infection source (age 12 plus)"
+                          },
+                          "archetype_details": {
+                            "archetype_id": {
+                              "value": "openEHR-EHR-CLUSTER.sepsis_clinical_infection_source.v0"
+                            },
+                            "rm_version": "1.0.4"
+                          },
+                          "items": [
+                            {
+                              "_type": "ELEMENT",
+                              "name": {
+                                "_type": "DV_TEXT",
+                                "value": "Likely source of infection"
+                              },
+                              "value": {
+                                "_type": "DV_CODED_TEXT",
+                                "value": "Respiratory",
+                                "defining_code": {
+                                  "_type": "CODE_PHRASE",
+                                  "terminology_id": {
+                                    "_type": "TERMINOLOGY_ID",
+                                    "value": "local"
+                                  },
+                                  "code_string": "at0002"
+                                }
+                              },
+                              "archetype_node_id": "at0001"
+                            }
+                          ],
+                          "archetype_node_id": "openEHR-EHR-CLUSTER.sepsis_clinical_infection_source.v0"
+                        },
+                        {
+                          "_type": "CLUSTER",
+                          "name": {
+                            "_type": "DV_TEXT",
+                            "value": "Sepsis clinical red flags (age 12 plus)"
+                          },
+                          "archetype_details": {
+                            "archetype_id": {
+                              "value": "openEHR-EHR-CLUSTER.sepsis_clinical_red_flags.v0"
+                            },
+                            "rm_version": "1.0.4"
+                          },
+                          "items": [
+                            {
+                              "_type": "ELEMENT",
+                              "name": {
+                                "_type": "DV_TEXT",
+                                "value": "Red flags"
+                              },
+                              "value": {
+                                "_type": "DV_CODED_TEXT",
+                                "value": "Objective evidence of new or altered mental state e.g. New deterioration in GCS/AVPU",
+                                "defining_code": {
+                                  "_type": "CODE_PHRASE",
+                                  "terminology_id": {
+                                    "_type": "TERMINOLOGY_ID",
+                                    "value": "local"
+                                  },
+                                  "code_string": "at0002"
+                                }
+                              },
+                              "archetype_node_id": "at0001"
+                            }
+                          ],
+                          "archetype_node_id": "openEHR-EHR-CLUSTER.sepsis_clinical_red_flags.v0"
+                        },
+                        {
+                          "_type": "CLUSTER",
+                          "name": {
+                            "_type": "DV_TEXT",
+                            "value": "Sepsis clinical amber flags (age 12 plus)"
+                          },
+                          "archetype_details": {
+                            "archetype_id": {
+                              "value": "openEHR-EHR-CLUSTER.sepsis_clinical_amber_flags.v0"
+                            },
+                            "rm_version": "1.0.4"
+                          },
+                          "items": [
+                            {
+                              "_type": "ELEMENT",
+                              "name": {
+                                "_type": "DV_TEXT",
+                                "value": "Amber flags"
+                              },
+                              "value": {
+                                "_type": "DV_CODED_TEXT",
+                                "value": "Relatives concerned about mental status",
+                                "defining_code": {
+                                  "_type": "CODE_PHRASE",
+                                  "terminology_id": {
+                                    "_type": "TERMINOLOGY_ID",
+                                    "value": "local"
+                                  },
+                                  "code_string": "at0002"
+                                }
+                              },
+                              "archetype_node_id": "at0001"
+                            }
+                          ],
+                          "archetype_node_id": "openEHR-EHR-CLUSTER.sepsis_clinical_amber_flags.v0"
+                        },
+                        {
+                          "_type": "CLUSTER",
+                          "name": {
+                            "_type": "DV_TEXT",
+                            "value": "Sepsis clinical 999 flag (age 12 plus)"
+                          },
+                          "archetype_details": {
+                            "archetype_id": {
+                              "value": "openEHR-EHR-CLUSTER.sepsis_clinical_999_flag_age_12_plus.v0"
+                            },
+                            "rm_version": "1.0.4"
+                          },
+                          "items": [
+                            {
+                              "_type": "ELEMENT",
+                              "name": {
+                                "_type": "DV_TEXT",
+                                "value": "999 Flag"
+                              },
+                              "value": {
+                                "_type": "DV_CODED_TEXT",
+                                "value": "Slurred speech or confusion",
+                                "defining_code": {
+                                  "_type": "CODE_PHRASE",
+                                  "terminology_id": {
+                                    "_type": "TERMINOLOGY_ID",
+                                    "value": "local"
+                                  },
+                                  "code_string": "at0002"
+                                }
+                              },
+                              "archetype_node_id": "at0001"
+                            }
+                          ],
+                          "archetype_node_id": "openEHR-EHR-CLUSTER.sepsis_clinical_999_flag_age_12_plus.v0"
+                        }
+                      ],
+                      "archetype_node_id": "at0003"
+                    },
+                    "archetype_node_id": "at0002"
+                  }
+                ],
+                "archetype_node_id": "at0001"
+              },
+              "archetype_node_id": "openEHR-EHR-OBSERVATION.sepsis_clinical_screening_age_12_plus.v0"
+            },
+            {
+              "_type": "OBSERVATION",
+              "name": {
+                "_type": "DV_TEXT",
+                "value": "Sepsis non clinical screening age 12 plus"
+              },
+              "archetype_details": {
+                "archetype_id": {
+                  "value": "openEHR-EHR-OBSERVATION.sepsis_non_clinical_screening_age_12_plus.v0"
+                },
+                "rm_version": "1.0.4"
+              },
+              "language": {
+                "_type": "CODE_PHRASE",
+                "terminology_id": {
+                  "_type": "TERMINOLOGY_ID",
+                  "value": "ISO_639-1"
+                },
+                "code_string": "en"
+              },
+              "encoding": {
+                "_type": "CODE_PHRASE",
+                "terminology_id": {
+                  "_type": "TERMINOLOGY_ID",
+                  "value": "IANA_character-sets"
+                },
+                "code_string": "ISO-10646-UTF-1"
+              },
+              "workflow_id": {
+                "_type": "OBJECT_REF",
+                "namespace": "unknown",
+                "type": "ANY",
+                "id": {
+                  "_type": "GENERIC_ID",
+                  "value": "482d9ddf-0bb8-391c-b3fb-67e2d15b5485",
+                  "scheme": "scheme"
+                }
+              },
+              "subject": {
+                "_type": "PARTY_SELF"
+              },
+              "provider": {
+                "_type": "PARTY_SELF"
+              },
+              "guideline_id": {
+                "_type": "OBJECT_REF",
+                "namespace": "unknown",
+                "type": "ANY",
+                "id": {
+                  "_type": "GENERIC_ID",
+                  "value": "741ed1fe-19de-3297-9f31-35f4322ea368",
+                  "scheme": "scheme"
+                }
+              },
+              "data": {
+                "name": {
+                  "_type": "DV_TEXT",
+                  "value": "History"
+                },
+                "origin": {
+                  "_type": "DV_DATE_TIME",
+                  "value": "2022-02-03T04:05:06"
+                },
+                "period": {
+                  "_type": "DV_DURATION",
+                  "value": "PT0S"
+                },
+                "duration": {
+                  "_type": "DV_DURATION",
+                  "value": "PT0S"
+                },
+                "events": [
+                  {
+                    "_type": "POINT_EVENT",
+                    "name": {
+                      "_type": "DV_TEXT",
+                      "value": "Single point in time"
+                    },
+                    "time": {
+                      "_type": "DV_DATE_TIME",
+                      "value": "2022-02-03T04:05:06"
+                    },
+                    "data": {
+                      "_type": "ITEM_TREE",
+                      "name": {
+                        "_type": "DV_TEXT",
+                        "value": "Tree"
+                      },
+                      "items": [
+                        {
+                          "_type": "CLUSTER",
+                          "name": {
+                            "_type": "DV_TEXT",
+                            "value": "Sepsis risk factors (age 12 plus)"
+                          },
+                          "archetype_details": {
+                            "archetype_id": {
+                              "value": "openEHR-EHR-CLUSTER.sepsis_clinical_risk_factors_age_12_plus.v0"
+                            },
+                            "rm_version": "1.0.4"
+                          },
+                          "items": [
+                            {
+                              "_type": "ELEMENT",
+                              "name": {
+                                "_type": "DV_TEXT",
+                                "value": "Risk factors"
+                              },
+                              "value": {
+                                "_type": "DV_CODED_TEXT",
+                                "value": "Age over 75",
+                                "defining_code": {
+                                  "_type": "CODE_PHRASE",
+                                  "terminology_id": {
+                                    "_type": "TERMINOLOGY_ID",
+                                    "value": "local"
+                                  },
+                                  "code_string": "at0002"
+                                }
+                              },
+                              "archetype_node_id": "at0001"
+                            }
+                          ],
+                          "archetype_node_id": "openEHR-EHR-CLUSTER.sepsis_clinical_risk_factors_age_12_plus.v0"
+                        },
+                        {
+                          "_type": "CLUSTER",
+                          "name": {
+                            "_type": "DV_TEXT",
+                            "value": "Sepsis infection source (age 12 plus)"
+                          },
+                          "archetype_details": {
+                            "archetype_id": {
+                              "value": "openEHR-EHR-CLUSTER.sepsis_clinical_infection_source.v0"
+                            },
+                            "rm_version": "1.0.4"
+                          },
+                          "items": [
+                            {
+                              "_type": "ELEMENT",
+                              "name": {
+                                "_type": "DV_TEXT",
+                                "value": "Likely source of infection"
+                              },
+                              "value": {
+                                "_type": "DV_CODED_TEXT",
+                                "value": "Respiratory",
+                                "defining_code": {
+                                  "_type": "CODE_PHRASE",
+                                  "terminology_id": {
+                                    "_type": "TERMINOLOGY_ID",
+                                    "value": "local"
+                                  },
+                                  "code_string": "at0002"
+                                }
+                              },
+                              "archetype_node_id": "at0001"
+                            }
+                          ],
+                          "archetype_node_id": "openEHR-EHR-CLUSTER.sepsis_clinical_infection_source.v0"
+                        },
+                        {
+                          "_type": "CLUSTER",
+                          "name": {
+                            "_type": "DV_TEXT",
+                            "value": "Sepsis non clinical red flags (age 12 plus)"
+                          },
+                          "archetype_details": {
+                            "archetype_id": {
+                              "value": "openEHR-EHR-CLUSTER.sepsis_non_clinical_red_flags.v0"
+                            },
+                            "rm_version": "1.0.4"
+                          },
+                          "items": [
+                            {
+                              "_type": "ELEMENT",
+                              "name": {
+                                "_type": "DV_TEXT",
+                                "value": "Red flags"
+                              },
+                              "value": {
+                                "_type": "DV_CODED_TEXT",
+                                "value": "Objective evidence of new or altered mental state",
+                                "defining_code": {
+                                  "_type": "CODE_PHRASE",
+                                  "terminology_id": {
+                                    "_type": "TERMINOLOGY_ID",
+                                    "value": "local"
+                                  },
+                                  "code_string": "at0012"
+                                }
+                              },
+                              "archetype_node_id": "at0001"
+                            }
+                          ],
+                          "archetype_node_id": "openEHR-EHR-CLUSTER.sepsis_non_clinical_red_flags.v0"
+                        },
+                        {
+                          "_type": "CLUSTER",
+                          "name": {
+                            "_type": "DV_TEXT",
+                            "value": "Sepsis non clinical amber flags (aged 12 plus)"
+                          },
+                          "archetype_details": {
+                            "archetype_id": {
+                              "value": "openEHR-EHR-CLUSTER.sepsis_non_clinical_amber_flags.v0"
+                            },
+                            "rm_version": "1.0.4"
+                          },
+                          "items": [
+                            {
+                              "_type": "ELEMENT",
+                              "name": {
+                                "_type": "DV_TEXT",
+                                "value": "Amber flags"
+                              },
+                              "value": {
+                                "_type": "DV_CODED_TEXT",
+                                "value": "Behavioural change / reduced activity",
+                                "defining_code": {
+                                  "_type": "CODE_PHRASE",
+                                  "terminology_id": {
+                                    "_type": "TERMINOLOGY_ID",
+                                    "value": "local"
+                                  },
+                                  "code_string": "at0013"
+                                }
+                              },
+                              "archetype_node_id": "at0001"
+                            }
+                          ],
+                          "archetype_node_id": "openEHR-EHR-CLUSTER.sepsis_non_clinical_amber_flags.v0"
+                        },
+                        {
+                          "_type": "CLUSTER",
+                          "name": {
+                            "_type": "DV_TEXT",
+                            "value": "Sepsis clinical 999 flag (age 12 plus)"
+                          },
+                          "archetype_details": {
+                            "archetype_id": {
+                              "value": "openEHR-EHR-CLUSTER.sepsis_clinical_999_flag_age_12_plus.v0"
+                            },
+                            "rm_version": "1.0.4"
+                          },
+                          "items": [
+                            {
+                              "_type": "ELEMENT",
+                              "name": {
+                                "_type": "DV_TEXT",
+                                "value": "999 Flag"
+                              },
+                              "value": {
+                                "_type": "DV_CODED_TEXT",
+                                "value": "Slurred speech or confusion",
+                                "defining_code": {
+                                  "_type": "CODE_PHRASE",
+                                  "terminology_id": {
+                                    "_type": "TERMINOLOGY_ID",
+                                    "value": "local"
+                                  },
+                                  "code_string": "at0002"
+                                }
+                              },
+                              "archetype_node_id": "at0001"
+                            }
+                          ],
+                          "archetype_node_id": "openEHR-EHR-CLUSTER.sepsis_clinical_999_flag_age_12_plus.v0"
+                        }
+                      ],
+                      "archetype_node_id": "at0003"
+                    },
+                    "archetype_node_id": "at0002"
+                  }
+                ],
+                "archetype_node_id": "at0001"
+              },
+              "archetype_node_id": "openEHR-EHR-OBSERVATION.sepsis_non_clinical_screening_age_12_plus.v0"
+            }
+          ],
+          "archetype_node_id": "openEHR-EHR-SECTION.adhoc.v1"
+        },
+        {
+          "_type": "SECTION",
+          "name": {
+            "_type": "DV_TEXT",
+            "value": "Covid"
+          },
+          "archetype_details": {
+            "archetype_id": {
+              "value": "openEHR-EHR-SECTION.adhoc.v1"
+            },
+            "rm_version": "1.0.4"
+          },
+          "items": [
+            {
+              "_type": "OBSERVATION",
+              "name": {
+                "_type": "DV_TEXT",
+                "value": "Covid symptoms"
+              },
+              "archetype_details": {
+                "archetype_id": {
+                  "value": "openEHR-EHR-OBSERVATION.symptom_sign_screening.v0"
+                },
+                "rm_version": "1.0.4"
+              },
+              "language": {
+                "_type": "CODE_PHRASE",
+                "terminology_id": {
+                  "_type": "TERMINOLOGY_ID",
+                  "value": "ISO_639-1"
+                },
+                "code_string": "en"
+              },
+              "encoding": {
+                "_type": "CODE_PHRASE",
+                "terminology_id": {
+                  "_type": "TERMINOLOGY_ID",
+                  "value": "IANA_character-sets"
+                },
+                "code_string": "ISO-10646-UTF-1"
+              },
+              "workflow_id": {
+                "_type": "OBJECT_REF",
+                "namespace": "unknown",
+                "type": "ANY",
+                "id": {
+                  "_type": "GENERIC_ID",
+                  "value": "1f29b1d0-52a2-3ef6-ae5a-759cf5e10f5b",
+                  "scheme": "scheme"
+                }
+              },
+              "subject": {
+                "_type": "PARTY_SELF"
+              },
+              "provider": {
+                "_type": "PARTY_SELF"
+              },
+              "guideline_id": {
+                "_type": "OBJECT_REF",
+                "namespace": "unknown",
+                "type": "ANY",
+                "id": {
+                  "_type": "GENERIC_ID",
+                  "value": "9de1d61d-d720-3c00-8faa-2ef313b9d7c5",
+                  "scheme": "scheme"
+                }
+              },
+              "data": {
+                "name": {
+                  "_type": "DV_TEXT",
+                  "value": "History"
+                },
+                "origin": {
+                  "_type": "DV_DATE_TIME",
+                  "value": "2022-02-03T04:05:06"
+                },
+                "period": {
+                  "_type": "DV_DURATION",
+                  "value": "PT0S"
+                },
+                "duration": {
+                  "_type": "DV_DURATION",
+                  "value": "PT0S"
+                },
+                "events": [
+                  {
+                    "_type": "INTERVAL_EVENT",
+                    "name": {
+                      "_type": "DV_TEXT",
+                      "value": "Any event"
+                    },
+                    "time": {
+                      "_type": "DV_DATE_TIME",
+                      "value": "2022-02-03T04:05:06"
+                    },
+                    "data": {
+                      "_type": "ITEM_TREE",
+                      "name": {
+                        "_type": "DV_TEXT",
+                        "value": "Tree"
+                      },
+                      "items": [
+                        {
+                          "_type": "ELEMENT",
+                          "name": {
+                            "_type": "DV_TEXT",
+                            "value": "Date of onset of first symptoms"
+                          },
+                          "value": {
+                            "_type": "DV_DATE_TIME",
+                            "value": "2022-02-03T04:05:06"
+                          },
+                          "archetype_node_id": "at0029"
+                        },
+                        {
+                          "_type": "CLUSTER",
+                          "name": {
+                            "_type": "DV_TEXT",
+                            "value": "Specific symptom/sign"
+                          },
+                          "items": [
+                            {
+                              "_type": "ELEMENT",
+                              "name": {
+                                "_type": "DV_TEXT",
+                                "value": "Symptom or sign name"
+                              },
+                              "value": {
+                                "_type": "DV_CODED_TEXT",
+                                "value": "Fever",
+                                "defining_code": {
+                                  "_type": "CODE_PHRASE",
+                                  "terminology_id": {
+                                    "_type": "TERMINOLOGY_ID",
+                                    "value": "SNOMED CT"
+                                  },
+                                  "code_string": "386661006"
+                                }
+                              },
+                              "archetype_node_id": "at0004"
+                            }
+                          ],
+                          "archetype_node_id": "at0022"
+                        }
+                      ],
+                      "archetype_node_id": "at0003"
+                    },
+                    "width": {
+                      "_type": "DV_DURATION",
+                      "value": "PT42H"
+                    },
+                    "math_function": {
+                      "_type": "DV_CODED_TEXT",
+                      "value": "minimum",
+                      "defining_code": {
+                        "_type": "CODE_PHRASE",
+                        "terminology_id": {
+                          "_type": "TERMINOLOGY_ID",
+                          "value": "openehr"
+                        },
+                        "code_string": "145"
+                      }
+                    },
+                    "archetype_node_id": "at0002"
+                  }
+                ],
+                "archetype_node_id": "at0001"
+              },
+              "archetype_node_id": "openEHR-EHR-OBSERVATION.symptom_sign_screening.v0"
+            },
+            {
+              "_type": "EVALUATION",
+              "name": {
+                "_type": "DV_TEXT",
+                "value": "Covid-19 exposure"
+              },
+              "archetype_details": {
+                "archetype_id": {
+                  "value": "openEHR-EHR-EVALUATION.health_risk-covid.v0"
+                },
+                "rm_version": "1.0.4"
+              },
+              "language": {
+                "_type": "CODE_PHRASE",
+                "terminology_id": {
+                  "_type": "TERMINOLOGY_ID",
+                  "value": "ISO_639-1"
+                },
+                "code_string": "en"
+              },
+              "encoding": {
+                "_type": "CODE_PHRASE",
+                "terminology_id": {
+                  "_type": "TERMINOLOGY_ID",
+                  "value": "IANA_character-sets"
+                },
+                "code_string": "ISO-10646-UTF-1"
+              },
+              "workflow_id": {
+                "_type": "OBJECT_REF",
+                "namespace": "unknown",
+                "type": "ANY",
+                "id": {
+                  "_type": "GENERIC_ID",
+                  "value": "706a8e56-31ac-3c52-81ef-a1ba5b0a0462",
+                  "scheme": "scheme"
+                }
+              },
+              "subject": {
+                "_type": "PARTY_SELF"
+              },
+              "provider": {
+                "_type": "PARTY_SELF"
+              },
+              "guideline_id": {
+                "_type": "OBJECT_REF",
+                "namespace": "unknown",
+                "type": "ANY",
+                "id": {
+                  "_type": "GENERIC_ID",
+                  "value": "591bbfa8-ed0c-3298-a9fb-ad94319640d6",
+                  "scheme": "scheme"
+                }
+              },
+              "time_asserted": {
+                "_type": "DV_DATE_TIME",
+                "value": "2022-02-03T04:05:06"
+              },
+              "data": {
+                "_type": "ITEM_TREE",
+                "name": {
+                  "_type": "DV_TEXT",
+                  "value": "structure"
+                },
+                "items": [
+                  {
+                    "_type": "ELEMENT",
+                    "name": {
+                      "_type": "DV_TEXT",
+                      "value": "Health risk"
+                    },
+                    "value": {
+                      "_type": "DV_CODED_TEXT",
+                      "value": "COVID-19 Risk assessment",
+                      "defining_code": {
+                        "_type": "CODE_PHRASE",
+                        "terminology_id": {
+                          "_type": "TERMINOLOGY_ID",
+                          "value": "local"
+                        },
+                        "code_string": "at0.1"
+                      }
+                    },
+                    "archetype_node_id": "at0002.1"
+                  },
+                  {
+                    "_type": "CLUSTER",
+                    "name": {
+                      "_type": "DV_TEXT",
+                      "value": "Care setting has confirmed Covid-19"
+                    },
+                    "items": [
+                      {
+                        "_type": "ELEMENT",
+                        "name": {
+                          "_type": "DV_TEXT",
+                          "value": "Risk factor"
+                        },
+                        "value": {
+                          "_type": "DV_CODED_TEXT",
+                          "value": "Potential contact exposure based on location",
+                          "defining_code": {
+                            "_type": "CODE_PHRASE",
+                            "terminology_id": {
+                              "_type": "TERMINOLOGY_ID",
+                              "value": "local"
+                            },
+                            "code_string": "at0.14"
+                          }
+                        },
+                        "archetype_node_id": "at0013.1"
+                      }
+                    ],
+                    "archetype_node_id": "at0016"
+                  },
+                  {
+                    "_type": "CLUSTER",
+                    "name": {
+                      "_type": "DV_TEXT",
+                      "value": "Contact with suspected/confirmed Covid-19"
+                    },
+                    "items": [
+                      {
+                        "_type": "ELEMENT",
+                        "name": {
+                          "_type": "DV_TEXT",
+                          "value": "Risk factor"
+                        },
+                        "value": {
+                          "_type": "DV_CODED_TEXT",
+                          "value": "Contact with confirmed Covid-19 case",
+                          "defining_code": {
+                            "_type": "CODE_PHRASE",
+                            "terminology_id": {
+                              "_type": "TERMINOLOGY_ID",
+                              "value": "local"
+                            },
+                            "code_string": "at0.9"
+                          }
+                        },
+                        "archetype_node_id": "at0013.1"
+                      },
+                      {
+                        "_type": "ELEMENT",
+                        "name": {
+                          "_type": "DV_TEXT",
+                          "value": "Presence"
+                        },
+                        "value": {
+                          "_type": "DV_CODED_TEXT",
+                          "value": "Present",
+                          "defining_code": {
+                            "_type": "CODE_PHRASE",
+                            "terminology_id": {
+                              "_type": "TERMINOLOGY_ID",
+                              "value": "local"
+                            },
+                            "code_string": "at0018"
+                          }
+                        },
+                        "archetype_node_id": "at0017.1"
+                      }
+                    ],
+                    "archetype_node_id": "at0016"
+                  }
+                ],
+                "archetype_node_id": "at0001"
+              },
+              "archetype_node_id": "openEHR-EHR-EVALUATION.health_risk-covid.v0"
+            },
+            {
+              "_type": "EVALUATION",
+              "name": {
+                "_type": "DV_TEXT",
+                "value": "Covid notes"
+              },
+              "archetype_details": {
+                "archetype_id": {
+                  "value": "openEHR-EHR-EVALUATION.clinical_synopsis.v1"
+                },
+                "rm_version": "1.0.4"
+              },
+              "language": {
+                "_type": "CODE_PHRASE",
+                "terminology_id": {
+                  "_type": "TERMINOLOGY_ID",
+                  "value": "ISO_639-1"
+                },
+                "code_string": "en"
+              },
+              "encoding": {
+                "_type": "CODE_PHRASE",
+                "terminology_id": {
+                  "_type": "TERMINOLOGY_ID",
+                  "value": "IANA_character-sets"
+                },
+                "code_string": "ISO-10646-UTF-1"
+              },
+              "workflow_id": {
+                "_type": "OBJECT_REF",
+                "namespace": "unknown",
+                "type": "ANY",
+                "id": {
+                  "_type": "GENERIC_ID",
+                  "value": "040afc70-4d86-353f-9e5d-23c39a90d6a7",
+                  "scheme": "scheme"
+                }
+              },
+              "subject": {
+                "_type": "PARTY_SELF"
+              },
+              "provider": {
+                "_type": "PARTY_SELF"
+              },
+              "guideline_id": {
+                "_type": "OBJECT_REF",
+                "namespace": "unknown",
+                "type": "ANY",
+                "id": {
+                  "_type": "GENERIC_ID",
+                  "value": "1f156108-f293-32c9-8b15-5f0a6cc99eec",
+                  "scheme": "scheme"
+                }
+              },
+              "time_asserted": {
+                "_type": "DV_DATE_TIME",
+                "value": "2022-02-03T04:05:06"
+              },
+              "data": {
+                "_type": "ITEM_TREE",
+                "name": {
+                  "_type": "DV_TEXT",
+                  "value": "List"
+                },
+                "items": [
+                  {
+                    "_type": "ELEMENT",
+                    "name": {
+                      "_type": "DV_TEXT",
+                      "value": "Synopsis"
+                    },
+                    "value": {
+                      "_type": "DV_TEXT",
+                      "value": "Lorem ipsum"
+                    },
+                    "archetype_node_id": "at0002"
+                  }
+                ],
+                "archetype_node_id": "at0001"
+              },
+              "archetype_node_id": "openEHR-EHR-EVALUATION.clinical_synopsis.v1"
+            }
+          ],
+          "archetype_node_id": "openEHR-EHR-SECTION.adhoc.v1"
+        },
+        {
+          "_type": "SECTION",
+          "name": {
+            "_type": "DV_TEXT",
+            "value": "NEWS2"
+          },
+          "archetype_details": {
+            "archetype_id": {
+              "value": "openEHR-EHR-SECTION.adhoc.v1"
+            },
+            "rm_version": "1.0.4"
+          },
+          "items": [
+            {
+              "_type": "OBSERVATION",
+              "name": {
+                "_type": "DV_TEXT",
+                "value": "Temperature"
+              },
+              "archetype_details": {
+                "archetype_id": {
+                  "value": "openEHR-EHR-OBSERVATION.body_temperature.v2"
+                },
+                "rm_version": "1.0.4"
+              },
+              "language": {
+                "_type": "CODE_PHRASE",
+                "terminology_id": {
+                  "_type": "TERMINOLOGY_ID",
+                  "value": "ISO_639-1"
+                },
+                "code_string": "en"
+              },
+              "encoding": {
+                "_type": "CODE_PHRASE",
+                "terminology_id": {
+                  "_type": "TERMINOLOGY_ID",
+                  "value": "IANA_character-sets"
+                },
+                "code_string": "ISO-10646-UTF-1"
+              },
+              "workflow_id": {
+                "_type": "OBJECT_REF",
+                "namespace": "unknown",
+                "type": "ANY",
+                "id": {
+                  "_type": "GENERIC_ID",
+                  "value": "66dbcab8-65e9-38ca-aef1-b18ae72d46ed",
+                  "scheme": "scheme"
+                }
+              },
+              "subject": {
+                "_type": "PARTY_SELF"
+              },
+              "provider": {
+                "_type": "PARTY_SELF"
+              },
+              "guideline_id": {
+                "_type": "OBJECT_REF",
+                "namespace": "unknown",
+                "type": "ANY",
+                "id": {
+                  "_type": "GENERIC_ID",
+                  "value": "23b25bb8-8df1-3579-a2c1-51a6245551cf",
+                  "scheme": "scheme"
+                }
+              },
+              "data": {
+                "name": {
+                  "_type": "DV_TEXT",
+                  "value": "History"
+                },
+                "origin": {
+                  "_type": "DV_DATE_TIME",
+                  "value": "2022-02-03T04:05:06"
+                },
+                "period": {
+                  "_type": "DV_DURATION",
+                  "value": "PT0S"
+                },
+                "duration": {
+                  "_type": "DV_DURATION",
+                  "value": "PT0S"
+                },
+                "events": [
+                  {
+                    "_type": "POINT_EVENT",
+                    "name": {
+                      "_type": "DV_TEXT",
+                      "value": "Any event"
+                    },
+                    "time": {
+                      "_type": "DV_DATE_TIME",
+                      "value": "2022-02-03T04:05:06"
+                    },
+                    "data": {
+                      "_type": "ITEM_TREE",
+                      "name": {
+                        "_type": "DV_TEXT",
+                        "value": "Tree"
+                      },
+                      "items": [
+                        {
+                          "_type": "ELEMENT",
+                          "name": {
+                            "_type": "DV_TEXT",
+                            "value": "Temperature"
+                          },
+                          "value": {
+                            "_type": "DV_QUANTITY",
+                            "units": "Cel",
+                            "magnitude": 50.0
+                          },
+                          "archetype_node_id": "at0004"
+                        }
+                      ],
+                      "archetype_node_id": "at0001"
+                    },
+                    "archetype_node_id": "at0003"
+                  }
+                ],
+                "archetype_node_id": "at0002"
+              },
+              "archetype_node_id": "openEHR-EHR-OBSERVATION.body_temperature.v2"
+            },
+            {
+              "_type": "OBSERVATION",
+              "name": {
+                "_type": "DV_TEXT",
+                "value": "Pulse oximetry"
+              },
+              "archetype_details": {
+                "archetype_id": {
+                  "value": "openEHR-EHR-OBSERVATION.pulse_oximetry.v1"
+                },
+                "rm_version": "1.0.4"
+              },
+              "language": {
+                "_type": "CODE_PHRASE",
+                "terminology_id": {
+                  "_type": "TERMINOLOGY_ID",
+                  "value": "ISO_639-1"
+                },
+                "code_string": "en"
+              },
+              "encoding": {
+                "_type": "CODE_PHRASE",
+                "terminology_id": {
+                  "_type": "TERMINOLOGY_ID",
+                  "value": "IANA_character-sets"
+                },
+                "code_string": "ISO-10646-UTF-1"
+              },
+              "workflow_id": {
+                "_type": "OBJECT_REF",
+                "namespace": "unknown",
+                "type": "ANY",
+                "id": {
+                  "_type": "GENERIC_ID",
+                  "value": "8f70cb92-d9cb-385f-82d2-5a9b5f530f10",
+                  "scheme": "scheme"
+                }
+              },
+              "subject": {
+                "_type": "PARTY_SELF"
+              },
+              "provider": {
+                "_type": "PARTY_SELF"
+              },
+              "guideline_id": {
+                "_type": "OBJECT_REF",
+                "namespace": "unknown",
+                "type": "ANY",
+                "id": {
+                  "_type": "GENERIC_ID",
+                  "value": "db42e61b-9e22-3790-96a0-140179a30eaf",
+                  "scheme": "scheme"
+                }
+              },
+              "data": {
+                "name": {
+                  "_type": "DV_TEXT",
+                  "value": "Event Series"
+                },
+                "origin": {
+                  "_type": "DV_DATE_TIME",
+                  "value": "2022-02-03T04:05:06"
+                },
+                "period": {
+                  "_type": "DV_DURATION",
+                  "value": "PT0S"
+                },
+                "duration": {
+                  "_type": "DV_DURATION",
+                  "value": "PT0S"
+                },
+                "events": [
+                  {
+                    "_type": "INTERVAL_EVENT",
+                    "name": {
+                      "_type": "DV_TEXT",
+                      "value": "Any event"
+                    },
+                    "time": {
+                      "_type": "DV_DATE_TIME",
+                      "value": "2022-02-03T04:05:06"
+                    },
+                    "state": {
+                      "_type": "ITEM_TREE",
+                      "name": {
+                        "_type": "DV_TEXT",
+                        "value": "Tree"
+                      },
+                      "items": [
+                        {
+                          "_type": "CLUSTER",
+                          "name": {
+                            "_type": "DV_TEXT",
+                            "value": "Inspired oxygen"
+                          },
+                          "archetype_details": {
+                            "archetype_id": {
+                              "value": "openEHR-EHR-CLUSTER.inspired_oxygen.v1"
+                            },
+                            "rm_version": "1.0.4"
+                          },
+                          "items": [
+                            {
+                              "_type": "ELEMENT",
+                              "name": {
+                                "_type": "DV_TEXT",
+                                "value": "Flow rate"
+                              },
+                              "value": {
+                                "_type": "DV_QUANTITY",
+                                "units": "l/min",
+                                "magnitude": 25.0
+                              },
+                              "archetype_node_id": "at0051"
+                            },
+                            {
+                              "_type": "ELEMENT",
+                              "name": {
+                                "_type": "DV_TEXT",
+                                "value": "Method of oxygen delivery"
+                              },
+                              "value": {
+                                "_type": "DV_TEXT",
+                                "value": "Room air"
+                              },
+                              "archetype_node_id": "at0054"
+                            }
+                          ],
+                          "archetype_node_id": "openEHR-EHR-CLUSTER.inspired_oxygen.v1"
+                        }
+                      ],
+                      "archetype_node_id": "at0014"
+                    },
+                    "data": {
+                      "_type": "ITEM_TREE",
+                      "name": {
+                        "_type": "DV_TEXT",
+                        "value": "Tree"
+                      },
+                      "items": [
+                        {
+                          "_type": "ELEMENT",
+                          "name": {
+                            "_type": "DV_TEXT",
+                            "value": "SpO\u2082"
+                          },
+                          "value": {
+                            "_type": "DV_PROPORTION",
+                            "numerator": 50.0,
+                            "denominator": 100.0,
+                            "type": 3
+                          },
+                          "archetype_node_id": "at0006"
+                        }
+                      ],
+                      "archetype_node_id": "at0003"
+                    },
+                    "width": {
+                      "_type": "DV_DURATION",
+                      "value": "PT42H"
+                    },
+                    "math_function": {
+                      "_type": "DV_CODED_TEXT",
+                      "value": "minimum",
+                      "defining_code": {
+                        "_type": "CODE_PHRASE",
+                        "terminology_id": {
+                          "_type": "TERMINOLOGY_ID",
+                          "value": "openehr"
+                        },
+                        "code_string": "145"
+                      }
+                    },
+                    "archetype_node_id": "at0002"
+                  }
+                ],
+                "archetype_node_id": "at0001"
+              },
+              "archetype_node_id": "openEHR-EHR-OBSERVATION.pulse_oximetry.v1"
+            },
+            {
+              "_type": "OBSERVATION",
+              "name": {
+                "_type": "DV_TEXT",
+                "value": "Pulse"
+              },
+              "archetype_details": {
+                "archetype_id": {
+                  "value": "openEHR-EHR-OBSERVATION.pulse.v1"
+                },
+                "rm_version": "1.0.4"
+              },
+              "language": {
+                "_type": "CODE_PHRASE",
+                "terminology_id": {
+                  "_type": "TERMINOLOGY_ID",
+                  "value": "ISO_639-1"
+                },
+                "code_string": "en"
+              },
+              "encoding": {
+                "_type": "CODE_PHRASE",
+                "terminology_id": {
+                  "_type": "TERMINOLOGY_ID",
+                  "value": "IANA_character-sets"
+                },
+                "code_string": "ISO-10646-UTF-1"
+              },
+              "workflow_id": {
+                "_type": "OBJECT_REF",
+                "namespace": "unknown",
+                "type": "ANY",
+                "id": {
+                  "_type": "GENERIC_ID",
+                  "value": "76557dc1-879b-38f4-9e78-2061893997be",
+                  "scheme": "scheme"
+                }
+              },
+              "subject": {
+                "_type": "PARTY_SELF"
+              },
+              "provider": {
+                "_type": "PARTY_SELF"
+              },
+              "guideline_id": {
+                "_type": "OBJECT_REF",
+                "namespace": "unknown",
+                "type": "ANY",
+                "id": {
+                  "_type": "GENERIC_ID",
+                  "value": "ce285893-77a6-3dd2-989b-783b9e7988dc",
+                  "scheme": "scheme"
+                }
+              },
+              "data": {
+                "name": {
+                  "_type": "DV_TEXT",
+                  "value": "history"
+                },
+                "origin": {
+                  "_type": "DV_DATE_TIME",
+                  "value": "2022-02-03T04:05:06"
+                },
+                "period": {
+                  "_type": "DV_DURATION",
+                  "value": "PT0S"
+                },
+                "duration": {
+                  "_type": "DV_DURATION",
+                  "value": "PT0S"
+                },
+                "events": [
+                  {
+                    "_type": "POINT_EVENT",
+                    "name": {
+                      "_type": "DV_TEXT",
+                      "value": "Any event"
+                    },
+                    "time": {
+                      "_type": "DV_DATE_TIME",
+                      "value": "2022-02-03T04:05:06"
+                    },
+                    "data": {
+                      "_type": "ITEM_TREE",
+                      "name": {
+                        "_type": "DV_TEXT",
+                        "value": "structure"
+                      },
+                      "items": [
+                        {
+                          "_type": "ELEMENT",
+                          "name": {
+                            "_type": "DV_CODED_TEXT",
+                            "value": "Pulse Rate",
+                            "defining_code": {
+                              "_type": "CODE_PHRASE",
+                              "terminology_id": {
+                                "_type": "TERMINOLOGY_ID",
+                                "value": "local"
+                              },
+                              "code_string": "at1026"
+                            }
+                          },
+                          "value": {
+                            "_type": "DV_QUANTITY",
+                            "units": "/min",
+                            "magnitude": 21.0
+                          },
+                          "archetype_node_id": "at0004"
+                        }
+                      ],
+                      "archetype_node_id": "at0001"
+                    },
+                    "archetype_node_id": "at0003"
+                  }
+                ],
+                "archetype_node_id": "at0002"
+              },
+              "archetype_node_id": "openEHR-EHR-OBSERVATION.pulse.v1"
+            },
+            {
+              "_type": "OBSERVATION",
+              "name": {
+                "_type": "DV_TEXT",
+                "value": "Respirations"
+              },
+              "archetype_details": {
+                "archetype_id": {
+                  "value": "openEHR-EHR-OBSERVATION.respiration.v1"
+                },
+                "rm_version": "1.0.4"
+              },
+              "language": {
+                "_type": "CODE_PHRASE",
+                "terminology_id": {
+                  "_type": "TERMINOLOGY_ID",
+                  "value": "ISO_639-1"
+                },
+                "code_string": "en"
+              },
+              "encoding": {
+                "_type": "CODE_PHRASE",
+                "terminology_id": {
+                  "_type": "TERMINOLOGY_ID",
+                  "value": "IANA_character-sets"
+                },
+                "code_string": "ISO-10646-UTF-1"
+              },
+              "workflow_id": {
+                "_type": "OBJECT_REF",
+                "namespace": "unknown",
+                "type": "ANY",
+                "id": {
+                  "_type": "GENERIC_ID",
+                  "value": "88c80f80-c620-38b4-8b63-a7c08fe0bf19",
+                  "scheme": "scheme"
+                }
+              },
+              "subject": {
+                "_type": "PARTY_SELF"
+              },
+              "provider": {
+                "_type": "PARTY_SELF"
+              },
+              "guideline_id": {
+                "_type": "OBJECT_REF",
+                "namespace": "unknown",
+                "type": "ANY",
+                "id": {
+                  "_type": "GENERIC_ID",
+                  "value": "62621571-8201-337b-a005-815ea8fa2db8",
+                  "scheme": "scheme"
+                }
+              },
+              "data": {
+                "name": {
+                  "_type": "DV_TEXT",
+                  "value": "history"
+                },
+                "origin": {
+                  "_type": "DV_DATE_TIME",
+                  "value": "2022-02-03T04:05:06"
+                },
+                "period": {
+                  "_type": "DV_DURATION",
+                  "value": "PT0S"
+                },
+                "duration": {
+                  "_type": "DV_DURATION",
+                  "value": "PT0S"
+                },
+                "events": [
+                  {
+                    "_type": "POINT_EVENT",
+                    "name": {
+                      "_type": "DV_TEXT",
+                      "value": "Any event"
+                    },
+                    "time": {
+                      "_type": "DV_DATE_TIME",
+                      "value": "2022-02-03T04:05:06"
+                    },
+                    "data": {
+                      "_type": "ITEM_TREE",
+                      "name": {
+                        "_type": "DV_TEXT",
+                        "value": "List"
+                      },
+                      "items": [
+                        {
+                          "_type": "ELEMENT",
+                          "name": {
+                            "_type": "DV_TEXT",
+                            "value": "Rate"
+                          },
+                          "value": {
+                            "_type": "DV_QUANTITY",
+                            "units": "/min",
+                            "magnitude": 100.0
+                          },
+                          "archetype_node_id": "at0004"
+                        }
+                      ],
+                      "archetype_node_id": "at0003"
+                    },
+                    "archetype_node_id": "at0002"
+                  }
+                ],
+                "archetype_node_id": "at0001"
+              },
+              "archetype_node_id": "openEHR-EHR-OBSERVATION.respiration.v1"
+            },
+            {
+              "_type": "OBSERVATION",
+              "name": {
+                "_type": "DV_TEXT",
+                "value": "ACVPU scale"
+              },
+              "archetype_details": {
+                "archetype_id": {
+                  "value": "openEHR-EHR-OBSERVATION.acvpu.v0"
+                },
+                "rm_version": "1.0.4"
+              },
+              "language": {
+                "_type": "CODE_PHRASE",
+                "terminology_id": {
+                  "_type": "TERMINOLOGY_ID",
+                  "value": "ISO_639-1"
+                },
+                "code_string": "en"
+              },
+              "encoding": {
+                "_type": "CODE_PHRASE",
+                "terminology_id": {
+                  "_type": "TERMINOLOGY_ID",
+                  "value": "IANA_character-sets"
+                },
+                "code_string": "ISO-10646-UTF-1"
+              },
+              "workflow_id": {
+                "_type": "OBJECT_REF",
+                "namespace": "unknown",
+                "type": "ANY",
+                "id": {
+                  "_type": "GENERIC_ID",
+                  "value": "4c3b29ab-40cd-3072-9ca9-07f7d83634ca",
+                  "scheme": "scheme"
+                }
+              },
+              "subject": {
+                "_type": "PARTY_SELF"
+              },
+              "provider": {
+                "_type": "PARTY_SELF"
+              },
+              "guideline_id": {
+                "_type": "OBJECT_REF",
+                "namespace": "unknown",
+                "type": "ANY",
+                "id": {
+                  "_type": "GENERIC_ID",
+                  "value": "ebb9e4a6-245d-3f11-aa6c-8234aa4ec2fb",
+                  "scheme": "scheme"
+                }
+              },
+              "data": {
+                "name": {
+                  "_type": "DV_TEXT",
+                  "value": "Event Series"
+                },
+                "origin": {
+                  "_type": "DV_DATE_TIME",
+                  "value": "2022-02-03T04:05:06"
+                },
+                "period": {
+                  "_type": "DV_DURATION",
+                  "value": "PT0S"
+                },
+                "duration": {
+                  "_type": "DV_DURATION",
+                  "value": "PT0S"
+                },
+                "events": [
+                  {
+                    "_type": "POINT_EVENT",
+                    "name": {
+                      "_type": "DV_TEXT",
+                      "value": "Any point in time event"
+                    },
+                    "time": {
+                      "_type": "DV_DATE_TIME",
+                      "value": "2022-02-03T04:05:06"
+                    },
+                    "data": {
+                      "_type": "ITEM_TREE",
+                      "name": {
+                        "_type": "DV_TEXT",
+                        "value": "Tree"
+                      },
+                      "items": [
+                        {
+                          "_type": "ELEMENT",
+                          "name": {
+                            "_type": "DV_TEXT",
+                            "value": "ACVPU"
+                          },
+                          "value": {
+                            "_type": "DV_CODED_TEXT",
+                            "value": "Alert",
+                            "defining_code": {
+                              "_type": "CODE_PHRASE",
+                              "terminology_id": {
+                                "_type": "TERMINOLOGY_ID",
+                                "value": "local"
+                              },
+                              "code_string": "at0005"
+                            }
+                          },
+                          "archetype_node_id": "at0004"
+                        }
+                      ],
+                      "archetype_node_id": "at0003"
+                    },
+                    "archetype_node_id": "at0002"
+                  }
+                ],
+                "archetype_node_id": "at0001"
+              },
+              "archetype_node_id": "openEHR-EHR-OBSERVATION.acvpu.v0"
+            },
+            {
+              "_type": "OBSERVATION",
+              "name": {
+                "_type": "DV_TEXT",
+                "value": "Blood pressure"
+              },
+              "archetype_details": {
+                "archetype_id": {
+                  "value": "openEHR-EHR-OBSERVATION.blood_pressure.v2"
+                },
+                "rm_version": "1.0.4"
+              },
+              "language": {
+                "_type": "CODE_PHRASE",
+                "terminology_id": {
+                  "_type": "TERMINOLOGY_ID",
+                  "value": "ISO_639-1"
+                },
+                "code_string": "en"
+              },
+              "encoding": {
+                "_type": "CODE_PHRASE",
+                "terminology_id": {
+                  "_type": "TERMINOLOGY_ID",
+                  "value": "IANA_character-sets"
+                },
+                "code_string": "ISO-10646-UTF-1"
+              },
+              "workflow_id": {
+                "_type": "OBJECT_REF",
+                "namespace": "unknown",
+                "type": "ANY",
+                "id": {
+                  "_type": "GENERIC_ID",
+                  "value": "a4b290fb-f88b-32ec-98a5-a9710f9b7c50",
+                  "scheme": "scheme"
+                }
+              },
+              "subject": {
+                "_type": "PARTY_SELF"
+              },
+              "provider": {
+                "_type": "PARTY_SELF"
+              },
+              "guideline_id": {
+                "_type": "OBJECT_REF",
+                "namespace": "unknown",
+                "type": "ANY",
+                "id": {
+                  "_type": "GENERIC_ID",
+                  "value": "4ee6e951-e500-343c-b57b-fea796470814",
+                  "scheme": "scheme"
+                }
+              },
+              "data": {
+                "name": {
+                  "_type": "DV_TEXT",
+                  "value": "History"
+                },
+                "origin": {
+                  "_type": "DV_DATE_TIME",
+                  "value": "2022-02-03T04:05:06"
+                },
+                "period": {
+                  "_type": "DV_DURATION",
+                  "value": "PT0S"
+                },
+                "duration": {
+                  "_type": "DV_DURATION",
+                  "value": "PT0S"
+                },
+                "events": [
+                  {
+                    "_type": "POINT_EVENT",
+                    "name": {
+                      "_type": "DV_TEXT",
+                      "value": "Any event"
+                    },
+                    "time": {
+                      "_type": "DV_DATE_TIME",
+                      "value": "2022-02-03T04:05:06"
+                    },
+                    "data": {
+                      "_type": "ITEM_TREE",
+                      "name": {
+                        "_type": "DV_TEXT",
+                        "value": "blood pressure"
+                      },
+                      "items": [
+                        {
+                          "_type": "ELEMENT",
+                          "name": {
+                            "_type": "DV_TEXT",
+                            "value": "Systolic"
+                          },
+                          "value": {
+                            "_type": "DV_QUANTITY",
+                            "units": "mm[Hg]",
+                            "magnitude": 500.0
+                          },
+                          "archetype_node_id": "at0004"
+                        },
+                        {
+                          "_type": "ELEMENT",
+                          "name": {
+                            "_type": "DV_TEXT",
+                            "value": "Diastolic"
+                          },
+                          "value": {
+                            "_type": "DV_QUANTITY",
+                            "units": "mm[Hg]",
+                            "magnitude": 500.0
+                          },
+                          "archetype_node_id": "at0005"
+                        }
+                      ],
+                      "archetype_node_id": "at0003"
+                    },
+                    "archetype_node_id": "at0006"
+                  }
+                ],
+                "archetype_node_id": "at0001"
+              },
+              "archetype_node_id": "openEHR-EHR-OBSERVATION.blood_pressure.v2"
+            },
+            {
+              "_type": "OBSERVATION",
+              "name": {
+                "_type": "DV_TEXT",
+                "value": "NEWS2 Score"
+              },
+              "archetype_details": {
+                "archetype_id": {
+                  "value": "openEHR-EHR-OBSERVATION.news2.v1"
+                },
+                "rm_version": "1.0.4"
+              },
+              "language": {
+                "_type": "CODE_PHRASE",
+                "terminology_id": {
+                  "_type": "TERMINOLOGY_ID",
+                  "value": "ISO_639-1"
+                },
+                "code_string": "en"
+              },
+              "encoding": {
+                "_type": "CODE_PHRASE",
+                "terminology_id": {
+                  "_type": "TERMINOLOGY_ID",
+                  "value": "IANA_character-sets"
+                },
+                "code_string": "ISO-10646-UTF-1"
+              },
+              "workflow_id": {
+                "_type": "OBJECT_REF",
+                "namespace": "unknown",
+                "type": "ANY",
+                "id": {
+                  "_type": "GENERIC_ID",
+                  "value": "cd6d0340-fec1-3fe8-ac04-ad4d0a0cae41",
+                  "scheme": "scheme"
+                }
+              },
+              "subject": {
+                "_type": "PARTY_SELF"
+              },
+              "provider": {
+                "_type": "PARTY_SELF"
+              },
+              "guideline_id": {
+                "_type": "OBJECT_REF",
+                "namespace": "unknown",
+                "type": "ANY",
+                "id": {
+                  "_type": "GENERIC_ID",
+                  "value": "64d89936-303f-3a20-9e4c-233c2f1aba7d",
+                  "scheme": "scheme"
+                }
+              },
+              "data": {
+                "name": {
+                  "_type": "DV_TEXT",
+                  "value": "Event Series"
+                },
+                "origin": {
+                  "_type": "DV_DATE_TIME",
+                  "value": "2022-02-03T04:05:06"
+                },
+                "period": {
+                  "_type": "DV_DURATION",
+                  "value": "PT0S"
+                },
+                "duration": {
+                  "_type": "DV_DURATION",
+                  "value": "PT0S"
+                },
+                "events": [
+                  {
+                    "_type": "POINT_EVENT",
+                    "name": {
+                      "_type": "DV_TEXT",
+                      "value": "Any point in time event"
+                    },
+                    "time": {
+                      "_type": "DV_DATE_TIME",
+                      "value": "2022-02-03T04:05:06"
+                    },
+                    "data": {
+                      "_type": "ITEM_TREE",
+                      "name": {
+                        "_type": "DV_TEXT",
+                        "value": "Tree"
+                      },
+                      "items": [
+                        {
+                          "_type": "ELEMENT",
+                          "name": {
+                            "_type": "DV_TEXT",
+                            "value": "Respiration rate"
+                          },
+                          "value": {
+                            "_type": "DV_ORDINAL",
+                            "symbol": {
+                              "_type": "DV_CODED_TEXT",
+                              "value": "\u22648",
+                              "defining_code": {
+                                "_type": "CODE_PHRASE",
+                                "terminology_id": {
+                                  "_type": "TERMINOLOGY_ID",
+                                  "value": "external"
+                                },
+                                "code_string": "at0021"
+                              }
+                            },
+                            "value": 3
+                          },
+                          "archetype_node_id": "at0006"
+                        },
+                        {
+                          "_type": "ELEMENT",
+                          "name": {
+                            "_type": "DV_TEXT",
+                            "value": "SpO\u2082 Scale 1"
+                          },
+                          "value": {
+                            "_type": "DV_ORDINAL",
+                            "symbol": {
+                              "_type": "DV_CODED_TEXT",
+                              "value": "\u226491",
+                              "defining_code": {
+                                "_type": "CODE_PHRASE",
+                                "terminology_id": {
+                                  "_type": "TERMINOLOGY_ID",
+                                  "value": "external"
+                                },
+                                "code_string": "at0033"
+                              }
+                            },
+                            "value": 3
+                          },
+                          "archetype_node_id": "at0029"
+                        },
+                        {
+                          "_type": "ELEMENT",
+                          "name": {
+                            "_type": "DV_TEXT",
+                            "value": "Air or oxygen?"
+                          },
+                          "value": {
+                            "_type": "DV_ORDINAL",
+                            "symbol": {
+                              "_type": "DV_CODED_TEXT",
+                              "value": "Air",
+                              "defining_code": {
+                                "_type": "CODE_PHRASE",
+                                "terminology_id": {
+                                  "_type": "TERMINOLOGY_ID",
+                                  "value": "external"
+                                },
+                                "code_string": "at0036"
+                              }
+                            },
+                            "value": 0
+                          },
+                          "archetype_node_id": "at0034"
+                        },
+                        {
+                          "_type": "ELEMENT",
+                          "name": {
+                            "_type": "DV_TEXT",
+                            "value": "Systolic blood pressure"
+                          },
+                          "value": {
+                            "_type": "DV_ORDINAL",
+                            "symbol": {
+                              "_type": "DV_CODED_TEXT",
+                              "value": "\u226490",
+                              "defining_code": {
+                                "_type": "CODE_PHRASE",
+                                "terminology_id": {
+                                  "_type": "TERMINOLOGY_ID",
+                                  "value": "external"
+                                },
+                                "code_string": "at0017"
+                              }
+                            },
+                            "value": 3
+                          },
+                          "archetype_node_id": "at0004"
+                        },
+                        {
+                          "_type": "ELEMENT",
+                          "name": {
+                            "_type": "DV_TEXT",
+                            "value": "Pulse"
+                          },
+                          "value": {
+                            "_type": "DV_ORDINAL",
+                            "symbol": {
+                              "_type": "DV_CODED_TEXT",
+                              "value": "\u226440",
+                              "defining_code": {
+                                "_type": "CODE_PHRASE",
+                                "terminology_id": {
+                                  "_type": "TERMINOLOGY_ID",
+                                  "value": "external"
+                                },
+                                "code_string": "at0010"
+                              }
+                            },
+                            "value": 3
+                          },
+                          "archetype_node_id": "at0005"
+                        },
+                        {
+                          "_type": "ELEMENT",
+                          "name": {
+                            "_type": "DV_TEXT",
+                            "value": "Consciousness"
+                          },
+                          "value": {
+                            "_type": "DV_ORDINAL",
+                            "symbol": {
+                              "_type": "DV_CODED_TEXT",
+                              "value": "Alert",
+                              "defining_code": {
+                                "_type": "CODE_PHRASE",
+                                "terminology_id": {
+                                  "_type": "TERMINOLOGY_ID",
+                                  "value": "external"
+                                },
+                                "code_string": "at0024"
+                              }
+                            },
+                            "value": 0
+                          },
+                          "archetype_node_id": "at0008"
+                        },
+                        {
+                          "_type": "ELEMENT",
+                          "name": {
+                            "_type": "DV_TEXT",
+                            "value": "Temperature"
+                          },
+                          "value": {
+                            "_type": "DV_ORDINAL",
+                            "symbol": {
+                              "_type": "DV_CODED_TEXT",
+                              "value": "\u226435.0",
+                              "defining_code": {
+                                "_type": "CODE_PHRASE",
+                                "terminology_id": {
+                                  "_type": "TERMINOLOGY_ID",
+                                  "value": "external"
+                                },
+                                "code_string": "at0039"
+                              }
+                            },
+                            "value": 3
+                          },
+                          "archetype_node_id": "at0007"
+                        },
+                        {
+                          "_type": "ELEMENT",
+                          "name": {
+                            "_type": "DV_TEXT",
+                            "value": "Total score"
+                          },
+                          "value": {
+                            "_type": "DV_COUNT",
+                            "magnitude": 10
+                          },
+                          "archetype_node_id": "at0028"
+                        },
+                        {
+                          "_type": "ELEMENT",
+                          "name": {
+                            "_type": "DV_TEXT",
+                            "value": "Clinical risk category"
+                          },
+                          "value": {
+                            "_type": "DV_CODED_TEXT",
+                            "value": "Low",
+                            "defining_code": {
+                              "_type": "CODE_PHRASE",
+                              "terminology_id": {
+                                "_type": "TERMINOLOGY_ID",
+                                "value": "local"
+                              },
+                              "code_string": "at0057"
+                            }
+                          },
+                          "archetype_node_id": "at0056"
+                        }
+                      ],
+                      "archetype_node_id": "at0003"
+                    },
+                    "archetype_node_id": "at0002"
+                  }
+                ],
+                "archetype_node_id": "at0001"
+              },
+              "archetype_node_id": "openEHR-EHR-OBSERVATION.news2.v1"
+            }
+          ],
+          "archetype_node_id": "openEHR-EHR-SECTION.adhoc.v1"
+        }
+      ],
+      "archetype_node_id": "openEHR-EHR-SECTION.adhoc.v1"
+    },
+    {
+      "_type": "SECTION",
+      "name": {
+        "_type": "DV_TEXT",
+        "value": "Response"
+      },
+      "archetype_details": {
+        "archetype_id": {
+          "value": "openEHR-EHR-SECTION.adhoc.v1"
+        },
+        "rm_version": "1.0.4"
+      },
+      "items": [
+        {
+          "_type": "EVALUATION",
+          "name": {
+            "_type": "DV_TEXT",
+            "value": "Recommendation"
+          },
+          "archetype_details": {
+            "archetype_id": {
+              "value": "openEHR-EHR-EVALUATION.recommendation.v1"
+            },
+            "rm_version": "1.0.4"
+          },
+          "language": {
+            "_type": "CODE_PHRASE",
+            "terminology_id": {
+              "_type": "TERMINOLOGY_ID",
+              "value": "ISO_639-1"
+            },
+            "code_string": "en"
+          },
+          "encoding": {
+            "_type": "CODE_PHRASE",
+            "terminology_id": {
+              "_type": "TERMINOLOGY_ID",
+              "value": "IANA_character-sets"
+            },
+            "code_string": "ISO-10646-UTF-1"
+          },
+          "workflow_id": {
+            "_type": "OBJECT_REF",
+            "namespace": "unknown",
+            "type": "ANY",
+            "id": {
+              "_type": "GENERIC_ID",
+              "value": "6d103c3a-9e9c-3eb6-8484-7de017068562",
+              "scheme": "scheme"
+            }
+          },
+          "subject": {
+            "_type": "PARTY_SELF"
+          },
+          "provider": {
+            "_type": "PARTY_SELF"
+          },
+          "guideline_id": {
+            "_type": "OBJECT_REF",
+            "namespace": "unknown",
+            "type": "ANY",
+            "id": {
+              "_type": "GENERIC_ID",
+              "value": "e108a53e-af3c-381b-9341-0c3ec268d493",
+              "scheme": "scheme"
+            }
+          },
+          "time_asserted": {
+            "_type": "DV_DATE_TIME",
+            "value": "2022-02-03T04:05:06"
+          },
+          "data": {
+            "_type": "ITEM_TREE",
+            "name": {
+              "_type": "DV_TEXT",
+              "value": "Tree"
+            },
+            "items": [
+              {
+                "_type": "ELEMENT",
+                "name": {
+                  "_type": "DV_TEXT",
+                  "value": "Recommendation"
+                },
+                "value": {
+                  "_type": "DV_TEXT",
+                  "value": "Presumed COVID-19 pathway"
+                },
+                "archetype_node_id": "at0002"
+              }
+            ],
+            "archetype_node_id": "at0001"
+          },
+          "archetype_node_id": "openEHR-EHR-EVALUATION.recommendation.v1"
+        }
+      ],
+      "archetype_node_id": "openEHR-EHR-SECTION.adhoc.v1"
+    }
+  ],
+  "archetype_node_id": "openEHR-EHR-COMPOSITION.encounter.v1"
+}

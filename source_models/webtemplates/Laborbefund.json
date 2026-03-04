@@ -1,0 +1,1346 @@
+{
+  "templateId": "Laborbefund",
+  "version": "2.3",
+  "defaultLanguage": "de",
+  "languages": [
+    "de"
+  ],
+  "tree": {
+    "id": "laborbefund",
+    "name": "Laborbefund",
+    "localizedName": "Laborbefund",
+    "rmType": "COMPOSITION",
+    "nodeId": "openEHR-EHR-COMPOSITION.report-result.v1",
+    "min": 1,
+    "max": 1,
+    "localizedNames": {
+      "de": "Laborbefund"
+    },
+    "localizedDescriptions": {
+      "de": "Das Dokument wird verwendet, um Informationen \u00fcber das Ergebnis eines Tests oder einer Bewertung zu \u00fcbermitteln."
+    },
+    "children": [
+      {
+        "id": "category",
+        "name": "category",
+        "localizedName": "category",
+        "rmType": "DV_CODED_TEXT",
+        "min": 1,
+        "max": 1,
+        "aqlPath": "/category",
+        "inputs": [
+          {
+            "suffix": "code",
+            "type": "CODED_TEXT",
+            "list": [
+              {
+                "value": "433",
+                "label": "event",
+                "localizedLabels": {
+                  "de": "event"
+                }
+              }
+            ],
+            "terminology": "openehr"
+          }
+        ],
+        "inContext": true
+      },
+      {
+        "id": "context",
+        "name": "context",
+        "localizedName": "context",
+        "rmType": "EVENT_CONTEXT",
+        "min": 1,
+        "max": 1,
+        "aqlPath": "/context",
+        "children": [
+          {
+            "id": "identifikator_des_laborbefunds",
+            "name": "Identifikator des Laborbefunds",
+            "localizedName": "Identifikator des Laborbefunds",
+            "rmType": "DV_TEXT",
+            "nodeId": "at0002",
+            "min": 0,
+            "max": 1,
+            "localizedNames": {
+              "de": "Identifikator des Laborbefunds"
+            },
+            "localizedDescriptions": {
+              "de": "Eindeutige Identifikation des Berichts."
+            },
+            "aqlPath": "/context/other_context[at0001]/items[at0002 and name/value='Identifikator des Laborbefunds']/value",
+            "inputs": [
+              {
+                "type": "TEXT"
+              }
+            ]
+          },
+          {
+            "id": "status",
+            "name": "Status",
+            "localizedName": "Status",
+            "rmType": "DV_TEXT",
+            "nodeId": "at0005",
+            "min": 1,
+            "max": 1,
+            "localizedNames": {
+              "de": "Status"
+            },
+            "localizedDescriptions": {
+              "de": "Status des gesamten Ergebnisberichts. Hinweis: Dies ist nicht der Status einzelner Berichtskomponenten."
+            },
+            "aqlPath": "/context/other_context[at0001]/items[at0005]/value",
+            "inputs": [
+              {
+                "type": "TEXT",
+                "list": [
+                  {
+                    "value": "Teilweise",
+                    "label": "Teilweise"
+                  },
+                  {
+                    "value": "Vorl\u00e4ufig",
+                    "label": "Vorl\u00e4ufig"
+                  },
+                  {
+                    "value": "Final",
+                    "label": "Final"
+                  },
+                  {
+                    "value": "Final korrigiert",
+                    "label": "Final korrigiert"
+                  },
+                  {
+                    "value": "Final ge\u00e4ndert",
+                    "label": "Final ge\u00e4ndert"
+                  },
+                  {
+                    "value": "Erweitert",
+                    "label": "Erweitert"
+                  }
+                ],
+                "listOpen": false
+              }
+            ]
+          },
+          {
+            "id": "fallidentifikation",
+            "name": "Fallidentifikation",
+            "localizedName": "Fallidentifikation",
+            "rmType": "CLUSTER",
+            "nodeId": "openEHR-EHR-CLUSTER.case_identification.v0",
+            "min": 1,
+            "max": 1,
+            "localizedNames": {
+              "de": "Fallidentifikation"
+            },
+            "localizedDescriptions": {
+              "de": "Zur Erfassung von Details zur Identifikation eines Falls im Gesundheitswesen."
+            },
+            "aqlPath": "/context/other_context[at0001]/items[openEHR-EHR-CLUSTER.case_identification.v0]",
+            "children": [
+              {
+                "id": "fall-kennung",
+                "name": "Fall-Kennung",
+                "localizedName": "Fall-Kennung",
+                "rmType": "DV_TEXT",
+                "nodeId": "at0001",
+                "min": 0,
+                "max": 1,
+                "localizedNames": {
+                  "de": "Fall-Kennung"
+                },
+                "localizedDescriptions": {
+                  "de": "Der Bezeichner/die Kennung dieses Falls."
+                },
+                "aqlPath": "/context/other_context[at0001]/items[openEHR-EHR-CLUSTER.case_identification.v0]/items[at0001]/value",
+                "inputs": [
+                  {
+                    "type": "TEXT"
+                  }
+                ]
+              }
+            ]
+          },
+          {
+            "id": "start_time",
+            "name": "start_time",
+            "rmType": "DV_DATE_TIME",
+            "min": 1,
+            "max": 1,
+            "aqlPath": "/context/start_time",
+            "inputs": [
+              {
+                "type": "DATETIME"
+              }
+            ],
+            "inContext": true
+          },
+          {
+            "id": "setting",
+            "name": "setting",
+            "rmType": "DV_CODED_TEXT",
+            "min": 1,
+            "max": 1,
+            "aqlPath": "/context/setting",
+            "inputs": [
+              {
+                "suffix": "code",
+                "type": "TEXT"
+              },
+              {
+                "suffix": "value",
+                "type": "TEXT"
+              }
+            ],
+            "inContext": true
+          }
+        ]
+      },
+      {
+        "id": "laborergebnis",
+        "name": "Laborergebnis",
+        "localizedName": "Laborergebnis",
+        "rmType": "OBSERVATION",
+        "nodeId": "openEHR-EHR-OBSERVATION.laboratory_test_result.v1",
+        "min": 1,
+        "max": -1,
+        "localizedNames": {
+          "de": "Laborergebnis"
+        },
+        "localizedDescriptions": {
+          "de": "Das Ergebnis - einschlie\u00dflich der Befunde und der Interpretation des Labors - einer Untersuchung, die an Proben durchgef\u00fchrt wurde, die von einer Einzelperson stammen oder mit dieser Person zusammenh\u00e4ngen."
+        },
+        "aqlPath": "/content[openEHR-EHR-OBSERVATION.laboratory_test_result.v1]",
+        "children": [
+          {
+            "id": "jedes_ereignis",
+            "name": "Jedes Ereignis",
+            "localizedName": "Jedes Ereignis",
+            "rmType": "EVENT",
+            "nodeId": "at0002",
+            "min": 1,
+            "max": -1,
+            "localizedNames": {
+              "de": "Jedes Ereignis"
+            },
+            "localizedDescriptions": {
+              "de": "Jeder Zeitpunkt oder jedes Intervall, das in einem Template oder zur Laufzeit definiert werden kann."
+            },
+            "aqlPath": "/content[openEHR-EHR-OBSERVATION.laboratory_test_result.v1]/data[at0001]/events[at0002]",
+            "children": [
+              {
+                "id": "anforderung",
+                "name": "Anforderung",
+                "localizedName": "Anforderung",
+                "rmType": "DV_TEXT",
+                "nodeId": "at0005",
+                "min": 1,
+                "max": 1,
+                "localizedNames": {
+                  "de": "Anforderung"
+                },
+                "localizedDescriptions": {
+                  "de": "Name der Laboruntersuchung, die an der/den Probe(n) durchgef\u00fchrt wurde."
+                },
+                "aqlPath": "/content[openEHR-EHR-OBSERVATION.laboratory_test_result.v1]/data[at0001]/events[at0002]/data[at0003]/items[at0005 and name/value='Anforderung']/value",
+                "inputs": [
+                  {
+                    "type": "TEXT"
+                  }
+                ],
+                "annotations": {
+                  "comment": "Ein Laborergebnis kann sich auf ein einzelnes Analyt oder eine Analytgruppe beziehen. Dazu z\u00e4hlen auch komplette Panel an Parametern.\n                        Es wird dringend empfohlen, die \"Labortest-Bezeichnung\" anhand einer Terminologie zu kodiereren, wie zum Beispiel LOINC oder SNOMED CT. Beispiel: \"Glukose\", \"Harnstoff\", \"Abstrich\", \"Cortisol\", \"Leberbiopsie\". Der Name kann u.U. auch das Probenmaterial oder den Patientenstatus (z.B. \"Blutzuckerspiegel n\u00fcchtern\") oder andere Informationen beinhalten wie \"Kalium (Blutgas)\"."
+                }
+              },
+              {
+                "id": "probe",
+                "name": "Probe",
+                "localizedName": "Probe",
+                "rmType": "CLUSTER",
+                "nodeId": "openEHR-EHR-CLUSTER.specimen.v1",
+                "min": 0,
+                "max": -1,
+                "localizedNames": {
+                  "de": "Probe"
+                },
+                "localizedDescriptions": {
+                  "de": "Eine physikalische Probe zur Erforschung, Untersuchung oder Analyse, die von einer Person entnommen wurde oder die sich auf die Person bezieht."
+                },
+                "aqlPath": "/content[openEHR-EHR-OBSERVATION.laboratory_test_result.v1]/data[at0001]/events[at0002]/data[at0003]/items[openEHR-EHR-CLUSTER.specimen.v1]",
+                "children": [
+                  {
+                    "id": "probenart",
+                    "name": "Probenart",
+                    "localizedName": "Probenart",
+                    "rmType": "DV_TEXT",
+                    "nodeId": "at0029",
+                    "min": 0,
+                    "max": 1,
+                    "localizedNames": {
+                      "de": "Probenart"
+                    },
+                    "localizedDescriptions": {
+                      "de": "Die Art der Probe."
+                    },
+                    "aqlPath": "/content[openEHR-EHR-OBSERVATION.laboratory_test_result.v1]/data[at0001]/events[at0002]/data[at0003]/items[openEHR-EHR-CLUSTER.specimen.v1]/items[at0029]/value",
+                    "inputs": [
+                      {
+                        "type": "TEXT"
+                      }
+                    ],
+                    "annotations": {
+                      "comment": "Zum Beispiel: Ven\u00f6ses Blut, Bakterienkultur, Zytologie oder Prostatabiopsie. Nach M\u00f6glichkeit wird die Kodierung der Probenart mit einer Terminologie bevorzugt.",
+                      "fhir_mapping": "Specimen.type"
+                    }
+                  },
+                  {
+                    "id": "laborprobenidentifikator",
+                    "name": "Laborprobenidentifikator",
+                    "localizedName": "Laborprobenidentifikator",
+                    "rmType": "DV_IDENTIFIER",
+                    "nodeId": "at0001",
+                    "min": 0,
+                    "max": 1,
+                    "localizedNames": {
+                      "de": "Laborprobenidentifikator"
+                    },
+                    "localizedDescriptions": {
+                      "de": "Eine eindeutige Kennung der Probe, die normalerweise vom Labor vergeben wird."
+                    },
+                    "aqlPath": "/content[openEHR-EHR-OBSERVATION.laboratory_test_result.v1]/data[at0001]/events[at0002]/data[at0003]/items[openEHR-EHR-CLUSTER.specimen.v1]/items[at0001]/value",
+                    "inputs": [
+                      {
+                        "suffix": "id",
+                        "type": "TEXT"
+                      },
+                      {
+                        "suffix": "type",
+                        "type": "TEXT"
+                      },
+                      {
+                        "suffix": "issuer",
+                        "type": "TEXT"
+                      },
+                      {
+                        "suffix": "assigner",
+                        "type": "TEXT"
+                      }
+                    ],
+                    "annotations": {
+                      "comment": "Wird manchmal als \"Accession Identifier\" bezeichnet. Probenbeh\u00e4lter, z. B. Vakuumflaschen oder Gewebekassetten, haben ihre eigenen Kennungen, die im Element \"Container identifier\" des Archetyps \"Probenbeh\u00e4lter\" eingetragen werden k\u00f6nnen.",
+                      "fhir_mapping": "Specimen.accessionIdentifier"
+                    }
+                  },
+                  {
+                    "id": "laboreingang",
+                    "name": "Laboreingang",
+                    "localizedName": "Laboreingang",
+                    "rmType": "DV_DATE_TIME",
+                    "nodeId": "at0034",
+                    "min": 0,
+                    "max": 1,
+                    "localizedNames": {
+                      "de": "Laboreingang"
+                    },
+                    "localizedDescriptions": {
+                      "de": "Datum und Uhrzeit des Eingangs der Probe im Labor."
+                    },
+                    "aqlPath": "/content[openEHR-EHR-OBSERVATION.laboratory_test_result.v1]/data[at0001]/events[at0002]/data[at0003]/items[openEHR-EHR-CLUSTER.specimen.v1]/items[at0034 and name/value='Laboreingang']/value",
+                    "inputs": [
+                      {
+                        "type": "DATETIME"
+                      }
+                    ],
+                    "annotations": {
+                      "fhir_mapping": "Specimen.receivedTime"
+                    }
+                  },
+                  {
+                    "id": "kommentar_des_probennehmers",
+                    "name": "Kommentar des Probennehmers",
+                    "localizedName": "Kommentar des Probennehmers",
+                    "rmType": "DV_TEXT",
+                    "nodeId": "at0079",
+                    "min": 0,
+                    "max": 1,
+                    "localizedNames": {
+                      "de": "Kommentar des Probennehmers"
+                    },
+                    "localizedDescriptions": {
+                      "de": "Erg\u00e4nzende Beschreibung zur Probenentnahme."
+                    },
+                    "aqlPath": "/content[openEHR-EHR-OBSERVATION.laboratory_test_result.v1]/data[at0001]/events[at0002]/data[at0003]/items[openEHR-EHR-CLUSTER.specimen.v1]/items[at0079]/value",
+                    "inputs": [
+                      {
+                        "type": "TEXT"
+                      }
+                    ]
+                  },
+                  {
+                    "id": "probenentnahmestelle",
+                    "name": "Probenentnahmestelle",
+                    "localizedName": "Probenentnahmestelle",
+                    "rmType": "DV_TEXT",
+                    "nodeId": "at0087",
+                    "min": 0,
+                    "max": 1,
+                    "localizedNames": {
+                      "de": "Probenentnahmestelle"
+                    },
+                    "localizedDescriptions": {
+                      "de": "Identifizierung der Entnahmestelle, an der die Probe entnommen wurde."
+                    },
+                    "aqlPath": "/content[openEHR-EHR-OBSERVATION.laboratory_test_result.v1]/data[at0001]/events[at0002]/data[at0003]/items[openEHR-EHR-CLUSTER.specimen.v1]/items[at0087]/value",
+                    "inputs": [
+                      {
+                        "type": "TEXT"
+                      }
+                    ],
+                    "annotations": {
+                      "comment": "Nach M\u00f6glichkeit wird die Kodierung des Namens der Probenentnahmestelle mit einer Terminologie bevorzugt. Verwenden Sie dieses Datenelement, um vorkoordinierte Probenentnahmestellen zu erfassen. Wenn die Anforderungen f\u00fcr die Darstellung der Probenentnahmestelle zur Laufzeit der Anwendung bestimmt werden oder diese eine komplexere Modellierung erfordern, z.B. relative Positionen, verwenden Sie in diesem Archetyp den SLOT \"Anatomische Entnahmestelle\". Wenn die Probenentnahmestelle \u00fcber vorab koordinierte Kodes in das Element \"Probenart\" einbezogen wird, wird dieses Datenelement \u00fcberfl\u00fcssig."
+                    }
+                  },
+                  {
+                    "id": "probenentnahme",
+                    "name": "Probenentnahme",
+                    "localizedName": "Probenentnahme",
+                    "rmType": "DV_DATE_TIME",
+                    "nodeId": "at0015",
+                    "min": 0,
+                    "max": 1,
+                    "localizedNames": {
+                      "de": "Probenentnahme"
+                    },
+                    "localizedDescriptions": {
+                      "de": "Das Datum und die Uhrzeit, zu der die Probennahme angeordnet wurde oder stattfand."
+                    },
+                    "aqlPath": "/content[openEHR-EHR-OBSERVATION.laboratory_test_result.v1]/data[at0001]/events[at0002]/data[at0003]/items[openEHR-EHR-CLUSTER.specimen.v1]/items[at0015 and name/value='Probenentnahme']/value",
+                    "inputs": [
+                      {
+                        "type": "DATETIME"
+                      }
+                    ],
+                    "annotations": {
+                      "comment": "Dieser Zeitpunkt wird haupts\u00e4chlich in den Zeitangaben, von INSTRUCTION, ACTION oder OBSERVATION erfasst. Da es sich jedoch um eine wichtige Information handelt, kann es n\u00fctzlich sein, diese auch direkt mit der Probe selbst zu verkn\u00fcpfen."
+                    }
+                  },
+                  {
+                    "id": "identifikator_der_\u00fcbergeordneten_probe",
+                    "name": "Identifikator der \u00fcbergeordneten Probe",
+                    "localizedName": "Identifikator der \u00fcbergeordneten Probe",
+                    "rmType": "DV_IDENTIFIER",
+                    "nodeId": "at0003",
+                    "min": 0,
+                    "max": 1,
+                    "localizedNames": {
+                      "de": "Identifikator der \u00fcbergeordneten Probe"
+                    },
+                    "localizedDescriptions": {
+                      "de": "Eindeutige Kennung der verwandten Probe(n), bei der die Probe in Teilproben aufgeteilt ist."
+                    },
+                    "aqlPath": "/content[openEHR-EHR-OBSERVATION.laboratory_test_result.v1]/data[at0001]/events[at0002]/data[at0003]/items[openEHR-EHR-CLUSTER.specimen.v1]/items[at0003]/value",
+                    "inputs": [
+                      {
+                        "suffix": "id",
+                        "type": "TEXT"
+                      },
+                      {
+                        "suffix": "type",
+                        "type": "TEXT"
+                      },
+                      {
+                        "suffix": "issuer",
+                        "type": "TEXT"
+                      },
+                      {
+                        "suffix": "assigner",
+                        "type": "TEXT"
+                      }
+                    ],
+                    "annotations": {
+                      "comment": "Zum Beispiel: eine bestimmte Probe eines Objekttr\u00e4gers f\u00fcr die Histologie w\u00fcrde einen bestimmten Paraffinwachsblock als Ausgangsprobe haben."
+                    }
+                  },
+                  {
+                    "id": "kommentar",
+                    "name": "Kommentar",
+                    "localizedName": "Kommentar",
+                    "rmType": "DV_TEXT",
+                    "nodeId": "at0045",
+                    "min": 0,
+                    "max": 1,
+                    "localizedNames": {
+                      "de": "Kommentar"
+                    },
+                    "localizedDescriptions": {
+                      "de": "Zus\u00e4tzliche Beschreibungen der Probe, die nicht in anderen Feldern abgebildet werden k\u00f6nnen."
+                    },
+                    "aqlPath": "/content[openEHR-EHR-OBSERVATION.laboratory_test_result.v1]/data[at0001]/events[at0002]/data[at0003]/items[openEHR-EHR-CLUSTER.specimen.v1]/items[at0045]/value",
+                    "inputs": [
+                      {
+                        "type": "TEXT"
+                      }
+                    ],
+                    "annotations": {
+                      "fhir_mapping": "Specimen.note"
+                    }
+                  }
+                ],
+                "annotations": {
+                  "comment": "Zum Beispiel: Gewebe, K\u00f6rperfl\u00fcssigkeit oder Lebensmittel."
+                }
+              },
+              {
+                "id": "gesamt-untersuchungsstatus",
+                "name": "Gesamt-Untersuchungsstatus",
+                "localizedName": "Gesamt-Untersuchungsstatus",
+                "rmType": "DV_CODED_TEXT",
+                "nodeId": "at0073",
+                "min": 0,
+                "max": 1,
+                "localizedNames": {
+                  "de": "Gesamt-Untersuchungsstatus"
+                },
+                "localizedDescriptions": {
+                  "de": "Der Status des gesamten Laborpr\u00fcfergebnisses."
+                },
+                "aqlPath": "/content[openEHR-EHR-OBSERVATION.laboratory_test_result.v1]/data[at0001]/events[at0002]/data[at0003]/items[at0073 and name/value='Gesamt-Untersuchungsstatus']/value",
+                "inputs": [
+                  {
+                    "suffix": "code",
+                    "type": "CODED_TEXT",
+                    "list": [
+                      {
+                        "value": "at0107",
+                        "label": "Registriert",
+                        "localizedLabels": {
+                          "de": "Registriert"
+                        },
+                        "localizedDescriptions": {
+                          "de": "Der Labortest wurde im Laborinformationssystem registriert, aber es ist derzeit noch nichts verf\u00fcgbar."
+                        }
+                      },
+                      {
+                        "value": "at0038",
+                        "label": "Final",
+                        "localizedLabels": {
+                          "de": "Final"
+                        },
+                        "localizedDescriptions": {
+                          "de": "Das Testergebnis ist vollst\u00e4ndig und durch eine autorisierte Person best\u00e4tigt."
+                        }
+                      },
+                      {
+                        "value": "at0074",
+                        "label": "Abgebrochen",
+                        "localizedLabels": {
+                          "de": "Abgebrochen"
+                        },
+                        "localizedDescriptions": {
+                          "de": "Das Ergebnis ist nicht verf\u00fcgbar, weil der Test nicht gestartet oder nicht abgeschlossen wurde (manchmal auch als \"gescheitert\" bezeichnet)."
+                        }
+                      }
+                    ],
+                    "terminology": "local"
+                  }
+                ],
+                "annotations": {
+                  "comment": "Die Werte wurden so ausgew\u00e4hlt, dass sie mit denen im HL7 FHIR Diagnosebericht \u00fcbereinstimmen, der historisch aus der HL7v2Praxis stammt. Andere lokale Codes/Begriffe k\u00f6nnen \u00fcber den Text \"Auswahl\" verwendet werden.\n\n                        Dieses Element kann mehrfach vorkommen, um F\u00e4lle abzudecken, bei denen der Status f\u00fcr verschiedene Aspekte des Ergebnisses in mehrere Elemente unterteilt wurde."
+                }
+              },
+              {
+                "id": "laboranalyt-resultat",
+                "name": "Laboranalyt-Resultat",
+                "localizedName": "Laboranalyt-Resultat",
+                "rmType": "CLUSTER",
+                "nodeId": "openEHR-EHR-CLUSTER.laboratory_test_analyte.v1",
+                "min": 1,
+                "max": -1,
+                "localizedNames": {
+                  "de": "Laboranalyt-Resultat"
+                },
+                "localizedDescriptions": {
+                  "de": "Ergebnis eines Labortests f\u00fcr einen bestimmten Analytwert."
+                },
+                "aqlPath": "/content[openEHR-EHR-OBSERVATION.laboratory_test_result.v1]/data[at0001]/events[at0002]/data[at0003]/items[openEHR-EHR-CLUSTER.laboratory_test_analyte.v1]",
+                "children": [
+                  {
+                    "id": "bezeichnung",
+                    "name": "Bezeichnung",
+                    "localizedName": "Bezeichnung",
+                    "rmType": "DV_TEXT",
+                    "nodeId": "at0024",
+                    "min": 1,
+                    "max": 1,
+                    "localizedNames": {
+                      "de": "Bezeichnung"
+                    },
+                    "localizedDescriptions": {
+                      "de": "Die Bezeichnung des Analyt-Resultats"
+                    },
+                    "aqlPath": "/content[openEHR-EHR-OBSERVATION.laboratory_test_result.v1]/data[at0001]/events[at0002]/data[at0003]/items[openEHR-EHR-CLUSTER.laboratory_test_analyte.v1]/items[at0024 and name/value='Bezeichnung']/value",
+                    "inputs": [
+                      {
+                        "type": "TEXT"
+                      }
+                    ],
+                    "annotations": {
+                      "comment": "Der Wert dieses Elements wird normalerweise meist durch eine Spezialisierung, durch einer Vorlage oder zur Laufzeit geliefert, um den aktuellen Analyt wiederzugeben. Zum Beispiel: 'Natrium im Serum','H\u00e4moglobin'.\n                                                        Die Codierung mit einer externen Terminologie, wie LOINC, NPU, SNOMED-CT oder lokalen Labor-Terminologien wird dringend empfohlen.",
+                      "hl7v2_mapping": "OBX.3",
+                      "fhir_mapping": "Observation.code"
+                    }
+                  },
+                  {
+                    "id": "messwert",
+                    "name": "Messwert",
+                    "localizedName": "Messwert",
+                    "rmType": "ELEMENT",
+                    "nodeId": "at0001",
+                    "min": 1,
+                    "max": 1,
+                    "localizedNames": {
+                      "de": "Messwert"
+                    },
+                    "localizedDescriptions": {
+                      "de": "(Mess-)Wert des Analyt-Resultats."
+                    },
+                    "aqlPath": "/content[openEHR-EHR-OBSERVATION.laboratory_test_result.v1]/data[at0001]/events[at0002]/data[at0003]/items[openEHR-EHR-CLUSTER.laboratory_test_analyte.v1]/items[at0001 and name/value='Messwert']",
+                    "children": [
+                      {
+                        "id": "text_value",
+                        "name": "Messwert",
+                        "localizedName": "Messwert",
+                        "rmType": "DV_TEXT",
+                        "nodeId": "at0001",
+                        "min": 0,
+                        "max": 1,
+                        "localizedNames": {
+                          "de": "Messwert"
+                        },
+                        "localizedDescriptions": {
+                          "de": "(Mess-)Wert des Analyt-Resultats."
+                        },
+                        "aqlPath": "/content[openEHR-EHR-OBSERVATION.laboratory_test_result.v1]/data[at0001]/events[at0002]/data[at0003]/items[openEHR-EHR-CLUSTER.laboratory_test_analyte.v1]/items[at0001 and name/value='Messwert']/value",
+                        "inputs": [
+                          {
+                            "type": "TEXT"
+                          }
+                        ],
+                        "annotations": {
+                          "comment": "z.B. '7.3 mmol/l', 'Erh\u00f6ht'. Der 'Any'-Datentyp wird dann\n                                                        durch eine Spezialisierung, eine Vorlage oder zur Laufzeit\n                                                        auf einen passenden Datentypen eingeschr\u00e4nkt werden m\u00fcssen, um das aktuelle Analyt-Ergebnis wiederzugeben. Der 'Quantity'-Datentyp hat Referenzmodell-Attribute, wie Kennungen f\u00fcr normal/abnormal, Referenzbereiche und N\u00e4herungen - f\u00fcr weitere Details s. https://specifications.openehr.org/releases/RM/latest/data_types.html#_dv_quantity_class .",
+                          "hl7v2_mapping": "OBX.2, OBX.5, OBX.6, OBX.7, OBX.8",
+                          "fhir_mapping": "Observation.value[x]"
+                        }
+                      },
+                      {
+                        "id": "quantity_value",
+                        "name": "Messwert",
+                        "localizedName": "Messwert",
+                        "rmType": "DV_QUANTITY",
+                        "nodeId": "at0001",
+                        "min": 0,
+                        "max": 1,
+                        "localizedNames": {
+                          "de": "Messwert"
+                        },
+                        "localizedDescriptions": {
+                          "de": "(Mess-)Wert des Analyt-Resultats."
+                        },
+                        "aqlPath": "/content[openEHR-EHR-OBSERVATION.laboratory_test_result.v1]/data[at0001]/events[at0002]/data[at0003]/items[openEHR-EHR-CLUSTER.laboratory_test_analyte.v1]/items[at0001 and name/value='Messwert']/value",
+                        "inputs": [
+                          {
+                            "suffix": "magnitude",
+                            "type": "DECIMAL"
+                          },
+                          {
+                            "suffix": "unit",
+                            "type": "CODED_TEXT"
+                          }
+                        ],
+                        "annotations": {
+                          "comment": "z.B. '7.3 mmol/l', 'Erh\u00f6ht'. Der 'Any'-Datentyp wird dann\n                                                        durch eine Spezialisierung, eine Vorlage oder zur Laufzeit\n                                                        auf einen passenden Datentypen eingeschr\u00e4nkt werden m\u00fcssen, um das aktuelle Analyt-Ergebnis wiederzugeben. Der 'Quantity'-Datentyp hat Referenzmodell-Attribute, wie Kennungen f\u00fcr normal/abnormal, Referenzbereiche und N\u00e4herungen - f\u00fcr weitere Details s. https://specifications.openehr.org/releases/RM/latest/data_types.html#_dv_quantity_class .",
+                          "hl7v2_mapping": "OBX.2, OBX.5, OBX.6, OBX.7, OBX.8",
+                          "fhir_mapping": "Observation.value[x]"
+                        }
+                      }
+                    ],
+                    "annotations": {
+                      "comment": "z.B. '7.3 mmol/l', 'Erh\u00f6ht'. Der 'Any'-Datentyp wird dann\n                                                        durch eine Spezialisierung, eine Vorlage oder zur Laufzeit\n                                                        auf einen passenden Datentypen eingeschr\u00e4nkt werden m\u00fcssen, um das aktuelle Analyt-Ergebnis wiederzugeben. Der 'Quantity'-Datentyp hat Referenzmodell-Attribute, wie Kennungen f\u00fcr normal/abnormal, Referenzbereiche und N\u00e4herungen - f\u00fcr weitere Details s. https://specifications.openehr.org/releases/RM/latest/data_types.html#_dv_quantity_class .",
+                      "hl7v2_mapping": "OBX.2, OBX.5, OBX.6, OBX.7, OBX.8",
+                      "fhir_mapping": "Observation.value[x]"
+                    }
+                  },
+                  {
+                    "id": "referenzbereich_typ",
+                    "name": "Referenzbereich Typ",
+                    "localizedName": "Referenzbereich Typ",
+                    "rmType": "DV_TEXT",
+                    "nodeId": "at0004",
+                    "min": 0,
+                    "max": 1,
+                    "localizedNames": {
+                      "de": "Referenzbereich Typ"
+                    },
+                    "localizedDescriptions": {
+                      "de": "Zus\u00e4tzliche Hinweise zur Anwendbarkeit des Referenzbereichs f\u00fcr dieses Resultat oder (codierter) Text, ob das Resultat im Referenzbereich ist oder nicht."
+                    },
+                    "aqlPath": "/content[openEHR-EHR-OBSERVATION.laboratory_test_result.v1]/data[at0001]/events[at0002]/data[at0003]/items[openEHR-EHR-CLUSTER.laboratory_test_analyte.v1]/items[at0004 and name/value='Referenzbereich Typ']/value",
+                    "inputs": [
+                      {
+                        "type": "TEXT"
+                      }
+                    ],
+                    "annotations": {
+                      "comment": "z.B.: 'im Referenzbereich, bezogen auf Alter und Geschlecht'."
+                    }
+                  },
+                  {
+                    "id": "zeitpunkt_validation",
+                    "name": "Zeitpunkt Validation",
+                    "localizedName": "Zeitpunkt Validation",
+                    "rmType": "DV_DATE_TIME",
+                    "nodeId": "at0025",
+                    "min": 0,
+                    "max": 1,
+                    "localizedNames": {
+                      "de": "Zeitpunkt Validation"
+                    },
+                    "localizedDescriptions": {
+                      "de": "Datum und Zeit, an dem das Analyseergebnis im Labor medizinisch validiert wurde."
+                    },
+                    "aqlPath": "/content[openEHR-EHR-OBSERVATION.laboratory_test_result.v1]/data[at0001]/events[at0002]/data[at0003]/items[openEHR-EHR-CLUSTER.laboratory_test_analyte.v1]/items[at0025]/value",
+                    "inputs": [
+                      {
+                        "type": "DATETIME"
+                      }
+                    ],
+                    "annotations": {
+                      "comment": "In vielen Gerichtsbarkeiten wird angenommen, dass der 'Ergebnisstatus' die medizinische Validation einschliesst, in anderen wird diese anhand dieses Datenelements separat erfasst und befundet"
+                    }
+                  },
+                  {
+                    "id": "ergebnis-status",
+                    "name": "Ergebnis-Status",
+                    "localizedName": "Ergebnis-Status",
+                    "rmType": "DV_CODED_TEXT",
+                    "min": 0,
+                    "max": 1,
+                    "localizedNames": {
+                      "de": "Ergebnis-Status"
+                    },
+                    "localizedDescriptions": {
+                      "de": "Status des Analyseergebnisses."
+                    },
+                    "aqlPath": "/content[openEHR-EHR-OBSERVATION.laboratory_test_result.v1]/data[at0001]/events[at0002]/data[at0003]/items[openEHR-EHR-CLUSTER.laboratory_test_analyte.v1]/items[at0005]/value",
+                    "inputs": [
+                      {
+                        "suffix": "code",
+                        "type": "CODED_TEXT",
+                        "list": [
+                          {
+                            "value": "at0015",
+                            "label": "Erfasst",
+                            "localizedLabels": {
+                              "de": "Erfasst"
+                            },
+                            "localizedDescriptions": {
+                              "de": "Der Test ist im Laborinformationssystem erfasst, aber noch kein Resultat verf\u00fcgbar."
+                            }
+                          },
+                          {
+                            "value": "at0016",
+                            "label": "Unvollst\u00e4ndig",
+                            "localizedLabels": {
+                              "de": "Unvollst\u00e4ndig"
+                            },
+                            "localizedDescriptions": {
+                              "de": "Das Testresultat ist ein Anfangs- oder Interimswert, vorl\u00e4ufig oder nicht verifiziert/validiert."
+                            }
+                          },
+                          {
+                            "value": "at0017",
+                            "label": "Vorl\u00e4ufig",
+                            "localizedLabels": {
+                              "de": "Vorl\u00e4ufig"
+                            },
+                            "localizedDescriptions": {
+                              "de": "Erste, verifizierte Resultate sind vorhanden, der Test ist aber noch nicht abgeschlossen (Sub-Kategorie von 'Unvollst\u00e4ndig')."
+                            }
+                          },
+                          {
+                            "value": "at0018",
+                            "label": "Endbefund",
+                            "localizedLabels": {
+                              "de": "Endbefund"
+                            },
+                            "localizedDescriptions": {
+                              "de": "Das Testresultat ist vollst\u00e4ndig und durch eine autorisierte Person verifiziert."
+                            }
+                          },
+                          {
+                            "value": "at0020",
+                            "label": "Endbefund, ge\u00e4ndert",
+                            "localizedLabels": {
+                              "de": "Endbefund, ge\u00e4ndert"
+                            },
+                            "localizedDescriptions": {
+                              "de": "Der Endbefund wurde erneut modifiziert, ist vollst\u00e4ndig und wurde durch den verantwortlichen Pathologen verifiziert. Des Weiteren haben sich die Ergebnisdaten hierdurch ver\u00e4ndert."
+                            }
+                          },
+                          {
+                            "value": "at0019",
+                            "label": "Endbefund, korrigiert",
+                            "localizedLabels": {
+                              "de": "Endbefund, korrigiert"
+                            },
+                            "localizedDescriptions": {
+                              "de": "Der Endbefund wurde erneut modifiziert, ist vollst\u00e4ndig und wurde durch den verantwortlichen Pathologen verifiziert. Dies ist eine Unterkategorie von \"Endbefund, ge\u00e4ndert\"."
+                            }
+                          },
+                          {
+                            "value": "at0021",
+                            "label": "Endbefund, erg\u00e4nzt",
+                            "localizedLabels": {
+                              "de": "Endbefund, erg\u00e4nzt"
+                            },
+                            "localizedDescriptions": {
+                              "de": "Nach Abschluss wurde der Bericht durch Hinzuf\u00fcgen neuer Inhalte abge\u00e4ndert. Der vorhandenen Inhalte sind unver\u00e4ndert. Dies ist eine Unterkategorie von \"Endbefund, ge\u00e4ndert\"."
+                            }
+                          },
+                          {
+                            "value": "at0023",
+                            "label": "Storniert",
+                            "localizedLabels": {
+                              "de": "Storniert"
+                            },
+                            "localizedDescriptions": {
+                              "de": "Das Testresultat ist nicht verf\u00fcgbar, weil der Test nicht (vollst\u00e4ndig) durchgef\u00fchrt oder abgebrochen wurde."
+                            }
+                          },
+                          {
+                            "value": "at0022",
+                            "label": "Endbefund, widerrufen",
+                            "localizedLabels": {
+                              "de": "Endbefund, widerrufen"
+                            },
+                            "localizedDescriptions": {
+                              "de": "Das Testresultat wurde nach Endbefundung zur\u00fcckgezogen."
+                            }
+                          }
+                        ],
+                        "listOpen": true,
+                        "terminology": "local"
+                      },
+                      {
+                        "suffix": "other",
+                        "type": "TEXT"
+                      }
+                    ],
+                    "annotations": {
+                      "comment": "Die Werte wurden analog zum HL7 FHIR Diagnostic Report gew\u00e4hlt, die wiederum aus der HL7-Praxis stammen. Andere Codes/Ausdr\u00fccke k\u00f6nnen \u00fcber den Text 'choice' verwendet werden.",
+                      "hl7v2_mapping": "OBX.11",
+                      "fhir_mapping": "Observation.status"
+                    }
+                  },
+                  {
+                    "id": "dokumentationsdatum_untersuchung",
+                    "name": "Dokumentationsdatum Untersuchung",
+                    "localizedName": "Dokumentationsdatum Untersuchung",
+                    "rmType": "DV_DATE_TIME",
+                    "nodeId": "at0006",
+                    "min": 0,
+                    "max": 1,
+                    "localizedNames": {
+                      "de": "Dokumentationsdatum Untersuchung"
+                    },
+                    "localizedDescriptions": {
+                      "de": "Datum und/oder Zeitpunkt an dem der Status f\u00fcr das Analyseergebnis gesetzt wurde."
+                    },
+                    "aqlPath": "/content[openEHR-EHR-OBSERVATION.laboratory_test_result.v1]/data[at0001]/events[at0002]/data[at0003]/items[openEHR-EHR-CLUSTER.laboratory_test_analyte.v1]/items[at0006 and name/value='Dokumentationsdatum Untersuchung']/value",
+                    "inputs": [
+                      {
+                        "type": "DATETIME"
+                      }
+                    ],
+                    "annotations": {
+                      "hl7v2_mapping": "OBX.19",
+                      "fhir_mapping": "Observation.issued"
+                    }
+                  },
+                  {
+                    "id": "probe_id",
+                    "name": "Probe ID",
+                    "localizedName": "Probe ID",
+                    "rmType": "ELEMENT",
+                    "nodeId": "at0026",
+                    "min": 0,
+                    "max": 1,
+                    "localizedNames": {
+                      "de": "Probe ID"
+                    },
+                    "localizedDescriptions": {
+                      "de": "Kennung der Probe, die f\u00fcr das Analyseergebnis verwendet wurde."
+                    },
+                    "aqlPath": "/content[openEHR-EHR-OBSERVATION.laboratory_test_result.v1]/data[at0001]/events[at0002]/data[at0003]/items[openEHR-EHR-CLUSTER.laboratory_test_analyte.v1]/items[at0026 and name/value='Probe ID']",
+                    "children": [
+                      {
+                        "id": "identifier_value",
+                        "name": "Probe ID",
+                        "localizedName": "Probe ID",
+                        "rmType": "DV_IDENTIFIER",
+                        "nodeId": "at0026",
+                        "min": 1,
+                        "max": 1,
+                        "localizedNames": {
+                          "de": "Probe ID"
+                        },
+                        "localizedDescriptions": {
+                          "de": "Kennung der Probe, die f\u00fcr das Analyseergebnis verwendet wurde."
+                        },
+                        "aqlPath": "/content[openEHR-EHR-OBSERVATION.laboratory_test_result.v1]/data[at0001]/events[at0002]/data[at0003]/items[openEHR-EHR-CLUSTER.laboratory_test_analyte.v1]/items[at0026 and name/value='Probe ID']/value",
+                        "inputs": [
+                          {
+                            "suffix": "id",
+                            "type": "TEXT"
+                          },
+                          {
+                            "suffix": "type",
+                            "type": "TEXT"
+                          },
+                          {
+                            "suffix": "issuer",
+                            "type": "TEXT"
+                          },
+                          {
+                            "suffix": "assigner",
+                            "type": "TEXT"
+                          }
+                        ],
+                        "annotations": {
+                          "comment": "In manchen Situationen wird ein einzelner Laborergebnis-Archetyp mehrere Probe- und Laboranalyt-Resultat-Archetypen enthalten. In diesen F\u00e4llen wird dieses 'Probe'-Datenelement ben\u00f6tigt, um die Resultate mit den richtigen Proben zu verkn\u00fcpfen."
+                        }
+                      },
+                      {
+                        "id": "uri_value",
+                        "name": "Probe ID",
+                        "localizedName": "Probe ID",
+                        "rmType": "DV_URI",
+                        "nodeId": "at0026",
+                        "min": 1,
+                        "max": 1,
+                        "localizedNames": {
+                          "de": "Probe ID"
+                        },
+                        "localizedDescriptions": {
+                          "de": "Kennung der Probe, die f\u00fcr das Analyseergebnis verwendet wurde."
+                        },
+                        "aqlPath": "/content[openEHR-EHR-OBSERVATION.laboratory_test_result.v1]/data[at0001]/events[at0002]/data[at0003]/items[openEHR-EHR-CLUSTER.laboratory_test_analyte.v1]/items[at0026 and name/value='Probe ID']/value",
+                        "inputs": [
+                          {
+                            "type": "TEXT"
+                          }
+                        ],
+                        "annotations": {
+                          "comment": "In manchen Situationen wird ein einzelner Laborergebnis-Archetyp mehrere Probe- und Laboranalyt-Resultat-Archetypen enthalten. In diesen F\u00e4llen wird dieses 'Probe'-Datenelement ben\u00f6tigt, um die Resultate mit den richtigen Proben zu verkn\u00fcpfen."
+                        }
+                      }
+                    ],
+                    "annotations": {
+                      "comment": "In manchen Situationen wird ein einzelner Laborergebnis-Archetyp mehrere Probe- und Laboranalyt-Resultat-Archetypen enthalten. In diesen F\u00e4llen wird dieses 'Probe'-Datenelement ben\u00f6tigt, um die Resultate mit den richtigen Proben zu verkn\u00fcpfen."
+                    }
+                  },
+                  {
+                    "id": "kommentar",
+                    "name": "Kommentar",
+                    "localizedName": "Kommentar",
+                    "rmType": "DV_TEXT",
+                    "nodeId": "at0003",
+                    "min": 0,
+                    "max": 1,
+                    "localizedNames": {
+                      "de": "Kommentar"
+                    },
+                    "localizedDescriptions": {
+                      "de": "Kommentar zum Analyt-Resultat, soweit noch nicht in anderen Feldern erfasst."
+                    },
+                    "aqlPath": "/content[openEHR-EHR-OBSERVATION.laboratory_test_result.v1]/data[at0001]/events[at0002]/data[at0003]/items[openEHR-EHR-CLUSTER.laboratory_test_analyte.v1]/items[at0003]/value",
+                    "inputs": [
+                      {
+                        "type": "TEXT"
+                      }
+                    ],
+                    "annotations": {
+                      "hl7v2_mapping": "NTE.3",
+                      "fhir_mapping": "Observation.note"
+                    }
+                  }
+                ],
+                "annotations": {
+                  "comment": "Beispiele: 'Natrium', 'Leukozytenzahl', 'T3'. \u00dcblicherweise \u00fcber eine externe Terminologie codiert."
+                }
+              },
+              {
+                "id": "interpretation",
+                "name": "Interpretation",
+                "localizedName": "Interpretation",
+                "rmType": "DV_TEXT",
+                "nodeId": "at0057",
+                "min": 0,
+                "max": 1,
+                "localizedNames": {
+                  "de": "Interpretation"
+                },
+                "localizedDescriptions": {
+                  "de": "Beschreibung der wichtigsten Ergebnisse."
+                },
+                "aqlPath": "/content[openEHR-EHR-OBSERVATION.laboratory_test_result.v1]/data[at0001]/events[at0002]/data[at0003]/items[at0057 and name/value='Interpretation']/value",
+                "inputs": [
+                  {
+                    "type": "TEXT"
+                  }
+                ],
+                "annotations": {
+                  "comment": "Zum Beispiel: \"Das Muster l\u00e4sst auf eine erhebliche Nierenfunktionsst\u00f6rung schlie\u00dfen\". Der Inhalt der Zusammenfassung unterscheidet sich je nach durchgef\u00fchrter Untersuchung. Diese Zusammenfassung sollte mit der kodierten \"Testdiagnose\" \u00fcbereinstimmen."
+                }
+              },
+              {
+                "id": "kommentar",
+                "name": "Kommentar",
+                "localizedName": "Kommentar",
+                "rmType": "DV_TEXT",
+                "nodeId": "at0101",
+                "min": 0,
+                "max": 1,
+                "localizedNames": {
+                  "de": "Kommentar"
+                },
+                "localizedDescriptions": {
+                  "de": "Weitere Informationen \u00fcber das Laborergebnis, welche bisher nicht in den anderen Feldern erfasst wurden."
+                },
+                "aqlPath": "/content[openEHR-EHR-OBSERVATION.laboratory_test_result.v1]/data[at0001]/events[at0002]/data[at0003]/items[at0101]/value",
+                "inputs": [
+                  {
+                    "type": "TEXT"
+                  }
+                ]
+              },
+              {
+                "id": "time",
+                "name": "time",
+                "rmType": "DV_DATE_TIME",
+                "min": 1,
+                "max": 1,
+                "aqlPath": "/content[openEHR-EHR-OBSERVATION.laboratory_test_result.v1]/data[at0001]/events[at0002]/time",
+                "inputs": [
+                  {
+                    "type": "DATETIME"
+                  }
+                ],
+                "inContext": true
+              }
+            ]
+          },
+          {
+            "id": "laborbereich",
+            "name": "Laborbereich",
+            "localizedName": "Laborbereich",
+            "rmType": "CLUSTER",
+            "nodeId": "openEHR-EHR-CLUSTER.location.v1",
+            "min": 0,
+            "max": 1,
+            "localizedNames": {
+              "de": "Laborbereich"
+            },
+            "localizedDescriptions": {
+              "de": "Standort umfasst sowohl beil\u00e4ufige Orte (ein Ort, der f\u00fcr die medizinische Versorgung ohne vorherige Benennung oder Genehmigung genutzt wird) als auch spezielle, offiziell benannte Orte. Die Standorte k\u00f6nnen privat, \u00f6ffentlich, mobil oder station\u00e4r sein."
+            },
+            "aqlPath": "/content[openEHR-EHR-OBSERVATION.laboratory_test_result.v1]/protocol[at0004]/items[openEHR-EHR-CLUSTER.location.v1 and name/value='Laborbereich']",
+            "children": [
+              {
+                "id": "standorttyp",
+                "name": "Standorttyp",
+                "localizedName": "Standorttyp",
+                "rmType": "DV_TEXT",
+                "nodeId": "at0040",
+                "min": 0,
+                "max": 1,
+                "localizedNames": {
+                  "de": "Standorttyp"
+                },
+                "localizedDescriptions": {
+                  "de": "Kategorisierung des Standorttyps, z.B. Klinik, zu Hause."
+                },
+                "aqlPath": "/content[openEHR-EHR-OBSERVATION.laboratory_test_result.v1]/protocol[at0004]/items[openEHR-EHR-CLUSTER.location.v1 and name/value='Laborbereich']/items[at0040]/value",
+                "inputs": [
+                  {
+                    "type": "TEXT",
+                    "list": [
+                      {
+                        "value": "Labor",
+                        "label": "Labor"
+                      }
+                    ],
+                    "listOpen": false
+                  }
+                ]
+              },
+              {
+                "id": "laborbereich",
+                "name": "Laborbereich",
+                "localizedName": "Laborbereich",
+                "rmType": "DV_TEXT",
+                "nodeId": "at0046",
+                "min": 0,
+                "max": 1,
+                "localizedNames": {
+                  "de": "Laborbereich"
+                },
+                "localizedDescriptions": {
+                  "de": "Das Feld enth\u00e4lt die Freitextbeschreibung des Standorts, z.B. Throax-, Herz- und Gef\u00e4\u00dfchirurgie."
+                },
+                "aqlPath": "/content[openEHR-EHR-OBSERVATION.laboratory_test_result.v1]/protocol[at0004]/items[openEHR-EHR-CLUSTER.location.v1 and name/value='Laborbereich']/items[at0046 and name/value='Laborbereich']/value",
+                "inputs": [
+                  {
+                    "type": "TEXT"
+                  }
+                ]
+              },
+              {
+                "id": "kode_des_laborbereichs",
+                "name": "Kode des Laborbereichs",
+                "localizedName": "Kode des Laborbereichs",
+                "rmType": "DV_TEXT",
+                "nodeId": "at0048",
+                "min": 0,
+                "max": 1,
+                "localizedNames": {
+                  "de": "Kode des Laborbereichs"
+                },
+                "localizedDescriptions": {
+                  "de": "Kodierung des Standortes, z.B. der Fachabteilungsschl\u00fcssel (z. B. 2000 Thoraxchirurgie)."
+                },
+                "aqlPath": "/content[openEHR-EHR-OBSERVATION.laboratory_test_result.v1]/protocol[at0004]/items[openEHR-EHR-CLUSTER.location.v1 and name/value='Laborbereich']/items[at0048 and name/value='Kode des Laborbereichs']/value",
+                "inputs": [
+                  {
+                    "type": "TEXT"
+                  }
+                ]
+              }
+            ]
+          },
+          {
+            "id": "details_der_testanforderung",
+            "name": "Details der Testanforderung",
+            "localizedName": "Details der Testanforderung",
+            "rmType": "CLUSTER",
+            "nodeId": "at0094",
+            "min": 0,
+            "max": -1,
+            "localizedNames": {
+              "de": "Details der Testanforderung"
+            },
+            "localizedDescriptions": {
+              "de": "Details zur Testanforderung."
+            },
+            "aqlPath": "/content[openEHR-EHR-OBSERVATION.laboratory_test_result.v1]/protocol[at0004]/items[at0094]",
+            "children": [
+              {
+                "id": "auftrags-id_einsender",
+                "name": "Auftrags-ID (Einsender)",
+                "localizedName": "Auftrags-ID (Einsender)",
+                "rmType": "DV_IDENTIFIER",
+                "nodeId": "at0062",
+                "min": 0,
+                "max": 1,
+                "localizedNames": {
+                  "de": "Auftrags-ID (Einsender)"
+                },
+                "localizedDescriptions": {
+                  "de": "Lokale Auftrags-ID des anfordernden/einsendenden Systems."
+                },
+                "aqlPath": "/content[openEHR-EHR-OBSERVATION.laboratory_test_result.v1]/protocol[at0004]/items[at0094]/items[at0062 and name/value='Auftrags-ID (Einsender)']/value",
+                "inputs": [
+                  {
+                    "suffix": "id",
+                    "type": "TEXT"
+                  },
+                  {
+                    "suffix": "type",
+                    "type": "TEXT"
+                  },
+                  {
+                    "suffix": "issuer",
+                    "type": "TEXT"
+                  },
+                  {
+                    "suffix": "assigner",
+                    "type": "TEXT"
+                  }
+                ],
+                "annotations": {
+                  "comment": "\u00c4quivalent zur \"HL7 Placer Order Identifier\"."
+                }
+              },
+              {
+                "id": "auftrags-id_empf\u00e4nger",
+                "name": "Auftrags-ID (Empf\u00e4nger)",
+                "localizedName": "Auftrags-ID (Empf\u00e4nger)",
+                "rmType": "DV_IDENTIFIER",
+                "nodeId": "at0063",
+                "min": 1,
+                "max": 1,
+                "localizedNames": {
+                  "de": "Auftrags-ID (Empf\u00e4nger)"
+                },
+                "localizedDescriptions": {
+                  "de": "Lokale Auftrags-ID, die vom auftragsempfangendem System, gew\u00f6hnlich dem Laborinformationssystem (LIS) zugewiesen wird."
+                },
+                "aqlPath": "/content[openEHR-EHR-OBSERVATION.laboratory_test_result.v1]/protocol[at0004]/items[at0094]/items[at0063]/value",
+                "inputs": [
+                  {
+                    "suffix": "id",
+                    "type": "TEXT"
+                  },
+                  {
+                    "suffix": "type",
+                    "type": "TEXT"
+                  },
+                  {
+                    "suffix": "issuer",
+                    "type": "TEXT"
+                  },
+                  {
+                    "suffix": "assigner",
+                    "type": "TEXT"
+                  }
+                ],
+                "annotations": {
+                  "comment": "Die Vergabe einer solchen ID erm\u00f6glicht das Nachverfolgen des Auftragsstatus und das Verlinken der Ergebnisse zum Auftrag. Es erlaubt auch das Verwalten von weiteren Erkundigungen und Nachfragen und ist \u00e4quivalent zum \"HL7 Filler Order Identifier\"."
+                }
+              }
+            ],
+            "annotations": {
+              "comment": "In den meisten F\u00e4llen gibt es eine Testanfrage und ein einzelnes entsprechendes Testergebnis. Jedoch erm\u00f6glicht dieser wiederholte Cluster die Situation, dass mehrere Testanfragen mit einem einzigen Testergebnis gemeldet werden k\u00f6nnen.\n\n                        Als Beispiel: \"Ein Arzt fordert in einer Anfrage Blutzucker und in einer zweiten Anfrage Harnstoff/Elektrolyte an, aber das Laboranalyseger\u00e4t f\u00fchrt beides durch und das Labor m\u00f6chte diese zusammen melden\"."
+            }
+          },
+          {
+            "id": "untersuchungsmethode",
+            "name": "Untersuchungsmethode",
+            "localizedName": "Untersuchungsmethode",
+            "rmType": "DV_TEXT",
+            "nodeId": "at0121",
+            "min": 0,
+            "max": 1,
+            "localizedNames": {
+              "de": "Untersuchungsmethode"
+            },
+            "localizedDescriptions": {
+              "de": "Die Beschreibung der Methode, mit dem der Test durchgef\u00fchrt wurde."
+            },
+            "aqlPath": "/content[openEHR-EHR-OBSERVATION.laboratory_test_result.v1]/protocol[at0004]/items[at0121 and name/value='Untersuchungsmethode']/value",
+            "inputs": [
+              {
+                "type": "TEXT"
+              }
+            ],
+            "annotations": {
+              "comment": "Wenn m\u00f6glich, ist eine Kodierung mit einer Terminologie w\u00fcnschenswert."
+            }
+          },
+          {
+            "id": "subject",
+            "name": "subject",
+            "rmType": "PARTY_PROXY",
+            "min": 1,
+            "max": 1,
+            "aqlPath": "/content[openEHR-EHR-OBSERVATION.laboratory_test_result.v1]/subject",
+            "inputs": [
+              {
+                "suffix": "id",
+                "type": "TEXT"
+              },
+              {
+                "suffix": "id_scheme",
+                "type": "TEXT"
+              },
+              {
+                "suffix": "id_namespace",
+                "type": "TEXT"
+              },
+              {
+                "suffix": "name",
+                "type": "TEXT"
+              }
+            ],
+            "inContext": true
+          },
+          {
+            "id": "language",
+            "name": "language",
+            "rmType": "CODE_PHRASE",
+            "min": 1,
+            "max": 1,
+            "aqlPath": "/content[openEHR-EHR-OBSERVATION.laboratory_test_result.v1]/language",
+            "inContext": true
+          },
+          {
+            "id": "encoding",
+            "name": "encoding",
+            "rmType": "CODE_PHRASE",
+            "min": 1,
+            "max": 1,
+            "aqlPath": "/content[openEHR-EHR-OBSERVATION.laboratory_test_result.v1]/encoding",
+            "inContext": true
+          }
+        ]
+      },
+      {
+        "id": "composer",
+        "name": "composer",
+        "rmType": "PARTY_PROXY",
+        "min": 1,
+        "max": 1,
+        "aqlPath": "/composer",
+        "inputs": [
+          {
+            "suffix": "id",
+            "type": "TEXT"
+          },
+          {
+            "suffix": "id_scheme",
+            "type": "TEXT"
+          },
+          {
+            "suffix": "id_namespace",
+            "type": "TEXT"
+          },
+          {
+            "suffix": "name",
+            "type": "TEXT"
+          }
+        ],
+        "inContext": true
+      },
+      {
+        "id": "language",
+        "name": "language",
+        "rmType": "CODE_PHRASE",
+        "min": 1,
+        "max": 1,
+        "aqlPath": "/language",
+        "inContext": true
+      },
+      {
+        "id": "territory",
+        "name": "territory",
+        "rmType": "CODE_PHRASE",
+        "min": 1,
+        "max": 1,
+        "aqlPath": "/territory",
+        "inContext": true
+      }
+    ]
+  }
+}

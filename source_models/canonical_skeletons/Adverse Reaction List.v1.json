@@ -1,0 +1,692 @@
+{
+  "_type": "COMPOSITION",
+  "name": {
+    "_type": "DV_TEXT",
+    "value": "Adverse reaction list"
+  },
+  "archetype_details": {
+    "archetype_id": {
+      "value": "openEHR-EHR-COMPOSITION.adverse_reaction_list.v1"
+    },
+    "template_id": {
+      "value": "Adverse Reaction List.v1"
+    },
+    "rm_version": "1.0.4"
+  },
+  "language": {
+    "_type": "CODE_PHRASE",
+    "terminology_id": {
+      "_type": "TERMINOLOGY_ID",
+      "value": "ISO_639-1"
+    },
+    "code_string": "en"
+  },
+  "territory": {
+    "_type": "CODE_PHRASE",
+    "terminology_id": {
+      "_type": "TERMINOLOGY_ID",
+      "value": "ISO_3166-1"
+    },
+    "code_string": "DE"
+  },
+  "category": {
+    "_type": "DV_CODED_TEXT",
+    "value": "event",
+    "defining_code": {
+      "_type": "CODE_PHRASE",
+      "terminology_id": {
+        "_type": "TERMINOLOGY_ID",
+        "value": "openehr"
+      },
+      "code_string": "433"
+    }
+  },
+  "composer": {
+    "_type": "PARTY_IDENTIFIED",
+    "name": "Max Mustermann"
+  },
+  "context": {
+    "_type": "EVENT_CONTEXT",
+    "start_time": {
+      "_type": "DV_DATE_TIME",
+      "value": "2022-02-03T04:05:06"
+    },
+    "end_time": {
+      "_type": "DV_DATE_TIME",
+      "value": "2022-02-03T04:05:06"
+    },
+    "setting": {
+      "_type": "DV_CODED_TEXT",
+      "value": "home",
+      "defining_code": {
+        "_type": "CODE_PHRASE",
+        "terminology_id": {
+          "_type": "TERMINOLOGY_ID",
+          "value": "openehr"
+        },
+        "code_string": "225"
+      }
+    },
+    "other_context": {
+      "_type": "ITEM_TREE",
+      "name": {
+        "_type": "DV_TEXT",
+        "value": "Tree"
+      },
+      "items": [
+        {
+          "_type": "CLUSTER",
+          "name": {
+            "_type": "DV_TEXT",
+            "value": "XDS Metadata"
+          },
+          "archetype_details": {
+            "archetype_id": {
+              "value": "openEHR-EHR-CLUSTER.xds_metadata.v0"
+            },
+            "rm_version": "1.0.4"
+          },
+          "items": [
+            {
+              "_type": "ELEMENT",
+              "name": {
+                "_type": "DV_TEXT",
+                "value": "Author specialty"
+              },
+              "value": {
+                "_type": "DV_TEXT",
+                "value": "Lorem ipsum"
+              },
+              "archetype_node_id": "at0001"
+            },
+            {
+              "_type": "ELEMENT",
+              "name": {
+                "_type": "DV_TEXT",
+                "value": "Class code"
+              },
+              "value": {
+                "_type": "DV_TEXT",
+                "value": "Lorem ipsum"
+              },
+              "archetype_node_id": "at0002"
+            },
+            {
+              "_type": "ELEMENT",
+              "name": {
+                "_type": "DV_TEXT",
+                "value": "Document type"
+              },
+              "value": {
+                "_type": "DV_TEXT",
+                "value": "SNOMED-CT::163221000000102::Allergies and adverse reactions"
+              },
+              "archetype_node_id": "at0003"
+            },
+            {
+              "_type": "ELEMENT",
+              "name": {
+                "_type": "DV_TEXT",
+                "value": "Health care facility type"
+              },
+              "value": {
+                "_type": "DV_TEXT",
+                "value": "Lorem ipsum"
+              },
+              "archetype_node_id": "at0007"
+            },
+            {
+              "_type": "ELEMENT",
+              "name": {
+                "_type": "DV_TEXT",
+                "value": "Practice setting code"
+              },
+              "value": {
+                "_type": "DV_TEXT",
+                "value": "Lorem ipsum"
+              },
+              "archetype_node_id": "at0009"
+            }
+          ],
+          "archetype_node_id": "openEHR-EHR-CLUSTER.xds_metadata.v0"
+        }
+      ],
+      "archetype_node_id": "at0001"
+    },
+    "health_care_facility": {
+      "_type": "PARTY_IDENTIFIED",
+      "name": "DOE, John"
+    }
+  },
+  "content": [
+    {
+      "_type": "SECTION",
+      "name": {
+        "_type": "DV_TEXT",
+        "value": "Allergies and adverse reactions"
+      },
+      "archetype_details": {
+        "archetype_id": {
+          "value": "openEHR-EHR-SECTION.allergies_adverse_reactions_rcp.v1"
+        },
+        "rm_version": "1.0.4"
+      },
+      "items": [
+        {
+          "_type": "EVALUATION",
+          "name": {
+            "_type": "DV_TEXT",
+            "value": "Adverse reaction risk"
+          },
+          "archetype_details": {
+            "archetype_id": {
+              "value": "openEHR-EHR-EVALUATION.adverse_reaction_risk.v1"
+            },
+            "rm_version": "1.0.4"
+          },
+          "language": {
+            "_type": "CODE_PHRASE",
+            "terminology_id": {
+              "_type": "TERMINOLOGY_ID",
+              "value": "ISO_639-1"
+            },
+            "code_string": "en"
+          },
+          "encoding": {
+            "_type": "CODE_PHRASE",
+            "terminology_id": {
+              "_type": "TERMINOLOGY_ID",
+              "value": "IANA_character-sets"
+            },
+            "code_string": "ISO-10646-UTF-1"
+          },
+          "workflow_id": {
+            "_type": "OBJECT_REF",
+            "namespace": "unknown",
+            "type": "ANY",
+            "id": {
+              "_type": "GENERIC_ID",
+              "value": "9e6eeb4c-6683-35a4-b67a-3392a44f4862",
+              "scheme": "scheme"
+            }
+          },
+          "subject": {
+            "_type": "PARTY_SELF"
+          },
+          "provider": {
+            "_type": "PARTY_SELF"
+          },
+          "protocol": {
+            "_type": "ITEM_TREE",
+            "name": {
+              "_type": "DV_TEXT",
+              "value": "Tree"
+            },
+            "items": [
+              {
+                "_type": "ELEMENT",
+                "name": {
+                  "_type": "DV_TEXT",
+                  "value": "Last updated"
+                },
+                "value": {
+                  "_type": "DV_DATE_TIME",
+                  "value": "2022-02-03T04:05:06"
+                },
+                "archetype_node_id": "at0062"
+              }
+            ],
+            "archetype_node_id": "at0042"
+          },
+          "guideline_id": {
+            "_type": "OBJECT_REF",
+            "namespace": "unknown",
+            "type": "ANY",
+            "id": {
+              "_type": "GENERIC_ID",
+              "value": "43505418-1730-3521-844a-af2a0857799b",
+              "scheme": "scheme"
+            }
+          },
+          "time_asserted": {
+            "_type": "DV_DATE_TIME",
+            "value": "2022-02-03T04:05:06"
+          },
+          "data": {
+            "_type": "ITEM_TREE",
+            "name": {
+              "_type": "DV_TEXT",
+              "value": "Tree"
+            },
+            "items": [
+              {
+                "_type": "ELEMENT",
+                "name": {
+                  "_type": "DV_TEXT",
+                  "value": "Causative agent"
+                },
+                "value": {
+                  "_type": "DV_TEXT",
+                  "value": "Lorem ipsum"
+                },
+                "archetype_node_id": "at0002"
+              },
+              {
+                "_type": "ELEMENT",
+                "name": {
+                  "_type": "DV_TEXT",
+                  "value": "Status"
+                },
+                "value": {
+                  "_type": "DV_CODED_TEXT",
+                  "value": "Suspected",
+                  "defining_code": {
+                    "_type": "CODE_PHRASE",
+                    "terminology_id": {
+                      "_type": "TERMINOLOGY_ID",
+                      "value": "local"
+                    },
+                    "code_string": "at0127"
+                  }
+                },
+                "archetype_node_id": "at0063"
+              },
+              {
+                "_type": "ELEMENT",
+                "name": {
+                  "_type": "DV_TEXT",
+                  "value": "Criticality"
+                },
+                "value": {
+                  "_type": "DV_CODED_TEXT",
+                  "value": "Low",
+                  "defining_code": {
+                    "_type": "CODE_PHRASE",
+                    "terminology_id": {
+                      "_type": "TERMINOLOGY_ID",
+                      "value": "local"
+                    },
+                    "code_string": "at0102"
+                  }
+                },
+                "archetype_node_id": "at0101"
+              },
+              {
+                "_type": "ELEMENT",
+                "name": {
+                  "_type": "DV_TEXT",
+                  "value": "Category"
+                },
+                "value": {
+                  "_type": "DV_CODED_TEXT",
+                  "value": "Food",
+                  "defining_code": {
+                    "_type": "CODE_PHRASE",
+                    "terminology_id": {
+                      "_type": "TERMINOLOGY_ID",
+                      "value": "local"
+                    },
+                    "code_string": "at0121"
+                  }
+                },
+                "archetype_node_id": "at0120"
+              },
+              {
+                "_type": "ELEMENT",
+                "name": {
+                  "_type": "DV_TEXT",
+                  "value": "Onset of last reaction"
+                },
+                "value": {
+                  "_type": "DV_DATE_TIME",
+                  "value": "2022-02-03T04:05:06"
+                },
+                "archetype_node_id": "at0117"
+              },
+              {
+                "_type": "ELEMENT",
+                "name": {
+                  "_type": "DV_TEXT",
+                  "value": "Comment"
+                },
+                "value": {
+                  "_type": "DV_TEXT",
+                  "value": "Lorem ipsum"
+                },
+                "archetype_node_id": "at0006"
+              },
+              {
+                "_type": "CLUSTER",
+                "name": {
+                  "_type": "DV_TEXT",
+                  "value": "Reaction event"
+                },
+                "items": [
+                  {
+                    "_type": "ELEMENT",
+                    "name": {
+                      "_type": "DV_TEXT",
+                      "value": "Manifestation"
+                    },
+                    "value": {
+                      "_type": "DV_TEXT",
+                      "value": "Lorem ipsum"
+                    },
+                    "archetype_node_id": "at0011"
+                  },
+                  {
+                    "_type": "ELEMENT",
+                    "name": {
+                      "_type": "DV_TEXT",
+                      "value": "Reaction description"
+                    },
+                    "value": {
+                      "_type": "DV_TEXT",
+                      "value": "Lorem ipsum"
+                    },
+                    "archetype_node_id": "at0012"
+                  },
+                  {
+                    "_type": "ELEMENT",
+                    "name": {
+                      "_type": "DV_TEXT",
+                      "value": "Onset of reaction"
+                    },
+                    "value": {
+                      "_type": "DV_DATE_TIME",
+                      "value": "2022-02-03T04:05:06"
+                    },
+                    "archetype_node_id": "at0027"
+                  },
+                  {
+                    "_type": "ELEMENT",
+                    "name": {
+                      "_type": "DV_TEXT",
+                      "value": "Severity"
+                    },
+                    "value": {
+                      "_type": "DV_CODED_TEXT",
+                      "value": "Mild",
+                      "defining_code": {
+                        "_type": "CODE_PHRASE",
+                        "terminology_id": {
+                          "_type": "TERMINOLOGY_ID",
+                          "value": "local"
+                        },
+                        "code_string": "at0093"
+                      }
+                    },
+                    "archetype_node_id": "at0089"
+                  },
+                  {
+                    "_type": "ELEMENT",
+                    "name": {
+                      "_type": "DV_TEXT",
+                      "value": "Route of exposure"
+                    },
+                    "value": {
+                      "_type": "DV_TEXT",
+                      "value": "Lorem ipsum"
+                    },
+                    "archetype_node_id": "at0106"
+                  },
+                  {
+                    "_type": "ELEMENT",
+                    "name": {
+                      "_type": "DV_TEXT",
+                      "value": "Comment"
+                    },
+                    "value": {
+                      "_type": "DV_TEXT",
+                      "value": "Lorem ipsum"
+                    },
+                    "archetype_node_id": "at0032"
+                  }
+                ],
+                "archetype_node_id": "at0009"
+              }
+            ],
+            "archetype_node_id": "at0001"
+          },
+          "archetype_node_id": "openEHR-EHR-EVALUATION.adverse_reaction_risk.v1"
+        },
+        {
+          "_type": "SECTION",
+          "name": {
+            "_type": "DV_TEXT",
+            "value": "Empty list info"
+          },
+          "archetype_details": {
+            "archetype_id": {
+              "value": "openEHR-EHR-SECTION.adhoc.v1"
+            },
+            "rm_version": "1.0.4"
+          },
+          "items": [
+            {
+              "_type": "EVALUATION",
+              "name": {
+                "_type": "DV_TEXT",
+                "value": "Exclusion - global"
+              },
+              "archetype_details": {
+                "archetype_id": {
+                  "value": "openEHR-EHR-EVALUATION.exclusion_global.v1"
+                },
+                "rm_version": "1.0.4"
+              },
+              "language": {
+                "_type": "CODE_PHRASE",
+                "terminology_id": {
+                  "_type": "TERMINOLOGY_ID",
+                  "value": "ISO_639-1"
+                },
+                "code_string": "en"
+              },
+              "encoding": {
+                "_type": "CODE_PHRASE",
+                "terminology_id": {
+                  "_type": "TERMINOLOGY_ID",
+                  "value": "IANA_character-sets"
+                },
+                "code_string": "ISO-10646-UTF-1"
+              },
+              "workflow_id": {
+                "_type": "OBJECT_REF",
+                "namespace": "unknown",
+                "type": "ANY",
+                "id": {
+                  "_type": "GENERIC_ID",
+                  "value": "5224eed3-e50e-3416-bc4c-e2ccc882ad82",
+                  "scheme": "scheme"
+                }
+              },
+              "subject": {
+                "_type": "PARTY_SELF"
+              },
+              "provider": {
+                "_type": "PARTY_SELF"
+              },
+              "guideline_id": {
+                "_type": "OBJECT_REF",
+                "namespace": "unknown",
+                "type": "ANY",
+                "id": {
+                  "_type": "GENERIC_ID",
+                  "value": "3f6ff07c-7a65-3fee-ae88-3b84b8014435",
+                  "scheme": "scheme"
+                }
+              },
+              "time_asserted": {
+                "_type": "DV_DATE_TIME",
+                "value": "2022-02-03T04:05:06"
+              },
+              "data": {
+                "_type": "ITEM_TREE",
+                "name": {
+                  "_type": "DV_TEXT",
+                  "value": "Tree"
+                },
+                "items": [
+                  {
+                    "_type": "ELEMENT",
+                    "name": {
+                      "_type": "DV_CODED_TEXT",
+                      "value": "Global exclusion of adverse reactions",
+                      "defining_code": {
+                        "_type": "CODE_PHRASE",
+                        "terminology_id": {
+                          "_type": "TERMINOLOGY_ID",
+                          "value": "local"
+                        },
+                        "code_string": "at0007"
+                      }
+                    },
+                    "value": {
+                      "_type": "DV_TEXT",
+                      "value": "No known allergies or adverse reactions"
+                    },
+                    "archetype_node_id": "at0002"
+                  },
+                  {
+                    "_type": "ELEMENT",
+                    "name": {
+                      "_type": "DV_TEXT",
+                      "value": "Comment"
+                    },
+                    "value": {
+                      "_type": "DV_TEXT",
+                      "value": "Lorem ipsum"
+                    },
+                    "archetype_node_id": "at0011"
+                  }
+                ],
+                "archetype_node_id": "at0001"
+              },
+              "archetype_node_id": "openEHR-EHR-EVALUATION.exclusion_global.v1"
+            },
+            {
+              "_type": "EVALUATION",
+              "name": {
+                "_type": "DV_TEXT",
+                "value": "Absence of Information"
+              },
+              "archetype_details": {
+                "archetype_id": {
+                  "value": "openEHR-EHR-EVALUATION.absence.v1"
+                },
+                "rm_version": "1.0.4"
+              },
+              "language": {
+                "_type": "CODE_PHRASE",
+                "terminology_id": {
+                  "_type": "TERMINOLOGY_ID",
+                  "value": "ISO_639-1"
+                },
+                "code_string": "en"
+              },
+              "encoding": {
+                "_type": "CODE_PHRASE",
+                "terminology_id": {
+                  "_type": "TERMINOLOGY_ID",
+                  "value": "IANA_character-sets"
+                },
+                "code_string": "ISO-10646-UTF-1"
+              },
+              "workflow_id": {
+                "_type": "OBJECT_REF",
+                "namespace": "unknown",
+                "type": "ANY",
+                "id": {
+                  "_type": "GENERIC_ID",
+                  "value": "9aa4953e-9b32-3219-9464-92872f82de4f",
+                  "scheme": "scheme"
+                }
+              },
+              "subject": {
+                "_type": "PARTY_SELF"
+              },
+              "provider": {
+                "_type": "PARTY_SELF"
+              },
+              "protocol": {
+                "_type": "ITEM_TREE",
+                "name": {
+                  "_type": "DV_TEXT",
+                  "value": "Tree"
+                },
+                "items": [
+                  {
+                    "_type": "ELEMENT",
+                    "name": {
+                      "_type": "DV_TEXT",
+                      "value": "Last updated"
+                    },
+                    "value": {
+                      "_type": "DV_DATE_TIME",
+                      "value": "2022-02-03T04:05:06"
+                    },
+                    "archetype_node_id": "at0004"
+                  }
+                ],
+                "archetype_node_id": "at0003"
+              },
+              "guideline_id": {
+                "_type": "OBJECT_REF",
+                "namespace": "unknown",
+                "type": "ANY",
+                "id": {
+                  "_type": "GENERIC_ID",
+                  "value": "1789f5c3-3c72-3c70-910a-2858820d5cac",
+                  "scheme": "scheme"
+                }
+              },
+              "time_asserted": {
+                "_type": "DV_DATE_TIME",
+                "value": "2022-02-03T04:05:06"
+              },
+              "data": {
+                "_type": "ITEM_TREE",
+                "name": {
+                  "_type": "DV_TEXT",
+                  "value": "Tree"
+                },
+                "items": [
+                  {
+                    "_type": "ELEMENT",
+                    "name": {
+                      "_type": "DV_TEXT",
+                      "value": "Absence statement"
+                    },
+                    "value": {
+                      "_type": "DV_TEXT",
+                      "value": "No information for known allergies and adverse reactions"
+                    },
+                    "archetype_node_id": "at0002"
+                  },
+                  {
+                    "_type": "ELEMENT",
+                    "name": {
+                      "_type": "DV_TEXT",
+                      "value": "Reason for absence"
+                    },
+                    "value": {
+                      "_type": "DV_TEXT",
+                      "value": "Lorem ipsum"
+                    },
+                    "archetype_node_id": "at0005"
+                  }
+                ],
+                "archetype_node_id": "at0001"
+              },
+              "archetype_node_id": "openEHR-EHR-EVALUATION.absence.v1"
+            }
+          ],
+          "archetype_node_id": "openEHR-EHR-SECTION.adhoc.v1"
+        }
+      ],
+      "archetype_node_id": "openEHR-EHR-SECTION.allergies_adverse_reactions_rcp.v1"
+    }
+  ],
+  "archetype_node_id": "openEHR-EHR-COMPOSITION.adverse_reaction_list.v1"
+}

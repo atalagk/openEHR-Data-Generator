@@ -1,0 +1,455 @@
+{
+  "_type": "COMPOSITION",
+  "name": {
+    "_type": "DV_TEXT",
+    "value": "test-ism.vitagroup.de.v1"
+  },
+  "archetype_details": {
+    "archetype_id": {
+      "value": "openEHR-EHR-COMPOSITION.report.v1"
+    },
+    "template_id": {
+      "value": "test-ism.vitagroup.de.v1"
+    },
+    "rm_version": "1.0.4"
+  },
+  "language": {
+    "_type": "CODE_PHRASE",
+    "terminology_id": {
+      "_type": "TERMINOLOGY_ID",
+      "value": "ISO_639-1"
+    },
+    "code_string": "en"
+  },
+  "territory": {
+    "_type": "CODE_PHRASE",
+    "terminology_id": {
+      "_type": "TERMINOLOGY_ID",
+      "value": "ISO_3166-1"
+    },
+    "code_string": "DE"
+  },
+  "category": {
+    "_type": "DV_CODED_TEXT",
+    "value": "event",
+    "defining_code": {
+      "_type": "CODE_PHRASE",
+      "terminology_id": {
+        "_type": "TERMINOLOGY_ID",
+        "value": "openehr"
+      },
+      "code_string": "433"
+    }
+  },
+  "composer": {
+    "_type": "PARTY_IDENTIFIED",
+    "name": "Max Mustermann"
+  },
+  "context": {
+    "_type": "EVENT_CONTEXT",
+    "start_time": {
+      "_type": "DV_DATE_TIME",
+      "value": "2022-02-03T04:05:06"
+    },
+    "end_time": {
+      "_type": "DV_DATE_TIME",
+      "value": "2022-02-03T04:05:06"
+    },
+    "setting": {
+      "_type": "DV_CODED_TEXT",
+      "value": "home",
+      "defining_code": {
+        "_type": "CODE_PHRASE",
+        "terminology_id": {
+          "_type": "TERMINOLOGY_ID",
+          "value": "openehr"
+        },
+        "code_string": "225"
+      }
+    },
+    "other_context": {
+      "_type": "ITEM_TREE",
+      "name": {
+        "_type": "DV_TEXT",
+        "value": "Tree"
+      },
+      "items": [
+        {
+          "_type": "ELEMENT",
+          "name": {
+            "_type": "DV_TEXT",
+            "value": "Report ID"
+          },
+          "value": {
+            "_type": "DV_TEXT",
+            "value": "Lorem ipsum"
+          },
+          "archetype_node_id": "at0002"
+        },
+        {
+          "_type": "ELEMENT",
+          "name": {
+            "_type": "DV_TEXT",
+            "value": "Status"
+          },
+          "value": {
+            "_type": "DV_TEXT",
+            "value": "Lorem ipsum"
+          },
+          "archetype_node_id": "at0005"
+        }
+      ],
+      "archetype_node_id": "at0001"
+    },
+    "health_care_facility": {
+      "_type": "PARTY_IDENTIFIED",
+      "name": "DOE, John"
+    }
+  },
+  "content": [
+    {
+      "_type": "ACTION",
+      "name": {
+        "_type": "DV_TEXT",
+        "value": "Medication management"
+      },
+      "archetype_details": {
+        "archetype_id": {
+          "value": "openEHR-EHR-ACTION.medication.v1"
+        },
+        "rm_version": "1.0.4"
+      },
+      "language": {
+        "_type": "CODE_PHRASE",
+        "terminology_id": {
+          "_type": "TERMINOLOGY_ID",
+          "value": "ISO_639-1"
+        },
+        "code_string": "en"
+      },
+      "encoding": {
+        "_type": "CODE_PHRASE",
+        "terminology_id": {
+          "_type": "TERMINOLOGY_ID",
+          "value": "IANA_character-sets"
+        },
+        "code_string": "ISO-10646-UTF-1"
+      },
+      "workflow_id": {
+        "_type": "OBJECT_REF",
+        "namespace": "unknown",
+        "type": "ANY",
+        "id": {
+          "_type": "GENERIC_ID",
+          "value": "2798bae6-b6f3-3c1f-99fa-7c6f9d671710",
+          "scheme": "scheme"
+        }
+      },
+      "subject": {
+        "_type": "PARTY_SELF"
+      },
+      "provider": {
+        "_type": "PARTY_SELF"
+      },
+      "protocol": {
+        "_type": "ITEM_TREE",
+        "name": {
+          "_type": "DV_TEXT",
+          "value": "Tree"
+        },
+        "items": [
+          {
+            "_type": "ELEMENT",
+            "name": {
+              "_type": "DV_TEXT",
+              "value": "Order ID"
+            },
+            "value": {
+              "_type": "DV_IDENTIFIER",
+              "id": "dev/null"
+            },
+            "archetype_node_id": "at0103"
+          }
+        ],
+        "archetype_node_id": "at0030"
+      },
+      "guideline_id": {
+        "_type": "OBJECT_REF",
+        "namespace": "unknown",
+        "type": "ANY",
+        "id": {
+          "_type": "GENERIC_ID",
+          "value": "49871477-3b73-33c5-ba22-fb509d963141",
+          "scheme": "scheme"
+        }
+      },
+      "time": {
+        "_type": "DV_DATE_TIME",
+        "value": "2022-02-03T04:05:06"
+      },
+      "description": {
+        "_type": "ITEM_TREE",
+        "name": {
+          "_type": "DV_TEXT",
+          "value": "Tree"
+        },
+        "items": [
+          {
+            "_type": "ELEMENT",
+            "name": {
+              "_type": "DV_TEXT",
+              "value": "Medication item"
+            },
+            "value": {
+              "_type": "DV_TEXT",
+              "value": "Lorem ipsum"
+            },
+            "archetype_node_id": "at0020"
+          },
+          {
+            "_type": "ELEMENT",
+            "name": {
+              "_type": "DV_TEXT",
+              "value": "Clinical indication"
+            },
+            "value": {
+              "_type": "DV_TEXT",
+              "value": "Lorem ipsum"
+            },
+            "archetype_node_id": "at0156"
+          },
+          {
+            "_type": "ELEMENT",
+            "name": {
+              "_type": "DV_TEXT",
+              "value": "Substitution"
+            },
+            "value": {
+              "_type": "DV_CODED_TEXT",
+              "value": "Substitution performed",
+              "defining_code": {
+                "_type": "CODE_PHRASE",
+                "terminology_id": {
+                  "_type": "TERMINOLOGY_ID",
+                  "value": "local"
+                },
+                "code_string": "at0138"
+              }
+            },
+            "archetype_node_id": "at0132"
+          },
+          {
+            "_type": "ELEMENT",
+            "name": {
+              "_type": "DV_TEXT",
+              "value": "Substitution reason"
+            },
+            "value": {
+              "_type": "DV_TEXT",
+              "value": "Lorem ipsum"
+            },
+            "archetype_node_id": "at0133"
+          },
+          {
+            "_type": "ELEMENT",
+            "name": {
+              "_type": "DV_TEXT",
+              "value": "Original scheduled date/time"
+            },
+            "value": {
+              "_type": "DV_DATE_TIME",
+              "value": "2022-02-03T04:05:06"
+            },
+            "archetype_node_id": "at0043"
+          },
+          {
+            "_type": "ELEMENT",
+            "name": {
+              "_type": "DV_TEXT",
+              "value": "Restart date/time"
+            },
+            "value": {
+              "_type": "DV_DATE_TIME",
+              "value": "2022-02-03T04:05:06"
+            },
+            "archetype_node_id": "at0154"
+          },
+          {
+            "_type": "ELEMENT",
+            "name": {
+              "_type": "DV_TEXT",
+              "value": "Restart criterion"
+            },
+            "value": {
+              "_type": "DV_TEXT",
+              "value": "Lorem ipsum"
+            },
+            "archetype_node_id": "at0155"
+          },
+          {
+            "_type": "ELEMENT",
+            "name": {
+              "_type": "DV_TEXT",
+              "value": "Reason"
+            },
+            "value": {
+              "_type": "DV_TEXT",
+              "value": "Lorem ipsum"
+            },
+            "archetype_node_id": "at0021"
+          },
+          {
+            "_type": "CLUSTER",
+            "name": {
+              "_type": "DV_TEXT",
+              "value": "Administration details"
+            },
+            "items": [
+              {
+                "_type": "ELEMENT",
+                "name": {
+                  "_type": "DV_TEXT",
+                  "value": "Route"
+                },
+                "value": {
+                  "_type": "DV_TEXT",
+                  "value": "Lorem ipsum"
+                },
+                "archetype_node_id": "at0147"
+              },
+              {
+                "_type": "ELEMENT",
+                "name": {
+                  "_type": "DV_TEXT",
+                  "value": "Body site"
+                },
+                "value": {
+                  "_type": "DV_TEXT",
+                  "value": "Lorem ipsum"
+                },
+                "archetype_node_id": "at0141"
+              },
+              {
+                "_type": "ELEMENT",
+                "name": {
+                  "_type": "DV_TEXT",
+                  "value": "Administration method"
+                },
+                "value": {
+                  "_type": "DV_TEXT",
+                  "value": "Lorem ipsum"
+                },
+                "archetype_node_id": "at0143"
+              }
+            ],
+            "archetype_node_id": "at0140"
+          },
+          {
+            "_type": "ELEMENT",
+            "name": {
+              "_type": "DV_TEXT",
+              "value": "Patient guidance"
+            },
+            "value": {
+              "_type": "DV_TEXT",
+              "value": "Lorem ipsum"
+            },
+            "archetype_node_id": "at0033"
+          },
+          {
+            "_type": "ELEMENT",
+            "name": {
+              "_type": "DV_TEXT",
+              "value": "Double-checked?"
+            },
+            "value": {
+              "_type": "DV_BOOLEAN",
+              "value": true
+            },
+            "archetype_node_id": "at0149"
+          },
+          {
+            "_type": "ELEMENT",
+            "name": {
+              "_type": "DV_TEXT",
+              "value": "Sequence number"
+            },
+            "value": {
+              "_type": "DV_COUNT",
+              "magnitude": 42
+            },
+            "archetype_node_id": "at0025"
+          },
+          {
+            "_type": "ELEMENT",
+            "name": {
+              "_type": "DV_TEXT",
+              "value": "Comment"
+            },
+            "value": {
+              "_type": "DV_TEXT",
+              "value": "Lorem ipsum"
+            },
+            "archetype_node_id": "at0024"
+          }
+        ],
+        "archetype_node_id": "at0017"
+      },
+      "ism_transition": {
+        "_type": "ISM_TRANSITION",
+        "current_state": {
+          "_type": "DV_CODED_TEXT",
+          "value": "planned",
+          "defining_code": {
+            "_type": "CODE_PHRASE",
+            "terminology_id": {
+              "_type": "TERMINOLOGY_ID",
+              "value": "openehr"
+            },
+            "code_string": "526"
+          }
+        },
+        "transition": {
+          "_type": "DV_CODED_TEXT",
+          "value": "restore",
+          "defining_code": {
+            "_type": "CODE_PHRASE",
+            "terminology_id": {
+              "_type": "TERMINOLOGY_ID",
+              "value": "openehr"
+            },
+            "code_string": "538"
+          }
+        },
+        "careflow_step": {
+          "_type": "DV_CODED_TEXT",
+          "value": "Medication recommended",
+          "defining_code": {
+            "_type": "CODE_PHRASE",
+            "terminology_id": {
+              "_type": "TERMINOLOGY_ID",
+              "value": "local"
+            },
+            "code_string": "at0109"
+          }
+        }
+      },
+      "instruction_details": {
+        "_type": "INSTRUCTION_DETAILS",
+        "instruction_id": {
+          "_type": "LOCATABLE_REF",
+          "namespace": "unknown",
+          "type": "INSTRUCTION",
+          "id": {
+            "_type": "HIER_OBJECT_ID",
+            "value": "fed6fb75-0ee5-3684-a38d-b5f2ff71ea14"
+          },
+          "path": ""
+        },
+        "activity_id": "activities[at0001]"
+      },
+      "archetype_node_id": "openEHR-EHR-ACTION.medication.v1"
+    }
+  ],
+  "archetype_node_id": "openEHR-EHR-COMPOSITION.report.v1"
+}

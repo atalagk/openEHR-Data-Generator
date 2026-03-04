@@ -1,0 +1,414 @@
+{
+  "_type": "COMPOSITION",
+  "name": {
+    "_type": "DV_TEXT",
+    "value": "Impfstatus"
+  },
+  "archetype_details": {
+    "archetype_id": {
+      "value": "openEHR-EHR-COMPOSITION.registereintrag.v1"
+    },
+    "template_id": {
+      "value": "Impfstatus"
+    },
+    "rm_version": "1.0.4"
+  },
+  "language": {
+    "_type": "CODE_PHRASE",
+    "terminology_id": {
+      "_type": "TERMINOLOGY_ID",
+      "value": "ISO_639-1"
+    },
+    "code_string": "de"
+  },
+  "territory": {
+    "_type": "CODE_PHRASE",
+    "terminology_id": {
+      "_type": "TERMINOLOGY_ID",
+      "value": "ISO_3166-1"
+    },
+    "code_string": "DE"
+  },
+  "category": {
+    "_type": "DV_CODED_TEXT",
+    "value": "event",
+    "defining_code": {
+      "_type": "CODE_PHRASE",
+      "terminology_id": {
+        "_type": "TERMINOLOGY_ID",
+        "value": "openehr"
+      },
+      "code_string": "433"
+    }
+  },
+  "composer": {
+    "_type": "PARTY_IDENTIFIED",
+    "name": "Max Mustermann"
+  },
+  "context": {
+    "_type": "EVENT_CONTEXT",
+    "start_time": {
+      "_type": "DV_DATE_TIME",
+      "value": "2022-02-03T04:05:06"
+    },
+    "end_time": {
+      "_type": "DV_DATE_TIME",
+      "value": "2022-02-03T04:05:06"
+    },
+    "setting": {
+      "_type": "DV_CODED_TEXT",
+      "value": "home",
+      "defining_code": {
+        "_type": "CODE_PHRASE",
+        "terminology_id": {
+          "_type": "TERMINOLOGY_ID",
+          "value": "openehr"
+        },
+        "code_string": "225"
+      }
+    },
+    "other_context": {
+      "_type": "ITEM_TREE",
+      "name": {
+        "_type": "DV_TEXT",
+        "value": "Baum"
+      },
+      "items": [
+        {
+          "_type": "ELEMENT",
+          "name": {
+            "_type": "DV_TEXT",
+            "value": "Status"
+          },
+          "value": {
+            "_type": "DV_CODED_TEXT",
+            "value": "registriert",
+            "defining_code": {
+              "_type": "CODE_PHRASE",
+              "terminology_id": {
+                "_type": "TERMINOLOGY_ID",
+                "value": "local"
+              },
+              "code_string": "at0010"
+            }
+          },
+          "archetype_node_id": "at0004"
+        },
+        {
+          "_type": "ELEMENT",
+          "name": {
+            "_type": "DV_TEXT",
+            "value": "Kategorie"
+          },
+          "value": {
+            "_type": "DV_TEXT",
+            "value": "Lorem ipsum"
+          },
+          "archetype_node_id": "at0005"
+        }
+      ],
+      "archetype_node_id": "at0001"
+    },
+    "health_care_facility": {
+      "_type": "PARTY_IDENTIFIED",
+      "name": "DOE, John"
+    }
+  },
+  "content": [
+    {
+      "_type": "ACTION",
+      "name": {
+        "_type": "DV_TEXT",
+        "value": "Impfung"
+      },
+      "archetype_details": {
+        "archetype_id": {
+          "value": "openEHR-EHR-ACTION.medication.v1"
+        },
+        "rm_version": "1.0.4"
+      },
+      "language": {
+        "_type": "CODE_PHRASE",
+        "terminology_id": {
+          "_type": "TERMINOLOGY_ID",
+          "value": "ISO_639-1"
+        },
+        "code_string": "de"
+      },
+      "encoding": {
+        "_type": "CODE_PHRASE",
+        "terminology_id": {
+          "_type": "TERMINOLOGY_ID",
+          "value": "IANA_character-sets"
+        },
+        "code_string": "ISO-10646-UTF-1"
+      },
+      "workflow_id": {
+        "_type": "OBJECT_REF",
+        "namespace": "unknown",
+        "type": "ANY",
+        "id": {
+          "_type": "GENERIC_ID",
+          "value": "6e356aec-28ac-3bab-859d-338088c6c09c",
+          "scheme": "scheme"
+        }
+      },
+      "subject": {
+        "_type": "PARTY_SELF"
+      },
+      "provider": {
+        "_type": "PARTY_SELF"
+      },
+      "guideline_id": {
+        "_type": "OBJECT_REF",
+        "namespace": "unknown",
+        "type": "ANY",
+        "id": {
+          "_type": "GENERIC_ID",
+          "value": "d6ea68bf-a26a-3c89-8e77-0ae1a92bf745",
+          "scheme": "scheme"
+        }
+      },
+      "time": {
+        "_type": "DV_DATE_TIME",
+        "value": "2022-02-03T04:05:06"
+      },
+      "description": {
+        "_type": "ITEM_TREE",
+        "name": {
+          "_type": "DV_TEXT",
+          "value": "Tree"
+        },
+        "items": [
+          {
+            "_type": "ELEMENT",
+            "name": {
+              "_type": "DV_TEXT",
+              "value": "Impfstoff"
+            },
+            "value": {
+              "_type": "DV_CODED_TEXT",
+              "value": "No example for term\u00ednology '//fhir.hl7.org//ValueSet/$expand?url=https://www.netzwerk-universitaetsmedizin.de/fhir/ValueSet/vaccines-snomed' available",
+              "defining_code": {
+                "_type": "CODE_PHRASE",
+                "terminology_id": {
+                  "_type": "TERMINOLOGY_ID",
+                  "value": "//fhir.hl7.org//ValueSet/$expand?url=https://www.netzwerk-universitaetsmedizin.de/fhir/ValueSet/vaccines-snomed"
+                },
+                "code_string": "42"
+              }
+            },
+            "archetype_node_id": "at0020"
+          },
+          {
+            "_type": "CLUSTER",
+            "name": {
+              "_type": "DV_TEXT",
+              "value": "Verabreichte Dosen"
+            },
+            "archetype_details": {
+              "archetype_id": {
+                "value": "openEHR-EHR-CLUSTER.dosage.v1"
+              },
+              "rm_version": "1.0.4"
+            },
+            "items": [
+              {
+                "_type": "ELEMENT",
+                "name": {
+                  "_type": "DV_TEXT",
+                  "value": "Dosierungsreihenfolge"
+                },
+                "value": {
+                  "_type": "DV_COUNT",
+                  "magnitude": 22
+                },
+                "archetype_node_id": "at0164"
+              },
+              {
+                "_type": "ELEMENT",
+                "name": {
+                  "_type": "DV_TEXT",
+                  "value": "Dosismenge"
+                },
+                "value": {
+                  "_type": "DV_QUANTITY",
+                  "units": "1",
+                  "magnitude": 21.0
+                },
+                "archetype_node_id": "at0144"
+              }
+            ],
+            "archetype_node_id": "openEHR-EHR-CLUSTER.dosage.v1"
+          },
+          {
+            "_type": "ELEMENT",
+            "name": {
+              "_type": "DV_TEXT",
+              "value": "Impfung gegen"
+            },
+            "value": {
+              "_type": "DV_CODED_TEXT",
+              "value": "No example for term\u00ednology '//fhir.hl7.org//ValueSet/$expand?url=https://fhir.kbv.de/ValueSet/KBV_VS_MIO_Vaccination_TargetDisease' available",
+              "defining_code": {
+                "_type": "CODE_PHRASE",
+                "terminology_id": {
+                  "_type": "TERMINOLOGY_ID",
+                  "value": "//fhir.hl7.org//ValueSet/$expand?url=https://fhir.kbv.de/ValueSet/KBV_VS_MIO_Vaccination_TargetDisease"
+                },
+                "code_string": "42"
+              }
+            },
+            "archetype_node_id": "at0021"
+          }
+        ],
+        "archetype_node_id": "at0017"
+      },
+      "ism_transition": {
+        "_type": "ISM_TRANSITION",
+        "current_state": {
+          "_type": "DV_CODED_TEXT",
+          "value": "completed",
+          "defining_code": {
+            "_type": "CODE_PHRASE",
+            "terminology_id": {
+              "_type": "TERMINOLOGY_ID",
+              "value": "openehr"
+            },
+            "code_string": "532"
+          }
+        },
+        "transition": {
+          "_type": "DV_CODED_TEXT",
+          "value": "finish",
+          "defining_code": {
+            "_type": "CODE_PHRASE",
+            "terminology_id": {
+              "_type": "TERMINOLOGY_ID",
+              "value": "openehr"
+            },
+            "code_string": "548"
+          }
+        },
+        "careflow_step": {
+          "_type": "DV_CODED_TEXT",
+          "value": "Rezept wurde ausgef\u00fchrt",
+          "defining_code": {
+            "_type": "CODE_PHRASE",
+            "terminology_id": {
+              "_type": "TERMINOLOGY_ID",
+              "value": "local"
+            },
+            "code_string": "at0152"
+          }
+        }
+      },
+      "instruction_details": {
+        "_type": "INSTRUCTION_DETAILS",
+        "instruction_id": {
+          "_type": "LOCATABLE_REF",
+          "namespace": "unknown",
+          "type": "INSTRUCTION",
+          "id": {
+            "_type": "HIER_OBJECT_ID",
+            "value": "9ffcb6e4-19f7-3077-b5f1-6b474fe91d91"
+          },
+          "path": ""
+        },
+        "activity_id": "activities[at0001]"
+      },
+      "archetype_node_id": "openEHR-EHR-ACTION.medication.v1"
+    },
+    {
+      "_type": "EVALUATION",
+      "name": {
+        "_type": "DV_TEXT",
+        "value": "Unbekannter Impfstatus"
+      },
+      "archetype_details": {
+        "archetype_id": {
+          "value": "openEHR-EHR-EVALUATION.absence.v2"
+        },
+        "rm_version": "1.0.4"
+      },
+      "language": {
+        "_type": "CODE_PHRASE",
+        "terminology_id": {
+          "_type": "TERMINOLOGY_ID",
+          "value": "ISO_639-1"
+        },
+        "code_string": "de"
+      },
+      "encoding": {
+        "_type": "CODE_PHRASE",
+        "terminology_id": {
+          "_type": "TERMINOLOGY_ID",
+          "value": "IANA_character-sets"
+        },
+        "code_string": "ISO-10646-UTF-1"
+      },
+      "workflow_id": {
+        "_type": "OBJECT_REF",
+        "namespace": "unknown",
+        "type": "ANY",
+        "id": {
+          "_type": "GENERIC_ID",
+          "value": "4245294d-0586-3583-9c53-9dce8d7a0f03",
+          "scheme": "scheme"
+        }
+      },
+      "subject": {
+        "_type": "PARTY_SELF"
+      },
+      "provider": {
+        "_type": "PARTY_SELF"
+      },
+      "guideline_id": {
+        "_type": "OBJECT_REF",
+        "namespace": "unknown",
+        "type": "ANY",
+        "id": {
+          "_type": "GENERIC_ID",
+          "value": "6fe9acd5-ab0f-3706-aa51-51ebf5ef24ae",
+          "scheme": "scheme"
+        }
+      },
+      "time_asserted": {
+        "_type": "DV_DATE_TIME",
+        "value": "2022-02-03T04:05:06"
+      },
+      "data": {
+        "_type": "ITEM_TREE",
+        "name": {
+          "_type": "DV_TEXT",
+          "value": "Baum"
+        },
+        "items": [
+          {
+            "_type": "ELEMENT",
+            "name": {
+              "_type": "DV_TEXT",
+              "value": "Aussage \u00fcber Abwesenheit"
+            },
+            "value": {
+              "_type": "DV_CODED_TEXT",
+              "value": "No example for term\u00ednology '//fhir.hl7.org//ValueSet/$expand?url=http://hl7.org/fhir/uv/ips/ValueSet/absent-or-unknown-immunizations-uv-ips' available",
+              "defining_code": {
+                "_type": "CODE_PHRASE",
+                "terminology_id": {
+                  "_type": "TERMINOLOGY_ID",
+                  "value": "//fhir.hl7.org//ValueSet/$expand?url=http://hl7.org/fhir/uv/ips/ValueSet/absent-or-unknown-immunizations-uv-ips"
+                },
+                "code_string": "42"
+              }
+            },
+            "archetype_node_id": "at0002"
+          }
+        ],
+        "archetype_node_id": "at0001"
+      },
+      "archetype_node_id": "openEHR-EHR-EVALUATION.absence.v2"
+    }
+  ],
+  "archetype_node_id": "openEHR-EHR-COMPOSITION.registereintrag.v1"
+}

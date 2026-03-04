@@ -1,0 +1,2064 @@
+{
+  "templateId": "informe_amb_1_arquetip_OBS",
+  "version": "2.3",
+  "defaultLanguage": "ca",
+  "languages": [
+    "ca"
+  ],
+  "tree": {
+    "id": "informe_amb_1_arquetip_obs",
+    "name": "informe_amb_1_arquetip_OBS",
+    "localizedName": "informe_amb_1_arquetip_OBS",
+    "rmType": "COMPOSITION",
+    "nodeId": "openEHR-EHR-COMPOSITION.informe_ad_hoc.v0",
+    "min": 1,
+    "max": 1,
+    "localizedNames": {
+      "ca": "informe_amb_1_arquetip_OBS"
+    },
+    "localizedDescriptions": {
+      "ca": "Informe d'implant"
+    },
+    "children": [
+      {
+        "id": "category",
+        "name": "category",
+        "localizedName": "category",
+        "rmType": "DV_CODED_TEXT",
+        "min": 1,
+        "max": 1,
+        "aqlPath": "/category",
+        "inputs": [
+          {
+            "suffix": "code",
+            "type": "CODED_TEXT",
+            "list": [
+              {
+                "value": "451",
+                "label": "episodic",
+                "localizedLabels": {
+                  "ca": "episodic"
+                }
+              }
+            ],
+            "terminology": "openehr"
+          }
+        ],
+        "inContext": true
+      },
+      {
+        "id": "context",
+        "name": "context",
+        "localizedName": "context",
+        "rmType": "EVENT_CONTEXT",
+        "min": 1,
+        "max": 1,
+        "aqlPath": "/context",
+        "children": [
+          {
+            "id": "start_time",
+            "name": "start_time",
+            "rmType": "DV_DATE_TIME",
+            "min": 1,
+            "max": 1,
+            "aqlPath": "/context/start_time",
+            "inputs": [
+              {
+                "type": "DATETIME"
+              }
+            ],
+            "inContext": true
+          },
+          {
+            "id": "setting",
+            "name": "setting",
+            "rmType": "DV_CODED_TEXT",
+            "min": 1,
+            "max": 1,
+            "aqlPath": "/context/setting",
+            "inputs": [
+              {
+                "suffix": "code",
+                "type": "TEXT"
+              },
+              {
+                "suffix": "value",
+                "type": "TEXT"
+              }
+            ],
+            "inContext": true
+          }
+        ]
+      },
+      {
+        "id": "resum_riqcat",
+        "name": "resum_RIQCat",
+        "localizedName": "resum_RIQCat",
+        "rmType": "OBSERVATION",
+        "nodeId": "openEHR-EHR-OBSERVATION.resum_riqcat.v0",
+        "min": 0,
+        "max": 1,
+        "localizedNames": {
+          "ca": "resum_RIQCat"
+        },
+        "localizedDescriptions": {
+          "ca": "resum_RIQCat"
+        },
+        "aqlPath": "/content[openEHR-EHR-OBSERVATION.resum_riqcat.v0]",
+        "children": [
+          {
+            "id": "any_event",
+            "name": "Any event",
+            "localizedName": "Any event",
+            "rmType": "EVENT",
+            "nodeId": "at0002",
+            "min": 0,
+            "max": -1,
+            "localizedNames": {
+              "ca": "Any event"
+            },
+            "localizedDescriptions": {
+              "ca": "@ internal @"
+            },
+            "aqlPath": "/content[openEHR-EHR-OBSERVATION.resum_riqcat.v0]/data[at0001]/events[at0002]",
+            "children": [
+              {
+                "id": "centre_realitzador",
+                "name": "Centre realitzador",
+                "localizedName": "Centre realitzador",
+                "rmType": "DV_TEXT",
+                "nodeId": "at0004",
+                "min": 0,
+                "max": 1,
+                "localizedNames": {
+                  "ca": "Centre realitzador"
+                },
+                "localizedDescriptions": {
+                  "ca": "Centre realitzador"
+                },
+                "aqlPath": "/content[openEHR-EHR-OBSERVATION.resum_riqcat.v0]/data[at0001]/events[at0002]/data[at0003]/items[at0004]/value",
+                "inputs": [
+                  {
+                    "type": "TEXT"
+                  }
+                ]
+              },
+              {
+                "id": "data_d_ingr\u00e9s_del_pacient",
+                "name": "Data d'ingr\u00e9s del pacient",
+                "localizedName": "Data d'ingr\u00e9s del pacient",
+                "rmType": "DV_DATE_TIME",
+                "nodeId": "at0005",
+                "min": 0,
+                "max": 1,
+                "localizedNames": {
+                  "ca": "Data d'ingr\u00e9s del pacient"
+                },
+                "localizedDescriptions": {
+                  "ca": "Data d'ingr\u00e9s del pacient"
+                },
+                "aqlPath": "/content[openEHR-EHR-OBSERVATION.resum_riqcat.v0]/data[at0001]/events[at0002]/data[at0003]/items[at0005]/value",
+                "inputs": [
+                  {
+                    "type": "DATETIME"
+                  }
+                ]
+              },
+              {
+                "id": "data_d_intervenci\u00f3_del_pacient",
+                "name": "Data d'intervenci\u00f3 del pacient",
+                "localizedName": "Data d'intervenci\u00f3 del pacient",
+                "rmType": "DV_DATE_TIME",
+                "nodeId": "at0006",
+                "min": 0,
+                "max": 1,
+                "localizedNames": {
+                  "ca": "Data d'intervenci\u00f3 del pacient"
+                },
+                "localizedDescriptions": {
+                  "ca": "Data d'intervenci\u00f3 del pacient"
+                },
+                "aqlPath": "/content[openEHR-EHR-OBSERVATION.resum_riqcat.v0]/data[at0001]/events[at0002]/data[at0003]/items[at0006]/value",
+                "inputs": [
+                  {
+                    "type": "DATETIME"
+                  }
+                ]
+              },
+              {
+                "id": "data_d_alta_del_pacient",
+                "name": "Data d'alta del pacient",
+                "localizedName": "Data d'alta del pacient",
+                "rmType": "DV_DATE_TIME",
+                "nodeId": "at0007",
+                "min": 0,
+                "max": 1,
+                "localizedNames": {
+                  "ca": "Data d'alta del pacient"
+                },
+                "localizedDescriptions": {
+                  "ca": "Data d'alta del pacient"
+                },
+                "aqlPath": "/content[openEHR-EHR-OBSERVATION.resum_riqcat.v0]/data[at0001]/events[at0002]/data[at0003]/items[at0007]/value",
+                "inputs": [
+                  {
+                    "type": "DATETIME"
+                  }
+                ]
+              },
+              {
+                "id": "tipus_d_intervenci\u00f3",
+                "name": "Tipus d'intervenci\u00f3",
+                "localizedName": "Tipus d'intervenci\u00f3",
+                "rmType": "DV_ORDINAL",
+                "nodeId": "at0008",
+                "min": 0,
+                "max": 1,
+                "localizedNames": {
+                  "ca": "Tipus d'intervenci\u00f3"
+                },
+                "localizedDescriptions": {
+                  "ca": "Tipus d'intervenci\u00f3"
+                },
+                "aqlPath": "/content[openEHR-EHR-OBSERVATION.resum_riqcat.v0]/data[at0001]/events[at0002]/data[at0003]/items[at0008]/value",
+                "inputs": [
+                  {
+                    "type": "CODED_TEXT",
+                    "list": [
+                      {
+                        "value": "at0009",
+                        "label": "Primera intervenci\u00f3",
+                        "localizedLabels": {
+                          "ca": "Primera intervenci\u00f3"
+                        },
+                        "localizedDescriptions": {
+                          "ca": "Primera intervenci\u00f3"
+                        },
+                        "ordinal": 1
+                      },
+                      {
+                        "value": "at0010",
+                        "label": "Reintervenci\u00f3",
+                        "localizedLabels": {
+                          "ca": "Reintervenci\u00f3"
+                        },
+                        "localizedDescriptions": {
+                          "ca": "Reintervenci\u00f3"
+                        },
+                        "ordinal": 2
+                      },
+                      {
+                        "value": "at0011",
+                        "label": "Explantaci\u00f3",
+                        "localizedLabels": {
+                          "ca": "Explantaci\u00f3"
+                        },
+                        "localizedDescriptions": {
+                          "ca": "Explantaci\u00f3"
+                        },
+                        "ordinal": 3
+                      }
+                    ]
+                  }
+                ]
+              },
+              {
+                "id": "codi_procediment",
+                "name": "Codi procediment",
+                "localizedName": "Codi procediment",
+                "rmType": "DV_TEXT",
+                "nodeId": "at0012",
+                "min": 0,
+                "max": 1,
+                "localizedNames": {
+                  "ca": "Codi procediment"
+                },
+                "localizedDescriptions": {
+                  "ca": "Codi procediment"
+                },
+                "aqlPath": "/content[openEHR-EHR-OBSERVATION.resum_riqcat.v0]/data[at0001]/events[at0002]/data[at0003]/items[at0012]/value",
+                "inputs": [
+                  {
+                    "type": "TEXT"
+                  }
+                ]
+              },
+              {
+                "id": "implant",
+                "name": "Implant",
+                "localizedName": "Implant",
+                "rmType": "CLUSTER",
+                "nodeId": "at0013",
+                "min": 0,
+                "max": 1,
+                "localizedNames": {
+                  "ca": "Implant"
+                },
+                "localizedDescriptions": {
+                  "ca": ""
+                },
+                "aqlPath": "/content[openEHR-EHR-OBSERVATION.resum_riqcat.v0]/data[at0001]/events[at0002]/data[at0003]/items[at0013]",
+                "children": [
+                  {
+                    "id": "implant_1",
+                    "name": "Implant 1",
+                    "localizedName": "Implant 1",
+                    "rmType": "CLUSTER",
+                    "nodeId": "at0014",
+                    "min": 0,
+                    "max": 1,
+                    "localizedNames": {
+                      "ca": "Implant 1"
+                    },
+                    "localizedDescriptions": {
+                      "ca": ""
+                    },
+                    "aqlPath": "/content[openEHR-EHR-OBSERVATION.resum_riqcat.v0]/data[at0001]/events[at0002]/data[at0003]/items[at0013]/items[at0014]",
+                    "children": [
+                      {
+                        "id": "codi_tipus_implant_emdn",
+                        "name": "Codi tipus implant EMDN",
+                        "localizedName": "Codi tipus implant EMDN",
+                        "rmType": "DV_TEXT",
+                        "nodeId": "at0024",
+                        "min": 0,
+                        "max": 1,
+                        "localizedNames": {
+                          "ca": "Codi tipus implant EMDN"
+                        },
+                        "localizedDescriptions": {
+                          "ca": "Codi tipus implant EMDN"
+                        },
+                        "aqlPath": "/content[openEHR-EHR-OBSERVATION.resum_riqcat.v0]/data[at0001]/events[at0002]/data[at0003]/items[at0013]/items[at0014]/items[at0024]/value",
+                        "inputs": [
+                          {
+                            "type": "TEXT"
+                          }
+                        ]
+                      },
+                      {
+                        "id": "n\u00famero_identificatiu_de_l_implant",
+                        "name": "N\u00famero identificatiu de l'implant",
+                        "localizedName": "N\u00famero identificatiu de l'implant",
+                        "rmType": "DV_TEXT",
+                        "nodeId": "at0025",
+                        "min": 0,
+                        "max": 1,
+                        "localizedNames": {
+                          "ca": "N\u00famero identificatiu de l'implant"
+                        },
+                        "localizedDescriptions": {
+                          "ca": "N\u00famero identificatiu de l'implant"
+                        },
+                        "aqlPath": "/content[openEHR-EHR-OBSERVATION.resum_riqcat.v0]/data[at0001]/events[at0002]/data[at0003]/items[at0013]/items[at0014]/items[at0025]/value",
+                        "inputs": [
+                          {
+                            "type": "TEXT"
+                          }
+                        ]
+                      },
+                      {
+                        "id": "n\u00famero_del_lot_del_implant",
+                        "name": "N\u00famero del lot del implant",
+                        "localizedName": "N\u00famero del lot del implant",
+                        "rmType": "DV_TEXT",
+                        "nodeId": "at0026",
+                        "min": 0,
+                        "max": 1,
+                        "localizedNames": {
+                          "ca": "N\u00famero del lot del implant"
+                        },
+                        "localizedDescriptions": {
+                          "ca": "N\u00famero del lot del implant"
+                        },
+                        "aqlPath": "/content[openEHR-EHR-OBSERVATION.resum_riqcat.v0]/data[at0001]/events[at0002]/data[at0003]/items[at0013]/items[at0014]/items[at0026]/value",
+                        "inputs": [
+                          {
+                            "type": "TEXT"
+                          }
+                        ]
+                      },
+                      {
+                        "id": "n\u00famero_de_serie_de_l_implant",
+                        "name": "N\u00famero de serie de l'implant",
+                        "localizedName": "N\u00famero de serie de l'implant",
+                        "rmType": "DV_TEXT",
+                        "nodeId": "at0027",
+                        "min": 0,
+                        "max": 1,
+                        "localizedNames": {
+                          "ca": "N\u00famero de serie de l'implant"
+                        },
+                        "localizedDescriptions": {
+                          "ca": "N\u00famero de serie de l'implant"
+                        },
+                        "aqlPath": "/content[openEHR-EHR-OBSERVATION.resum_riqcat.v0]/data[at0001]/events[at0002]/data[at0003]/items[at0013]/items[at0014]/items[at0027]/value",
+                        "inputs": [
+                          {
+                            "type": "TEXT"
+                          }
+                        ]
+                      },
+                      {
+                        "id": "nom_descripci\u00f3_del_producte",
+                        "name": "Nom/descripci\u00f3 del producte",
+                        "localizedName": "Nom/descripci\u00f3 del producte",
+                        "rmType": "DV_TEXT",
+                        "nodeId": "at0028",
+                        "min": 0,
+                        "max": 1,
+                        "localizedNames": {
+                          "ca": "Nom/descripci\u00f3 del producte"
+                        },
+                        "localizedDescriptions": {
+                          "ca": "Nom/descripci\u00f3 del producte"
+                        },
+                        "aqlPath": "/content[openEHR-EHR-OBSERVATION.resum_riqcat.v0]/data[at0001]/events[at0002]/data[at0003]/items[at0013]/items[at0014]/items[at0028]/value",
+                        "inputs": [
+                          {
+                            "type": "TEXT"
+                          }
+                        ]
+                      },
+                      {
+                        "id": "nom_del_fabricant",
+                        "name": "Nom del fabricant",
+                        "localizedName": "Nom del fabricant",
+                        "rmType": "DV_TEXT",
+                        "nodeId": "at0029",
+                        "min": 0,
+                        "max": 1,
+                        "localizedNames": {
+                          "ca": "Nom del fabricant"
+                        },
+                        "localizedDescriptions": {
+                          "ca": "Nom del fabricant"
+                        },
+                        "aqlPath": "/content[openEHR-EHR-OBSERVATION.resum_riqcat.v0]/data[at0001]/events[at0002]/data[at0003]/items[at0013]/items[at0014]/items[at0029]/value",
+                        "inputs": [
+                          {
+                            "type": "TEXT"
+                          }
+                        ]
+                      },
+                      {
+                        "id": "n\u00famero_d_identificaci\u00f3_del_fabricant",
+                        "name": "N\u00famero d'identificaci\u00f3 del fabricant",
+                        "localizedName": "N\u00famero d'identificaci\u00f3 del fabricant",
+                        "rmType": "DV_TEXT",
+                        "nodeId": "at0030",
+                        "min": 0,
+                        "max": 1,
+                        "localizedNames": {
+                          "ca": "N\u00famero d'identificaci\u00f3 del fabricant"
+                        },
+                        "localizedDescriptions": {
+                          "ca": "N\u00famero d'identificaci\u00f3 del fabricant"
+                        },
+                        "aqlPath": "/content[openEHR-EHR-OBSERVATION.resum_riqcat.v0]/data[at0001]/events[at0002]/data[at0003]/items[at0013]/items[at0014]/items[at0030]/value",
+                        "inputs": [
+                          {
+                            "type": "TEXT"
+                          }
+                        ]
+                      }
+                    ]
+                  },
+                  {
+                    "id": "implant_2",
+                    "name": "Implant 2",
+                    "localizedName": "Implant 2",
+                    "rmType": "CLUSTER",
+                    "nodeId": "at0015",
+                    "min": 0,
+                    "max": 1,
+                    "localizedNames": {
+                      "ca": "Implant 2"
+                    },
+                    "localizedDescriptions": {
+                      "ca": ""
+                    },
+                    "aqlPath": "/content[openEHR-EHR-OBSERVATION.resum_riqcat.v0]/data[at0001]/events[at0002]/data[at0003]/items[at0013]/items[at0015]",
+                    "children": [
+                      {
+                        "id": "codi_tipus_implant_emdn",
+                        "name": "Codi tipus implant EMDN",
+                        "localizedName": "Codi tipus implant EMDN",
+                        "rmType": "DV_TEXT",
+                        "nodeId": "at0031",
+                        "min": 0,
+                        "max": 1,
+                        "localizedNames": {
+                          "ca": "Codi tipus implant EMDN"
+                        },
+                        "localizedDescriptions": {
+                          "ca": "Codi tipus implant EMDN"
+                        },
+                        "aqlPath": "/content[openEHR-EHR-OBSERVATION.resum_riqcat.v0]/data[at0001]/events[at0002]/data[at0003]/items[at0013]/items[at0015]/items[at0031]/value",
+                        "inputs": [
+                          {
+                            "type": "TEXT"
+                          }
+                        ]
+                      },
+                      {
+                        "id": "n\u00famero_identificatiu_de_l_implant",
+                        "name": "N\u00famero identificatiu de l'implant",
+                        "localizedName": "N\u00famero identificatiu de l'implant",
+                        "rmType": "DV_TEXT",
+                        "nodeId": "at0032",
+                        "min": 0,
+                        "max": 1,
+                        "localizedNames": {
+                          "ca": "N\u00famero identificatiu de l'implant"
+                        },
+                        "localizedDescriptions": {
+                          "ca": "N\u00famero identificatiu de l'implant"
+                        },
+                        "aqlPath": "/content[openEHR-EHR-OBSERVATION.resum_riqcat.v0]/data[at0001]/events[at0002]/data[at0003]/items[at0013]/items[at0015]/items[at0032]/value",
+                        "inputs": [
+                          {
+                            "type": "TEXT"
+                          }
+                        ]
+                      },
+                      {
+                        "id": "n\u00famero_del_lot_del_implant",
+                        "name": "N\u00famero del lot del implant",
+                        "localizedName": "N\u00famero del lot del implant",
+                        "rmType": "DV_TEXT",
+                        "nodeId": "at0033",
+                        "min": 0,
+                        "max": 1,
+                        "localizedNames": {
+                          "ca": "N\u00famero del lot del implant"
+                        },
+                        "localizedDescriptions": {
+                          "ca": "N\u00famero del lot del implant"
+                        },
+                        "aqlPath": "/content[openEHR-EHR-OBSERVATION.resum_riqcat.v0]/data[at0001]/events[at0002]/data[at0003]/items[at0013]/items[at0015]/items[at0033]/value",
+                        "inputs": [
+                          {
+                            "type": "TEXT"
+                          }
+                        ]
+                      },
+                      {
+                        "id": "n\u00famero_de_serie_de_l_implant",
+                        "name": "N\u00famero de serie de l'implant",
+                        "localizedName": "N\u00famero de serie de l'implant",
+                        "rmType": "DV_TEXT",
+                        "nodeId": "at0034",
+                        "min": 0,
+                        "max": 1,
+                        "localizedNames": {
+                          "ca": "N\u00famero de serie de l'implant"
+                        },
+                        "localizedDescriptions": {
+                          "ca": "N\u00famero de serie de l'implant"
+                        },
+                        "aqlPath": "/content[openEHR-EHR-OBSERVATION.resum_riqcat.v0]/data[at0001]/events[at0002]/data[at0003]/items[at0013]/items[at0015]/items[at0034]/value",
+                        "inputs": [
+                          {
+                            "type": "TEXT"
+                          }
+                        ]
+                      },
+                      {
+                        "id": "nom_descripci\u00f3_del_producte",
+                        "name": "Nom/descripci\u00f3 del producte",
+                        "localizedName": "Nom/descripci\u00f3 del producte",
+                        "rmType": "DV_TEXT",
+                        "nodeId": "at0035",
+                        "min": 0,
+                        "max": 1,
+                        "localizedNames": {
+                          "ca": "Nom/descripci\u00f3 del producte"
+                        },
+                        "localizedDescriptions": {
+                          "ca": "Nom/descripci\u00f3 del producte"
+                        },
+                        "aqlPath": "/content[openEHR-EHR-OBSERVATION.resum_riqcat.v0]/data[at0001]/events[at0002]/data[at0003]/items[at0013]/items[at0015]/items[at0035]/value",
+                        "inputs": [
+                          {
+                            "type": "TEXT"
+                          }
+                        ]
+                      },
+                      {
+                        "id": "nom_del_fabricant",
+                        "name": "Nom del fabricant",
+                        "localizedName": "Nom del fabricant",
+                        "rmType": "DV_TEXT",
+                        "nodeId": "at0036",
+                        "min": 0,
+                        "max": 1,
+                        "localizedNames": {
+                          "ca": "Nom del fabricant"
+                        },
+                        "localizedDescriptions": {
+                          "ca": "Nom del fabricant"
+                        },
+                        "aqlPath": "/content[openEHR-EHR-OBSERVATION.resum_riqcat.v0]/data[at0001]/events[at0002]/data[at0003]/items[at0013]/items[at0015]/items[at0036]/value",
+                        "inputs": [
+                          {
+                            "type": "TEXT"
+                          }
+                        ]
+                      },
+                      {
+                        "id": "n\u00famero_d_identificaci\u00f3_del_fabricant",
+                        "name": "N\u00famero d'identificaci\u00f3 del fabricant",
+                        "localizedName": "N\u00famero d'identificaci\u00f3 del fabricant",
+                        "rmType": "DV_TEXT",
+                        "nodeId": "at0037",
+                        "min": 0,
+                        "max": 1,
+                        "localizedNames": {
+                          "ca": "N\u00famero d'identificaci\u00f3 del fabricant"
+                        },
+                        "localizedDescriptions": {
+                          "ca": "N\u00famero d'identificaci\u00f3 del fabricant"
+                        },
+                        "aqlPath": "/content[openEHR-EHR-OBSERVATION.resum_riqcat.v0]/data[at0001]/events[at0002]/data[at0003]/items[at0013]/items[at0015]/items[at0037]/value",
+                        "inputs": [
+                          {
+                            "type": "TEXT"
+                          }
+                        ]
+                      }
+                    ]
+                  },
+                  {
+                    "id": "implant_3",
+                    "name": "Implant 3",
+                    "localizedName": "Implant 3",
+                    "rmType": "CLUSTER",
+                    "nodeId": "at0016",
+                    "min": 0,
+                    "max": 1,
+                    "localizedNames": {
+                      "ca": "Implant 3"
+                    },
+                    "localizedDescriptions": {
+                      "ca": ""
+                    },
+                    "aqlPath": "/content[openEHR-EHR-OBSERVATION.resum_riqcat.v0]/data[at0001]/events[at0002]/data[at0003]/items[at0013]/items[at0016]",
+                    "children": [
+                      {
+                        "id": "codi_tipus_implant_emdn",
+                        "name": "Codi tipus implant EMDN",
+                        "localizedName": "Codi tipus implant EMDN",
+                        "rmType": "DV_TEXT",
+                        "nodeId": "at0038",
+                        "min": 0,
+                        "max": 1,
+                        "localizedNames": {
+                          "ca": "Codi tipus implant EMDN"
+                        },
+                        "localizedDescriptions": {
+                          "ca": "Codi tipus implant EMDN"
+                        },
+                        "aqlPath": "/content[openEHR-EHR-OBSERVATION.resum_riqcat.v0]/data[at0001]/events[at0002]/data[at0003]/items[at0013]/items[at0016]/items[at0038]/value",
+                        "inputs": [
+                          {
+                            "type": "TEXT"
+                          }
+                        ]
+                      },
+                      {
+                        "id": "n\u00famero_identificatiu_de_l_implant",
+                        "name": "N\u00famero identificatiu de l'implant",
+                        "localizedName": "N\u00famero identificatiu de l'implant",
+                        "rmType": "DV_TEXT",
+                        "nodeId": "at0039",
+                        "min": 0,
+                        "max": 1,
+                        "localizedNames": {
+                          "ca": "N\u00famero identificatiu de l'implant"
+                        },
+                        "localizedDescriptions": {
+                          "ca": "N\u00famero identificatiu de l'implant"
+                        },
+                        "aqlPath": "/content[openEHR-EHR-OBSERVATION.resum_riqcat.v0]/data[at0001]/events[at0002]/data[at0003]/items[at0013]/items[at0016]/items[at0039]/value",
+                        "inputs": [
+                          {
+                            "type": "TEXT"
+                          }
+                        ]
+                      },
+                      {
+                        "id": "n\u00famero_del_lot_del_implant",
+                        "name": "N\u00famero del lot del implant",
+                        "localizedName": "N\u00famero del lot del implant",
+                        "rmType": "DV_TEXT",
+                        "nodeId": "at0040",
+                        "min": 0,
+                        "max": 1,
+                        "localizedNames": {
+                          "ca": "N\u00famero del lot del implant"
+                        },
+                        "localizedDescriptions": {
+                          "ca": "N\u00famero del lot del implant"
+                        },
+                        "aqlPath": "/content[openEHR-EHR-OBSERVATION.resum_riqcat.v0]/data[at0001]/events[at0002]/data[at0003]/items[at0013]/items[at0016]/items[at0040]/value",
+                        "inputs": [
+                          {
+                            "type": "TEXT"
+                          }
+                        ]
+                      },
+                      {
+                        "id": "n\u00famero_de_serie_de_l_implant",
+                        "name": "N\u00famero de serie de l'implant",
+                        "localizedName": "N\u00famero de serie de l'implant",
+                        "rmType": "DV_TEXT",
+                        "nodeId": "at0041",
+                        "min": 0,
+                        "max": 1,
+                        "localizedNames": {
+                          "ca": "N\u00famero de serie de l'implant"
+                        },
+                        "localizedDescriptions": {
+                          "ca": "N\u00famero de serie de l'implant"
+                        },
+                        "aqlPath": "/content[openEHR-EHR-OBSERVATION.resum_riqcat.v0]/data[at0001]/events[at0002]/data[at0003]/items[at0013]/items[at0016]/items[at0041]/value",
+                        "inputs": [
+                          {
+                            "type": "TEXT"
+                          }
+                        ]
+                      },
+                      {
+                        "id": "nom_descripci\u00f3_del_producte",
+                        "name": "Nom/descripci\u00f3 del producte",
+                        "localizedName": "Nom/descripci\u00f3 del producte",
+                        "rmType": "DV_TEXT",
+                        "nodeId": "at0042",
+                        "min": 0,
+                        "max": 1,
+                        "localizedNames": {
+                          "ca": "Nom/descripci\u00f3 del producte"
+                        },
+                        "localizedDescriptions": {
+                          "ca": "Nom/descripci\u00f3 del producte"
+                        },
+                        "aqlPath": "/content[openEHR-EHR-OBSERVATION.resum_riqcat.v0]/data[at0001]/events[at0002]/data[at0003]/items[at0013]/items[at0016]/items[at0042]/value",
+                        "inputs": [
+                          {
+                            "type": "TEXT"
+                          }
+                        ]
+                      },
+                      {
+                        "id": "nom_del_fabricant",
+                        "name": "Nom del fabricant",
+                        "localizedName": "Nom del fabricant",
+                        "rmType": "DV_TEXT",
+                        "nodeId": "at0043",
+                        "min": 0,
+                        "max": 1,
+                        "localizedNames": {
+                          "ca": "Nom del fabricant"
+                        },
+                        "localizedDescriptions": {
+                          "ca": "Nom del fabricant"
+                        },
+                        "aqlPath": "/content[openEHR-EHR-OBSERVATION.resum_riqcat.v0]/data[at0001]/events[at0002]/data[at0003]/items[at0013]/items[at0016]/items[at0043]/value",
+                        "inputs": [
+                          {
+                            "type": "TEXT"
+                          }
+                        ]
+                      },
+                      {
+                        "id": "n\u00famero_d_identificaci\u00f3_del_fabricant",
+                        "name": "N\u00famero d'identificaci\u00f3 del fabricant",
+                        "localizedName": "N\u00famero d'identificaci\u00f3 del fabricant",
+                        "rmType": "DV_TEXT",
+                        "nodeId": "at0044",
+                        "min": 0,
+                        "max": 1,
+                        "localizedNames": {
+                          "ca": "N\u00famero d'identificaci\u00f3 del fabricant"
+                        },
+                        "localizedDescriptions": {
+                          "ca": "N\u00famero d'identificaci\u00f3 del fabricant"
+                        },
+                        "aqlPath": "/content[openEHR-EHR-OBSERVATION.resum_riqcat.v0]/data[at0001]/events[at0002]/data[at0003]/items[at0013]/items[at0016]/items[at0044]/value",
+                        "inputs": [
+                          {
+                            "type": "TEXT"
+                          }
+                        ]
+                      }
+                    ]
+                  },
+                  {
+                    "id": "implant_4",
+                    "name": "Implant 4",
+                    "localizedName": "Implant 4",
+                    "rmType": "CLUSTER",
+                    "nodeId": "at0017",
+                    "min": 0,
+                    "max": 1,
+                    "localizedNames": {
+                      "ca": "Implant 4"
+                    },
+                    "localizedDescriptions": {
+                      "ca": ""
+                    },
+                    "aqlPath": "/content[openEHR-EHR-OBSERVATION.resum_riqcat.v0]/data[at0001]/events[at0002]/data[at0003]/items[at0013]/items[at0017]",
+                    "children": [
+                      {
+                        "id": "codi_tipus_implant_emdn",
+                        "name": "Codi tipus implant EMDN",
+                        "localizedName": "Codi tipus implant EMDN",
+                        "rmType": "DV_TEXT",
+                        "nodeId": "at0045",
+                        "min": 0,
+                        "max": 1,
+                        "localizedNames": {
+                          "ca": "Codi tipus implant EMDN"
+                        },
+                        "localizedDescriptions": {
+                          "ca": "Codi tipus implant EMDN"
+                        },
+                        "aqlPath": "/content[openEHR-EHR-OBSERVATION.resum_riqcat.v0]/data[at0001]/events[at0002]/data[at0003]/items[at0013]/items[at0017]/items[at0045]/value",
+                        "inputs": [
+                          {
+                            "type": "TEXT"
+                          }
+                        ]
+                      },
+                      {
+                        "id": "n\u00famero_identificatiu_de_l_implant",
+                        "name": "N\u00famero identificatiu de l'implant",
+                        "localizedName": "N\u00famero identificatiu de l'implant",
+                        "rmType": "DV_TEXT",
+                        "nodeId": "at0046",
+                        "min": 0,
+                        "max": 1,
+                        "localizedNames": {
+                          "ca": "N\u00famero identificatiu de l'implant"
+                        },
+                        "localizedDescriptions": {
+                          "ca": "N\u00famero identificatiu de l'implant"
+                        },
+                        "aqlPath": "/content[openEHR-EHR-OBSERVATION.resum_riqcat.v0]/data[at0001]/events[at0002]/data[at0003]/items[at0013]/items[at0017]/items[at0046]/value",
+                        "inputs": [
+                          {
+                            "type": "TEXT"
+                          }
+                        ]
+                      },
+                      {
+                        "id": "n\u00famero_del_lot_del_implant",
+                        "name": "N\u00famero del lot del implant",
+                        "localizedName": "N\u00famero del lot del implant",
+                        "rmType": "DV_TEXT",
+                        "nodeId": "at0047",
+                        "min": 0,
+                        "max": 1,
+                        "localizedNames": {
+                          "ca": "N\u00famero del lot del implant"
+                        },
+                        "localizedDescriptions": {
+                          "ca": "N\u00famero del lot del implant"
+                        },
+                        "aqlPath": "/content[openEHR-EHR-OBSERVATION.resum_riqcat.v0]/data[at0001]/events[at0002]/data[at0003]/items[at0013]/items[at0017]/items[at0047]/value",
+                        "inputs": [
+                          {
+                            "type": "TEXT"
+                          }
+                        ]
+                      },
+                      {
+                        "id": "n\u00famero_de_serie_de_l_implant",
+                        "name": "N\u00famero de serie de l'implant",
+                        "localizedName": "N\u00famero de serie de l'implant",
+                        "rmType": "DV_TEXT",
+                        "nodeId": "at0048",
+                        "min": 0,
+                        "max": 1,
+                        "localizedNames": {
+                          "ca": "N\u00famero de serie de l'implant"
+                        },
+                        "localizedDescriptions": {
+                          "ca": "N\u00famero de serie de l'implant"
+                        },
+                        "aqlPath": "/content[openEHR-EHR-OBSERVATION.resum_riqcat.v0]/data[at0001]/events[at0002]/data[at0003]/items[at0013]/items[at0017]/items[at0048]/value",
+                        "inputs": [
+                          {
+                            "type": "TEXT"
+                          }
+                        ]
+                      },
+                      {
+                        "id": "nom_descripci\u00f3_del_producte",
+                        "name": "Nom/descripci\u00f3 del producte",
+                        "localizedName": "Nom/descripci\u00f3 del producte",
+                        "rmType": "DV_TEXT",
+                        "nodeId": "at0049",
+                        "min": 0,
+                        "max": 1,
+                        "localizedNames": {
+                          "ca": "Nom/descripci\u00f3 del producte"
+                        },
+                        "localizedDescriptions": {
+                          "ca": "Nom/descripci\u00f3 del producte"
+                        },
+                        "aqlPath": "/content[openEHR-EHR-OBSERVATION.resum_riqcat.v0]/data[at0001]/events[at0002]/data[at0003]/items[at0013]/items[at0017]/items[at0049]/value",
+                        "inputs": [
+                          {
+                            "type": "TEXT"
+                          }
+                        ]
+                      },
+                      {
+                        "id": "nom_del_fabricant",
+                        "name": "Nom del fabricant",
+                        "localizedName": "Nom del fabricant",
+                        "rmType": "DV_TEXT",
+                        "nodeId": "at0050",
+                        "min": 0,
+                        "max": 1,
+                        "localizedNames": {
+                          "ca": "Nom del fabricant"
+                        },
+                        "localizedDescriptions": {
+                          "ca": "Nom del fabricant"
+                        },
+                        "aqlPath": "/content[openEHR-EHR-OBSERVATION.resum_riqcat.v0]/data[at0001]/events[at0002]/data[at0003]/items[at0013]/items[at0017]/items[at0050]/value",
+                        "inputs": [
+                          {
+                            "type": "TEXT"
+                          }
+                        ]
+                      },
+                      {
+                        "id": "n\u00famero_d_identificaci\u00f3_del_fabricant",
+                        "name": "N\u00famero d'identificaci\u00f3 del fabricant",
+                        "localizedName": "N\u00famero d'identificaci\u00f3 del fabricant",
+                        "rmType": "DV_TEXT",
+                        "nodeId": "at0051",
+                        "min": 0,
+                        "max": 1,
+                        "localizedNames": {
+                          "ca": "N\u00famero d'identificaci\u00f3 del fabricant"
+                        },
+                        "localizedDescriptions": {
+                          "ca": "N\u00famero d'identificaci\u00f3 del fabricant"
+                        },
+                        "aqlPath": "/content[openEHR-EHR-OBSERVATION.resum_riqcat.v0]/data[at0001]/events[at0002]/data[at0003]/items[at0013]/items[at0017]/items[at0051]/value",
+                        "inputs": [
+                          {
+                            "type": "TEXT"
+                          }
+                        ]
+                      }
+                    ]
+                  },
+                  {
+                    "id": "implant_5",
+                    "name": "Implant 5",
+                    "localizedName": "Implant 5",
+                    "rmType": "CLUSTER",
+                    "nodeId": "at0018",
+                    "min": 0,
+                    "max": 1,
+                    "localizedNames": {
+                      "ca": "Implant 5"
+                    },
+                    "localizedDescriptions": {
+                      "ca": ""
+                    },
+                    "aqlPath": "/content[openEHR-EHR-OBSERVATION.resum_riqcat.v0]/data[at0001]/events[at0002]/data[at0003]/items[at0013]/items[at0018]",
+                    "children": [
+                      {
+                        "id": "codi_tipus_implant_emdn",
+                        "name": "Codi tipus implant EMDN",
+                        "localizedName": "Codi tipus implant EMDN",
+                        "rmType": "DV_TEXT",
+                        "nodeId": "at0052",
+                        "min": 0,
+                        "max": 1,
+                        "localizedNames": {
+                          "ca": "Codi tipus implant EMDN"
+                        },
+                        "localizedDescriptions": {
+                          "ca": "Codi tipus implant EMDN"
+                        },
+                        "aqlPath": "/content[openEHR-EHR-OBSERVATION.resum_riqcat.v0]/data[at0001]/events[at0002]/data[at0003]/items[at0013]/items[at0018]/items[at0052]/value",
+                        "inputs": [
+                          {
+                            "type": "TEXT"
+                          }
+                        ]
+                      },
+                      {
+                        "id": "n\u00famero_identificatiu_de_l_implant",
+                        "name": "N\u00famero identificatiu de l'implant",
+                        "localizedName": "N\u00famero identificatiu de l'implant",
+                        "rmType": "DV_TEXT",
+                        "nodeId": "at0053",
+                        "min": 0,
+                        "max": 1,
+                        "localizedNames": {
+                          "ca": "N\u00famero identificatiu de l'implant"
+                        },
+                        "localizedDescriptions": {
+                          "ca": "N\u00famero identificatiu de l'implant"
+                        },
+                        "aqlPath": "/content[openEHR-EHR-OBSERVATION.resum_riqcat.v0]/data[at0001]/events[at0002]/data[at0003]/items[at0013]/items[at0018]/items[at0053]/value",
+                        "inputs": [
+                          {
+                            "type": "TEXT"
+                          }
+                        ]
+                      },
+                      {
+                        "id": "n\u00famero_del_lot_del_implant",
+                        "name": "N\u00famero del lot del implant",
+                        "localizedName": "N\u00famero del lot del implant",
+                        "rmType": "DV_TEXT",
+                        "nodeId": "at0054",
+                        "min": 0,
+                        "max": 1,
+                        "localizedNames": {
+                          "ca": "N\u00famero del lot del implant"
+                        },
+                        "localizedDescriptions": {
+                          "ca": "N\u00famero del lot del implant"
+                        },
+                        "aqlPath": "/content[openEHR-EHR-OBSERVATION.resum_riqcat.v0]/data[at0001]/events[at0002]/data[at0003]/items[at0013]/items[at0018]/items[at0054]/value",
+                        "inputs": [
+                          {
+                            "type": "TEXT"
+                          }
+                        ]
+                      },
+                      {
+                        "id": "n\u00famero_de_serie_de_l_implant",
+                        "name": "N\u00famero de serie de l'implant",
+                        "localizedName": "N\u00famero de serie de l'implant",
+                        "rmType": "DV_TEXT",
+                        "nodeId": "at0055",
+                        "min": 0,
+                        "max": 1,
+                        "localizedNames": {
+                          "ca": "N\u00famero de serie de l'implant"
+                        },
+                        "localizedDescriptions": {
+                          "ca": "N\u00famero de serie de l'implant"
+                        },
+                        "aqlPath": "/content[openEHR-EHR-OBSERVATION.resum_riqcat.v0]/data[at0001]/events[at0002]/data[at0003]/items[at0013]/items[at0018]/items[at0055]/value",
+                        "inputs": [
+                          {
+                            "type": "TEXT"
+                          }
+                        ]
+                      },
+                      {
+                        "id": "nom_descripci\u00f3_del_producte",
+                        "name": "Nom/descripci\u00f3 del producte",
+                        "localizedName": "Nom/descripci\u00f3 del producte",
+                        "rmType": "DV_TEXT",
+                        "nodeId": "at0056",
+                        "min": 0,
+                        "max": 1,
+                        "localizedNames": {
+                          "ca": "Nom/descripci\u00f3 del producte"
+                        },
+                        "localizedDescriptions": {
+                          "ca": "Nom/descripci\u00f3 del producte"
+                        },
+                        "aqlPath": "/content[openEHR-EHR-OBSERVATION.resum_riqcat.v0]/data[at0001]/events[at0002]/data[at0003]/items[at0013]/items[at0018]/items[at0056]/value",
+                        "inputs": [
+                          {
+                            "type": "TEXT"
+                          }
+                        ]
+                      },
+                      {
+                        "id": "nom_del_fabricant",
+                        "name": "Nom del fabricant",
+                        "localizedName": "Nom del fabricant",
+                        "rmType": "DV_TEXT",
+                        "nodeId": "at0057",
+                        "min": 0,
+                        "max": 1,
+                        "localizedNames": {
+                          "ca": "Nom del fabricant"
+                        },
+                        "localizedDescriptions": {
+                          "ca": "Nom del fabricant"
+                        },
+                        "aqlPath": "/content[openEHR-EHR-OBSERVATION.resum_riqcat.v0]/data[at0001]/events[at0002]/data[at0003]/items[at0013]/items[at0018]/items[at0057]/value",
+                        "inputs": [
+                          {
+                            "type": "TEXT"
+                          }
+                        ]
+                      },
+                      {
+                        "id": "n\u00famero_d_identificaci\u00f3_del_fabricant",
+                        "name": "N\u00famero d'identificaci\u00f3 del fabricant",
+                        "localizedName": "N\u00famero d'identificaci\u00f3 del fabricant",
+                        "rmType": "DV_TEXT",
+                        "nodeId": "at0058",
+                        "min": 0,
+                        "max": 1,
+                        "localizedNames": {
+                          "ca": "N\u00famero d'identificaci\u00f3 del fabricant"
+                        },
+                        "localizedDescriptions": {
+                          "ca": "N\u00famero d'identificaci\u00f3 del fabricant"
+                        },
+                        "aqlPath": "/content[openEHR-EHR-OBSERVATION.resum_riqcat.v0]/data[at0001]/events[at0002]/data[at0003]/items[at0013]/items[at0018]/items[at0058]/value",
+                        "inputs": [
+                          {
+                            "type": "TEXT"
+                          }
+                        ]
+                      }
+                    ]
+                  },
+                  {
+                    "id": "implant_6",
+                    "name": "Implant 6",
+                    "localizedName": "Implant 6",
+                    "rmType": "CLUSTER",
+                    "nodeId": "at0019",
+                    "min": 0,
+                    "max": 1,
+                    "localizedNames": {
+                      "ca": "Implant 6"
+                    },
+                    "localizedDescriptions": {
+                      "ca": ""
+                    },
+                    "aqlPath": "/content[openEHR-EHR-OBSERVATION.resum_riqcat.v0]/data[at0001]/events[at0002]/data[at0003]/items[at0013]/items[at0019]",
+                    "children": [
+                      {
+                        "id": "codi_tipus_implant_emdn",
+                        "name": "Codi tipus implant EMDN",
+                        "localizedName": "Codi tipus implant EMDN",
+                        "rmType": "DV_TEXT",
+                        "nodeId": "at0059",
+                        "min": 0,
+                        "max": 1,
+                        "localizedNames": {
+                          "ca": "Codi tipus implant EMDN"
+                        },
+                        "localizedDescriptions": {
+                          "ca": "Codi tipus implant EMDN"
+                        },
+                        "aqlPath": "/content[openEHR-EHR-OBSERVATION.resum_riqcat.v0]/data[at0001]/events[at0002]/data[at0003]/items[at0013]/items[at0019]/items[at0059]/value",
+                        "inputs": [
+                          {
+                            "type": "TEXT"
+                          }
+                        ]
+                      },
+                      {
+                        "id": "n\u00famero_identificatiu_de_l_implant",
+                        "name": "N\u00famero identificatiu de l'implant",
+                        "localizedName": "N\u00famero identificatiu de l'implant",
+                        "rmType": "DV_TEXT",
+                        "nodeId": "at0060",
+                        "min": 0,
+                        "max": 1,
+                        "localizedNames": {
+                          "ca": "N\u00famero identificatiu de l'implant"
+                        },
+                        "localizedDescriptions": {
+                          "ca": "N\u00famero identificatiu de l'implant"
+                        },
+                        "aqlPath": "/content[openEHR-EHR-OBSERVATION.resum_riqcat.v0]/data[at0001]/events[at0002]/data[at0003]/items[at0013]/items[at0019]/items[at0060]/value",
+                        "inputs": [
+                          {
+                            "type": "TEXT"
+                          }
+                        ]
+                      },
+                      {
+                        "id": "n\u00famero_del_lot_del_implant",
+                        "name": "N\u00famero del lot del implant",
+                        "localizedName": "N\u00famero del lot del implant",
+                        "rmType": "DV_TEXT",
+                        "nodeId": "at0061",
+                        "min": 0,
+                        "max": 1,
+                        "localizedNames": {
+                          "ca": "N\u00famero del lot del implant"
+                        },
+                        "localizedDescriptions": {
+                          "ca": "N\u00famero del lot del implant"
+                        },
+                        "aqlPath": "/content[openEHR-EHR-OBSERVATION.resum_riqcat.v0]/data[at0001]/events[at0002]/data[at0003]/items[at0013]/items[at0019]/items[at0061]/value",
+                        "inputs": [
+                          {
+                            "type": "TEXT"
+                          }
+                        ]
+                      },
+                      {
+                        "id": "n\u00famero_de_serie_de_l_implant",
+                        "name": "N\u00famero de serie de l'implant",
+                        "localizedName": "N\u00famero de serie de l'implant",
+                        "rmType": "DV_TEXT",
+                        "nodeId": "at0062",
+                        "min": 0,
+                        "max": 1,
+                        "localizedNames": {
+                          "ca": "N\u00famero de serie de l'implant"
+                        },
+                        "localizedDescriptions": {
+                          "ca": "N\u00famero de serie de l'implant"
+                        },
+                        "aqlPath": "/content[openEHR-EHR-OBSERVATION.resum_riqcat.v0]/data[at0001]/events[at0002]/data[at0003]/items[at0013]/items[at0019]/items[at0062]/value",
+                        "inputs": [
+                          {
+                            "type": "TEXT"
+                          }
+                        ]
+                      },
+                      {
+                        "id": "nom_descripci\u00f3_del_producte",
+                        "name": "Nom/descripci\u00f3 del producte",
+                        "localizedName": "Nom/descripci\u00f3 del producte",
+                        "rmType": "DV_TEXT",
+                        "nodeId": "at0063",
+                        "min": 0,
+                        "max": 1,
+                        "localizedNames": {
+                          "ca": "Nom/descripci\u00f3 del producte"
+                        },
+                        "localizedDescriptions": {
+                          "ca": "Nom/descripci\u00f3 del producte"
+                        },
+                        "aqlPath": "/content[openEHR-EHR-OBSERVATION.resum_riqcat.v0]/data[at0001]/events[at0002]/data[at0003]/items[at0013]/items[at0019]/items[at0063]/value",
+                        "inputs": [
+                          {
+                            "type": "TEXT"
+                          }
+                        ]
+                      },
+                      {
+                        "id": "nom_del_fabricant",
+                        "name": "Nom del fabricant",
+                        "localizedName": "Nom del fabricant",
+                        "rmType": "DV_TEXT",
+                        "nodeId": "at0064",
+                        "min": 0,
+                        "max": 1,
+                        "localizedNames": {
+                          "ca": "Nom del fabricant"
+                        },
+                        "localizedDescriptions": {
+                          "ca": "Nom del fabricant"
+                        },
+                        "aqlPath": "/content[openEHR-EHR-OBSERVATION.resum_riqcat.v0]/data[at0001]/events[at0002]/data[at0003]/items[at0013]/items[at0019]/items[at0064]/value",
+                        "inputs": [
+                          {
+                            "type": "TEXT"
+                          }
+                        ]
+                      },
+                      {
+                        "id": "n\u00famero_d_identificaci\u00f3_del_fabricant",
+                        "name": "N\u00famero d'identificaci\u00f3 del fabricant",
+                        "localizedName": "N\u00famero d'identificaci\u00f3 del fabricant",
+                        "rmType": "DV_TEXT",
+                        "nodeId": "at0065",
+                        "min": 0,
+                        "max": 1,
+                        "localizedNames": {
+                          "ca": "N\u00famero d'identificaci\u00f3 del fabricant"
+                        },
+                        "localizedDescriptions": {
+                          "ca": "N\u00famero d'identificaci\u00f3 del fabricant"
+                        },
+                        "aqlPath": "/content[openEHR-EHR-OBSERVATION.resum_riqcat.v0]/data[at0001]/events[at0002]/data[at0003]/items[at0013]/items[at0019]/items[at0065]/value",
+                        "inputs": [
+                          {
+                            "type": "TEXT"
+                          }
+                        ]
+                      }
+                    ]
+                  },
+                  {
+                    "id": "implant_7",
+                    "name": "Implant 7",
+                    "localizedName": "Implant 7",
+                    "rmType": "CLUSTER",
+                    "nodeId": "at0020",
+                    "min": 0,
+                    "max": 1,
+                    "localizedNames": {
+                      "ca": "Implant 7"
+                    },
+                    "localizedDescriptions": {
+                      "ca": ""
+                    },
+                    "aqlPath": "/content[openEHR-EHR-OBSERVATION.resum_riqcat.v0]/data[at0001]/events[at0002]/data[at0003]/items[at0013]/items[at0020]",
+                    "children": [
+                      {
+                        "id": "codi_tipus_implant_emdn",
+                        "name": "Codi tipus implant EMDN",
+                        "localizedName": "Codi tipus implant EMDN",
+                        "rmType": "DV_TEXT",
+                        "nodeId": "at0066",
+                        "min": 0,
+                        "max": 1,
+                        "localizedNames": {
+                          "ca": "Codi tipus implant EMDN"
+                        },
+                        "localizedDescriptions": {
+                          "ca": "Codi tipus implant EMDN"
+                        },
+                        "aqlPath": "/content[openEHR-EHR-OBSERVATION.resum_riqcat.v0]/data[at0001]/events[at0002]/data[at0003]/items[at0013]/items[at0020]/items[at0066]/value",
+                        "inputs": [
+                          {
+                            "type": "TEXT"
+                          }
+                        ]
+                      },
+                      {
+                        "id": "n\u00famero_identificatiu_de_l_implant",
+                        "name": "N\u00famero identificatiu de l'implant",
+                        "localizedName": "N\u00famero identificatiu de l'implant",
+                        "rmType": "DV_TEXT",
+                        "nodeId": "at0067",
+                        "min": 0,
+                        "max": 1,
+                        "localizedNames": {
+                          "ca": "N\u00famero identificatiu de l'implant"
+                        },
+                        "localizedDescriptions": {
+                          "ca": "N\u00famero identificatiu de l'implant"
+                        },
+                        "aqlPath": "/content[openEHR-EHR-OBSERVATION.resum_riqcat.v0]/data[at0001]/events[at0002]/data[at0003]/items[at0013]/items[at0020]/items[at0067]/value",
+                        "inputs": [
+                          {
+                            "type": "TEXT"
+                          }
+                        ]
+                      },
+                      {
+                        "id": "n\u00famero_del_lot_del_implant",
+                        "name": "N\u00famero del lot del implant",
+                        "localizedName": "N\u00famero del lot del implant",
+                        "rmType": "DV_TEXT",
+                        "nodeId": "at0068",
+                        "min": 0,
+                        "max": 1,
+                        "localizedNames": {
+                          "ca": "N\u00famero del lot del implant"
+                        },
+                        "localizedDescriptions": {
+                          "ca": "N\u00famero del lot del implant"
+                        },
+                        "aqlPath": "/content[openEHR-EHR-OBSERVATION.resum_riqcat.v0]/data[at0001]/events[at0002]/data[at0003]/items[at0013]/items[at0020]/items[at0068]/value",
+                        "inputs": [
+                          {
+                            "type": "TEXT"
+                          }
+                        ]
+                      },
+                      {
+                        "id": "n\u00famero_de_serie_de_l_implant",
+                        "name": "N\u00famero de serie de l'implant",
+                        "localizedName": "N\u00famero de serie de l'implant",
+                        "rmType": "DV_TEXT",
+                        "nodeId": "at0069",
+                        "min": 0,
+                        "max": 1,
+                        "localizedNames": {
+                          "ca": "N\u00famero de serie de l'implant"
+                        },
+                        "localizedDescriptions": {
+                          "ca": "N\u00famero de serie de l'implant"
+                        },
+                        "aqlPath": "/content[openEHR-EHR-OBSERVATION.resum_riqcat.v0]/data[at0001]/events[at0002]/data[at0003]/items[at0013]/items[at0020]/items[at0069]/value",
+                        "inputs": [
+                          {
+                            "type": "TEXT"
+                          }
+                        ]
+                      },
+                      {
+                        "id": "nom_descripci\u00f3_del_producte",
+                        "name": "Nom/descripci\u00f3 del producte",
+                        "localizedName": "Nom/descripci\u00f3 del producte",
+                        "rmType": "DV_TEXT",
+                        "nodeId": "at0070",
+                        "min": 0,
+                        "max": 1,
+                        "localizedNames": {
+                          "ca": "Nom/descripci\u00f3 del producte"
+                        },
+                        "localizedDescriptions": {
+                          "ca": "Nom/descripci\u00f3 del producte"
+                        },
+                        "aqlPath": "/content[openEHR-EHR-OBSERVATION.resum_riqcat.v0]/data[at0001]/events[at0002]/data[at0003]/items[at0013]/items[at0020]/items[at0070]/value",
+                        "inputs": [
+                          {
+                            "type": "TEXT"
+                          }
+                        ]
+                      },
+                      {
+                        "id": "nom_del_fabricant",
+                        "name": "Nom del fabricant",
+                        "localizedName": "Nom del fabricant",
+                        "rmType": "DV_TEXT",
+                        "nodeId": "at0071",
+                        "min": 0,
+                        "max": 1,
+                        "localizedNames": {
+                          "ca": "Nom del fabricant"
+                        },
+                        "localizedDescriptions": {
+                          "ca": "Nom del fabricant"
+                        },
+                        "aqlPath": "/content[openEHR-EHR-OBSERVATION.resum_riqcat.v0]/data[at0001]/events[at0002]/data[at0003]/items[at0013]/items[at0020]/items[at0071]/value",
+                        "inputs": [
+                          {
+                            "type": "TEXT"
+                          }
+                        ]
+                      },
+                      {
+                        "id": "n\u00famero_d_identificaci\u00f3_del_fabricant",
+                        "name": "N\u00famero d'identificaci\u00f3 del fabricant",
+                        "localizedName": "N\u00famero d'identificaci\u00f3 del fabricant",
+                        "rmType": "DV_TEXT",
+                        "nodeId": "at0072",
+                        "min": 0,
+                        "max": 1,
+                        "localizedNames": {
+                          "ca": "N\u00famero d'identificaci\u00f3 del fabricant"
+                        },
+                        "localizedDescriptions": {
+                          "ca": "N\u00famero d'identificaci\u00f3 del fabricant"
+                        },
+                        "aqlPath": "/content[openEHR-EHR-OBSERVATION.resum_riqcat.v0]/data[at0001]/events[at0002]/data[at0003]/items[at0013]/items[at0020]/items[at0072]/value",
+                        "inputs": [
+                          {
+                            "type": "TEXT"
+                          }
+                        ]
+                      }
+                    ]
+                  },
+                  {
+                    "id": "implant_8",
+                    "name": "Implant 8",
+                    "localizedName": "Implant 8",
+                    "rmType": "CLUSTER",
+                    "nodeId": "at0021",
+                    "min": 0,
+                    "max": 1,
+                    "localizedNames": {
+                      "ca": "Implant 8"
+                    },
+                    "localizedDescriptions": {
+                      "ca": ""
+                    },
+                    "aqlPath": "/content[openEHR-EHR-OBSERVATION.resum_riqcat.v0]/data[at0001]/events[at0002]/data[at0003]/items[at0013]/items[at0021]",
+                    "children": [
+                      {
+                        "id": "codi_tipus_implant_emdn",
+                        "name": "Codi tipus implant EMDN",
+                        "localizedName": "Codi tipus implant EMDN",
+                        "rmType": "DV_TEXT",
+                        "nodeId": "at0073",
+                        "min": 0,
+                        "max": 1,
+                        "localizedNames": {
+                          "ca": "Codi tipus implant EMDN"
+                        },
+                        "localizedDescriptions": {
+                          "ca": "Codi tipus implant EMDN"
+                        },
+                        "aqlPath": "/content[openEHR-EHR-OBSERVATION.resum_riqcat.v0]/data[at0001]/events[at0002]/data[at0003]/items[at0013]/items[at0021]/items[at0073]/value",
+                        "inputs": [
+                          {
+                            "type": "TEXT"
+                          }
+                        ]
+                      },
+                      {
+                        "id": "n\u00famero_identificatiu_de_l_implant",
+                        "name": "N\u00famero identificatiu de l'implant",
+                        "localizedName": "N\u00famero identificatiu de l'implant",
+                        "rmType": "DV_TEXT",
+                        "nodeId": "at0074",
+                        "min": 0,
+                        "max": 1,
+                        "localizedNames": {
+                          "ca": "N\u00famero identificatiu de l'implant"
+                        },
+                        "localizedDescriptions": {
+                          "ca": "N\u00famero identificatiu de l'implant"
+                        },
+                        "aqlPath": "/content[openEHR-EHR-OBSERVATION.resum_riqcat.v0]/data[at0001]/events[at0002]/data[at0003]/items[at0013]/items[at0021]/items[at0074]/value",
+                        "inputs": [
+                          {
+                            "type": "TEXT"
+                          }
+                        ]
+                      },
+                      {
+                        "id": "n\u00famero_del_lot_del_implant",
+                        "name": "N\u00famero del lot del implant",
+                        "localizedName": "N\u00famero del lot del implant",
+                        "rmType": "DV_TEXT",
+                        "nodeId": "at0075",
+                        "min": 0,
+                        "max": 1,
+                        "localizedNames": {
+                          "ca": "N\u00famero del lot del implant"
+                        },
+                        "localizedDescriptions": {
+                          "ca": "N\u00famero del lot del implant"
+                        },
+                        "aqlPath": "/content[openEHR-EHR-OBSERVATION.resum_riqcat.v0]/data[at0001]/events[at0002]/data[at0003]/items[at0013]/items[at0021]/items[at0075]/value",
+                        "inputs": [
+                          {
+                            "type": "TEXT"
+                          }
+                        ]
+                      },
+                      {
+                        "id": "n\u00famero_de_serie_de_l_implant",
+                        "name": "N\u00famero de serie de l'implant",
+                        "localizedName": "N\u00famero de serie de l'implant",
+                        "rmType": "DV_TEXT",
+                        "nodeId": "at0076",
+                        "min": 0,
+                        "max": 1,
+                        "localizedNames": {
+                          "ca": "N\u00famero de serie de l'implant"
+                        },
+                        "localizedDescriptions": {
+                          "ca": "N\u00famero de serie de l'implant"
+                        },
+                        "aqlPath": "/content[openEHR-EHR-OBSERVATION.resum_riqcat.v0]/data[at0001]/events[at0002]/data[at0003]/items[at0013]/items[at0021]/items[at0076]/value",
+                        "inputs": [
+                          {
+                            "type": "TEXT"
+                          }
+                        ]
+                      },
+                      {
+                        "id": "nom_descripci\u00f3_del_producte",
+                        "name": "Nom/descripci\u00f3 del producte",
+                        "localizedName": "Nom/descripci\u00f3 del producte",
+                        "rmType": "DV_TEXT",
+                        "nodeId": "at0077",
+                        "min": 0,
+                        "max": 1,
+                        "localizedNames": {
+                          "ca": "Nom/descripci\u00f3 del producte"
+                        },
+                        "localizedDescriptions": {
+                          "ca": "Nom/descripci\u00f3 del producte"
+                        },
+                        "aqlPath": "/content[openEHR-EHR-OBSERVATION.resum_riqcat.v0]/data[at0001]/events[at0002]/data[at0003]/items[at0013]/items[at0021]/items[at0077]/value",
+                        "inputs": [
+                          {
+                            "type": "TEXT"
+                          }
+                        ]
+                      },
+                      {
+                        "id": "nom_del_fabricant",
+                        "name": "Nom del fabricant",
+                        "localizedName": "Nom del fabricant",
+                        "rmType": "DV_TEXT",
+                        "nodeId": "at0078",
+                        "min": 0,
+                        "max": 1,
+                        "localizedNames": {
+                          "ca": "Nom del fabricant"
+                        },
+                        "localizedDescriptions": {
+                          "ca": "Nom del fabricant"
+                        },
+                        "aqlPath": "/content[openEHR-EHR-OBSERVATION.resum_riqcat.v0]/data[at0001]/events[at0002]/data[at0003]/items[at0013]/items[at0021]/items[at0078]/value",
+                        "inputs": [
+                          {
+                            "type": "TEXT"
+                          }
+                        ]
+                      },
+                      {
+                        "id": "n\u00famero_d_identificaci\u00f3_del_fabricant",
+                        "name": "N\u00famero d'identificaci\u00f3 del fabricant",
+                        "localizedName": "N\u00famero d'identificaci\u00f3 del fabricant",
+                        "rmType": "DV_TEXT",
+                        "nodeId": "at0079",
+                        "min": 0,
+                        "max": 1,
+                        "localizedNames": {
+                          "ca": "N\u00famero d'identificaci\u00f3 del fabricant"
+                        },
+                        "localizedDescriptions": {
+                          "ca": "N\u00famero d'identificaci\u00f3 del fabricant"
+                        },
+                        "aqlPath": "/content[openEHR-EHR-OBSERVATION.resum_riqcat.v0]/data[at0001]/events[at0002]/data[at0003]/items[at0013]/items[at0021]/items[at0079]/value",
+                        "inputs": [
+                          {
+                            "type": "TEXT"
+                          }
+                        ]
+                      }
+                    ]
+                  },
+                  {
+                    "id": "implant_9",
+                    "name": "Implant 9",
+                    "localizedName": "Implant 9",
+                    "rmType": "CLUSTER",
+                    "nodeId": "at0080",
+                    "min": 0,
+                    "max": 1,
+                    "localizedNames": {
+                      "ca": "Implant 9"
+                    },
+                    "localizedDescriptions": {
+                      "ca": ""
+                    },
+                    "aqlPath": "/content[openEHR-EHR-OBSERVATION.resum_riqcat.v0]/data[at0001]/events[at0002]/data[at0003]/items[at0013]/items[at0080]",
+                    "children": [
+                      {
+                        "id": "codi_tipus_implant_emdn",
+                        "name": "Codi tipus implant EMDN",
+                        "localizedName": "Codi tipus implant EMDN",
+                        "rmType": "DV_TEXT",
+                        "nodeId": "at0081",
+                        "min": 0,
+                        "max": 1,
+                        "localizedNames": {
+                          "ca": "Codi tipus implant EMDN"
+                        },
+                        "localizedDescriptions": {
+                          "ca": "Codi tipus implant EMDN"
+                        },
+                        "aqlPath": "/content[openEHR-EHR-OBSERVATION.resum_riqcat.v0]/data[at0001]/events[at0002]/data[at0003]/items[at0013]/items[at0080]/items[at0081]/value",
+                        "inputs": [
+                          {
+                            "type": "TEXT"
+                          }
+                        ]
+                      },
+                      {
+                        "id": "n\u00famero_identificatiu_de_l_implant",
+                        "name": "N\u00famero identificatiu de l'implant",
+                        "localizedName": "N\u00famero identificatiu de l'implant",
+                        "rmType": "DV_TEXT",
+                        "nodeId": "at0082",
+                        "min": 0,
+                        "max": 1,
+                        "localizedNames": {
+                          "ca": "N\u00famero identificatiu de l'implant"
+                        },
+                        "localizedDescriptions": {
+                          "ca": "N\u00famero identificatiu de l'implant"
+                        },
+                        "aqlPath": "/content[openEHR-EHR-OBSERVATION.resum_riqcat.v0]/data[at0001]/events[at0002]/data[at0003]/items[at0013]/items[at0080]/items[at0082]/value",
+                        "inputs": [
+                          {
+                            "type": "TEXT"
+                          }
+                        ]
+                      },
+                      {
+                        "id": "n\u00famero_del_lot_del_implant",
+                        "name": "N\u00famero del lot del implant",
+                        "localizedName": "N\u00famero del lot del implant",
+                        "rmType": "DV_TEXT",
+                        "nodeId": "at0083",
+                        "min": 0,
+                        "max": 1,
+                        "localizedNames": {
+                          "ca": "N\u00famero del lot del implant"
+                        },
+                        "localizedDescriptions": {
+                          "ca": "N\u00famero del lot del implant"
+                        },
+                        "aqlPath": "/content[openEHR-EHR-OBSERVATION.resum_riqcat.v0]/data[at0001]/events[at0002]/data[at0003]/items[at0013]/items[at0080]/items[at0083]/value",
+                        "inputs": [
+                          {
+                            "type": "TEXT"
+                          }
+                        ]
+                      },
+                      {
+                        "id": "n\u00famero_de_serie_de_l_implant",
+                        "name": "N\u00famero de serie de l'implant",
+                        "localizedName": "N\u00famero de serie de l'implant",
+                        "rmType": "DV_TEXT",
+                        "nodeId": "at0084",
+                        "min": 0,
+                        "max": 1,
+                        "localizedNames": {
+                          "ca": "N\u00famero de serie de l'implant"
+                        },
+                        "localizedDescriptions": {
+                          "ca": "N\u00famero de serie de l'implant"
+                        },
+                        "aqlPath": "/content[openEHR-EHR-OBSERVATION.resum_riqcat.v0]/data[at0001]/events[at0002]/data[at0003]/items[at0013]/items[at0080]/items[at0084]/value",
+                        "inputs": [
+                          {
+                            "type": "TEXT"
+                          }
+                        ]
+                      },
+                      {
+                        "id": "nom_descripci\u00f3_del_producte",
+                        "name": "Nom/descripci\u00f3 del producte",
+                        "localizedName": "Nom/descripci\u00f3 del producte",
+                        "rmType": "DV_TEXT",
+                        "nodeId": "at0085",
+                        "min": 0,
+                        "max": 1,
+                        "localizedNames": {
+                          "ca": "Nom/descripci\u00f3 del producte"
+                        },
+                        "localizedDescriptions": {
+                          "ca": "Nom/descripci\u00f3 del producte"
+                        },
+                        "aqlPath": "/content[openEHR-EHR-OBSERVATION.resum_riqcat.v0]/data[at0001]/events[at0002]/data[at0003]/items[at0013]/items[at0080]/items[at0085]/value",
+                        "inputs": [
+                          {
+                            "type": "TEXT"
+                          }
+                        ]
+                      },
+                      {
+                        "id": "nom_del_fabricant",
+                        "name": "Nom del fabricant",
+                        "localizedName": "Nom del fabricant",
+                        "rmType": "DV_TEXT",
+                        "nodeId": "at0086",
+                        "min": 0,
+                        "max": 1,
+                        "localizedNames": {
+                          "ca": "Nom del fabricant"
+                        },
+                        "localizedDescriptions": {
+                          "ca": "Nom del fabricant"
+                        },
+                        "aqlPath": "/content[openEHR-EHR-OBSERVATION.resum_riqcat.v0]/data[at0001]/events[at0002]/data[at0003]/items[at0013]/items[at0080]/items[at0086]/value",
+                        "inputs": [
+                          {
+                            "type": "TEXT"
+                          }
+                        ]
+                      },
+                      {
+                        "id": "n\u00famero_d_identificaci\u00f3_del_fabricant",
+                        "name": "N\u00famero d'identificaci\u00f3 del fabricant",
+                        "localizedName": "N\u00famero d'identificaci\u00f3 del fabricant",
+                        "rmType": "DV_TEXT",
+                        "nodeId": "at0087",
+                        "min": 0,
+                        "max": 1,
+                        "localizedNames": {
+                          "ca": "N\u00famero d'identificaci\u00f3 del fabricant"
+                        },
+                        "localizedDescriptions": {
+                          "ca": "N\u00famero d'identificaci\u00f3 del fabricant"
+                        },
+                        "aqlPath": "/content[openEHR-EHR-OBSERVATION.resum_riqcat.v0]/data[at0001]/events[at0002]/data[at0003]/items[at0013]/items[at0080]/items[at0087]/value",
+                        "inputs": [
+                          {
+                            "type": "TEXT"
+                          }
+                        ]
+                      }
+                    ]
+                  },
+                  {
+                    "id": "implant_10",
+                    "name": "Implant 10",
+                    "localizedName": "Implant 10",
+                    "rmType": "CLUSTER",
+                    "nodeId": "at0023",
+                    "min": 0,
+                    "max": 1,
+                    "localizedNames": {
+                      "ca": "Implant 10"
+                    },
+                    "localizedDescriptions": {
+                      "ca": ""
+                    },
+                    "aqlPath": "/content[openEHR-EHR-OBSERVATION.resum_riqcat.v0]/data[at0001]/events[at0002]/data[at0003]/items[at0013]/items[at0023]",
+                    "children": [
+                      {
+                        "id": "codi_tipus_implant_emdn",
+                        "name": "Codi tipus implant EMDN",
+                        "localizedName": "Codi tipus implant EMDN",
+                        "rmType": "DV_TEXT",
+                        "nodeId": "at0088",
+                        "min": 0,
+                        "max": 1,
+                        "localizedNames": {
+                          "ca": "Codi tipus implant EMDN"
+                        },
+                        "localizedDescriptions": {
+                          "ca": "Codi tipus implant EMDN"
+                        },
+                        "aqlPath": "/content[openEHR-EHR-OBSERVATION.resum_riqcat.v0]/data[at0001]/events[at0002]/data[at0003]/items[at0013]/items[at0023]/items[at0088]/value",
+                        "inputs": [
+                          {
+                            "type": "TEXT"
+                          }
+                        ]
+                      },
+                      {
+                        "id": "n\u00famero_identificatiu_de_l_implant",
+                        "name": "N\u00famero identificatiu de l'implant",
+                        "localizedName": "N\u00famero identificatiu de l'implant",
+                        "rmType": "DV_TEXT",
+                        "nodeId": "at0089",
+                        "min": 0,
+                        "max": 1,
+                        "localizedNames": {
+                          "ca": "N\u00famero identificatiu de l'implant"
+                        },
+                        "localizedDescriptions": {
+                          "ca": "N\u00famero identificatiu de l'implant"
+                        },
+                        "aqlPath": "/content[openEHR-EHR-OBSERVATION.resum_riqcat.v0]/data[at0001]/events[at0002]/data[at0003]/items[at0013]/items[at0023]/items[at0089]/value",
+                        "inputs": [
+                          {
+                            "type": "TEXT"
+                          }
+                        ]
+                      },
+                      {
+                        "id": "n\u00famero_del_lot_del_implant",
+                        "name": "N\u00famero del lot del implant",
+                        "localizedName": "N\u00famero del lot del implant",
+                        "rmType": "DV_TEXT",
+                        "nodeId": "at0090",
+                        "min": 0,
+                        "max": 1,
+                        "localizedNames": {
+                          "ca": "N\u00famero del lot del implant"
+                        },
+                        "localizedDescriptions": {
+                          "ca": "N\u00famero del lot del implant"
+                        },
+                        "aqlPath": "/content[openEHR-EHR-OBSERVATION.resum_riqcat.v0]/data[at0001]/events[at0002]/data[at0003]/items[at0013]/items[at0023]/items[at0090]/value",
+                        "inputs": [
+                          {
+                            "type": "TEXT"
+                          }
+                        ]
+                      },
+                      {
+                        "id": "n\u00famero_de_serie_de_l_implant",
+                        "name": "N\u00famero de serie de l'implant",
+                        "localizedName": "N\u00famero de serie de l'implant",
+                        "rmType": "DV_TEXT",
+                        "nodeId": "at0091",
+                        "min": 0,
+                        "max": 1,
+                        "localizedNames": {
+                          "ca": "N\u00famero de serie de l'implant"
+                        },
+                        "localizedDescriptions": {
+                          "ca": "N\u00famero de serie de l'implant"
+                        },
+                        "aqlPath": "/content[openEHR-EHR-OBSERVATION.resum_riqcat.v0]/data[at0001]/events[at0002]/data[at0003]/items[at0013]/items[at0023]/items[at0091]/value",
+                        "inputs": [
+                          {
+                            "type": "TEXT"
+                          }
+                        ]
+                      },
+                      {
+                        "id": "nom_descripci\u00f3_del_producte",
+                        "name": "Nom/descripci\u00f3 del producte",
+                        "localizedName": "Nom/descripci\u00f3 del producte",
+                        "rmType": "DV_TEXT",
+                        "nodeId": "at0092",
+                        "min": 0,
+                        "max": 1,
+                        "localizedNames": {
+                          "ca": "Nom/descripci\u00f3 del producte"
+                        },
+                        "localizedDescriptions": {
+                          "ca": "Nom/descripci\u00f3 del producte"
+                        },
+                        "aqlPath": "/content[openEHR-EHR-OBSERVATION.resum_riqcat.v0]/data[at0001]/events[at0002]/data[at0003]/items[at0013]/items[at0023]/items[at0092]/value",
+                        "inputs": [
+                          {
+                            "type": "TEXT"
+                          }
+                        ]
+                      },
+                      {
+                        "id": "nom_del_fabricant",
+                        "name": "Nom del fabricant",
+                        "localizedName": "Nom del fabricant",
+                        "rmType": "DV_TEXT",
+                        "nodeId": "at0093",
+                        "min": 0,
+                        "max": 1,
+                        "localizedNames": {
+                          "ca": "Nom del fabricant"
+                        },
+                        "localizedDescriptions": {
+                          "ca": "Nom del fabricant"
+                        },
+                        "aqlPath": "/content[openEHR-EHR-OBSERVATION.resum_riqcat.v0]/data[at0001]/events[at0002]/data[at0003]/items[at0013]/items[at0023]/items[at0093]/value",
+                        "inputs": [
+                          {
+                            "type": "TEXT"
+                          }
+                        ]
+                      },
+                      {
+                        "id": "n\u00famero_d_identificaci\u00f3_del_fabricant",
+                        "name": "N\u00famero d'identificaci\u00f3 del fabricant",
+                        "localizedName": "N\u00famero d'identificaci\u00f3 del fabricant",
+                        "rmType": "DV_TEXT",
+                        "nodeId": "at0094",
+                        "min": 0,
+                        "max": 1,
+                        "localizedNames": {
+                          "ca": "N\u00famero d'identificaci\u00f3 del fabricant"
+                        },
+                        "localizedDescriptions": {
+                          "ca": "N\u00famero d'identificaci\u00f3 del fabricant"
+                        },
+                        "aqlPath": "/content[openEHR-EHR-OBSERVATION.resum_riqcat.v0]/data[at0001]/events[at0002]/data[at0003]/items[at0013]/items[at0023]/items[at0094]/value",
+                        "inputs": [
+                          {
+                            "type": "TEXT"
+                          }
+                        ]
+                      }
+                    ]
+                  }
+                ]
+              },
+              {
+                "id": "time",
+                "name": "time",
+                "rmType": "DV_DATE_TIME",
+                "min": 1,
+                "max": 1,
+                "aqlPath": "/content[openEHR-EHR-OBSERVATION.resum_riqcat.v0]/data[at0001]/events[at0002]/time",
+                "inputs": [
+                  {
+                    "type": "DATETIME"
+                  }
+                ],
+                "inContext": true
+              }
+            ]
+          },
+          {
+            "id": "subject",
+            "name": "subject",
+            "rmType": "PARTY_PROXY",
+            "min": 1,
+            "max": 1,
+            "aqlPath": "/content[openEHR-EHR-OBSERVATION.resum_riqcat.v0]/subject",
+            "inputs": [
+              {
+                "suffix": "id",
+                "type": "TEXT"
+              },
+              {
+                "suffix": "id_scheme",
+                "type": "TEXT"
+              },
+              {
+                "suffix": "id_namespace",
+                "type": "TEXT"
+              },
+              {
+                "suffix": "name",
+                "type": "TEXT"
+              }
+            ],
+            "inContext": true
+          },
+          {
+            "id": "language",
+            "name": "language",
+            "rmType": "CODE_PHRASE",
+            "min": 1,
+            "max": 1,
+            "aqlPath": "/content[openEHR-EHR-OBSERVATION.resum_riqcat.v0]/language",
+            "inContext": true
+          },
+          {
+            "id": "encoding",
+            "name": "encoding",
+            "rmType": "CODE_PHRASE",
+            "min": 1,
+            "max": 1,
+            "aqlPath": "/content[openEHR-EHR-OBSERVATION.resum_riqcat.v0]/encoding",
+            "inContext": true
+          }
+        ]
+      },
+      {
+        "id": "composer",
+        "name": "composer",
+        "rmType": "PARTY_PROXY",
+        "min": 1,
+        "max": 1,
+        "aqlPath": "/composer",
+        "inputs": [
+          {
+            "suffix": "id",
+            "type": "TEXT"
+          },
+          {
+            "suffix": "id_scheme",
+            "type": "TEXT"
+          },
+          {
+            "suffix": "id_namespace",
+            "type": "TEXT"
+          },
+          {
+            "suffix": "name",
+            "type": "TEXT"
+          }
+        ],
+        "inContext": true
+      },
+      {
+        "id": "language",
+        "name": "language",
+        "rmType": "CODE_PHRASE",
+        "min": 1,
+        "max": 1,
+        "aqlPath": "/language",
+        "inContext": true
+      },
+      {
+        "id": "territory",
+        "name": "territory",
+        "rmType": "CODE_PHRASE",
+        "min": 1,
+        "max": 1,
+        "aqlPath": "/territory",
+        "inContext": true
+      }
+    ]
+  }
+}

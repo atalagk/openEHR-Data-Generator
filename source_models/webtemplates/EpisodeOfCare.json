@@ -1,0 +1,546 @@
+{
+  "templateId": "EpisodeOfCare",
+  "version": "2.3",
+  "defaultLanguage": "de",
+  "languages": [
+    "de"
+  ],
+  "tree": {
+    "id": "episodeofcare",
+    "name": "EpisodeOfCare",
+    "localizedName": "EpisodeOfCare",
+    "rmType": "COMPOSITION",
+    "nodeId": "openEHR-EHR-COMPOSITION.versorgungsfall.v0",
+    "min": 1,
+    "max": 1,
+    "localizedNames": {
+      "de": "EpisodeOfCare"
+    },
+    "localizedDescriptions": {
+      "de": "zwischengeschaltete zwangs-composition."
+    },
+    "children": [
+      {
+        "id": "category",
+        "name": "category",
+        "localizedName": "category",
+        "rmType": "DV_CODED_TEXT",
+        "min": 1,
+        "max": 1,
+        "aqlPath": "/category",
+        "inputs": [
+          {
+            "suffix": "code",
+            "type": "CODED_TEXT",
+            "list": [
+              {
+                "value": "433",
+                "label": "event",
+                "localizedLabels": {
+                  "de": "event"
+                }
+              }
+            ],
+            "terminology": "openehr"
+          }
+        ],
+        "inContext": true
+      },
+      {
+        "id": "episodeofcare",
+        "name": "Episodeofcare",
+        "localizedName": "Episodeofcare",
+        "rmType": "ADMIN_ENTRY",
+        "nodeId": "openEHR-EHR-ADMIN_ENTRY.episodeofcare.v0",
+        "min": 0,
+        "max": -1,
+        "localizedNames": {
+          "de": "Episodeofcare"
+        },
+        "localizedDescriptions": {
+          "de": "unknown"
+        },
+        "aqlPath": "/content[openEHR-EHR-ADMIN_ENTRY.episodeofcare.v0]",
+        "children": [
+          {
+            "id": "identifier",
+            "name": "identifier",
+            "localizedName": "identifier",
+            "rmType": "DV_IDENTIFIER",
+            "nodeId": "at0002",
+            "min": 0,
+            "max": -1,
+            "localizedNames": {
+              "de": "identifier"
+            },
+            "localizedDescriptions": {
+              "de": "Business Identifier(s) relevant for this EpisodeOfCare"
+            },
+            "aqlPath": "/content[openEHR-EHR-ADMIN_ENTRY.episodeofcare.v0]/data[at0001]/items[at0002]/value",
+            "inputs": [
+              {
+                "suffix": "id",
+                "type": "TEXT"
+              },
+              {
+                "suffix": "type",
+                "type": "TEXT"
+              },
+              {
+                "suffix": "issuer",
+                "type": "TEXT"
+              },
+              {
+                "suffix": "assigner",
+                "type": "TEXT"
+              }
+            ]
+          },
+          {
+            "id": "status",
+            "name": "status",
+            "localizedName": "status",
+            "rmType": "DV_CODED_TEXT",
+            "nodeId": "at0003",
+            "min": 0,
+            "max": 1,
+            "localizedNames": {
+              "de": "status"
+            },
+            "localizedDescriptions": {
+              "de": "*"
+            },
+            "aqlPath": "/content[openEHR-EHR-ADMIN_ENTRY.episodeofcare.v0]/data[at0001]/items[at0003]/value",
+            "inputs": [
+              {
+                "suffix": "code",
+                "type": "CODED_TEXT",
+                "list": [
+                  {
+                    "value": "at0004",
+                    "label": "planned",
+                    "localizedLabels": {
+                      "de": "planned"
+                    },
+                    "localizedDescriptions": {
+                      "de": "*"
+                    }
+                  },
+                  {
+                    "value": "at0005",
+                    "label": "waitlist",
+                    "localizedLabels": {
+                      "de": "waitlist"
+                    },
+                    "localizedDescriptions": {
+                      "de": "*"
+                    }
+                  },
+                  {
+                    "value": "at0006",
+                    "label": "active",
+                    "localizedLabels": {
+                      "de": "active"
+                    },
+                    "localizedDescriptions": {
+                      "de": "*"
+                    }
+                  },
+                  {
+                    "value": "at0007",
+                    "label": "onhold",
+                    "localizedLabels": {
+                      "de": "onhold"
+                    },
+                    "localizedDescriptions": {
+                      "de": "*"
+                    }
+                  },
+                  {
+                    "value": "at0008",
+                    "label": "finished",
+                    "localizedLabels": {
+                      "de": "finished"
+                    },
+                    "localizedDescriptions": {
+                      "de": "*"
+                    }
+                  },
+                  {
+                    "value": "at0009",
+                    "label": "cancelled",
+                    "localizedLabels": {
+                      "de": "cancelled"
+                    },
+                    "localizedDescriptions": {
+                      "de": "*"
+                    }
+                  },
+                  {
+                    "value": "at0010",
+                    "label": "entered-in-error",
+                    "localizedLabels": {
+                      "de": "entered-in-error"
+                    },
+                    "localizedDescriptions": {
+                      "de": "*"
+                    }
+                  }
+                ],
+                "terminology": "local"
+              }
+            ]
+          },
+          {
+            "id": "type",
+            "name": "type",
+            "localizedName": "type",
+            "rmType": "DV_TEXT",
+            "nodeId": "at0011",
+            "min": 0,
+            "max": 1,
+            "localizedNames": {
+              "de": "type"
+            },
+            "localizedDescriptions": {
+              "de": "Type/class - e.g. specialist referral, disease management"
+            },
+            "aqlPath": "/content[openEHR-EHR-ADMIN_ENTRY.episodeofcare.v0]/data[at0001]/items[at0011]/value",
+            "inputs": [
+              {
+                "type": "TEXT"
+              }
+            ]
+          },
+          {
+            "id": "period",
+            "name": "period",
+            "localizedName": "period",
+            "rmType": "DV_INTERVAL<DV_DATE_TIME>",
+            "nodeId": "at0014",
+            "min": 0,
+            "max": 1,
+            "localizedNames": {
+              "de": "period"
+            },
+            "localizedDescriptions": {
+              "de": "Interval during responsibility is assumed"
+            },
+            "aqlPath": "/content[openEHR-EHR-ADMIN_ENTRY.episodeofcare.v0]/data[at0001]/items[at0014]/value",
+            "children": [
+              {
+                "id": "upper",
+                "name": "upper",
+                "localizedName": "upper",
+                "rmType": "DV_DATE_TIME",
+                "min": 1,
+                "max": 1,
+                "aqlPath": "/content[openEHR-EHR-ADMIN_ENTRY.episodeofcare.v0]/data[at0001]/items[at0014]/value/upper",
+                "inputs": [
+                  {
+                    "type": "DATETIME",
+                    "validation": {
+                      "pattern": "yyyy-mm-ddTHH:MM:SS"
+                    }
+                  }
+                ]
+              },
+              {
+                "id": "lower",
+                "name": "lower",
+                "localizedName": "lower",
+                "rmType": "DV_DATE_TIME",
+                "min": 1,
+                "max": 1,
+                "aqlPath": "/content[openEHR-EHR-ADMIN_ENTRY.episodeofcare.v0]/data[at0001]/items[at0014]/value/lower",
+                "inputs": [
+                  {
+                    "type": "DATETIME",
+                    "validation": {
+                      "pattern": "yyyy-mm-ddTHH:MM:SS"
+                    }
+                  }
+                ]
+              }
+            ]
+          },
+          {
+            "id": "diagnosis",
+            "name": "diagnosis",
+            "localizedName": "diagnosis",
+            "rmType": "CLUSTER",
+            "nodeId": "at0018",
+            "min": 0,
+            "max": -1,
+            "localizedNames": {
+              "de": "diagnosis"
+            },
+            "localizedDescriptions": {
+              "de": "The list of diagnosis relevant to this episode of care"
+            },
+            "aqlPath": "/content[openEHR-EHR-ADMIN_ENTRY.episodeofcare.v0]/data[at0001]/items[at0018]",
+            "children": [
+              {
+                "id": "diagnosis_entry",
+                "name": "diagnosis entry",
+                "localizedName": "diagnosis entry",
+                "rmType": "DV_EHR_URI",
+                "nodeId": "at0019",
+                "min": 1,
+                "max": 1,
+                "localizedNames": {
+                  "de": "diagnosis entry"
+                },
+                "localizedDescriptions": {
+                  "de": "Conditions/problems/diagnoses this episode of care is for"
+                },
+                "aqlPath": "/content[openEHR-EHR-ADMIN_ENTRY.episodeofcare.v0]/data[at0001]/items[at0018]/items[at0019]/value",
+                "inputs": [
+                  {
+                    "type": "TEXT"
+                  }
+                ]
+              },
+              {
+                "id": "role",
+                "name": "role",
+                "localizedName": "role",
+                "rmType": "DV_TEXT",
+                "nodeId": "at0020",
+                "min": 0,
+                "max": 1,
+                "localizedNames": {
+                  "de": "role"
+                },
+                "localizedDescriptions": {
+                  "de": "Role that this diagnosis has within the episode of care (e.g. admission,\n                        billing,\n                        discharge...)\n                    "
+                },
+                "aqlPath": "/content[openEHR-EHR-ADMIN_ENTRY.episodeofcare.v0]/data[at0001]/items[at0018]/items[at0020]/value",
+                "inputs": [
+                  {
+                    "type": "TEXT"
+                  }
+                ]
+              },
+              {
+                "id": "rank",
+                "name": "rank",
+                "localizedName": "rank",
+                "rmType": "DV_COUNT",
+                "nodeId": "at0021",
+                "min": 0,
+                "max": 1,
+                "localizedNames": {
+                  "de": "rank"
+                },
+                "localizedDescriptions": {
+                  "de": "Ranking of the diagnosis (for each role type)"
+                },
+                "aqlPath": "/content[openEHR-EHR-ADMIN_ENTRY.episodeofcare.v0]/data[at0001]/items[at0018]/items[at0021]/value",
+                "inputs": [
+                  {
+                    "type": "INTEGER"
+                  }
+                ]
+              }
+            ]
+          },
+          {
+            "id": "care_manager",
+            "name": "care manager",
+            "localizedName": "care manager",
+            "rmType": "DV_URI",
+            "nodeId": "at0012",
+            "min": 0,
+            "max": 1,
+            "localizedNames": {
+              "de": "care manager"
+            },
+            "localizedDescriptions": {
+              "de": "Care manager/care coordinator for the patient"
+            },
+            "aqlPath": "/content[openEHR-EHR-ADMIN_ENTRY.episodeofcare.v0]/data[at0001]/items[at0012]/value",
+            "inputs": [
+              {
+                "type": "TEXT"
+              }
+            ]
+          },
+          {
+            "id": "managing_organization",
+            "name": "managing organization",
+            "localizedName": "managing organization",
+            "rmType": "DV_URI",
+            "nodeId": "at0017",
+            "min": 0,
+            "max": 1,
+            "localizedNames": {
+              "de": "managing organization"
+            },
+            "localizedDescriptions": {
+              "de": "*"
+            },
+            "aqlPath": "/content[openEHR-EHR-ADMIN_ENTRY.episodeofcare.v0]/data[at0001]/items[at0017]/value",
+            "inputs": [
+              {
+                "type": "TEXT"
+              }
+            ]
+          },
+          {
+            "id": "team",
+            "name": "team",
+            "localizedName": "team",
+            "rmType": "DV_URI",
+            "nodeId": "at0013",
+            "min": 0,
+            "max": -1,
+            "localizedNames": {
+              "de": "team"
+            },
+            "localizedDescriptions": {
+              "de": "Other practitioners facilitating this episode of care"
+            },
+            "aqlPath": "/content[openEHR-EHR-ADMIN_ENTRY.episodeofcare.v0]/data[at0001]/items[at0013]/value",
+            "inputs": [
+              {
+                "type": "TEXT"
+              }
+            ]
+          },
+          {
+            "id": "subject",
+            "name": "subject",
+            "rmType": "PARTY_PROXY",
+            "min": 1,
+            "max": 1,
+            "aqlPath": "/content[openEHR-EHR-ADMIN_ENTRY.episodeofcare.v0]/subject",
+            "inputs": [
+              {
+                "suffix": "id",
+                "type": "TEXT"
+              },
+              {
+                "suffix": "id_scheme",
+                "type": "TEXT"
+              },
+              {
+                "suffix": "id_namespace",
+                "type": "TEXT"
+              },
+              {
+                "suffix": "name",
+                "type": "TEXT"
+              }
+            ],
+            "inContext": true
+          },
+          {
+            "id": "language",
+            "name": "language",
+            "rmType": "CODE_PHRASE",
+            "min": 1,
+            "max": 1,
+            "aqlPath": "/content[openEHR-EHR-ADMIN_ENTRY.episodeofcare.v0]/language",
+            "inContext": true
+          },
+          {
+            "id": "encoding",
+            "name": "encoding",
+            "rmType": "CODE_PHRASE",
+            "min": 1,
+            "max": 1,
+            "aqlPath": "/content[openEHR-EHR-ADMIN_ENTRY.episodeofcare.v0]/encoding",
+            "inContext": true
+          }
+        ]
+      },
+      {
+        "id": "composer",
+        "name": "composer",
+        "rmType": "PARTY_PROXY",
+        "min": 1,
+        "max": 1,
+        "aqlPath": "/composer",
+        "inputs": [
+          {
+            "suffix": "id",
+            "type": "TEXT"
+          },
+          {
+            "suffix": "id_scheme",
+            "type": "TEXT"
+          },
+          {
+            "suffix": "id_namespace",
+            "type": "TEXT"
+          },
+          {
+            "suffix": "name",
+            "type": "TEXT"
+          }
+        ],
+        "inContext": true
+      },
+      {
+        "id": "language",
+        "name": "language",
+        "rmType": "CODE_PHRASE",
+        "min": 1,
+        "max": 1,
+        "aqlPath": "/language",
+        "inContext": true
+      },
+      {
+        "id": "context",
+        "name": "context",
+        "rmType": "EVENT_CONTEXT",
+        "min": 0,
+        "max": 1,
+        "aqlPath": "/context",
+        "children": [
+          {
+            "id": "start_time",
+            "name": "start_time",
+            "rmType": "DV_DATE_TIME",
+            "min": 1,
+            "max": 1,
+            "aqlPath": "/context/start_time",
+            "inputs": [
+              {
+                "type": "DATETIME"
+              }
+            ]
+          },
+          {
+            "id": "setting",
+            "name": "setting",
+            "rmType": "DV_CODED_TEXT",
+            "min": 1,
+            "max": 1,
+            "aqlPath": "/context/setting",
+            "inputs": [
+              {
+                "suffix": "code",
+                "type": "TEXT"
+              },
+              {
+                "suffix": "value",
+                "type": "TEXT"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "id": "territory",
+        "name": "territory",
+        "rmType": "CODE_PHRASE",
+        "min": 1,
+        "max": 1,
+        "aqlPath": "/territory",
+        "inContext": true
+      }
+    ]
+  }
+}

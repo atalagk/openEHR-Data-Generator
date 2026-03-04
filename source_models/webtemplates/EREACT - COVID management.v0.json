@@ -1,0 +1,1338 @@
+{
+  "templateId": "EREACT - COVID management.v0",
+  "version": "2.3",
+  "defaultLanguage": "en",
+  "languages": [
+    "en"
+  ],
+  "tree": {
+    "id": "covid_status_monitoring",
+    "name": "COVID status monitoring",
+    "localizedName": "COVID status monitoring",
+    "rmType": "COMPOSITION",
+    "nodeId": "openEHR-EHR-COMPOSITION.report.v1",
+    "min": 1,
+    "max": 1,
+    "localizedNames": {
+      "en": "COVID status monitoring"
+    },
+    "localizedDescriptions": {
+      "en": "Document to communicate information to others, commonly in response to a request from another party."
+    },
+    "children": [
+      {
+        "id": "category",
+        "name": "category",
+        "localizedName": "category",
+        "rmType": "DV_CODED_TEXT",
+        "min": 1,
+        "max": 1,
+        "aqlPath": "/category",
+        "inputs": [
+          {
+            "suffix": "code",
+            "type": "CODED_TEXT",
+            "list": [
+              {
+                "value": "433",
+                "label": "event",
+                "localizedLabels": {
+                  "en": "event"
+                }
+              }
+            ],
+            "terminology": "openehr"
+          }
+        ],
+        "inContext": true
+      },
+      {
+        "id": "context",
+        "name": "context",
+        "localizedName": "context",
+        "rmType": "EVENT_CONTEXT",
+        "min": 1,
+        "max": 1,
+        "aqlPath": "/context",
+        "children": [
+          {
+            "id": "report_id",
+            "name": "Report ID",
+            "localizedName": "Report ID",
+            "rmType": "DV_TEXT",
+            "nodeId": "at0002",
+            "min": 0,
+            "max": 1,
+            "localizedNames": {
+              "en": "Report ID"
+            },
+            "localizedDescriptions": {
+              "en": "Identification information about the report."
+            },
+            "aqlPath": "/context/other_context[at0001]/items[at0002]/value",
+            "inputs": [
+              {
+                "type": "TEXT"
+              }
+            ]
+          },
+          {
+            "id": "status",
+            "name": "Status",
+            "localizedName": "Status",
+            "rmType": "DV_TEXT",
+            "nodeId": "at0005",
+            "min": 0,
+            "max": 1,
+            "localizedNames": {
+              "en": "Status"
+            },
+            "localizedDescriptions": {
+              "en": "The status of the entire report. Note: This is not the status of any of the report components."
+            },
+            "aqlPath": "/context/other_context[at0001]/items[at0005]/value",
+            "inputs": [
+              {
+                "type": "TEXT"
+              }
+            ]
+          },
+          {
+            "id": "start_time",
+            "name": "start_time",
+            "rmType": "DV_DATE_TIME",
+            "min": 1,
+            "max": 1,
+            "aqlPath": "/context/start_time",
+            "inputs": [
+              {
+                "type": "DATETIME"
+              }
+            ],
+            "inContext": true
+          },
+          {
+            "id": "setting",
+            "name": "setting",
+            "rmType": "DV_CODED_TEXT",
+            "min": 1,
+            "max": 1,
+            "aqlPath": "/context/setting",
+            "inputs": [
+              {
+                "suffix": "code",
+                "type": "TEXT"
+              },
+              {
+                "suffix": "value",
+                "type": "TEXT"
+              }
+            ],
+            "inContext": true
+          }
+        ]
+      },
+      {
+        "id": "suspected_covid",
+        "name": "Suspected Covid",
+        "localizedName": "Suspected Covid",
+        "rmType": "EVALUATION",
+        "nodeId": "openEHR-EHR-EVALUATION.health_risk.v1",
+        "min": 0,
+        "max": 1,
+        "localizedNames": {
+          "en": "Suspected Covid"
+        },
+        "localizedDescriptions": {
+          "en": "Assessment of the potential and likelihood of future adverse health effects as determined by identified risk factors."
+        },
+        "aqlPath": "/content[openEHR-EHR-EVALUATION.health_risk.v1 and name/value='Suspected Covid']",
+        "children": [
+          {
+            "id": "health_risk",
+            "name": "Health risk",
+            "localizedName": "Health risk",
+            "rmType": "DV_CODED_TEXT",
+            "nodeId": "at0002",
+            "min": 1,
+            "max": 1,
+            "localizedNames": {
+              "en": "Health risk"
+            },
+            "localizedDescriptions": {
+              "en": "Identification of the potential future disease, condition or health issue for which the risk is being assessed, by name."
+            },
+            "aqlPath": "/content[openEHR-EHR-EVALUATION.health_risk.v1 and name/value='Suspected Covid']/data[at0001]/items[at0002]/value",
+            "inputs": [
+              {
+                "suffix": "code",
+                "type": "CODED_TEXT",
+                "list": [
+                  {
+                    "value": "1240761000000102",
+                    "label": "Suspected Covid-19",
+                    "localizedLabels": {
+                      "en": "Suspected Covid-19"
+                    },
+                    "localizedDescriptions": {
+                      "en": ""
+                    }
+                  }
+                ],
+                "terminology": "SNOMED-CT"
+              }
+            ],
+            "annotations": {
+              "comment": "Coding of 'Health risk' with a terminology is preferred, where possible. Free text should be used only if there is no appropriate terminology available. For example: risk of cardiovascular disease, with risk factors of hypertension and hypercholesterolaemia."
+            }
+          },
+          {
+            "id": "covid_status",
+            "name": "Covid status",
+            "localizedName": "Covid status",
+            "rmType": "DV_TEXT",
+            "nodeId": "at0003",
+            "min": 0,
+            "max": 1,
+            "localizedNames": {
+              "en": "Covid status"
+            },
+            "localizedDescriptions": {
+              "en": "Evaluation of the health risk."
+            },
+            "aqlPath": "/content[openEHR-EHR-EVALUATION.health_risk.v1 and name/value='Suspected Covid']/data[at0001]/items[at0003 and name/value='Covid status']/value",
+            "inputs": [
+              {
+                "type": "TEXT",
+                "list": [
+                  {
+                    "value": "Suspected Symptoms (Assessed but no test)",
+                    "label": "Suspected Symptoms (Assessed but no test)"
+                  },
+                  {
+                    "value": "Exposure to COVID (Assessed but no test)",
+                    "label": "Exposure to COVID (Assessed but no test)"
+                  },
+                  {
+                    "value": "Positive (Tested Positive)",
+                    "label": "Positive (Tested Positive)"
+                  },
+                  {
+                    "value": "Negative (Tested Negative)",
+                    "label": "Negative (Tested Negative)"
+                  },
+                  {
+                    "value": "Recovered (Tested Negative following previous positive test)",
+                    "label": "Recovered (Tested Negative following previous positive test)"
+                  }
+                ],
+                "listOpen": false
+              }
+            ],
+            "annotations": {
+              "comment": "There may be multiple variations on the assessment of risk. The Choice data type allows for recording of the assessment as either free text or value sets (such as low, medium or hig). The proportion data type allows recording of a percentage, a ratio or a fraction. The quantity data type allows recording of a decimal number."
+            }
+          },
+          {
+            "id": "subject",
+            "name": "subject",
+            "rmType": "PARTY_PROXY",
+            "min": 1,
+            "max": 1,
+            "aqlPath": "/content[openEHR-EHR-EVALUATION.health_risk.v1 and name/value='Suspected Covid']/subject",
+            "inputs": [
+              {
+                "suffix": "id",
+                "type": "TEXT"
+              },
+              {
+                "suffix": "id_scheme",
+                "type": "TEXT"
+              },
+              {
+                "suffix": "id_namespace",
+                "type": "TEXT"
+              },
+              {
+                "suffix": "name",
+                "type": "TEXT"
+              }
+            ],
+            "inContext": true
+          },
+          {
+            "id": "language",
+            "name": "language",
+            "rmType": "CODE_PHRASE",
+            "min": 1,
+            "max": 1,
+            "aqlPath": "/content[openEHR-EHR-EVALUATION.health_risk.v1 and name/value='Suspected Covid']/language",
+            "inContext": true
+          },
+          {
+            "id": "encoding",
+            "name": "encoding",
+            "rmType": "CODE_PHRASE",
+            "min": 1,
+            "max": 1,
+            "aqlPath": "/content[openEHR-EHR-EVALUATION.health_risk.v1 and name/value='Suspected Covid']/encoding",
+            "inContext": true
+          }
+        ]
+      },
+      {
+        "id": "isolation_request",
+        "name": "Isolation request",
+        "localizedName": "Isolation request",
+        "rmType": "INSTRUCTION",
+        "nodeId": "openEHR-EHR-INSTRUCTION.service_request.v1",
+        "min": 0,
+        "max": 1,
+        "localizedNames": {
+          "en": "Isolation request"
+        },
+        "localizedDescriptions": {
+          "en": "Request for a health-related service or activity to be delivered by a clinician, organisation or agency."
+        },
+        "aqlPath": "/content[openEHR-EHR-INSTRUCTION.service_request.v1 and name/value='Isolation request']",
+        "children": [
+          {
+            "id": "current_activity",
+            "name": "Current Activity",
+            "localizedName": "Current Activity",
+            "rmType": "ACTIVITY",
+            "nodeId": "at0001",
+            "min": 1,
+            "max": 1,
+            "localizedNames": {
+              "en": "Current Activity"
+            },
+            "localizedDescriptions": {
+              "en": "Current Activity."
+            },
+            "aqlPath": "/content[openEHR-EHR-INSTRUCTION.service_request.v1 and name/value='Isolation request']/activities[at0001]",
+            "children": [
+              {
+                "id": "service_name",
+                "name": "Service name",
+                "localizedName": "Service name",
+                "rmType": "DV_CODED_TEXT",
+                "nodeId": "at0121",
+                "min": 1,
+                "max": 1,
+                "localizedNames": {
+                  "en": "Service name"
+                },
+                "localizedDescriptions": {
+                  "en": "The name of the single service or activity requested."
+                },
+                "aqlPath": "/content[openEHR-EHR-INSTRUCTION.service_request.v1 and name/value='Isolation request']/activities[at0001]/description[at0009]/items[at0121]/value",
+                "inputs": [
+                  {
+                    "suffix": "code",
+                    "type": "CODED_TEXT",
+                    "list": [
+                      {
+                        "value": "170499009",
+                        "label": "Isolation of infection contact",
+                        "localizedLabels": {
+                          "en": "Isolation of infection contact"
+                        },
+                        "localizedDescriptions": {
+                          "en": ""
+                        }
+                      }
+                    ],
+                    "terminology": "SNOMED-CT"
+                  }
+                ],
+                "annotations": {
+                  "comment": "Coding of the 'Service name' with a coding system is desirable, if available. For example: 'referral' to an endocrinologist for diabetes management."
+                }
+              },
+              {
+                "id": "reason_for_request",
+                "name": "Reason for request",
+                "localizedName": "Reason for request",
+                "rmType": "DV_CODED_TEXT",
+                "nodeId": "at0062",
+                "min": 0,
+                "max": 1,
+                "localizedNames": {
+                  "en": "Reason for request"
+                },
+                "localizedDescriptions": {
+                  "en": "A short phrase describing the reason for the request."
+                },
+                "aqlPath": "/content[openEHR-EHR-INSTRUCTION.service_request.v1 and name/value='Isolation request']/activities[at0001]/description[at0009]/items[at0062]/value",
+                "inputs": [
+                  {
+                    "suffix": "code",
+                    "type": "CODED_TEXT",
+                    "list": [
+                      {
+                        "value": "840544004",
+                        "label": "Suspected disease caused by 2019 novel coronavirus",
+                        "localizedLabels": {
+                          "en": "Suspected disease caused by 2019 novel coronavirus"
+                        },
+                        "localizedDescriptions": {
+                          "en": ""
+                        }
+                      },
+                      {
+                        "value": "840546002",
+                        "label": "Exposure to 2019 novel coronavirus",
+                        "localizedLabels": {
+                          "en": "Exposure to 2019 novel coronavirus"
+                        },
+                        "localizedDescriptions": {
+                          "en": ""
+                        }
+                      },
+                      {
+                        "value": "840539006",
+                        "label": "Disease caused by 2019-nCoV",
+                        "localizedLabels": {
+                          "en": "Disease caused by 2019-nCoV"
+                        },
+                        "localizedDescriptions": {
+                          "en": ""
+                        }
+                      }
+                    ],
+                    "terminology": "SNOMED-CT"
+                  }
+                ],
+                "annotations": {
+                  "comment": "Coding of the 'Reason for request' with a coding system is desirable, if available. This data element allows multiple occurrences to enable the user to record a multiple responses, if required. For example: 'manage diabetes complications'."
+                }
+              },
+              {
+                "id": "reason_for_isolation",
+                "name": "Reason for isolation",
+                "localizedName": "Reason for isolation",
+                "rmType": "DV_TEXT",
+                "nodeId": "at0064",
+                "min": 0,
+                "max": 1,
+                "localizedNames": {
+                  "en": "Reason for isolation"
+                },
+                "localizedDescriptions": {
+                  "en": "Narrative description about the reason for request."
+                },
+                "aqlPath": "/content[openEHR-EHR-INSTRUCTION.service_request.v1 and name/value='Isolation request']/activities[at0001]/description[at0009]/items[at0064 and name/value='Reason for isolation']/value",
+                "inputs": [
+                  {
+                    "type": "TEXT"
+                  }
+                ],
+                "annotations": {
+                  "comment": "For example: 'The patient's diabetes has recently become more difficult to stabilise and renal function is deteriorating'."
+                }
+              },
+              {
+                "id": "isolation_timing",
+                "name": "Isolation timing",
+                "localizedName": "Isolation timing",
+                "rmType": "CLUSTER",
+                "nodeId": "openEHR-EHR-CLUSTER.service_direction.v1",
+                "min": 0,
+                "max": 1,
+                "localizedNames": {
+                  "en": "Isolation timing"
+                },
+                "localizedDescriptions": {
+                  "en": "Structured details of a complex direction for an ordered or requested service."
+                },
+                "aqlPath": "/content[openEHR-EHR-INSTRUCTION.service_request.v1 and name/value='Isolation request']/activities[at0001]/description[at0009]/items[openEHR-EHR-CLUSTER.service_direction.v1 and name/value='Isolation timing']",
+                "children": [
+                  {
+                    "id": "isolation_duration",
+                    "name": "Isolation duration",
+                    "localizedName": "Isolation duration",
+                    "rmType": "DV_DURATION",
+                    "nodeId": "at0007",
+                    "min": 0,
+                    "max": 1,
+                    "localizedNames": {
+                      "en": "Isolation duration"
+                    },
+                    "localizedDescriptions": {
+                      "en": "The length of time for which this direction should be applied."
+                    },
+                    "aqlPath": "/content[openEHR-EHR-INSTRUCTION.service_request.v1 and name/value='Isolation request']/activities[at0001]/description[at0009]/items[openEHR-EHR-CLUSTER.service_direction.v1 and name/value='Isolation timing']/items[at0007 and name/value='Isolation duration']/value",
+                    "inputs": [
+                      {
+                        "suffix": "day",
+                        "type": "INTEGER",
+                        "validation": {
+                          "range": {
+                            "min": 0,
+                            "minOp": ">=",
+                            "max": 30,
+                            "maxOp": "<="
+                          }
+                        }
+                      }
+                    ],
+                    "annotations": {
+                      "comment": "For example: 'for 7 days','Indefinite'. An example of a set of multiple directions, with varying durations might be '1 time daily for 3 days, 2 times daily for 4 days, then 3 times Indefinite'."
+                    }
+                  }
+                ],
+                "annotations": {
+                  "comment": "For example: a sequence of vital signs obervations over the first 24 hours post-operatively; or a request for home nursing attendance in the morning and evening, gradually reducing over a month."
+                }
+              },
+              {
+                "id": "date_isolation_due_to_start",
+                "name": "Date isolation due to start",
+                "localizedName": "Date isolation due to start",
+                "rmType": "DV_DATE_TIME",
+                "nodeId": "at0145",
+                "min": 0,
+                "max": 1,
+                "localizedNames": {
+                  "en": "Date isolation due to start"
+                },
+                "localizedDescriptions": {
+                  "en": "The date/time that marks the beginning of the valid period of time for delivery of this service."
+                },
+                "aqlPath": "/content[openEHR-EHR-INSTRUCTION.service_request.v1 and name/value='Isolation request']/activities[at0001]/description[at0009]/items[at0145 and name/value='Date isolation due to start']/value",
+                "inputs": [
+                  {
+                    "type": "DATETIME"
+                  }
+                ],
+                "annotations": {
+                  "comment": "This date/time is the equivalent to the earliest possible date for service delivery. For example: sometimes a certain amount of time must pass before a service can be performed, for example some procedures can only be performed once the patient has stopped taking medications for a specific amount of time."
+                }
+              },
+              {
+                "id": "date_isolation_due_to_end",
+                "name": "Date isolation due to end",
+                "localizedName": "Date isolation due to end",
+                "rmType": "DV_DATE_TIME",
+                "nodeId": "at0144",
+                "min": 0,
+                "max": 1,
+                "localizedNames": {
+                  "en": "Date isolation due to end"
+                },
+                "localizedDescriptions": {
+                  "en": "The date/time that marks the conclusion of the clinically valid period of time for delivery of this service."
+                },
+                "aqlPath": "/content[openEHR-EHR-INSTRUCTION.service_request.v1 and name/value='Isolation request']/activities[at0001]/description[at0009]/items[at0144 and name/value='Date isolation due to end']/value",
+                "inputs": [
+                  {
+                    "type": "DATETIME"
+                  }
+                ],
+                "annotations": {
+                  "comment": "This date/time is the equivalent to the latest possible date for service delivery or to the date of expiry for this request. For example: a service may be required to be completed before another event, such as scheduled surgery."
+                }
+              },
+              {
+                "id": "timing",
+                "name": "timing",
+                "rmType": "DV_PARSABLE",
+                "min": 0,
+                "max": 1,
+                "aqlPath": "/content[openEHR-EHR-INSTRUCTION.service_request.v1 and name/value='Isolation request']/activities[at0001]/timing",
+                "inputs": [
+                  {
+                    "suffix": "value",
+                    "type": "TEXT"
+                  },
+                  {
+                    "suffix": "formalism",
+                    "type": "TEXT"
+                  }
+                ],
+                "inContext": true
+              },
+              {
+                "id": "action_archetype_id",
+                "name": "action_archetype_id",
+                "rmType": "STRING",
+                "min": 1,
+                "max": 1,
+                "aqlPath": "/content[openEHR-EHR-INSTRUCTION.service_request.v1 and name/value='Isolation request']/activities[at0001]/action_archetype_id",
+                "inputs": [
+                  {
+                    "type": "TEXT"
+                  }
+                ],
+                "inContext": true
+              }
+            ]
+          },
+          {
+            "id": "subject",
+            "name": "subject",
+            "rmType": "PARTY_PROXY",
+            "min": 1,
+            "max": 1,
+            "aqlPath": "/content[openEHR-EHR-INSTRUCTION.service_request.v1 and name/value='Isolation request']/subject",
+            "inputs": [
+              {
+                "suffix": "id",
+                "type": "TEXT"
+              },
+              {
+                "suffix": "id_scheme",
+                "type": "TEXT"
+              },
+              {
+                "suffix": "id_namespace",
+                "type": "TEXT"
+              },
+              {
+                "suffix": "name",
+                "type": "TEXT"
+              }
+            ],
+            "inContext": true
+          },
+          {
+            "id": "narrative",
+            "name": "narrative",
+            "rmType": "DV_TEXT",
+            "min": 1,
+            "max": 1,
+            "aqlPath": "/content[openEHR-EHR-INSTRUCTION.service_request.v1 and name/value='Isolation request']/narrative",
+            "inputs": [
+              {
+                "type": "TEXT"
+              }
+            ],
+            "inContext": true
+          },
+          {
+            "id": "language",
+            "name": "language",
+            "rmType": "CODE_PHRASE",
+            "min": 1,
+            "max": 1,
+            "aqlPath": "/content[openEHR-EHR-INSTRUCTION.service_request.v1 and name/value='Isolation request']/language",
+            "inContext": true
+          },
+          {
+            "id": "encoding",
+            "name": "encoding",
+            "rmType": "CODE_PHRASE",
+            "min": 1,
+            "max": 1,
+            "aqlPath": "/content[openEHR-EHR-INSTRUCTION.service_request.v1 and name/value='Isolation request']/encoding",
+            "inContext": true
+          },
+          {
+            "id": "expiry_time",
+            "name": "expiry_time",
+            "rmType": "DV_DATE_TIME",
+            "min": 0,
+            "max": 1,
+            "aqlPath": "/content[openEHR-EHR-INSTRUCTION.service_request.v1 and name/value='Isolation request']/expiry_time",
+            "inputs": [
+              {
+                "type": "DATETIME"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "id": "lab_testing",
+        "name": "Lab testing",
+        "localizedName": "Lab testing",
+        "rmType": "SECTION",
+        "nodeId": "openEHR-EHR-SECTION.adhoc.v1",
+        "min": 0,
+        "max": 1,
+        "localizedNames": {
+          "en": "Lab testing"
+        },
+        "localizedDescriptions": {
+          "en": "A generic section header which should be renamed in a template to suit a specific clinical context."
+        },
+        "aqlPath": "/content[openEHR-EHR-SECTION.adhoc.v1 and name/value='Lab testing']",
+        "children": [
+          {
+            "id": "covid_test_request",
+            "name": "Covid test request",
+            "localizedName": "Covid test request",
+            "rmType": "INSTRUCTION",
+            "nodeId": "openEHR-EHR-INSTRUCTION.service_request.v1",
+            "min": 0,
+            "max": 1,
+            "localizedNames": {
+              "en": "Covid test request"
+            },
+            "localizedDescriptions": {
+              "en": "Request for a health-related service or activity to be delivered by a clinician, organisation or agency."
+            },
+            "aqlPath": "/content[openEHR-EHR-SECTION.adhoc.v1 and name/value='Lab testing']/items[openEHR-EHR-INSTRUCTION.service_request.v1 and name/value='Covid test request']",
+            "children": [
+              {
+                "id": "current_activity",
+                "name": "Current Activity",
+                "localizedName": "Current Activity",
+                "rmType": "ACTIVITY",
+                "nodeId": "at0001",
+                "min": 1,
+                "max": 1,
+                "localizedNames": {
+                  "en": "Current Activity"
+                },
+                "localizedDescriptions": {
+                  "en": "Current Activity."
+                },
+                "aqlPath": "/content[openEHR-EHR-SECTION.adhoc.v1 and name/value='Lab testing']/items[openEHR-EHR-INSTRUCTION.service_request.v1 and name/value='Covid test request']/activities[at0001]",
+                "children": [
+                  {
+                    "id": "service_name",
+                    "name": "Service name",
+                    "localizedName": "Service name",
+                    "rmType": "DV_CODED_TEXT",
+                    "nodeId": "at0121",
+                    "min": 1,
+                    "max": 1,
+                    "localizedNames": {
+                      "en": "Service name"
+                    },
+                    "localizedDescriptions": {
+                      "en": "The name of the single service or activity requested."
+                    },
+                    "aqlPath": "/content[openEHR-EHR-SECTION.adhoc.v1 and name/value='Lab testing']/items[openEHR-EHR-INSTRUCTION.service_request.v1 and name/value='Covid test request']/activities[at0001]/description[at0009]/items[at0121]/value",
+                    "inputs": [
+                      {
+                        "suffix": "code",
+                        "type": "CODED_TEXT",
+                        "list": [
+                          {
+                            "value": "1240471000000102",
+                            "label": "Measurement of severe acute respiratory syndrome coronavirus 2 antigen",
+                            "localizedLabels": {
+                              "en": "Measurement of severe acute respiratory syndrome coronavirus 2 antigen"
+                            },
+                            "localizedDescriptions": {
+                              "en": ""
+                            }
+                          }
+                        ],
+                        "terminology": "SNOMED-CT"
+                      }
+                    ],
+                    "annotations": {
+                      "comment": "Coding of the 'Service name' with a coding system is desirable, if available. For example: 'referral' to an endocrinologist for diabetes management."
+                    }
+                  },
+                  {
+                    "id": "reason_for_request",
+                    "name": "Reason for request",
+                    "localizedName": "Reason for request",
+                    "rmType": "DV_TEXT",
+                    "nodeId": "at0062",
+                    "min": 0,
+                    "max": -1,
+                    "localizedNames": {
+                      "en": "Reason for request"
+                    },
+                    "localizedDescriptions": {
+                      "en": "A short phrase describing the reason for the request."
+                    },
+                    "aqlPath": "/content[openEHR-EHR-SECTION.adhoc.v1 and name/value='Lab testing']/items[openEHR-EHR-INSTRUCTION.service_request.v1 and name/value='Covid test request']/activities[at0001]/description[at0009]/items[at0062]/value",
+                    "inputs": [
+                      {
+                        "type": "TEXT",
+                        "list": [
+                          {
+                            "value": "Symptoms",
+                            "label": "Symptoms"
+                          },
+                          {
+                            "value": "Recovery Check",
+                            "label": "Recovery Check"
+                          },
+                          {
+                            "value": "Contact with symptoms",
+                            "label": "Contact with symptoms"
+                          },
+                          {
+                            "value": "Routine Test",
+                            "label": "Routine Test"
+                          }
+                        ],
+                        "listOpen": false
+                      }
+                    ],
+                    "annotations": {
+                      "comment": "Coding of the 'Reason for request' with a coding system is desirable, if available. This data element allows multiple occurrences to enable the user to record a multiple responses, if required. For example: 'manage diabetes complications'."
+                    }
+                  },
+                  {
+                    "id": "timing",
+                    "name": "timing",
+                    "rmType": "DV_PARSABLE",
+                    "min": 0,
+                    "max": 1,
+                    "aqlPath": "/content[openEHR-EHR-SECTION.adhoc.v1 and name/value='Lab testing']/items[openEHR-EHR-INSTRUCTION.service_request.v1 and name/value='Covid test request']/activities[at0001]/timing",
+                    "inputs": [
+                      {
+                        "suffix": "value",
+                        "type": "TEXT"
+                      },
+                      {
+                        "suffix": "formalism",
+                        "type": "TEXT"
+                      }
+                    ],
+                    "inContext": true
+                  },
+                  {
+                    "id": "action_archetype_id",
+                    "name": "action_archetype_id",
+                    "rmType": "STRING",
+                    "min": 1,
+                    "max": 1,
+                    "aqlPath": "/content[openEHR-EHR-SECTION.adhoc.v1 and name/value='Lab testing']/items[openEHR-EHR-INSTRUCTION.service_request.v1 and name/value='Covid test request']/activities[at0001]/action_archetype_id",
+                    "inputs": [
+                      {
+                        "type": "TEXT"
+                      }
+                    ],
+                    "inContext": true
+                  }
+                ]
+              },
+              {
+                "id": "subject",
+                "name": "subject",
+                "rmType": "PARTY_PROXY",
+                "min": 1,
+                "max": 1,
+                "aqlPath": "/content[openEHR-EHR-SECTION.adhoc.v1 and name/value='Lab testing']/items[openEHR-EHR-INSTRUCTION.service_request.v1 and name/value='Covid test request']/subject",
+                "inputs": [
+                  {
+                    "suffix": "id",
+                    "type": "TEXT"
+                  },
+                  {
+                    "suffix": "id_scheme",
+                    "type": "TEXT"
+                  },
+                  {
+                    "suffix": "id_namespace",
+                    "type": "TEXT"
+                  },
+                  {
+                    "suffix": "name",
+                    "type": "TEXT"
+                  }
+                ],
+                "inContext": true
+              },
+              {
+                "id": "narrative",
+                "name": "narrative",
+                "rmType": "DV_TEXT",
+                "min": 1,
+                "max": 1,
+                "aqlPath": "/content[openEHR-EHR-SECTION.adhoc.v1 and name/value='Lab testing']/items[openEHR-EHR-INSTRUCTION.service_request.v1 and name/value='Covid test request']/narrative",
+                "inputs": [
+                  {
+                    "type": "TEXT"
+                  }
+                ],
+                "inContext": true
+              },
+              {
+                "id": "language",
+                "name": "language",
+                "rmType": "CODE_PHRASE",
+                "min": 1,
+                "max": 1,
+                "aqlPath": "/content[openEHR-EHR-SECTION.adhoc.v1 and name/value='Lab testing']/items[openEHR-EHR-INSTRUCTION.service_request.v1 and name/value='Covid test request']/language",
+                "inContext": true
+              },
+              {
+                "id": "encoding",
+                "name": "encoding",
+                "rmType": "CODE_PHRASE",
+                "min": 1,
+                "max": 1,
+                "aqlPath": "/content[openEHR-EHR-SECTION.adhoc.v1 and name/value='Lab testing']/items[openEHR-EHR-INSTRUCTION.service_request.v1 and name/value='Covid test request']/encoding",
+                "inContext": true
+              },
+              {
+                "id": "expiry_time",
+                "name": "expiry_time",
+                "rmType": "DV_DATE_TIME",
+                "min": 0,
+                "max": 1,
+                "aqlPath": "/content[openEHR-EHR-SECTION.adhoc.v1 and name/value='Lab testing']/items[openEHR-EHR-INSTRUCTION.service_request.v1 and name/value='Covid test request']/expiry_time",
+                "inputs": [
+                  {
+                    "type": "DATETIME"
+                  }
+                ]
+              }
+            ]
+          },
+          {
+            "id": "covid_test_tracking",
+            "name": "Covid test tracking",
+            "localizedName": "Covid test tracking",
+            "rmType": "ACTION",
+            "nodeId": "openEHR-EHR-ACTION.service.v0",
+            "min": 0,
+            "max": 1,
+            "localizedNames": {
+              "en": "Covid test tracking"
+            },
+            "localizedDescriptions": {
+              "en": "A general clinical activity carried out for the patient to receive a specified service, advice or care from an expert healthcare provider."
+            },
+            "aqlPath": "/content[openEHR-EHR-SECTION.adhoc.v1 and name/value='Lab testing']/items[openEHR-EHR-ACTION.service.v0 and name/value='Covid test tracking']",
+            "children": [
+              {
+                "id": "service_name",
+                "name": "Service name",
+                "localizedName": "Service name",
+                "rmType": "DV_CODED_TEXT",
+                "nodeId": "at0011",
+                "min": 0,
+                "max": 1,
+                "localizedNames": {
+                  "en": "Service name"
+                },
+                "localizedDescriptions": {
+                  "en": "Identification of the clinical service to be/being carried out."
+                },
+                "aqlPath": "/content[openEHR-EHR-SECTION.adhoc.v1 and name/value='Lab testing']/items[openEHR-EHR-ACTION.service.v0 and name/value='Covid test tracking']/description[at0001]/items[at0011]/value",
+                "inputs": [
+                  {
+                    "suffix": "code",
+                    "type": "CODED_TEXT",
+                    "list": [
+                      {
+                        "value": "1240471000000102",
+                        "label": "Measurement of severe acute respiratory syndrome coronavirus 2 antigen",
+                        "localizedLabels": {
+                          "en": "Measurement of severe acute respiratory syndrome coronavirus 2 antigen"
+                        },
+                        "localizedDescriptions": {
+                          "en": ""
+                        }
+                      }
+                    ],
+                    "terminology": "SNOMED-CT"
+                  }
+                ],
+                "annotations": {
+                  "comment": "Coding of the specific service name with a terminology is preferred, where possible."
+                }
+              },
+              {
+                "id": "subject",
+                "name": "subject",
+                "rmType": "PARTY_PROXY",
+                "min": 1,
+                "max": 1,
+                "aqlPath": "/content[openEHR-EHR-SECTION.adhoc.v1 and name/value='Lab testing']/items[openEHR-EHR-ACTION.service.v0 and name/value='Covid test tracking']/subject",
+                "inputs": [
+                  {
+                    "suffix": "id",
+                    "type": "TEXT"
+                  },
+                  {
+                    "suffix": "id_scheme",
+                    "type": "TEXT"
+                  },
+                  {
+                    "suffix": "id_namespace",
+                    "type": "TEXT"
+                  },
+                  {
+                    "suffix": "name",
+                    "type": "TEXT"
+                  }
+                ],
+                "inContext": true
+              },
+              {
+                "id": "language",
+                "name": "language",
+                "rmType": "CODE_PHRASE",
+                "min": 1,
+                "max": 1,
+                "aqlPath": "/content[openEHR-EHR-SECTION.adhoc.v1 and name/value='Lab testing']/items[openEHR-EHR-ACTION.service.v0 and name/value='Covid test tracking']/language",
+                "inContext": true
+              },
+              {
+                "id": "encoding",
+                "name": "encoding",
+                "rmType": "CODE_PHRASE",
+                "min": 1,
+                "max": 1,
+                "aqlPath": "/content[openEHR-EHR-SECTION.adhoc.v1 and name/value='Lab testing']/items[openEHR-EHR-ACTION.service.v0 and name/value='Covid test tracking']/encoding",
+                "inContext": true
+              },
+              {
+                "id": "activity_id",
+                "name": "activity_id",
+                "rmType": "STRING",
+                "min": 1,
+                "max": 1,
+                "aqlPath": "/content[openEHR-EHR-SECTION.adhoc.v1 and name/value='Lab testing']/items[openEHR-EHR-ACTION.service.v0 and name/value='Covid test tracking']/instruction_details/activity_id",
+                "inputs": [
+                  {
+                    "type": "TEXT"
+                  }
+                ]
+              },
+              {
+                "id": "instruction_id",
+                "name": "instruction_id",
+                "rmType": "LOCATABLE_REF",
+                "min": 1,
+                "max": 1,
+                "aqlPath": "/content[openEHR-EHR-SECTION.adhoc.v1 and name/value='Lab testing']/items[openEHR-EHR-ACTION.service.v0 and name/value='Covid test tracking']/instruction_details/instruction_id"
+              },
+              {
+                "id": "time",
+                "name": "time",
+                "rmType": "DV_DATE_TIME",
+                "min": 1,
+                "max": 1,
+                "aqlPath": "/content[openEHR-EHR-SECTION.adhoc.v1 and name/value='Lab testing']/items[openEHR-EHR-ACTION.service.v0 and name/value='Covid test tracking']/time",
+                "inputs": [
+                  {
+                    "type": "DATETIME"
+                  }
+                ],
+                "inContext": true
+              },
+              {
+                "id": "ism_transition",
+                "name": "ism_transition",
+                "rmType": "ISM_TRANSITION",
+                "min": 1,
+                "max": 1,
+                "aqlPath": "/content[openEHR-EHR-SECTION.adhoc.v1 and name/value='Lab testing']/items[openEHR-EHR-ACTION.service.v0 and name/value='Covid test tracking']/ism_transition",
+                "children": [
+                  {
+                    "id": "careflow_step",
+                    "name": "Careflow_step",
+                    "rmType": "DV_CODED_TEXT",
+                    "min": 1,
+                    "max": 1,
+                    "aqlPath": "/content[openEHR-EHR-SECTION.adhoc.v1 and name/value='Lab testing']/items[openEHR-EHR-ACTION.service.v0 and name/value='Covid test tracking']/ism_transition/careflow_step",
+                    "inputs": [
+                      {
+                        "suffix": "code",
+                        "type": "CODED_TEXT",
+                        "list": [
+                          {
+                            "value": "at0026",
+                            "label": "Service request sent",
+                            "localizedLabels": {
+                              "en": "Service request sent"
+                            },
+                            "localizedDescriptions": {
+                              "en": "Request for service sent."
+                            },
+                            "currentStates": [
+                              "526"
+                            ]
+                          },
+                          {
+                            "value": "at0005",
+                            "label": "Service activity complete",
+                            "localizedLabels": {
+                              "en": "Service activity complete"
+                            },
+                            "localizedDescriptions": {
+                              "en": "All service activities have been completed."
+                            },
+                            "currentStates": [
+                              "532"
+                            ]
+                          }
+                        ],
+                        "terminology": "local"
+                      }
+                    ],
+                    "inContext": true
+                  },
+                  {
+                    "id": "current_state",
+                    "name": "Current_state",
+                    "rmType": "DV_CODED_TEXT",
+                    "min": 1,
+                    "max": 1,
+                    "aqlPath": "/content[openEHR-EHR-SECTION.adhoc.v1 and name/value='Lab testing']/items[openEHR-EHR-ACTION.service.v0 and name/value='Covid test tracking']/ism_transition/current_state",
+                    "inputs": [
+                      {
+                        "suffix": "code",
+                        "type": "CODED_TEXT",
+                        "list": [
+                          {
+                            "value": "526",
+                            "label": "planned",
+                            "localizedLabels": {
+                              "en": "planned"
+                            }
+                          },
+                          {
+                            "value": "532",
+                            "label": "completed",
+                            "localizedLabels": {
+                              "en": "completed"
+                            }
+                          }
+                        ],
+                        "terminology": "openehr"
+                      }
+                    ],
+                    "inContext": true
+                  },
+                  {
+                    "id": "transition",
+                    "name": "transition",
+                    "rmType": "DV_CODED_TEXT",
+                    "min": 0,
+                    "max": 1,
+                    "aqlPath": "/content[openEHR-EHR-SECTION.adhoc.v1 and name/value='Lab testing']/items[openEHR-EHR-ACTION.service.v0 and name/value='Covid test tracking']/ism_transition/transition",
+                    "inputs": [
+                      {
+                        "suffix": "code",
+                        "type": "TEXT"
+                      },
+                      {
+                        "suffix": "value",
+                        "type": "TEXT"
+                      }
+                    ],
+                    "inContext": true
+                  }
+                ],
+                "inContext": true
+              }
+            ]
+          },
+          {
+            "id": "covid_test_result",
+            "name": "Covid test result",
+            "localizedName": "Covid test result",
+            "rmType": "OBSERVATION",
+            "nodeId": "openEHR-EHR-OBSERVATION.laboratory_test_result.v1",
+            "min": 0,
+            "max": 1,
+            "localizedNames": {
+              "en": "Covid test result"
+            },
+            "localizedDescriptions": {
+              "en": "The result, including findings and the laboratory's interpretation, of an investigation performed on specimens collected from an individual or related to that individual."
+            },
+            "aqlPath": "/content[openEHR-EHR-SECTION.adhoc.v1 and name/value='Lab testing']/items[openEHR-EHR-OBSERVATION.laboratory_test_result.v1 and name/value='Covid test result']",
+            "children": [
+              {
+                "id": "test_name",
+                "name": "Test name",
+                "localizedName": "Test name",
+                "rmType": "DV_CODED_TEXT",
+                "nodeId": "at0005",
+                "min": 1,
+                "max": 1,
+                "localizedNames": {
+                  "en": "Test name"
+                },
+                "localizedDescriptions": {
+                  "en": "Name of the laboratory investigation performed on the specimen(s)."
+                },
+                "aqlPath": "/content[openEHR-EHR-SECTION.adhoc.v1 and name/value='Lab testing']/items[openEHR-EHR-OBSERVATION.laboratory_test_result.v1 and name/value='Covid test result']/data[at0001]/events[at0002]/data[at0003]/items[at0005]/value",
+                "inputs": [
+                  {
+                    "suffix": "code",
+                    "type": "CODED_TEXT",
+                    "list": [
+                      {
+                        "value": "1240471000000102",
+                        "label": "Measurement of severe acute respiratory syndrome coronavirus 2 antigen",
+                        "localizedLabels": {
+                          "en": "Measurement of severe acute respiratory syndrome coronavirus 2 antigen"
+                        },
+                        "localizedDescriptions": {
+                          "en": ""
+                        }
+                      }
+                    ],
+                    "terminology": "SNOMED-CT"
+                  }
+                ],
+                "annotations": {
+                  "comment": "A test result may be for a single analyte, or a group of items, including panel tests. It is strongly recommended that 'Test name' be coded with a terminology, for example LOINC or SNOMED CT. For example: 'Glucose', 'Urea and Electrolytes', 'Swab', 'Cortisol (am)', 'Potassium in perspiration' or 'Melanoma histopathology'. The name may sometimes include specimen type and patient state, for example 'Fasting blood glucose' or include other information, as 'Potassium (PNA blood gas)'."
+                }
+              },
+              {
+                "id": "test_result2",
+                "name": "Test result",
+                "localizedName": "Test result",
+                "rmType": "DV_CODED_TEXT",
+                "nodeId": "at0098",
+                "min": 0,
+                "max": 1,
+                "localizedNames": {
+                  "en": "Test result"
+                },
+                "localizedDescriptions": {
+                  "en": "Single word, phrase or brief description that represents the clinical meaning and significance of the laboratory test result."
+                },
+                "aqlPath": "/content[openEHR-EHR-SECTION.adhoc.v1 and name/value='Lab testing']/items[openEHR-EHR-OBSERVATION.laboratory_test_result.v1 and name/value='Covid test result']/data[at0001]/events[at0002]/data[at0003]/items[at0098 and name/value='Test result']/value",
+                "inputs": [
+                  {
+                    "suffix": "code",
+                    "type": "CODED_TEXT",
+                    "list": [
+                      {
+                        "value": "1300721000000109",
+                        "label": "COVID-19 confirmed by laboratory test",
+                        "localizedLabels": {
+                          "en": "COVID-19 confirmed by laboratory test"
+                        },
+                        "localizedDescriptions": {
+                          "en": ""
+                        }
+                      },
+                      {
+                        "value": "1321111000000101",
+                        "label": "COVID-19 excluded by laboratory test",
+                        "localizedLabels": {
+                          "en": "COVID-19 excluded by laboratory test"
+                        },
+                        "localizedDescriptions": {
+                          "en": ""
+                        }
+                      }
+                    ],
+                    "terminology": "SNOMED-CT"
+                  }
+                ],
+                "annotations": {
+                  "comment": "For example: 'Severe hepatic impairment', 'Salmonella contamination'. Coding of the diagnosis with a terminology is strongly recommended, where possible. This diagnosis should be aligned with the narrative in the 'Conclusion'."
+                }
+              },
+              {
+                "id": "time",
+                "name": "time",
+                "rmType": "DV_DATE_TIME",
+                "min": 1,
+                "max": 1,
+                "aqlPath": "/content[openEHR-EHR-SECTION.adhoc.v1 and name/value='Lab testing']/items[openEHR-EHR-OBSERVATION.laboratory_test_result.v1 and name/value='Covid test result']/data[at0001]/events[at0002]/time",
+                "inputs": [
+                  {
+                    "type": "DATETIME"
+                  }
+                ],
+                "inContext": true
+              },
+              {
+                "id": "subject",
+                "name": "subject",
+                "rmType": "PARTY_PROXY",
+                "min": 1,
+                "max": 1,
+                "aqlPath": "/content[openEHR-EHR-SECTION.adhoc.v1 and name/value='Lab testing']/items[openEHR-EHR-OBSERVATION.laboratory_test_result.v1 and name/value='Covid test result']/subject",
+                "inputs": [
+                  {
+                    "suffix": "id",
+                    "type": "TEXT"
+                  },
+                  {
+                    "suffix": "id_scheme",
+                    "type": "TEXT"
+                  },
+                  {
+                    "suffix": "id_namespace",
+                    "type": "TEXT"
+                  },
+                  {
+                    "suffix": "name",
+                    "type": "TEXT"
+                  }
+                ],
+                "inContext": true
+              },
+              {
+                "id": "language",
+                "name": "language",
+                "rmType": "CODE_PHRASE",
+                "min": 1,
+                "max": 1,
+                "aqlPath": "/content[openEHR-EHR-SECTION.adhoc.v1 and name/value='Lab testing']/items[openEHR-EHR-OBSERVATION.laboratory_test_result.v1 and name/value='Covid test result']/language",
+                "inContext": true
+              },
+              {
+                "id": "encoding",
+                "name": "encoding",
+                "rmType": "CODE_PHRASE",
+                "min": 1,
+                "max": 1,
+                "aqlPath": "/content[openEHR-EHR-SECTION.adhoc.v1 and name/value='Lab testing']/items[openEHR-EHR-OBSERVATION.laboratory_test_result.v1 and name/value='Covid test result']/encoding",
+                "inContext": true
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "id": "composer",
+        "name": "composer",
+        "rmType": "PARTY_PROXY",
+        "min": 1,
+        "max": 1,
+        "aqlPath": "/composer",
+        "inputs": [
+          {
+            "suffix": "id",
+            "type": "TEXT"
+          },
+          {
+            "suffix": "id_scheme",
+            "type": "TEXT"
+          },
+          {
+            "suffix": "id_namespace",
+            "type": "TEXT"
+          },
+          {
+            "suffix": "name",
+            "type": "TEXT"
+          }
+        ],
+        "inContext": true
+      },
+      {
+        "id": "language",
+        "name": "language",
+        "rmType": "CODE_PHRASE",
+        "min": 1,
+        "max": 1,
+        "aqlPath": "/language",
+        "inContext": true
+      },
+      {
+        "id": "territory",
+        "name": "territory",
+        "rmType": "CODE_PHRASE",
+        "min": 1,
+        "max": 1,
+        "aqlPath": "/territory",
+        "inContext": true
+      }
+    ]
+  }
+}

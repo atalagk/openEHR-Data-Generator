@@ -17,7 +17,7 @@
       "de": "skipped_invalid_node_ids"
     },
     "localizedDescriptions": {
-      "de": "Generische Zusammenstellung zur Darstellung eines Datensatzes für Forschungszwecke."
+      "de": "Generische Zusammenstellung zur Darstellung eines Datensatzes f\u00fcr Forschungszwecke."
     },
     "children": [
       {
@@ -67,7 +67,7 @@
               "de": "Status"
             },
             "localizedDescriptions": {
-              "de": "Status der gelieferten Daten für den Registereintrag. Hinweis: Dies ist nicht der Status einzelner Komponenten."
+              "de": "Status der gelieferten Daten f\u00fcr den Registereintrag. Hinweis: Dies ist nicht der Status einzelner Komponenten."
             },
             "aqlPath": "/context/other_context[at0001]/items[at0004]/value",
             "inputs": [
@@ -87,9 +87,9 @@
                   },
                   {
                     "value": "at0011",
-                    "label": "vorläufig",
+                    "label": "vorl\u00e4ufig",
                     "localizedLabels": {
-                      "de": "vorläufig"
+                      "de": "vorl\u00e4ufig"
                     },
                     "localizedDescriptions": {
                       "de": "*"
@@ -107,9 +107,9 @@
                   },
                   {
                     "value": "at0013",
-                    "label": "geändert",
+                    "label": "ge\u00e4ndert",
                     "localizedLabels": {
-                      "de": "geändert"
+                      "de": "ge\u00e4ndert"
                     },
                     "localizedDescriptions": {
                       "de": "*"
@@ -188,7 +188,7 @@
           "de": "skipped_invalid_node_ids"
         },
         "localizedDescriptions": {
-          "de": "Angabe darüber, ob die Person schwanger ist oder schwanger sein könnte oder nicht."
+          "de": "Angabe dar\u00fcber, ob die Person schwanger ist oder schwanger sein k\u00f6nnte oder nicht."
         },
         "aqlPath": "/content[openEHR-EHR-OBSERVATION.pregnancy_status.v0]",
         "children": [

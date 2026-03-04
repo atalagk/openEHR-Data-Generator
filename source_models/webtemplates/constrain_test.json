@@ -19,12 +19,38 @@
     "localizedDescriptions": {
       "en": "Interaction, contact or care event between a subject of care and healthcare provider(s)."
     },
-    "aqlPath": "",
     "children": [
       {
+        "id": "category",
+        "name": "category",
+        "localizedName": "category",
+        "rmType": "DV_CODED_TEXT",
+        "min": 1,
+        "max": 1,
+        "aqlPath": "/category",
+        "inputs": [
+          {
+            "suffix": "code",
+            "type": "CODED_TEXT",
+            "list": [
+              {
+                "value": "433",
+                "label": "event",
+                "localizedLabels": {
+                  "en": "event"
+                }
+              }
+            ],
+            "terminology": "openehr"
+          }
+        ],
+        "inContext": true
+      },
+      {
         "id": "context",
+        "name": "context",
+        "localizedName": "context",
         "rmType": "EVENT_CONTEXT",
-        "nodeId": "",
         "min": 1,
         "max": 1,
         "aqlPath": "/context",
@@ -121,7 +147,8 @@
                               "en": "Temporary address."
                             }
                           }
-                        ]
+                        ],
+                        "terminology": "local"
                       }
                     ]
                   },
@@ -300,9 +327,9 @@
           },
           {
             "id": "start_time",
-            "name": "Start_time",
+            "name": "start_time",
             "rmType": "DV_DATE_TIME",
-            "min": 0,
+            "min": 1,
             "max": 1,
             "aqlPath": "/context/start_time",
             "inputs": [
@@ -314,9 +341,9 @@
           },
           {
             "id": "setting",
-            "name": "Setting",
+            "name": "setting",
             "rmType": "DV_CODED_TEXT",
-            "min": 0,
+            "min": 1,
             "max": 1,
             "aqlPath": "/context/setting",
             "inputs": [
@@ -379,9 +406,6 @@
                 "localizedDescriptions": {
                   "en": ""
                 },
-                "annotations": {
-                  "comment": "For example: whimpering; groaning; crying."
-                },
                 "aqlPath": "/content[openEHR-EHR-OBSERVATION.abbey_pain_scale.v0]/data[at0001]/events[at0002]/data[at0003]/items[at0004]/value",
                 "inputs": [
                   {
@@ -434,7 +458,10 @@
                     ],
                     "defaultValue": "at0011"
                   }
-                ]
+                ],
+                "annotations": {
+                  "comment": "For example: whimpering; groaning; crying."
+                }
               },
               {
                 "id": "facial_expression",
@@ -449,9 +476,6 @@
                 },
                 "localizedDescriptions": {
                   "en": ""
-                },
-                "annotations": {
-                  "comment": "For example: looking tense; frowning; grimacing; looking frightened."
                 },
                 "aqlPath": "/content[openEHR-EHR-OBSERVATION.abbey_pain_scale.v0]/data[at0001]/events[at0002]/data[at0003]/items[at0005]/value",
                 "inputs": [
@@ -504,7 +528,10 @@
                       }
                     ]
                   }
-                ]
+                ],
+                "annotations": {
+                  "comment": "For example: looking tense; frowning; grimacing; looking frightened."
+                }
               },
               {
                 "id": "change_in_body_language",
@@ -519,9 +546,6 @@
                 },
                 "localizedDescriptions": {
                   "en": ""
-                },
-                "annotations": {
-                  "comment": "For example: fidgeting; rocking; guarding part of body; withdrawn."
                 },
                 "aqlPath": "/content[openEHR-EHR-OBSERVATION.abbey_pain_scale.v0]/data[at0001]/events[at0002]/data[at0003]/items[at0006]/value",
                 "inputs": [
@@ -574,7 +598,10 @@
                       }
                     ]
                   }
-                ]
+                ],
+                "annotations": {
+                  "comment": "For example: fidgeting; rocking; guarding part of body; withdrawn."
+                }
               },
               {
                 "id": "behavioural_change",
@@ -589,9 +616,6 @@
                 },
                 "localizedDescriptions": {
                   "en": ""
-                },
-                "annotations": {
-                  "comment": "For example: increased confusion; refusing to eat,; alteration in usual patterns."
                 },
                 "aqlPath": "/content[openEHR-EHR-OBSERVATION.abbey_pain_scale.v0]/data[at0001]/events[at0002]/data[at0003]/items[at0007]/value",
                 "inputs": [
@@ -644,7 +668,10 @@
                       }
                     ]
                   }
-                ]
+                ],
+                "annotations": {
+                  "comment": "For example: increased confusion; refusing to eat,; alteration in usual patterns."
+                }
               },
               {
                 "id": "physiological_change",
@@ -659,9 +686,6 @@
                 },
                 "localizedDescriptions": {
                   "en": ""
-                },
-                "annotations": {
-                  "comment": "For example: temperature, pulse or blood pressure outside normal limits; perspiring, flushing or pallor."
                 },
                 "aqlPath": "/content[openEHR-EHR-OBSERVATION.abbey_pain_scale.v0]/data[at0001]/events[at0002]/data[at0003]/items[at0008]/value",
                 "inputs": [
@@ -714,7 +738,10 @@
                       }
                     ]
                   }
-                ]
+                ],
+                "annotations": {
+                  "comment": "For example: temperature, pulse or blood pressure outside normal limits; perspiring, flushing or pallor."
+                }
               },
               {
                 "id": "physical_changes",
@@ -729,9 +756,6 @@
                 },
                 "localizedDescriptions": {
                   "en": ""
-                },
-                "annotations": {
-                  "comment": "For example: skin tears; pressure areas; arthritis; contractures; previous injuries."
                 },
                 "aqlPath": "/content[openEHR-EHR-OBSERVATION.abbey_pain_scale.v0]/data[at0001]/events[at0002]/data[at0003]/items[at0009]/value",
                 "inputs": [
@@ -784,7 +808,10 @@
                       }
                     ]
                   }
-                ]
+                ],
+                "annotations": {
+                  "comment": "For example: skin tears; pressure areas; arthritis; contractures; previous injuries."
+                }
               },
               {
                 "id": "total_pain_score",
@@ -806,10 +833,10 @@
                     "type": "INTEGER",
                     "validation": {
                       "range": {
-                        "minOp": ">=",
                         "min": 11,
-                        "maxOp": "<=",
-                        "max": 15
+                        "minOp": ">=",
+                        "max": 15,
+                        "maxOp": "<="
                       }
                     },
                     "defaultValue": 11
@@ -876,7 +903,8 @@
                           "en": "Total pain score 14+."
                         }
                       }
-                    ]
+                    ],
+                    "terminology": "local"
                   }
                 ]
               },
@@ -930,15 +958,16 @@
                           "en": ""
                         }
                       }
-                    ]
+                    ],
+                    "terminology": "local"
                   }
                 ]
               },
               {
                 "id": "time",
-                "name": "Time",
+                "name": "time",
                 "rmType": "DV_DATE_TIME",
-                "min": 0,
+                "min": 1,
                 "max": 1,
                 "aqlPath": "/content[openEHR-EHR-OBSERVATION.abbey_pain_scale.v0]/data[at0001]/events[at0002]/time",
                 "inputs": [
@@ -951,28 +980,10 @@
             ]
           },
           {
-            "id": "language",
-            "name": "Language",
-            "rmType": "CODE_PHRASE",
-            "min": 0,
-            "max": 1,
-            "aqlPath": "/content[openEHR-EHR-OBSERVATION.abbey_pain_scale.v0]/language",
-            "inContext": true
-          },
-          {
-            "id": "encoding",
-            "name": "Encoding",
-            "rmType": "CODE_PHRASE",
-            "min": 0,
-            "max": 1,
-            "aqlPath": "/content[openEHR-EHR-OBSERVATION.abbey_pain_scale.v0]/encoding",
-            "inContext": true
-          },
-          {
             "id": "subject",
-            "name": "Subject",
+            "name": "subject",
             "rmType": "PARTY_PROXY",
-            "min": 0,
+            "min": 1,
             "max": 1,
             "aqlPath": "/content[openEHR-EHR-OBSERVATION.abbey_pain_scale.v0]/subject",
             "inputs": [
@@ -994,6 +1005,24 @@
               }
             ],
             "inContext": true
+          },
+          {
+            "id": "language",
+            "name": "language",
+            "rmType": "CODE_PHRASE",
+            "min": 1,
+            "max": 1,
+            "aqlPath": "/content[openEHR-EHR-OBSERVATION.abbey_pain_scale.v0]/language",
+            "inContext": true
+          },
+          {
+            "id": "encoding",
+            "name": "encoding",
+            "rmType": "CODE_PHRASE",
+            "min": 1,
+            "max": 1,
+            "aqlPath": "/content[openEHR-EHR-OBSERVATION.abbey_pain_scale.v0]/encoding",
+            "inContext": true
           }
         ]
       },
@@ -1010,9 +1039,6 @@
         },
         "localizedDescriptions": {
           "en": "The local measurement of arterial blood pressure which is a surrogate for arterial pressure in the systemic circulation."
-        },
-        "annotations": {
-          "comment": "Most commonly, use of the term 'blood pressure' refers to measurement of brachial artery pressure in the upper arm."
         },
         "aqlPath": "/content[openEHR-EHR-OBSERVATION.blood_pressure.v2]",
         "children": [
@@ -1052,17 +1078,17 @@
                     "suffix": "magnitude",
                     "type": "DECIMAL",
                     "validation": {
-                      "range": {
-                        "minOp": ">=",
-                        "min": 0.0,
-                        "maxOp": "<",
-                        "max": 1000.0
-                      },
                       "precision": {
-                        "minOp": ">=",
                         "min": 0,
-                        "maxOp": "<=",
-                        "max": 0
+                        "minOp": ">=",
+                        "max": 0,
+                        "maxOp": "<="
+                      },
+                      "range": {
+                        "min": 0.0,
+                        "minOp": ">=",
+                        "max": 1000.0,
+                        "maxOp": "<"
                       }
                     }
                   },
@@ -1077,29 +1103,23 @@
                           "en": "mmHg"
                         },
                         "validation": {
-                          "range": {
-                            "minOp": ">=",
-                            "min": 0.0,
-                            "maxOp": "<",
-                            "max": 1000.0
-                          },
                           "precision": {
-                            "minOp": ">=",
                             "min": 0,
-                            "maxOp": "<=",
-                            "max": 0
+                            "minOp": ">=",
+                            "max": 0,
+                            "maxOp": "<="
+                          },
+                          "range": {
+                            "min": 0.0,
+                            "minOp": ">=",
+                            "max": 1000.0,
+                            "maxOp": "<"
                           }
                         }
                       }
                     ]
                   }
-                ],
-                "termBindings": {
-                  "SNOMED-CT": {
-                    "value": "[SNOMED-CT(2003)::271649006]",
-                    "terminologyId": "SNOMED-CT"
-                  }
-                }
+                ]
               },
               {
                 "id": "diastolic",
@@ -1121,17 +1141,17 @@
                     "suffix": "magnitude",
                     "type": "DECIMAL",
                     "validation": {
-                      "range": {
-                        "minOp": ">=",
-                        "min": 0.0,
-                        "maxOp": "<",
-                        "max": 1000.0
-                      },
                       "precision": {
-                        "minOp": ">=",
                         "min": 0,
-                        "maxOp": "<=",
-                        "max": 0
+                        "minOp": ">=",
+                        "max": 0,
+                        "maxOp": "<="
+                      },
+                      "range": {
+                        "min": 0.0,
+                        "minOp": ">=",
+                        "max": 1000.0,
+                        "maxOp": "<"
                       }
                     }
                   },
@@ -1146,29 +1166,23 @@
                           "en": "mmHg"
                         },
                         "validation": {
-                          "range": {
-                            "minOp": ">=",
-                            "min": 0.0,
-                            "maxOp": "<",
-                            "max": 1000.0
-                          },
                           "precision": {
-                            "minOp": ">=",
                             "min": 0,
-                            "maxOp": "<=",
-                            "max": 0
+                            "minOp": ">=",
+                            "max": 0,
+                            "maxOp": "<="
+                          },
+                          "range": {
+                            "min": 0.0,
+                            "minOp": ">=",
+                            "max": 1000.0,
+                            "maxOp": "<"
                           }
                         }
                       }
                     ]
                   }
-                ],
-                "termBindings": {
-                  "SNOMED-CT": {
-                    "value": "[SNOMED-CT(2003)::271650006]",
-                    "terminologyId": "SNOMED-CT"
-                  }
-                }
+                ]
               },
               {
                 "id": "mean_arterial_pressure",
@@ -1190,17 +1204,17 @@
                     "suffix": "magnitude",
                     "type": "DECIMAL",
                     "validation": {
-                      "range": {
-                        "minOp": ">=",
-                        "min": 0.0,
-                        "maxOp": "<",
-                        "max": 1000.0
-                      },
                       "precision": {
-                        "minOp": ">=",
                         "min": 0,
-                        "maxOp": "<=",
-                        "max": 0
+                        "minOp": ">=",
+                        "max": 0,
+                        "maxOp": "<="
+                      },
+                      "range": {
+                        "min": 0.0,
+                        "minOp": ">=",
+                        "max": 1000.0,
+                        "maxOp": "<"
                       }
                     }
                   },
@@ -1215,17 +1229,17 @@
                           "en": "mmHg"
                         },
                         "validation": {
-                          "range": {
-                            "minOp": ">=",
-                            "min": 0.0,
-                            "maxOp": "<",
-                            "max": 1000.0
-                          },
                           "precision": {
-                            "minOp": ">=",
                             "min": 0,
-                            "maxOp": "<=",
-                            "max": 0
+                            "minOp": ">=",
+                            "max": 0,
+                            "maxOp": "<="
+                          },
+                          "range": {
+                            "min": 0.0,
+                            "minOp": ">=",
+                            "max": 1000.0,
+                            "maxOp": "<"
                           }
                         }
                       }
@@ -1253,17 +1267,17 @@
                     "suffix": "magnitude",
                     "type": "DECIMAL",
                     "validation": {
-                      "range": {
-                        "minOp": ">=",
-                        "min": 0.0,
-                        "maxOp": "<",
-                        "max": 1000.0
-                      },
                       "precision": {
-                        "minOp": ">=",
                         "min": 0,
-                        "maxOp": "<=",
-                        "max": 0
+                        "minOp": ">=",
+                        "max": 0,
+                        "maxOp": "<="
+                      },
+                      "range": {
+                        "min": 0.0,
+                        "minOp": ">=",
+                        "max": 1000.0,
+                        "maxOp": "<"
                       }
                     }
                   },
@@ -1278,17 +1292,17 @@
                           "en": "mmHg"
                         },
                         "validation": {
-                          "range": {
-                            "minOp": ">=",
-                            "min": 0.0,
-                            "maxOp": "<",
-                            "max": 1000.0
-                          },
                           "precision": {
-                            "minOp": ">=",
                             "min": 0,
-                            "maxOp": "<=",
-                            "max": 0
+                            "minOp": ">=",
+                            "max": 0,
+                            "maxOp": "<="
+                          },
+                          "range": {
+                            "min": 0.0,
+                            "minOp": ">=",
+                            "max": 1000.0,
+                            "maxOp": "<"
                           }
                         }
                       }
@@ -1346,14 +1360,6 @@
                 "nodeId": "at0008",
                 "min": 0,
                 "max": 1,
-                "dependsOn": [
-                  "systolic",
-                  "diastolic",
-                  "mean_arterial_pressure",
-                  "clinical_interpretation",
-                  "comment",
-                  "pulse_pressure"
-                ],
                 "localizedNames": {
                   "en": "Position"
                 },
@@ -1416,7 +1422,8 @@
                           "en": "Lying flat with some lateral tilt, usually angled towards the left side.   Commonly required in the last trimester of pregnancy to relieve aortocaval compression."
                         }
                       }
-                    ]
+                    ],
+                    "terminology": "local"
                   }
                 ]
               },
@@ -1428,14 +1435,6 @@
                 "nodeId": "at1052",
                 "min": 0,
                 "max": 1,
-                "dependsOn": [
-                  "systolic",
-                  "diastolic",
-                  "mean_arterial_pressure",
-                  "clinical_interpretation",
-                  "comment",
-                  "pulse_pressure"
-                ],
                 "localizedNames": {
                   "en": "Confounding factors"
                 },
@@ -1457,14 +1456,6 @@
                 "nodeId": "at1043",
                 "min": 0,
                 "max": 1,
-                "dependsOn": [
-                  "systolic",
-                  "diastolic",
-                  "mean_arterial_pressure",
-                  "clinical_interpretation",
-                  "comment",
-                  "pulse_pressure"
-                ],
                 "localizedNames": {
                   "en": "Sleep status"
                 },
@@ -1497,7 +1488,8 @@
                           "en": "The individual is in the natural state of bodily rest."
                         }
                       }
-                    ]
+                    ],
+                    "terminology": "local"
                   }
                 ]
               },
@@ -1509,14 +1501,6 @@
                 "nodeId": "at1005",
                 "min": 0,
                 "max": 1,
-                "dependsOn": [
-                  "systolic",
-                  "diastolic",
-                  "mean_arterial_pressure",
-                  "clinical_interpretation",
-                  "comment",
-                  "pulse_pressure"
-                ],
                 "localizedNames": {
                   "en": "Tilt"
                 },
@@ -1529,17 +1513,17 @@
                     "suffix": "magnitude",
                     "type": "DECIMAL",
                     "validation": {
-                      "range": {
-                        "minOp": ">=",
-                        "min": -90.0,
-                        "maxOp": "<=",
-                        "max": 90.0
-                      },
                       "precision": {
-                        "minOp": ">=",
                         "min": 0,
-                        "maxOp": "<=",
-                        "max": 0
+                        "minOp": ">=",
+                        "max": 0,
+                        "maxOp": "<="
+                      },
+                      "range": {
+                        "min": -90.0,
+                        "minOp": ">=",
+                        "max": 90.0,
+                        "maxOp": "<="
                       }
                     }
                   },
@@ -1551,20 +1535,20 @@
                         "value": "deg",
                         "label": "deg",
                         "localizedLabels": {
-                          "en": "°"
+                          "en": "\u00b0"
                         },
                         "validation": {
-                          "range": {
-                            "minOp": ">=",
-                            "min": -90.0,
-                            "maxOp": "<=",
-                            "max": 90.0
-                          },
                           "precision": {
-                            "minOp": ">=",
                             "min": 0,
-                            "maxOp": "<=",
-                            "max": 0
+                            "minOp": ">=",
+                            "max": 0,
+                            "maxOp": "<="
+                          },
+                          "range": {
+                            "min": -90.0,
+                            "minOp": ">=",
+                            "max": 90.0,
+                            "maxOp": "<="
                           }
                         }
                       }
@@ -1574,9 +1558,9 @@
               },
               {
                 "id": "time",
-                "name": "Time",
+                "name": "time",
                 "rmType": "DV_DATE_TIME",
-                "min": 0,
+                "min": 1,
                 "max": 1,
                 "aqlPath": "/content[openEHR-EHR-OBSERVATION.blood_pressure.v2]/data[at0001]/events[at0006]/time",
                 "inputs": [
@@ -1606,8 +1590,9 @@
             "children": [
               {
                 "id": "math_function",
+                "name": "math_function",
+                "localizedName": "math_function",
                 "rmType": "DV_CODED_TEXT",
-                "nodeId": "",
                 "min": 1,
                 "max": 1,
                 "aqlPath": "/content[openEHR-EHR-OBSERVATION.blood_pressure.v2]/data[at0001]/events[at1042]/math_function",
@@ -1630,8 +1615,9 @@
               },
               {
                 "id": "width",
+                "name": "width",
+                "localizedName": "width",
                 "rmType": "DV_DURATION",
-                "nodeId": "",
                 "min": 1,
                 "max": 1,
                 "aqlPath": "/content[openEHR-EHR-OBSERVATION.blood_pressure.v2]/data[at0001]/events[at1042]/width",
@@ -1641,8 +1627,8 @@
                     "type": "INTEGER",
                     "validation": {
                       "range": {
-                        "minOp": ">=",
-                        "min": 0
+                        "min": 0,
+                        "minOp": ">="
                       }
                     }
                   },
@@ -1651,8 +1637,8 @@
                     "type": "INTEGER",
                     "validation": {
                       "range": {
-                        "minOp": ">=",
-                        "min": 0
+                        "min": 0,
+                        "minOp": ">="
                       }
                     }
                   },
@@ -1661,8 +1647,8 @@
                     "type": "INTEGER",
                     "validation": {
                       "range": {
-                        "minOp": ">=",
-                        "min": 0
+                        "min": 0,
+                        "minOp": ">="
                       }
                     }
                   },
@@ -1671,8 +1657,8 @@
                     "type": "INTEGER",
                     "validation": {
                       "range": {
-                        "minOp": ">=",
-                        "min": 0
+                        "min": 0,
+                        "minOp": ">="
                       }
                     }
                   },
@@ -1681,10 +1667,10 @@
                     "type": "INTEGER",
                     "validation": {
                       "range": {
-                        "minOp": ">=",
                         "min": 24,
-                        "maxOp": "<=",
-                        "max": 24
+                        "minOp": ">=",
+                        "max": 24,
+                        "maxOp": "<="
                       }
                     }
                   },
@@ -1693,8 +1679,8 @@
                     "type": "INTEGER",
                     "validation": {
                       "range": {
-                        "minOp": ">=",
-                        "min": 0
+                        "min": 0,
+                        "minOp": ">="
                       }
                     }
                   },
@@ -1703,8 +1689,8 @@
                     "type": "INTEGER",
                     "validation": {
                       "range": {
-                        "minOp": ">=",
-                        "min": 0
+                        "min": 0,
+                        "minOp": ">="
                       }
                     }
                   }
@@ -1730,17 +1716,17 @@
                     "suffix": "magnitude",
                     "type": "DECIMAL",
                     "validation": {
-                      "range": {
-                        "minOp": ">=",
-                        "min": 16.0,
-                        "maxOp": "<",
-                        "max": 1000.0
-                      },
                       "precision": {
-                        "minOp": ">=",
                         "min": 0,
-                        "maxOp": "<=",
-                        "max": 0
+                        "minOp": ">=",
+                        "max": 0,
+                        "maxOp": "<="
+                      },
+                      "range": {
+                        "min": 16.0,
+                        "minOp": ">=",
+                        "max": 1000.0,
+                        "maxOp": "<"
                       }
                     },
                     "defaultValue": 17.0
@@ -1756,30 +1742,24 @@
                           "en": "mmHg"
                         },
                         "validation": {
-                          "range": {
-                            "minOp": ">=",
-                            "min": 16.0,
-                            "maxOp": "<",
-                            "max": 1000.0
-                          },
                           "precision": {
-                            "minOp": ">=",
                             "min": 0,
-                            "maxOp": "<=",
-                            "max": 0
+                            "minOp": ">=",
+                            "max": 0,
+                            "maxOp": "<="
+                          },
+                          "range": {
+                            "min": 16.0,
+                            "minOp": ">=",
+                            "max": 1000.0,
+                            "maxOp": "<"
                           }
                         }
                       }
                     ],
                     "defaultValue": "mm[Hg]"
                   }
-                ],
-                "termBindings": {
-                  "SNOMED-CT": {
-                    "value": "[SNOMED-CT(2003)::271649006]",
-                    "terminologyId": "SNOMED-CT"
-                  }
-                }
+                ]
               },
               {
                 "id": "diastolic",
@@ -1801,17 +1781,17 @@
                     "suffix": "magnitude",
                     "type": "DECIMAL",
                     "validation": {
-                      "range": {
-                        "minOp": ">=",
-                        "min": 0.0,
-                        "maxOp": "<",
-                        "max": 1000.0
-                      },
                       "precision": {
-                        "minOp": ">=",
                         "min": 0,
-                        "maxOp": "<=",
-                        "max": 0
+                        "minOp": ">=",
+                        "max": 0,
+                        "maxOp": "<="
+                      },
+                      "range": {
+                        "min": 0.0,
+                        "minOp": ">=",
+                        "max": 1000.0,
+                        "maxOp": "<"
                       }
                     }
                   },
@@ -1826,29 +1806,23 @@
                           "en": "mmHg"
                         },
                         "validation": {
-                          "range": {
-                            "minOp": ">=",
-                            "min": 0.0,
-                            "maxOp": "<",
-                            "max": 1000.0
-                          },
                           "precision": {
-                            "minOp": ">=",
                             "min": 0,
-                            "maxOp": "<=",
-                            "max": 0
+                            "minOp": ">=",
+                            "max": 0,
+                            "maxOp": "<="
+                          },
+                          "range": {
+                            "min": 0.0,
+                            "minOp": ">=",
+                            "max": 1000.0,
+                            "maxOp": "<"
                           }
                         }
                       }
                     ]
                   }
-                ],
-                "termBindings": {
-                  "SNOMED-CT": {
-                    "value": "[SNOMED-CT(2003)::271650006]",
-                    "terminologyId": "SNOMED-CT"
-                  }
-                }
+                ]
               },
               {
                 "id": "mean_arterial_pressure",
@@ -1870,17 +1844,17 @@
                     "suffix": "magnitude",
                     "type": "DECIMAL",
                     "validation": {
-                      "range": {
-                        "minOp": ">=",
-                        "min": 0.0,
-                        "maxOp": "<",
-                        "max": 1000.0
-                      },
                       "precision": {
-                        "minOp": ">=",
                         "min": 0,
-                        "maxOp": "<=",
-                        "max": 0
+                        "minOp": ">=",
+                        "max": 0,
+                        "maxOp": "<="
+                      },
+                      "range": {
+                        "min": 0.0,
+                        "minOp": ">=",
+                        "max": 1000.0,
+                        "maxOp": "<"
                       }
                     }
                   },
@@ -1895,17 +1869,17 @@
                           "en": "mmHg"
                         },
                         "validation": {
-                          "range": {
-                            "minOp": ">=",
-                            "min": 0.0,
-                            "maxOp": "<",
-                            "max": 1000.0
-                          },
                           "precision": {
-                            "minOp": ">=",
                             "min": 0,
-                            "maxOp": "<=",
-                            "max": 0
+                            "minOp": ">=",
+                            "max": 0,
+                            "maxOp": "<="
+                          },
+                          "range": {
+                            "min": 0.0,
+                            "minOp": ">=",
+                            "max": 1000.0,
+                            "maxOp": "<"
                           }
                         }
                       }
@@ -1933,17 +1907,17 @@
                     "suffix": "magnitude",
                     "type": "DECIMAL",
                     "validation": {
-                      "range": {
-                        "minOp": ">=",
-                        "min": 0.0,
-                        "maxOp": "<",
-                        "max": 1000.0
-                      },
                       "precision": {
-                        "minOp": ">=",
                         "min": 0,
-                        "maxOp": "<=",
-                        "max": 0
+                        "minOp": ">=",
+                        "max": 0,
+                        "maxOp": "<="
+                      },
+                      "range": {
+                        "min": 0.0,
+                        "minOp": ">=",
+                        "max": 1000.0,
+                        "maxOp": "<"
                       }
                     }
                   },
@@ -1958,17 +1932,17 @@
                           "en": "mmHg"
                         },
                         "validation": {
-                          "range": {
-                            "minOp": ">=",
-                            "min": 0.0,
-                            "maxOp": "<",
-                            "max": 1000.0
-                          },
                           "precision": {
-                            "minOp": ">=",
                             "min": 0,
-                            "maxOp": "<=",
-                            "max": 0
+                            "minOp": ">=",
+                            "max": 0,
+                            "maxOp": "<="
+                          },
+                          "range": {
+                            "min": 0.0,
+                            "minOp": ">=",
+                            "max": 1000.0,
+                            "maxOp": "<"
                           }
                         }
                       }
@@ -2027,14 +2001,6 @@
                 "nodeId": "at0008",
                 "min": 0,
                 "max": 1,
-                "dependsOn": [
-                  "systolic",
-                  "diastolic",
-                  "mean_arterial_pressure",
-                  "clinical_interpretation",
-                  "comment",
-                  "pulse_pressure"
-                ],
                 "localizedNames": {
                   "en": "Position"
                 },
@@ -2097,7 +2063,8 @@
                           "en": "Lying flat with some lateral tilt, usually angled towards the left side.   Commonly required in the last trimester of pregnancy to relieve aortocaval compression."
                         }
                       }
-                    ]
+                    ],
+                    "terminology": "local"
                   }
                 ]
               },
@@ -2109,14 +2076,6 @@
                 "nodeId": "at1052",
                 "min": 0,
                 "max": 1,
-                "dependsOn": [
-                  "systolic",
-                  "diastolic",
-                  "mean_arterial_pressure",
-                  "clinical_interpretation",
-                  "comment",
-                  "pulse_pressure"
-                ],
                 "localizedNames": {
                   "en": "Confounding factors"
                 },
@@ -2138,14 +2097,6 @@
                 "nodeId": "at1043",
                 "min": 0,
                 "max": 1,
-                "dependsOn": [
-                  "systolic",
-                  "diastolic",
-                  "mean_arterial_pressure",
-                  "clinical_interpretation",
-                  "comment",
-                  "pulse_pressure"
-                ],
                 "localizedNames": {
                   "en": "Sleep status"
                 },
@@ -2178,7 +2129,8 @@
                           "en": "The individual is in the natural state of bodily rest."
                         }
                       }
-                    ]
+                    ],
+                    "terminology": "local"
                   }
                 ]
               },
@@ -2190,14 +2142,6 @@
                 "nodeId": "at1005",
                 "min": 0,
                 "max": 1,
-                "dependsOn": [
-                  "systolic",
-                  "diastolic",
-                  "mean_arterial_pressure",
-                  "clinical_interpretation",
-                  "comment",
-                  "pulse_pressure"
-                ],
                 "localizedNames": {
                   "en": "Tilt"
                 },
@@ -2210,17 +2154,17 @@
                     "suffix": "magnitude",
                     "type": "DECIMAL",
                     "validation": {
-                      "range": {
-                        "minOp": ">=",
-                        "min": -90.0,
-                        "maxOp": "<=",
-                        "max": 90.0
-                      },
                       "precision": {
-                        "minOp": ">=",
                         "min": -1,
-                        "maxOp": "<=",
-                        "max": -1
+                        "minOp": ">=",
+                        "max": -1,
+                        "maxOp": "<="
+                      },
+                      "range": {
+                        "min": -90.0,
+                        "minOp": ">=",
+                        "max": 90.0,
+                        "maxOp": "<="
                       }
                     }
                   },
@@ -2232,20 +2176,20 @@
                         "value": "deg",
                         "label": "deg",
                         "localizedLabels": {
-                          "en": "°"
+                          "en": "\u00b0"
                         },
                         "validation": {
-                          "range": {
-                            "minOp": ">=",
-                            "min": -90.0,
-                            "maxOp": "<=",
-                            "max": 90.0
-                          },
                           "precision": {
-                            "minOp": ">=",
                             "min": -1,
-                            "maxOp": "<=",
-                            "max": -1
+                            "minOp": ">=",
+                            "max": -1,
+                            "maxOp": "<="
+                          },
+                          "range": {
+                            "min": -90.0,
+                            "minOp": ">=",
+                            "max": 90.0,
+                            "maxOp": "<="
                           }
                         }
                       }
@@ -2255,9 +2199,9 @@
               },
               {
                 "id": "time",
-                "name": "Time",
+                "name": "time",
                 "rmType": "DV_DATE_TIME",
-                "min": 0,
+                "min": 1,
                 "max": 1,
                 "aqlPath": "/content[openEHR-EHR-OBSERVATION.blood_pressure.v2]/data[at0001]/events[at1042]/time",
                 "inputs": [
@@ -2277,18 +2221,11 @@
             "nodeId": "at0013",
             "min": 0,
             "max": 1,
-            "dependsOn": [
-              "any_event",
-              "a24_hour_average"
-            ],
             "localizedNames": {
               "en": "Cuff size"
             },
             "localizedDescriptions": {
               "en": "The size of the cuff used for blood pressure measurement."
-            },
-            "annotations": {
-              "comment": "Perloff D, Grim C, Flack J, Frohlich ED, Hill M, McDonald M, Morgenstern BZ. Human blood pressure determination by sphygmomanometry. Circulation 1993;88;2460-2470. "
             },
             "aqlPath": "/content[openEHR-EHR-OBSERVATION.blood_pressure.v2]/protocol[at0011]/items[at0013]/value",
             "inputs": [
@@ -2366,14 +2303,12 @@
                       "en": "A cuff used for a neonate, assuming cuff is the appropriate size for maturity and birthweight of the neonate."
                     }
                   }
-                ]
+                ],
+                "terminology": "local"
               }
             ],
-            "termBindings": {
-              "SNOMED-CT": {
-                "value": "[SNOMED-CT(2003)::246153002]",
-                "terminologyId": "SNOMED-CT"
-              }
+            "annotations": {
+              "comment": "Perloff D, Grim C, Flack J, Frohlich ED, Hill M, McDonald M, Morgenstern BZ. Human blood pressure determination by sphygmomanometry. Circulation 1993;88;2460-2470. "
             }
           },
           {
@@ -2381,13 +2316,8 @@
             "name": "Location of measurement",
             "localizedName": "Location of measurement",
             "rmType": "DV_CODED_TEXT",
-            "nodeId": "at0014",
             "min": 0,
             "max": 1,
-            "dependsOn": [
-              "any_event",
-              "a24_hour_average"
-            ],
             "localizedNames": {
               "en": "Location of measurement"
             },
@@ -2521,7 +2451,8 @@
                     }
                   }
                 ],
-                "listOpen": true
+                "listOpen": true,
+                "terminology": "local"
               },
               {
                 "suffix": "other",
@@ -2537,10 +2468,6 @@
             "nodeId": "at1035",
             "min": 0,
             "max": 1,
-            "dependsOn": [
-              "any_event",
-              "a24_hour_average"
-            ],
             "localizedNames": {
               "en": "Method"
             },
@@ -2593,7 +2520,8 @@
                       "en": "Method of measuring blood pressure internally ie involving penetration of the skin and measuring inside blood vessels."
                     }
                   }
-                ]
+                ],
+                "terminology": "local"
               }
             ]
           },
@@ -2605,10 +2533,6 @@
             "nodeId": "at1038",
             "min": 0,
             "max": 1,
-            "dependsOn": [
-              "any_event",
-              "a24_hour_average"
-            ],
             "localizedNames": {
               "en": "Mean arterial pressure formula"
             },
@@ -2630,10 +2554,6 @@
             "nodeId": "at1054",
             "min": 0,
             "max": 1,
-            "dependsOn": [
-              "any_event",
-              "a24_hour_average"
-            ],
             "localizedNames": {
               "en": "Systolic pressure formula"
             },
@@ -2655,10 +2575,6 @@
             "nodeId": "at1055",
             "min": 0,
             "max": 1,
-            "dependsOn": [
-              "any_event",
-              "a24_hour_average"
-            ],
             "localizedNames": {
               "en": "Diastolic pressure formula"
             },
@@ -2680,10 +2596,6 @@
             "nodeId": "at1010",
             "min": 0,
             "max": 1,
-            "dependsOn": [
-              "any_event",
-              "a24_hour_average"
-            ],
             "localizedNames": {
               "en": "Diastolic endpoint"
             },
@@ -2716,33 +2628,16 @@
                       "en": "The fifth Korotkoff sound is identified by absence of sounds as the cuff pressure drops below the diastolic blood pressure."
                     }
                   }
-                ]
+                ],
+                "terminology": "local"
               }
             ]
           },
           {
-            "id": "language",
-            "name": "Language",
-            "rmType": "CODE_PHRASE",
-            "min": 0,
-            "max": 1,
-            "aqlPath": "/content[openEHR-EHR-OBSERVATION.blood_pressure.v2]/language",
-            "inContext": true
-          },
-          {
-            "id": "encoding",
-            "name": "Encoding",
-            "rmType": "CODE_PHRASE",
-            "min": 0,
-            "max": 1,
-            "aqlPath": "/content[openEHR-EHR-OBSERVATION.blood_pressure.v2]/encoding",
-            "inContext": true
-          },
-          {
             "id": "subject",
-            "name": "Subject",
+            "name": "subject",
             "rmType": "PARTY_PROXY",
-            "min": 0,
+            "min": 1,
             "max": 1,
             "aqlPath": "/content[openEHR-EHR-OBSERVATION.blood_pressure.v2]/subject",
             "inputs": [
@@ -2764,13 +2659,28 @@
               }
             ],
             "inContext": true
+          },
+          {
+            "id": "language",
+            "name": "language",
+            "rmType": "CODE_PHRASE",
+            "min": 1,
+            "max": 1,
+            "aqlPath": "/content[openEHR-EHR-OBSERVATION.blood_pressure.v2]/language",
+            "inContext": true
+          },
+          {
+            "id": "encoding",
+            "name": "encoding",
+            "rmType": "CODE_PHRASE",
+            "min": 1,
+            "max": 1,
+            "aqlPath": "/content[openEHR-EHR-OBSERVATION.blood_pressure.v2]/encoding",
+            "inContext": true
           }
         ],
-        "termBindings": {
-          "SNOMED-CT": {
-            "value": "[SNOMED-CT(2003)::364090009]",
-            "terminologyId": "SNOMED-CT"
-          }
+        "annotations": {
+          "comment": "Most commonly, use of the term 'blood pressure' refers to measurement of brachial artery pressure in the upper arm."
         }
       },
       {
@@ -2831,7 +2741,6 @@
                 "name": "Type",
                 "localizedName": "Type",
                 "rmType": "DV_CODED_TEXT",
-                "nodeId": "at0006",
                 "min": 0,
                 "max": 1,
                 "localizedNames": {
@@ -2877,7 +2786,8 @@
                         }
                       }
                     ],
-                    "listOpen": true
+                    "listOpen": true,
+                    "terminology": "local"
                   },
                   {
                     "suffix": "other",
@@ -2899,9 +2809,6 @@
                 "localizedDescriptions": {
                   "en": "The age of the infant when the selected type of feeding was commenced."
                 },
-                "annotations": {
-                  "comment": "If commenced at birth, which will be recorded as 0 days, weeks or months, then this could be captured or displayed in a system as 'Birth'."
-                },
                 "aqlPath": "/content[openEHR-EHR-EVALUATION.infant_feeding.v0]/data[at0001]/items[at0003]/items[at0004]/value",
                 "inputs": [
                   {
@@ -2909,8 +2816,8 @@
                     "type": "INTEGER",
                     "validation": {
                       "range": {
-                        "minOp": ">=",
-                        "min": 4
+                        "min": 4,
+                        "minOp": ">="
                       }
                     },
                     "defaultValue": 6
@@ -2920,19 +2827,8 @@
                     "type": "INTEGER",
                     "validation": {
                       "range": {
-                        "minOp": ">=",
-                        "min": 0
-                      }
-                    },
-                    "defaultValue": 0
-                  },
-                  {
-                    "suffix": "week",
-                    "type": "INTEGER",
-                    "validation": {
-                      "range": {
-                        "minOp": ">=",
-                        "min": 0
+                        "min": 0,
+                        "minOp": ">="
                       }
                     },
                     "defaultValue": 0
@@ -2942,13 +2838,27 @@
                     "type": "INTEGER",
                     "validation": {
                       "range": {
-                        "minOp": ">=",
-                        "min": 0
+                        "min": 0,
+                        "minOp": ">="
+                      }
+                    },
+                    "defaultValue": 0
+                  },
+                  {
+                    "suffix": "week",
+                    "type": "INTEGER",
+                    "validation": {
+                      "range": {
+                        "min": 0,
+                        "minOp": ">="
                       }
                     },
                     "defaultValue": 0
                   }
-                ]
+                ],
+                "annotations": {
+                  "comment": "If commenced at birth, which will be recorded as 0 days, weeks or months, then this could be captured or displayed in a system as 'Birth'."
+                }
               },
               {
                 "id": "age_ceased",
@@ -2971,8 +2881,8 @@
                     "type": "INTEGER",
                     "validation": {
                       "range": {
-                        "minOp": ">=",
-                        "min": 0
+                        "min": 0,
+                        "minOp": ">="
                       }
                     }
                   },
@@ -2981,8 +2891,8 @@
                     "type": "INTEGER",
                     "validation": {
                       "range": {
-                        "minOp": ">=",
-                        "min": 0
+                        "min": 0,
+                        "minOp": ">="
                       }
                     }
                   },
@@ -2991,8 +2901,8 @@
                     "type": "INTEGER",
                     "validation": {
                       "range": {
-                        "minOp": ">=",
-                        "min": 0
+                        "min": 0,
+                        "minOp": ">="
                       }
                     }
                   },
@@ -3001,8 +2911,8 @@
                     "type": "INTEGER",
                     "validation": {
                       "range": {
-                        "minOp": ">=",
-                        "min": 0
+                        "min": 0,
+                        "minOp": ">="
                       }
                     }
                   },
@@ -3011,8 +2921,8 @@
                     "type": "INTEGER",
                     "validation": {
                       "range": {
-                        "minOp": ">=",
-                        "min": 0
+                        "min": 0,
+                        "minOp": ">="
                       }
                     }
                   },
@@ -3021,8 +2931,8 @@
                     "type": "INTEGER",
                     "validation": {
                       "range": {
-                        "minOp": ">=",
-                        "min": 0
+                        "min": 0,
+                        "minOp": ">="
                       }
                     }
                   },
@@ -3031,8 +2941,8 @@
                     "type": "INTEGER",
                     "validation": {
                       "range": {
-                        "minOp": ">=",
-                        "min": 0
+                        "min": 0,
+                        "minOp": ">="
                       }
                     }
                   }
@@ -3082,8 +2992,8 @@
                 "type": "INTEGER",
                 "validation": {
                   "range": {
-                    "minOp": ">=",
-                    "min": 0
+                    "min": 0,
+                    "minOp": ">="
                   }
                 }
               }
@@ -3110,18 +3020,8 @@
                 "type": "INTEGER",
                 "validation": {
                   "range": {
-                    "minOp": ">=",
-                    "min": 0
-                  }
-                }
-              },
-              {
-                "suffix": "week",
-                "type": "INTEGER",
-                "validation": {
-                  "range": {
-                    "minOp": ">=",
-                    "min": 0
+                    "min": 0,
+                    "minOp": ">="
                   }
                 }
               },
@@ -3130,8 +3030,18 @@
                 "type": "INTEGER",
                 "validation": {
                   "range": {
-                    "minOp": ">=",
-                    "min": 0
+                    "min": 0,
+                    "minOp": ">="
+                  }
+                }
+              },
+              {
+                "suffix": "week",
+                "type": "INTEGER",
+                "validation": {
+                  "range": {
+                    "min": 0,
+                    "minOp": ">="
                   }
                 }
               }
@@ -3158,8 +3068,8 @@
                 "type": "INTEGER",
                 "validation": {
                   "range": {
-                    "minOp": ">=",
-                    "min": 0
+                    "min": 0,
+                    "minOp": ">="
                   }
                 }
               },
@@ -3168,36 +3078,18 @@
                 "type": "INTEGER",
                 "validation": {
                   "range": {
-                    "minOp": ">=",
-                    "min": 0
+                    "min": 0,
+                    "minOp": ">="
                   }
                 }
               }
             ]
           },
           {
-            "id": "language",
-            "name": "Language",
-            "rmType": "CODE_PHRASE",
-            "min": 0,
-            "max": 1,
-            "aqlPath": "/content[openEHR-EHR-EVALUATION.infant_feeding.v0]/language",
-            "inContext": true
-          },
-          {
-            "id": "encoding",
-            "name": "Encoding",
-            "rmType": "CODE_PHRASE",
-            "min": 0,
-            "max": 1,
-            "aqlPath": "/content[openEHR-EHR-EVALUATION.infant_feeding.v0]/encoding",
-            "inContext": true
-          },
-          {
             "id": "subject",
-            "name": "Subject",
+            "name": "subject",
             "rmType": "PARTY_PROXY",
-            "min": 0,
+            "min": 1,
             "max": 1,
             "aqlPath": "/content[openEHR-EHR-EVALUATION.infant_feeding.v0]/subject",
             "inputs": [
@@ -3218,6 +3110,24 @@
                 "type": "TEXT"
               }
             ],
+            "inContext": true
+          },
+          {
+            "id": "language",
+            "name": "language",
+            "rmType": "CODE_PHRASE",
+            "min": 1,
+            "max": 1,
+            "aqlPath": "/content[openEHR-EHR-EVALUATION.infant_feeding.v0]/language",
+            "inContext": true
+          },
+          {
+            "id": "encoding",
+            "name": "encoding",
+            "rmType": "CODE_PHRASE",
+            "min": 1,
+            "max": 1,
+            "aqlPath": "/content[openEHR-EHR-EVALUATION.infant_feeding.v0]/encoding",
             "inContext": true
           }
         ]
@@ -3268,15 +3178,15 @@
                 "localizedDescriptions": {
                   "en": "The name of the injury or disease affected the skin."
                 },
-                "annotations": {
-                  "comment": "For example: burn; or psoriasis. Coding of the condition name with an external terminology is preferred, where possible. "
-                },
                 "aqlPath": "/content[openEHR-EHR-OBSERVATION.affected_body_surface_area.v0]/data[at0001]/events[at0002]/data[at0003]/items[at0004]/value",
                 "inputs": [
                   {
                     "type": "TEXT"
                   }
-                ]
+                ],
+                "annotations": {
+                  "comment": "For example: burn; or psoriasis. Coding of the condition name with an external terminology is preferred, where possible. "
+                }
               },
               {
                 "id": "description",
@@ -3313,23 +3223,17 @@
                 "localizedDescriptions": {
                   "en": "The total sum of affected surface area across all body sites."
                 },
-                "annotations": {
-                  "comment": "For example: if 4.5% of an arm and 6% of the back is affected, then the TBSA is 10%."
-                },
                 "aqlPath": "/content[openEHR-EHR-OBSERVATION.affected_body_surface_area.v0]/data[at0001]/events[at0002]/data[at0003]/items[at0014]/value",
-                "proportionTypes": [
-                  "percent"
-                ],
                 "inputs": [
                   {
                     "suffix": "numerator",
                     "type": "DECIMAL",
                     "validation": {
                       "range": {
-                        "minOp": ">=",
                         "min": 4.0,
-                        "maxOp": "<=",
-                        "max": 100.0
+                        "minOp": ">=",
+                        "max": 100.0,
+                        "maxOp": "<="
                       }
                     },
                     "defaultValue": 10.0
@@ -3339,13 +3243,20 @@
                     "type": "DECIMAL",
                     "validation": {
                       "range": {
-                        "minOp": ">=",
                         "min": 100.0,
-                        "maxOp": "<=",
-                        "max": 100.0
+                        "minOp": ">=",
+                        "max": 100.0,
+                        "maxOp": "<="
                       }
-                    }
+                    },
+                    "defaultValue": 100.0
                   }
+                ],
+                "annotations": {
+                  "comment": "For example: if 4.5% of an arm and 6% of the back is affected, then the TBSA is 10%."
+                },
+                "proportionTypes": [
+                  "percent"
                 ]
               },
               {
@@ -3378,15 +3289,15 @@
                     "localizedDescriptions": {
                       "en": "The name of the body site assessed."
                     },
-                    "annotations": {
-                      "comment": "Coding of the body site name with an external terminology is preferred, where possible. "
-                    },
                     "aqlPath": "/content[openEHR-EHR-OBSERVATION.affected_body_surface_area.v0]/data[at0001]/events[at0002]/data[at0003]/items[at0006]/items[at0007]/value",
                     "inputs": [
                       {
                         "type": "TEXT"
                       }
-                    ]
+                    ],
+                    "annotations": {
+                      "comment": "Coding of the body site name with an external terminology is preferred, where possible. "
+                    }
                   },
                   {
                     "id": "site_surface_area",
@@ -3402,23 +3313,17 @@
                     "localizedDescriptions": {
                       "en": "The estimated percentage of total body surface area apportioned for the entire identified body site."
                     },
-                    "annotations": {
-                      "comment": "For example: when using the 'Rule of nines' method of estimation, 9% is apportioned for each arm, 18% for the back of the torso, and 1% for the genitalia."
-                    },
                     "aqlPath": "/content[openEHR-EHR-OBSERVATION.affected_body_surface_area.v0]/data[at0001]/events[at0002]/data[at0003]/items[at0006]/items[at0008]/value",
-                    "proportionTypes": [
-                      "percent"
-                    ],
                     "inputs": [
                       {
                         "suffix": "numerator",
                         "type": "DECIMAL",
                         "validation": {
                           "range": {
-                            "minOp": ">=",
                             "min": 0.0,
-                            "maxOp": "<=",
-                            "max": 100.0
+                            "minOp": ">=",
+                            "max": 100.0,
+                            "maxOp": "<="
                           }
                         }
                       },
@@ -3427,13 +3332,19 @@
                         "type": "DECIMAL",
                         "validation": {
                           "range": {
-                            "minOp": ">=",
                             "min": 100.0,
-                            "maxOp": "<=",
-                            "max": 100.0
+                            "minOp": ">=",
+                            "max": 100.0,
+                            "maxOp": "<="
                           }
                         }
                       }
+                    ],
+                    "annotations": {
+                      "comment": "For example: when using the 'Rule of nines' method of estimation, 9% is apportioned for each arm, 18% for the back of the torso, and 1% for the genitalia."
+                    },
+                    "proportionTypes": [
+                      "percent"
                     ]
                   },
                   {
@@ -3450,23 +3361,17 @@
                     "localizedDescriptions": {
                       "en": "The estimated extent of total body surface area affected at the identified body site."
                     },
-                    "annotations": {
-                      "comment": "For example: when using the 'Rule of nines' method, if half of an arm is affected, the affected site surface area value is 4.5%; or if a third of the back is affected, the value is 6%."
-                    },
                     "aqlPath": "/content[openEHR-EHR-OBSERVATION.affected_body_surface_area.v0]/data[at0001]/events[at0002]/data[at0003]/items[at0006]/items[at0010]/value",
-                    "proportionTypes": [
-                      "percent"
-                    ],
                     "inputs": [
                       {
                         "suffix": "numerator",
                         "type": "DECIMAL",
                         "validation": {
                           "range": {
-                            "minOp": ">=",
                             "min": 0.0,
-                            "maxOp": "<=",
-                            "max": 100.0
+                            "minOp": ">=",
+                            "max": 100.0,
+                            "maxOp": "<="
                           }
                         }
                       },
@@ -3475,13 +3380,19 @@
                         "type": "DECIMAL",
                         "validation": {
                           "range": {
-                            "minOp": ">=",
                             "min": 100.0,
-                            "maxOp": "<=",
-                            "max": 100.0
+                            "minOp": ">=",
+                            "max": 100.0,
+                            "maxOp": "<="
                           }
                         }
                       }
+                    ],
+                    "annotations": {
+                      "comment": "For example: when using the 'Rule of nines' method, if half of an arm is affected, the affected site surface area value is 4.5%; or if a third of the back is affected, the value is 6%."
+                    },
+                    "proportionTypes": [
+                      "percent"
                     ]
                   },
                   {
@@ -3514,15 +3425,15 @@
                         "localizedDescriptions": {
                           "en": "The degree of severity of the condition at the identified site."
                         },
-                        "annotations": {
-                          "comment": "For example: mild, moderate or severe for a rash; or first degree, second degree or third degree for a burn. Coding of the severity with an external terminology is preferred, where possible. It is expected that the severity values will be identical as the values used in the 'Affected body surface area per severity' cluster."
-                        },
                         "aqlPath": "/content[openEHR-EHR-OBSERVATION.affected_body_surface_area.v0]/data[at0001]/events[at0002]/data[at0003]/items[at0006]/items[at0011]/items[at0012]/value",
                         "inputs": [
                           {
                             "type": "TEXT"
                           }
-                        ]
+                        ],
+                        "annotations": {
+                          "comment": "For example: mild, moderate or severe for a rash; or first degree, second degree or third degree for a burn. Coding of the severity with an external terminology is preferred, where possible. It is expected that the severity values will be identical as the values used in the 'Affected body surface area per severity' cluster."
+                        }
                       },
                       {
                         "id": "affected_site_surface_area",
@@ -3538,23 +3449,17 @@
                         "localizedDescriptions": {
                           "en": "The estimated extent of total body surface area affected by the degree of identified severity, at the identified body site."
                         },
-                        "annotations": {
-                          "comment": "For example: when using the 'Rule of nines' method, if half of an arm is affected, the affected site surface area value is 4.5%; or if a third of the back is affected, the value is 6%."
-                        },
                         "aqlPath": "/content[openEHR-EHR-OBSERVATION.affected_body_surface_area.v0]/data[at0001]/events[at0002]/data[at0003]/items[at0006]/items[at0011]/items[at0013]/value",
-                        "proportionTypes": [
-                          "percent"
-                        ],
                         "inputs": [
                           {
                             "suffix": "numerator",
                             "type": "DECIMAL",
                             "validation": {
                               "range": {
-                                "minOp": ">=",
                                 "min": 0.0,
-                                "maxOp": "<=",
-                                "max": 100.0
+                                "minOp": ">=",
+                                "max": 100.0,
+                                "maxOp": "<="
                               }
                             }
                           },
@@ -3563,13 +3468,19 @@
                             "type": "DECIMAL",
                             "validation": {
                               "range": {
-                                "minOp": ">=",
                                 "min": 100.0,
-                                "maxOp": "<=",
-                                "max": 100.0
+                                "minOp": ">=",
+                                "max": 100.0,
+                                "maxOp": "<="
                               }
                             }
                           }
+                        ],
+                        "annotations": {
+                          "comment": "For example: when using the 'Rule of nines' method, if half of an arm is affected, the affected site surface area value is 4.5%; or if a third of the back is affected, the value is 6%."
+                        },
+                        "proportionTypes": [
+                          "percent"
                         ]
                       }
                     ]
@@ -3606,15 +3517,15 @@
                     "localizedDescriptions": {
                       "en": "The degree of severity of the condition."
                     },
-                    "annotations": {
-                      "comment": "For example: mild, moderate or severe for a rash; or first degree, second degree or third degree for a burn. Coding of the severity with an external terminology is preferred, where possible. It is expected that the severity values will be identical as the values used in the 'Per severity' cluster."
-                    },
                     "aqlPath": "/content[openEHR-EHR-OBSERVATION.affected_body_surface_area.v0]/data[at0001]/events[at0002]/data[at0003]/items[at0015]/items[at0016]/value",
                     "inputs": [
                       {
                         "type": "TEXT"
                       }
-                    ]
+                    ],
+                    "annotations": {
+                      "comment": "For example: mild, moderate or severe for a rash; or first degree, second degree or third degree for a burn. Coding of the severity with an external terminology is preferred, where possible. It is expected that the severity values will be identical as the values used in the 'Per severity' cluster."
+                    }
                   },
                   {
                     "id": "total_body_surface_area_affected",
@@ -3630,23 +3541,17 @@
                     "localizedDescriptions": {
                       "en": "The total sum of body surface area affected by the degree of the identified severity, across all body sites."
                     },
-                    "annotations": {
-                      "comment": "For example: when using the 'Rule of nines' method, if half of an arm is affected, the affected site surface area value is 4.5 %; or if a third of the back is affected, the value is 6 %."
-                    },
                     "aqlPath": "/content[openEHR-EHR-OBSERVATION.affected_body_surface_area.v0]/data[at0001]/events[at0002]/data[at0003]/items[at0015]/items[at0017]/value",
-                    "proportionTypes": [
-                      "percent"
-                    ],
                     "inputs": [
                       {
                         "suffix": "numerator",
                         "type": "DECIMAL",
                         "validation": {
                           "range": {
-                            "minOp": ">=",
                             "min": 0.0,
-                            "maxOp": "<=",
-                            "max": 100.0
+                            "minOp": ">=",
+                            "max": 100.0,
+                            "maxOp": "<="
                           }
                         }
                       },
@@ -3655,13 +3560,19 @@
                         "type": "DECIMAL",
                         "validation": {
                           "range": {
-                            "minOp": ">=",
                             "min": 100.0,
-                            "maxOp": "<=",
-                            "max": 100.0
+                            "minOp": ">=",
+                            "max": 100.0,
+                            "maxOp": "<="
                           }
                         }
                       }
+                    ],
+                    "annotations": {
+                      "comment": "For example: when using the 'Rule of nines' method, if half of an arm is affected, the affected site surface area value is 4.5 %; or if a third of the back is affected, the value is 6 %."
+                    },
+                    "proportionTypes": [
+                      "percent"
                     ]
                   }
                 ]
@@ -3689,9 +3600,9 @@
               },
               {
                 "id": "time",
-                "name": "Time",
+                "name": "time",
                 "rmType": "DV_DATE_TIME",
-                "min": 0,
+                "min": 1,
                 "max": 1,
                 "aqlPath": "/content[openEHR-EHR-OBSERVATION.affected_body_surface_area.v0]/data[at0001]/events[at0002]/time",
                 "inputs": [
@@ -3704,28 +3615,10 @@
             ]
           },
           {
-            "id": "language",
-            "name": "Language",
-            "rmType": "CODE_PHRASE",
-            "min": 0,
-            "max": 1,
-            "aqlPath": "/content[openEHR-EHR-OBSERVATION.affected_body_surface_area.v0]/language",
-            "inContext": true
-          },
-          {
-            "id": "encoding",
-            "name": "Encoding",
-            "rmType": "CODE_PHRASE",
-            "min": 0,
-            "max": 1,
-            "aqlPath": "/content[openEHR-EHR-OBSERVATION.affected_body_surface_area.v0]/encoding",
-            "inContext": true
-          },
-          {
             "id": "subject",
-            "name": "Subject",
+            "name": "subject",
             "rmType": "PARTY_PROXY",
-            "min": 0,
+            "min": 1,
             "max": 1,
             "aqlPath": "/content[openEHR-EHR-OBSERVATION.affected_body_surface_area.v0]/subject",
             "inputs": [
@@ -3747,57 +3640,32 @@
               }
             ],
             "inContext": true
+          },
+          {
+            "id": "language",
+            "name": "language",
+            "rmType": "CODE_PHRASE",
+            "min": 1,
+            "max": 1,
+            "aqlPath": "/content[openEHR-EHR-OBSERVATION.affected_body_surface_area.v0]/language",
+            "inContext": true
+          },
+          {
+            "id": "encoding",
+            "name": "encoding",
+            "rmType": "CODE_PHRASE",
+            "min": 1,
+            "max": 1,
+            "aqlPath": "/content[openEHR-EHR-OBSERVATION.affected_body_surface_area.v0]/encoding",
+            "inContext": true
           }
         ]
       },
       {
-        "id": "category",
-        "rmType": "DV_CODED_TEXT",
-        "nodeId": "",
-        "min": 1,
-        "max": 1,
-        "aqlPath": "/category",
-        "inputs": [
-          {
-            "suffix": "code",
-            "type": "CODED_TEXT",
-            "list": [
-              {
-                "value": "433",
-                "label": "event",
-                "localizedLabels": {
-                  "en": "event"
-                }
-              }
-            ],
-            "terminology": "openehr"
-          }
-        ],
-        "inContext": true
-      },
-      {
-        "id": "language",
-        "name": "Language",
-        "rmType": "CODE_PHRASE",
-        "min": 0,
-        "max": 1,
-        "aqlPath": "/language",
-        "inContext": true
-      },
-      {
-        "id": "territory",
-        "name": "Territory",
-        "rmType": "CODE_PHRASE",
-        "min": 0,
-        "max": 1,
-        "aqlPath": "/territory",
-        "inContext": true
-      },
-      {
         "id": "composer",
-        "name": "Composer",
+        "name": "composer",
         "rmType": "PARTY_PROXY",
-        "min": 0,
+        "min": 1,
         "max": 1,
         "aqlPath": "/composer",
         "inputs": [
@@ -3818,6 +3686,24 @@
             "type": "TEXT"
           }
         ],
+        "inContext": true
+      },
+      {
+        "id": "language",
+        "name": "language",
+        "rmType": "CODE_PHRASE",
+        "min": 1,
+        "max": 1,
+        "aqlPath": "/language",
+        "inContext": true
+      },
+      {
+        "id": "territory",
+        "name": "territory",
+        "rmType": "CODE_PHRASE",
+        "min": 1,
+        "max": 1,
+        "aqlPath": "/territory",
         "inContext": true
       }
     ]

@@ -17,14 +17,40 @@
       "de": "Bericht"
     },
     "localizedDescriptions": {
-      "de": "Ein Dokument zur Übermittlung von Informationen an andere, meist als Antwort auf\n                eine Anfrage.\n            "
+      "de": "Ein Dokument zur \u00dcbermittlung von Informationen an andere, meist als Antwort auf\n                eine Anfrage.\n            "
     },
-    "aqlPath": "",
     "children": [
       {
+        "id": "category",
+        "name": "category",
+        "localizedName": "category",
+        "rmType": "DV_CODED_TEXT",
+        "min": 1,
+        "max": 1,
+        "aqlPath": "/category",
+        "inputs": [
+          {
+            "suffix": "code",
+            "type": "CODED_TEXT",
+            "list": [
+              {
+                "value": "433",
+                "label": "event",
+                "localizedLabels": {
+                  "de": "event"
+                }
+              }
+            ],
+            "terminology": "openehr"
+          }
+        ],
+        "inContext": true
+      },
+      {
         "id": "context",
+        "name": "context",
+        "localizedName": "context",
         "rmType": "EVENT_CONTEXT",
-        "nodeId": "",
         "min": 1,
         "max": 1,
         "aqlPath": "/context",
@@ -73,9 +99,9 @@
           },
           {
             "id": "start_time",
-            "name": "Start_time",
+            "name": "start_time",
             "rmType": "DV_DATE_TIME",
-            "min": 0,
+            "min": 1,
             "max": 1,
             "aqlPath": "/context/start_time",
             "inputs": [
@@ -87,9 +113,9 @@
           },
           {
             "id": "setting",
-            "name": "Setting",
+            "name": "setting",
             "rmType": "DV_CODED_TEXT",
-            "min": 0,
+            "min": 1,
             "max": 1,
             "aqlPath": "/context/setting",
             "inputs": [
@@ -107,18 +133,18 @@
         ]
       },
       {
-        "id": "körpergewicht",
-        "name": "Körpergewicht",
-        "localizedName": "Körpergewicht",
+        "id": "k\u00f6rpergewicht",
+        "name": "K\u00f6rpergewicht",
+        "localizedName": "K\u00f6rpergewicht",
         "rmType": "OBSERVATION",
         "nodeId": "openEHR-EHR-OBSERVATION.body_weight.v2",
         "min": 0,
         "max": -1,
         "localizedNames": {
-          "de": "Körpergewicht"
+          "de": "K\u00f6rpergewicht"
         },
         "localizedDescriptions": {
-          "de": "Messung des Körpergewichts eines Individuums."
+          "de": "Messung des K\u00f6rpergewichts eines Individuums."
         },
         "aqlPath": "/content[openEHR-EHR-OBSERVATION.body_weight.v2]",
         "children": [
@@ -167,10 +193,10 @@
                         "label": "kg",
                         "validation": {
                           "range": {
+                            "min": 0.0,
                             "minOp": ">=",
-                            "min": 0,
-                            "maxOp": "<=",
-                            "max": 1000
+                            "max": 1000.0,
+                            "maxOp": "<="
                           }
                         }
                       },
@@ -179,10 +205,10 @@
                         "label": "[lb_av]",
                         "validation": {
                           "range": {
+                            "min": 0.0,
                             "minOp": ">=",
-                            "min": 0,
-                            "maxOp": "<=",
-                            "max": 2000
+                            "max": 2000.0,
+                            "maxOp": "<="
                           }
                         }
                       },
@@ -191,10 +217,10 @@
                         "label": "g",
                         "validation": {
                           "range": {
+                            "min": 0.0,
                             "minOp": ">=",
-                            "min": 0,
-                            "maxOp": "<=",
-                            "max": 1000000
+                            "max": 1000000.0,
+                            "maxOp": "<="
                           }
                         }
                       }
@@ -231,10 +257,6 @@
                 "nodeId": "at0009",
                 "min": 0,
                 "max": 1,
-                "dependsOn": [
-                  "gewicht",
-                  "comment_en"
-                ],
                 "localizedNames": {
                   "de": "*State of dress(en)"
                 },
@@ -264,17 +286,17 @@
                           "de": "Windel"
                         },
                         "localizedDescriptions": {
-                          "de": "Trägt Windel; kann signifikant zum Gewicht beitragen."
+                          "de": "Tr\u00e4gt Windel; kann signifikant zum Gewicht beitragen."
                         }
                       },
                       {
                         "value": "at0011",
-                        "label": "Leicht bekleidet / Unterwäsche",
+                        "label": "Leicht bekleidet / Unterw\u00e4sche",
                         "localizedLabels": {
-                          "de": "Leicht bekleidet / Unterwäsche"
+                          "de": "Leicht bekleidet / Unterw\u00e4sche"
                         },
                         "localizedDescriptions": {
-                          "de": "Bekleidung, die nicht signifikant zum Gewicht beiträgt."
+                          "de": "Bekleidung, die nicht signifikant zum Gewicht beitr\u00e4gt."
                         }
                       },
                       {
@@ -294,10 +316,11 @@
                           "de": "Voll bekleidet, mit Schuhen"
                         },
                         "localizedDescriptions": {
-                          "de": "Bekleidung, die signifikant zum Gewicht beiträgt, mit Schuhen."
+                          "de": "Bekleidung, die signifikant zum Gewicht beitr\u00e4gt, mit Schuhen."
                         }
                       }
-                    ]
+                    ],
+                    "terminology": "local"
                   }
                 ]
               },
@@ -309,10 +332,6 @@
                 "nodeId": "at0025",
                 "min": 0,
                 "max": -1,
-                "dependsOn": [
-                  "gewicht",
-                  "comment_en"
-                ],
                 "localizedNames": {
                   "de": "*Confounding factors(en)"
                 },
@@ -328,9 +347,9 @@
               },
               {
                 "id": "time",
-                "name": "Time",
+                "name": "time",
                 "rmType": "DV_DATE_TIME",
-                "min": 0,
+                "min": 1,
                 "max": 1,
                 "aqlPath": "/content[openEHR-EHR-OBSERVATION.body_weight.v2]/data[at0002]/events[at0003]/time",
                 "inputs": [
@@ -387,10 +406,10 @@
                         "label": "kg",
                         "validation": {
                           "range": {
+                            "min": 0.0,
                             "minOp": ">=",
-                            "min": 0,
-                            "maxOp": "<=",
-                            "max": 1000
+                            "max": 1000.0,
+                            "maxOp": "<="
                           }
                         }
                       },
@@ -399,10 +418,10 @@
                         "label": "[lb_av]",
                         "validation": {
                           "range": {
+                            "min": 0.0,
                             "minOp": ">=",
-                            "min": 0,
-                            "maxOp": "<=",
-                            "max": 2000
+                            "max": 2000.0,
+                            "maxOp": "<="
                           }
                         }
                       },
@@ -411,10 +430,10 @@
                         "label": "g",
                         "validation": {
                           "range": {
+                            "min": 0.0,
                             "minOp": ">=",
-                            "min": 0,
-                            "maxOp": "<=",
-                            "max": 1000000
+                            "max": 1000000.0,
+                            "maxOp": "<="
                           }
                         }
                       }
@@ -451,10 +470,6 @@
                 "nodeId": "at0009",
                 "min": 0,
                 "max": 1,
-                "dependsOn": [
-                  "gewicht",
-                  "comment_en"
-                ],
                 "localizedNames": {
                   "de": "*State of dress(en)"
                 },
@@ -484,17 +499,17 @@
                           "de": "Windel"
                         },
                         "localizedDescriptions": {
-                          "de": "Trägt Windel; kann signifikant zum Gewicht beitragen."
+                          "de": "Tr\u00e4gt Windel; kann signifikant zum Gewicht beitragen."
                         }
                       },
                       {
                         "value": "at0011",
-                        "label": "Leicht bekleidet / Unterwäsche",
+                        "label": "Leicht bekleidet / Unterw\u00e4sche",
                         "localizedLabels": {
-                          "de": "Leicht bekleidet / Unterwäsche"
+                          "de": "Leicht bekleidet / Unterw\u00e4sche"
                         },
                         "localizedDescriptions": {
-                          "de": "Bekleidung, die nicht signifikant zum Gewicht beiträgt."
+                          "de": "Bekleidung, die nicht signifikant zum Gewicht beitr\u00e4gt."
                         }
                       },
                       {
@@ -514,10 +529,11 @@
                           "de": "Voll bekleidet, mit Schuhen"
                         },
                         "localizedDescriptions": {
-                          "de": "Bekleidung, die signifikant zum Gewicht beiträgt, mit Schuhen."
+                          "de": "Bekleidung, die signifikant zum Gewicht beitr\u00e4gt, mit Schuhen."
                         }
                       }
-                    ]
+                    ],
+                    "terminology": "local"
                   }
                 ]
               },
@@ -529,10 +545,6 @@
                 "nodeId": "at0025",
                 "min": 0,
                 "max": -1,
-                "dependsOn": [
-                  "gewicht",
-                  "comment_en"
-                ],
                 "localizedNames": {
                   "de": "*Confounding factors(en)"
                 },
@@ -548,9 +560,9 @@
               },
               {
                 "id": "time",
-                "name": "Time",
+                "name": "time",
                 "rmType": "DV_DATE_TIME",
-                "min": 0,
+                "min": 1,
                 "max": 1,
                 "aqlPath": "/content[openEHR-EHR-OBSERVATION.body_weight.v2]/data[at0002]/events[at0026]/time",
                 "inputs": [
@@ -563,28 +575,10 @@
             ]
           },
           {
-            "id": "language",
-            "name": "Language",
-            "rmType": "CODE_PHRASE",
-            "min": 0,
-            "max": 1,
-            "aqlPath": "/content[openEHR-EHR-OBSERVATION.body_weight.v2]/language",
-            "inContext": true
-          },
-          {
-            "id": "encoding",
-            "name": "Encoding",
-            "rmType": "CODE_PHRASE",
-            "min": 0,
-            "max": 1,
-            "aqlPath": "/content[openEHR-EHR-OBSERVATION.body_weight.v2]/encoding",
-            "inContext": true
-          },
-          {
             "id": "subject",
-            "name": "Subject",
+            "name": "subject",
             "rmType": "PARTY_PROXY",
-            "min": 0,
+            "min": 1,
             "max": 1,
             "aqlPath": "/content[openEHR-EHR-OBSERVATION.body_weight.v2]/subject",
             "inputs": [
@@ -606,57 +600,32 @@
               }
             ],
             "inContext": true
+          },
+          {
+            "id": "language",
+            "name": "language",
+            "rmType": "CODE_PHRASE",
+            "min": 1,
+            "max": 1,
+            "aqlPath": "/content[openEHR-EHR-OBSERVATION.body_weight.v2]/language",
+            "inContext": true
+          },
+          {
+            "id": "encoding",
+            "name": "encoding",
+            "rmType": "CODE_PHRASE",
+            "min": 1,
+            "max": 1,
+            "aqlPath": "/content[openEHR-EHR-OBSERVATION.body_weight.v2]/encoding",
+            "inContext": true
           }
         ]
       },
       {
-        "id": "category",
-        "rmType": "DV_CODED_TEXT",
-        "nodeId": "",
-        "min": 1,
-        "max": 1,
-        "aqlPath": "/category",
-        "inputs": [
-          {
-            "suffix": "code",
-            "type": "CODED_TEXT",
-            "list": [
-              {
-                "value": "433",
-                "label": "event",
-                "localizedLabels": {
-                  "de": ""
-                }
-              }
-            ],
-            "terminology": "openehr"
-          }
-        ],
-        "inContext": true
-      },
-      {
-        "id": "language",
-        "name": "Language",
-        "rmType": "CODE_PHRASE",
-        "min": 0,
-        "max": 1,
-        "aqlPath": "/language",
-        "inContext": true
-      },
-      {
-        "id": "territory",
-        "name": "Territory",
-        "rmType": "CODE_PHRASE",
-        "min": 0,
-        "max": 1,
-        "aqlPath": "/territory",
-        "inContext": true
-      },
-      {
         "id": "composer",
-        "name": "Composer",
+        "name": "composer",
         "rmType": "PARTY_PROXY",
-        "min": 0,
+        "min": 1,
         "max": 1,
         "aqlPath": "/composer",
         "inputs": [
@@ -677,6 +646,24 @@
             "type": "TEXT"
           }
         ],
+        "inContext": true
+      },
+      {
+        "id": "language",
+        "name": "language",
+        "rmType": "CODE_PHRASE",
+        "min": 1,
+        "max": 1,
+        "aqlPath": "/language",
+        "inContext": true
+      },
+      {
+        "id": "territory",
+        "name": "territory",
+        "rmType": "CODE_PHRASE",
+        "min": 1,
+        "max": 1,
+        "aqlPath": "/territory",
         "inContext": true
       }
     ]
