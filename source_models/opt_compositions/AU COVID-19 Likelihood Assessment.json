@@ -1,0 +1,1656 @@
+{
+  "_type": "COMPOSITION",
+  "name": {
+    "_type": "DV_TEXT",
+    "value": "AU Northern Territory COVID-19 Likelihood Assessment"
+  },
+  "archetype_details": {
+    "archetype_id": {
+      "value": "openEHR-EHR-COMPOSITION.encounter.v1"
+    },
+    "template_id": {
+      "value": "AU COVID-19 Likelihood Assessment"
+    },
+    "rm_version": "1.0.4"
+  },
+  "language": {
+    "_type": "CODE_PHRASE",
+    "terminology_id": {
+      "_type": "TERMINOLOGY_ID",
+      "value": "ISO_639-1"
+    },
+    "code_string": "en"
+  },
+  "territory": {
+    "_type": "CODE_PHRASE",
+    "terminology_id": {
+      "_type": "TERMINOLOGY_ID",
+      "value": "ISO_3166-1"
+    },
+    "code_string": "DE"
+  },
+  "category": {
+    "_type": "DV_CODED_TEXT",
+    "value": "event",
+    "defining_code": {
+      "_type": "CODE_PHRASE",
+      "terminology_id": {
+        "_type": "TERMINOLOGY_ID",
+        "value": "openehr"
+      },
+      "code_string": "433"
+    }
+  },
+  "composer": {
+    "_type": "PARTY_IDENTIFIED",
+    "name": "Max Mustermann"
+  },
+  "context": {
+    "_type": "EVENT_CONTEXT",
+    "start_time": {
+      "_type": "DV_DATE_TIME",
+      "value": "2022-02-03T04:05:06"
+    },
+    "end_time": {
+      "_type": "DV_DATE_TIME",
+      "value": "2022-02-03T04:05:06"
+    },
+    "setting": {
+      "_type": "DV_CODED_TEXT",
+      "value": "home",
+      "defining_code": {
+        "_type": "CODE_PHRASE",
+        "terminology_id": {
+          "_type": "TERMINOLOGY_ID",
+          "value": "openehr"
+        },
+        "code_string": "225"
+      }
+    },
+    "health_care_facility": {
+      "_type": "PARTY_IDENTIFIED",
+      "name": "DOE, John"
+    }
+  },
+  "content": [
+    {
+      "_type": "OBSERVATION",
+      "name": {
+        "_type": "DV_TEXT",
+        "value": "Symptom screening"
+      },
+      "archetype_details": {
+        "archetype_id": {
+          "value": "openEHR-EHR-OBSERVATION.symptom_sign_screening.v0"
+        },
+        "rm_version": "1.0.4"
+      },
+      "language": {
+        "_type": "CODE_PHRASE",
+        "terminology_id": {
+          "_type": "TERMINOLOGY_ID",
+          "value": "ISO_639-1"
+        },
+        "code_string": "en"
+      },
+      "encoding": {
+        "_type": "CODE_PHRASE",
+        "terminology_id": {
+          "_type": "TERMINOLOGY_ID",
+          "value": "IANA_character-sets"
+        },
+        "code_string": "ISO-10646-UTF-1"
+      },
+      "workflow_id": {
+        "_type": "OBJECT_REF",
+        "namespace": "unknown",
+        "type": "ANY",
+        "id": {
+          "_type": "GENERIC_ID",
+          "value": "cd61df77-4a42-3633-ba37-876f77c9a260",
+          "scheme": "scheme"
+        }
+      },
+      "subject": {
+        "_type": "PARTY_SELF"
+      },
+      "provider": {
+        "_type": "PARTY_SELF"
+      },
+      "guideline_id": {
+        "_type": "OBJECT_REF",
+        "namespace": "unknown",
+        "type": "ANY",
+        "id": {
+          "_type": "GENERIC_ID",
+          "value": "9437bb20-6370-37ab-9708-e4b25c940015",
+          "scheme": "scheme"
+        }
+      },
+      "data": {
+        "name": {
+          "_type": "DV_TEXT",
+          "value": "History"
+        },
+        "origin": {
+          "_type": "DV_DATE_TIME",
+          "value": "2022-02-03T04:05:06"
+        },
+        "period": {
+          "_type": "DV_DURATION",
+          "value": "PT0S"
+        },
+        "duration": {
+          "_type": "DV_DURATION",
+          "value": "PT0S"
+        },
+        "events": [
+          {
+            "_type": "INTERVAL_EVENT",
+            "name": {
+              "_type": "DV_TEXT",
+              "value": "Any event"
+            },
+            "time": {
+              "_type": "DV_DATE_TIME",
+              "value": "2022-02-03T04:05:06"
+            },
+            "data": {
+              "_type": "ITEM_TREE",
+              "name": {
+                "_type": "DV_TEXT",
+                "value": "Tree"
+              },
+              "items": [
+                {
+                  "_type": "ELEMENT",
+                  "name": {
+                    "_type": "DV_TEXT",
+                    "value": "Presence of any symptoms or signs?"
+                  },
+                  "value": {
+                    "_type": "DV_CODED_TEXT",
+                    "value": "Present",
+                    "defining_code": {
+                      "_type": "CODE_PHRASE",
+                      "terminology_id": {
+                        "_type": "TERMINOLOGY_ID",
+                        "value": "local"
+                      },
+                      "code_string": "at0031"
+                    }
+                  },
+                  "archetype_node_id": "at0028"
+                },
+                {
+                  "_type": "CLUSTER",
+                  "name": {
+                    "_type": "DV_TEXT",
+                    "value": "Symptoms"
+                  },
+                  "items": [
+                    {
+                      "_type": "ELEMENT",
+                      "name": {
+                        "_type": "DV_TEXT",
+                        "value": "Symptom"
+                      },
+                      "value": {
+                        "_type": "DV_TEXT",
+                        "value": "Recent fever or shivering"
+                      },
+                      "archetype_node_id": "at0004"
+                    },
+                    {
+                      "_type": "ELEMENT",
+                      "name": {
+                        "_type": "DV_TEXT",
+                        "value": "Y/N"
+                      },
+                      "value": {
+                        "_type": "DV_CODED_TEXT",
+                        "value": "Present",
+                        "defining_code": {
+                          "_type": "CODE_PHRASE",
+                          "terminology_id": {
+                            "_type": "TERMINOLOGY_ID",
+                            "value": "local"
+                          },
+                          "code_string": "at0023"
+                        }
+                      },
+                      "archetype_node_id": "at0005"
+                    },
+                    {
+                      "_type": "ELEMENT",
+                      "name": {
+                        "_type": "DV_TEXT",
+                        "value": "When did it start?"
+                      },
+                      "value": {
+                        "_type": "DV_DATE_TIME",
+                        "value": "2022-02-03T04:05:06"
+                      },
+                      "archetype_node_id": "at0006"
+                    },
+                    {
+                      "_type": "ELEMENT",
+                      "name": {
+                        "_type": "DV_TEXT",
+                        "value": "Comment"
+                      },
+                      "value": {
+                        "_type": "DV_TEXT",
+                        "value": "Lorem ipsum"
+                      },
+                      "archetype_node_id": "at0035"
+                    }
+                  ],
+                  "archetype_node_id": "at0022"
+                },
+                {
+                  "_type": "ELEMENT",
+                  "name": {
+                    "_type": "DV_TEXT",
+                    "value": "Notes"
+                  },
+                  "value": {
+                    "_type": "DV_TEXT",
+                    "value": "Lorem ipsum"
+                  },
+                  "archetype_node_id": "at0025"
+                }
+              ],
+              "archetype_node_id": "at0003"
+            },
+            "width": {
+              "_type": "DV_DURATION",
+              "value": "PT42H"
+            },
+            "math_function": {
+              "_type": "DV_CODED_TEXT",
+              "value": "minimum",
+              "defining_code": {
+                "_type": "CODE_PHRASE",
+                "terminology_id": {
+                  "_type": "TERMINOLOGY_ID",
+                  "value": "openehr"
+                },
+                "code_string": "145"
+              }
+            },
+            "archetype_node_id": "at0002"
+          },
+          {
+            "_type": "POINT_EVENT",
+            "name": {
+              "_type": "DV_TEXT",
+              "value": "Any event"
+            },
+            "time": {
+              "_type": "DV_DATE_TIME",
+              "value": "2022-02-03T04:05:06"
+            },
+            "data": {
+              "_type": "ITEM_TREE",
+              "name": {
+                "_type": "DV_TEXT",
+                "value": "Tree"
+              },
+              "items": [
+                {
+                  "_type": "ELEMENT",
+                  "name": {
+                    "_type": "DV_TEXT",
+                    "value": "Presence of any symptoms or signs?"
+                  },
+                  "value": {
+                    "_type": "DV_CODED_TEXT",
+                    "value": "Present",
+                    "defining_code": {
+                      "_type": "CODE_PHRASE",
+                      "terminology_id": {
+                        "_type": "TERMINOLOGY_ID",
+                        "value": "local"
+                      },
+                      "code_string": "at0031"
+                    }
+                  },
+                  "archetype_node_id": "at0028"
+                },
+                {
+                  "_type": "CLUSTER",
+                  "name": {
+                    "_type": "DV_TEXT",
+                    "value": "Symptoms"
+                  },
+                  "items": [
+                    {
+                      "_type": "ELEMENT",
+                      "name": {
+                        "_type": "DV_TEXT",
+                        "value": "Symptom"
+                      },
+                      "value": {
+                        "_type": "DV_TEXT",
+                        "value": "Recent fever or shivering"
+                      },
+                      "archetype_node_id": "at0004"
+                    },
+                    {
+                      "_type": "ELEMENT",
+                      "name": {
+                        "_type": "DV_TEXT",
+                        "value": "Y/N"
+                      },
+                      "value": {
+                        "_type": "DV_CODED_TEXT",
+                        "value": "Present",
+                        "defining_code": {
+                          "_type": "CODE_PHRASE",
+                          "terminology_id": {
+                            "_type": "TERMINOLOGY_ID",
+                            "value": "local"
+                          },
+                          "code_string": "at0023"
+                        }
+                      },
+                      "archetype_node_id": "at0005"
+                    },
+                    {
+                      "_type": "ELEMENT",
+                      "name": {
+                        "_type": "DV_TEXT",
+                        "value": "When did it start?"
+                      },
+                      "value": {
+                        "_type": "DV_DATE_TIME",
+                        "value": "2022-02-03T04:05:06"
+                      },
+                      "archetype_node_id": "at0006"
+                    },
+                    {
+                      "_type": "ELEMENT",
+                      "name": {
+                        "_type": "DV_TEXT",
+                        "value": "Comment"
+                      },
+                      "value": {
+                        "_type": "DV_TEXT",
+                        "value": "Lorem ipsum"
+                      },
+                      "archetype_node_id": "at0035"
+                    }
+                  ],
+                  "archetype_node_id": "at0022"
+                },
+                {
+                  "_type": "ELEMENT",
+                  "name": {
+                    "_type": "DV_TEXT",
+                    "value": "Notes"
+                  },
+                  "value": {
+                    "_type": "DV_TEXT",
+                    "value": "Lorem ipsum"
+                  },
+                  "archetype_node_id": "at0025"
+                }
+              ],
+              "archetype_node_id": "at0003"
+            },
+            "archetype_node_id": "at0002"
+          },
+          {
+            "_type": "INTERVAL_EVENT",
+            "name": {
+              "_type": "DV_TEXT",
+              "value": "Any event"
+            },
+            "time": {
+              "_type": "DV_DATE_TIME",
+              "value": "2022-02-03T04:05:06"
+            },
+            "data": {
+              "_type": "ITEM_TREE",
+              "name": {
+                "_type": "DV_TEXT",
+                "value": "Tree"
+              },
+              "items": [
+                {
+                  "_type": "ELEMENT",
+                  "name": {
+                    "_type": "DV_TEXT",
+                    "value": "Presence of any symptoms or signs?"
+                  },
+                  "value": {
+                    "_type": "DV_CODED_TEXT",
+                    "value": "Present",
+                    "defining_code": {
+                      "_type": "CODE_PHRASE",
+                      "terminology_id": {
+                        "_type": "TERMINOLOGY_ID",
+                        "value": "local"
+                      },
+                      "code_string": "at0031"
+                    }
+                  },
+                  "archetype_node_id": "at0028"
+                },
+                {
+                  "_type": "CLUSTER",
+                  "name": {
+                    "_type": "DV_TEXT",
+                    "value": "Symptoms"
+                  },
+                  "items": [
+                    {
+                      "_type": "ELEMENT",
+                      "name": {
+                        "_type": "DV_TEXT",
+                        "value": "Symptom"
+                      },
+                      "value": {
+                        "_type": "DV_TEXT",
+                        "value": "Recent fever or shivering"
+                      },
+                      "archetype_node_id": "at0004"
+                    },
+                    {
+                      "_type": "ELEMENT",
+                      "name": {
+                        "_type": "DV_TEXT",
+                        "value": "Y/N"
+                      },
+                      "value": {
+                        "_type": "DV_CODED_TEXT",
+                        "value": "Present",
+                        "defining_code": {
+                          "_type": "CODE_PHRASE",
+                          "terminology_id": {
+                            "_type": "TERMINOLOGY_ID",
+                            "value": "local"
+                          },
+                          "code_string": "at0023"
+                        }
+                      },
+                      "archetype_node_id": "at0005"
+                    },
+                    {
+                      "_type": "ELEMENT",
+                      "name": {
+                        "_type": "DV_TEXT",
+                        "value": "When did it start?"
+                      },
+                      "value": {
+                        "_type": "DV_DATE_TIME",
+                        "value": "2022-02-03T04:05:06"
+                      },
+                      "archetype_node_id": "at0006"
+                    },
+                    {
+                      "_type": "ELEMENT",
+                      "name": {
+                        "_type": "DV_TEXT",
+                        "value": "Comment"
+                      },
+                      "value": {
+                        "_type": "DV_TEXT",
+                        "value": "Lorem ipsum"
+                      },
+                      "archetype_node_id": "at0035"
+                    }
+                  ],
+                  "archetype_node_id": "at0022"
+                },
+                {
+                  "_type": "ELEMENT",
+                  "name": {
+                    "_type": "DV_TEXT",
+                    "value": "Notes"
+                  },
+                  "value": {
+                    "_type": "DV_TEXT",
+                    "value": "Lorem ipsum"
+                  },
+                  "archetype_node_id": "at0025"
+                }
+              ],
+              "archetype_node_id": "at0003"
+            },
+            "width": {
+              "_type": "DV_DURATION",
+              "value": "PT42H"
+            },
+            "math_function": {
+              "_type": "DV_CODED_TEXT",
+              "value": "minimum",
+              "defining_code": {
+                "_type": "CODE_PHRASE",
+                "terminology_id": {
+                  "_type": "TERMINOLOGY_ID",
+                  "value": "openehr"
+                },
+                "code_string": "145"
+              }
+            },
+            "archetype_node_id": "at0002"
+          }
+        ],
+        "archetype_node_id": "at0001"
+      },
+      "archetype_node_id": "openEHR-EHR-OBSERVATION.symptom_sign_screening.v0"
+    },
+    {
+      "_type": "EVALUATION",
+      "name": {
+        "_type": "DV_TEXT",
+        "value": "Living arrangement"
+      },
+      "archetype_details": {
+        "archetype_id": {
+          "value": "openEHR-EHR-EVALUATION.living_arrangement.v0"
+        },
+        "rm_version": "1.0.4"
+      },
+      "language": {
+        "_type": "CODE_PHRASE",
+        "terminology_id": {
+          "_type": "TERMINOLOGY_ID",
+          "value": "ISO_639-1"
+        },
+        "code_string": "en"
+      },
+      "encoding": {
+        "_type": "CODE_PHRASE",
+        "terminology_id": {
+          "_type": "TERMINOLOGY_ID",
+          "value": "IANA_character-sets"
+        },
+        "code_string": "ISO-10646-UTF-1"
+      },
+      "workflow_id": {
+        "_type": "OBJECT_REF",
+        "namespace": "unknown",
+        "type": "ANY",
+        "id": {
+          "_type": "GENERIC_ID",
+          "value": "3abdb169-f520-3094-9c85-9c3cbc683b5a",
+          "scheme": "scheme"
+        }
+      },
+      "subject": {
+        "_type": "PARTY_SELF"
+      },
+      "provider": {
+        "_type": "PARTY_SELF"
+      },
+      "guideline_id": {
+        "_type": "OBJECT_REF",
+        "namespace": "unknown",
+        "type": "ANY",
+        "id": {
+          "_type": "GENERIC_ID",
+          "value": "db17fdfc-d191-366b-bbc7-7527f61ea285",
+          "scheme": "scheme"
+        }
+      },
+      "time_asserted": {
+        "_type": "DV_DATE_TIME",
+        "value": "2022-02-03T04:05:06"
+      },
+      "data": {
+        "_type": "ITEM_TREE",
+        "name": {
+          "_type": "DV_TEXT",
+          "value": "Item tree"
+        },
+        "items": [
+          {
+            "_type": "ELEMENT",
+            "name": {
+              "_type": "DV_TEXT",
+              "value": "Number of household members"
+            },
+            "value": {
+              "_type": "DV_COUNT",
+              "magnitude": 42
+            },
+            "archetype_node_id": "at0007"
+          },
+          {
+            "_type": "CLUSTER",
+            "name": {
+              "_type": "DV_TEXT",
+              "value": "Dwelling"
+            },
+            "archetype_details": {
+              "archetype_id": {
+                "value": "openEHR-EHR-CLUSTER.dwelling.v0"
+              },
+              "rm_version": "1.0.4"
+            },
+            "items": [
+              {
+                "_type": "ELEMENT",
+                "name": {
+                  "_type": "DV_TEXT",
+                  "value": "Number of bedrooms"
+                },
+                "value": {
+                  "_type": "DV_COUNT",
+                  "magnitude": 42
+                },
+                "archetype_node_id": "at0028"
+              },
+              {
+                "_type": "CLUSTER",
+                "name": {
+                  "_type": "DV_TEXT",
+                  "value": "Overcrowding screening"
+                },
+                "archetype_details": {
+                  "archetype_id": {
+                    "value": "openEHR-EHR-CLUSTER.overcrowding_screening.v0"
+                  },
+                  "rm_version": "1.0.4"
+                },
+                "items": [
+                  {
+                    "_type": "ELEMENT",
+                    "name": {
+                      "_type": "DV_TEXT",
+                      "value": "Number of persons sleeping in your bedroom"
+                    },
+                    "value": {
+                      "_type": "DV_COUNT",
+                      "magnitude": 42
+                    },
+                    "archetype_node_id": "at0002"
+                  }
+                ],
+                "archetype_node_id": "openEHR-EHR-CLUSTER.overcrowding_screening.v0"
+              }
+            ],
+            "archetype_node_id": "openEHR-EHR-CLUSTER.dwelling.v0"
+          }
+        ],
+        "archetype_node_id": "at0001"
+      },
+      "archetype_node_id": "openEHR-EHR-EVALUATION.living_arrangement.v0"
+    },
+    {
+      "_type": "OBSERVATION",
+      "name": {
+        "_type": "DV_TEXT",
+        "value": "Exposure assessment"
+      },
+      "archetype_details": {
+        "archetype_id": {
+          "value": "openEHR-EHR-OBSERVATION.exposure_assessment.v0"
+        },
+        "rm_version": "1.0.4"
+      },
+      "language": {
+        "_type": "CODE_PHRASE",
+        "terminology_id": {
+          "_type": "TERMINOLOGY_ID",
+          "value": "ISO_639-1"
+        },
+        "code_string": "en"
+      },
+      "encoding": {
+        "_type": "CODE_PHRASE",
+        "terminology_id": {
+          "_type": "TERMINOLOGY_ID",
+          "value": "IANA_character-sets"
+        },
+        "code_string": "ISO-10646-UTF-1"
+      },
+      "workflow_id": {
+        "_type": "OBJECT_REF",
+        "namespace": "unknown",
+        "type": "ANY",
+        "id": {
+          "_type": "GENERIC_ID",
+          "value": "2a4a346b-ac45-3e9c-beca-3a5271856519",
+          "scheme": "scheme"
+        }
+      },
+      "subject": {
+        "_type": "PARTY_SELF"
+      },
+      "provider": {
+        "_type": "PARTY_SELF"
+      },
+      "guideline_id": {
+        "_type": "OBJECT_REF",
+        "namespace": "unknown",
+        "type": "ANY",
+        "id": {
+          "_type": "GENERIC_ID",
+          "value": "9bc19020-42c1-3937-acaf-f05a35b6897c",
+          "scheme": "scheme"
+        }
+      },
+      "data": {
+        "name": {
+          "_type": "DV_TEXT",
+          "value": "History"
+        },
+        "origin": {
+          "_type": "DV_DATE_TIME",
+          "value": "2022-02-03T04:05:06"
+        },
+        "period": {
+          "_type": "DV_DURATION",
+          "value": "PT0S"
+        },
+        "duration": {
+          "_type": "DV_DURATION",
+          "value": "PT0S"
+        },
+        "events": [
+          {
+            "_type": "INTERVAL_EVENT",
+            "name": {
+              "_type": "DV_TEXT",
+              "value": "Any event"
+            },
+            "time": {
+              "_type": "DV_DATE_TIME",
+              "value": "2022-02-03T04:05:06"
+            },
+            "data": {
+              "_type": "ITEM_TREE",
+              "name": {
+                "_type": "DV_TEXT",
+                "value": "Item tree"
+              },
+              "items": [
+                {
+                  "_type": "ELEMENT",
+                  "name": {
+                    "_type": "DV_TEXT",
+                    "value": "Exposure"
+                  },
+                  "value": {
+                    "_type": "DV_TEXT",
+                    "value": "Exposure to COVID-19 virus"
+                  },
+                  "archetype_node_id": "at0043"
+                },
+                {
+                  "_type": "CLUSTER",
+                  "name": {
+                    "_type": "DV_TEXT",
+                    "value": "Per risk factor"
+                  },
+                  "items": [
+                    {
+                      "_type": "ELEMENT",
+                      "name": {
+                        "_type": "DV_TEXT",
+                        "value": "Risk factor"
+                      },
+                      "value": {
+                        "_type": "DV_TEXT",
+                        "value": "Contact with anyone who has had or has been tested for COVID-19"
+                      },
+                      "archetype_node_id": "at0045"
+                    },
+                    {
+                      "_type": "ELEMENT",
+                      "name": {
+                        "_type": "DV_TEXT",
+                        "value": "Presence"
+                      },
+                      "value": {
+                        "_type": "DV_CODED_TEXT",
+                        "value": "Present",
+                        "defining_code": {
+                          "_type": "CODE_PHRASE",
+                          "terminology_id": {
+                            "_type": "TERMINOLOGY_ID",
+                            "value": "local"
+                          },
+                          "code_string": "at0047"
+                        }
+                      },
+                      "archetype_node_id": "at0046"
+                    },
+                    {
+                      "_type": "ELEMENT",
+                      "name": {
+                        "_type": "DV_TEXT",
+                        "value": "Details"
+                      },
+                      "value": {
+                        "_type": "DV_TEXT",
+                        "value": "Lorem ipsum"
+                      },
+                      "archetype_node_id": "at0050"
+                    }
+                  ],
+                  "archetype_node_id": "at0044"
+                }
+              ],
+              "archetype_node_id": "at0042"
+            },
+            "width": {
+              "_type": "DV_DURATION",
+              "value": "PT42H"
+            },
+            "math_function": {
+              "_type": "DV_CODED_TEXT",
+              "value": "minimum",
+              "defining_code": {
+                "_type": "CODE_PHRASE",
+                "terminology_id": {
+                  "_type": "TERMINOLOGY_ID",
+                  "value": "openehr"
+                },
+                "code_string": "145"
+              }
+            },
+            "archetype_node_id": "at0002"
+          },
+          {
+            "_type": "POINT_EVENT",
+            "name": {
+              "_type": "DV_TEXT",
+              "value": "Any event"
+            },
+            "time": {
+              "_type": "DV_DATE_TIME",
+              "value": "2022-02-03T04:05:06"
+            },
+            "data": {
+              "_type": "ITEM_TREE",
+              "name": {
+                "_type": "DV_TEXT",
+                "value": "Item tree"
+              },
+              "items": [
+                {
+                  "_type": "ELEMENT",
+                  "name": {
+                    "_type": "DV_TEXT",
+                    "value": "Exposure"
+                  },
+                  "value": {
+                    "_type": "DV_TEXT",
+                    "value": "Exposure to COVID-19 virus"
+                  },
+                  "archetype_node_id": "at0043"
+                },
+                {
+                  "_type": "CLUSTER",
+                  "name": {
+                    "_type": "DV_TEXT",
+                    "value": "Per risk factor"
+                  },
+                  "items": [
+                    {
+                      "_type": "ELEMENT",
+                      "name": {
+                        "_type": "DV_TEXT",
+                        "value": "Risk factor"
+                      },
+                      "value": {
+                        "_type": "DV_TEXT",
+                        "value": "Contact with anyone who has had or has been tested for COVID-19"
+                      },
+                      "archetype_node_id": "at0045"
+                    },
+                    {
+                      "_type": "ELEMENT",
+                      "name": {
+                        "_type": "DV_TEXT",
+                        "value": "Presence"
+                      },
+                      "value": {
+                        "_type": "DV_CODED_TEXT",
+                        "value": "Present",
+                        "defining_code": {
+                          "_type": "CODE_PHRASE",
+                          "terminology_id": {
+                            "_type": "TERMINOLOGY_ID",
+                            "value": "local"
+                          },
+                          "code_string": "at0047"
+                        }
+                      },
+                      "archetype_node_id": "at0046"
+                    },
+                    {
+                      "_type": "ELEMENT",
+                      "name": {
+                        "_type": "DV_TEXT",
+                        "value": "Details"
+                      },
+                      "value": {
+                        "_type": "DV_TEXT",
+                        "value": "Lorem ipsum"
+                      },
+                      "archetype_node_id": "at0050"
+                    }
+                  ],
+                  "archetype_node_id": "at0044"
+                }
+              ],
+              "archetype_node_id": "at0042"
+            },
+            "archetype_node_id": "at0002"
+          },
+          {
+            "_type": "INTERVAL_EVENT",
+            "name": {
+              "_type": "DV_TEXT",
+              "value": "Any event"
+            },
+            "time": {
+              "_type": "DV_DATE_TIME",
+              "value": "2022-02-03T04:05:06"
+            },
+            "data": {
+              "_type": "ITEM_TREE",
+              "name": {
+                "_type": "DV_TEXT",
+                "value": "Item tree"
+              },
+              "items": [
+                {
+                  "_type": "ELEMENT",
+                  "name": {
+                    "_type": "DV_TEXT",
+                    "value": "Exposure"
+                  },
+                  "value": {
+                    "_type": "DV_TEXT",
+                    "value": "Exposure to COVID-19 virus"
+                  },
+                  "archetype_node_id": "at0043"
+                },
+                {
+                  "_type": "CLUSTER",
+                  "name": {
+                    "_type": "DV_TEXT",
+                    "value": "Per risk factor"
+                  },
+                  "items": [
+                    {
+                      "_type": "ELEMENT",
+                      "name": {
+                        "_type": "DV_TEXT",
+                        "value": "Risk factor"
+                      },
+                      "value": {
+                        "_type": "DV_TEXT",
+                        "value": "Contact with anyone who has had or has been tested for COVID-19"
+                      },
+                      "archetype_node_id": "at0045"
+                    },
+                    {
+                      "_type": "ELEMENT",
+                      "name": {
+                        "_type": "DV_TEXT",
+                        "value": "Presence"
+                      },
+                      "value": {
+                        "_type": "DV_CODED_TEXT",
+                        "value": "Present",
+                        "defining_code": {
+                          "_type": "CODE_PHRASE",
+                          "terminology_id": {
+                            "_type": "TERMINOLOGY_ID",
+                            "value": "local"
+                          },
+                          "code_string": "at0047"
+                        }
+                      },
+                      "archetype_node_id": "at0046"
+                    },
+                    {
+                      "_type": "ELEMENT",
+                      "name": {
+                        "_type": "DV_TEXT",
+                        "value": "Details"
+                      },
+                      "value": {
+                        "_type": "DV_TEXT",
+                        "value": "Lorem ipsum"
+                      },
+                      "archetype_node_id": "at0050"
+                    }
+                  ],
+                  "archetype_node_id": "at0044"
+                }
+              ],
+              "archetype_node_id": "at0042"
+            },
+            "width": {
+              "_type": "DV_DURATION",
+              "value": "PT42H"
+            },
+            "math_function": {
+              "_type": "DV_CODED_TEXT",
+              "value": "minimum",
+              "defining_code": {
+                "_type": "CODE_PHRASE",
+                "terminology_id": {
+                  "_type": "TERMINOLOGY_ID",
+                  "value": "openehr"
+                },
+                "code_string": "145"
+              }
+            },
+            "archetype_node_id": "at0002"
+          }
+        ],
+        "archetype_node_id": "at0001"
+      },
+      "archetype_node_id": "openEHR-EHR-OBSERVATION.exposure_assessment.v0"
+    },
+    {
+      "_type": "OBSERVATION",
+      "name": {
+        "_type": "DV_TEXT",
+        "value": "Travel event"
+      },
+      "archetype_details": {
+        "archetype_id": {
+          "value": "openEHR-EHR-OBSERVATION.travel_event.v0"
+        },
+        "rm_version": "1.0.4"
+      },
+      "language": {
+        "_type": "CODE_PHRASE",
+        "terminology_id": {
+          "_type": "TERMINOLOGY_ID",
+          "value": "ISO_639-1"
+        },
+        "code_string": "en"
+      },
+      "encoding": {
+        "_type": "CODE_PHRASE",
+        "terminology_id": {
+          "_type": "TERMINOLOGY_ID",
+          "value": "IANA_character-sets"
+        },
+        "code_string": "ISO-10646-UTF-1"
+      },
+      "workflow_id": {
+        "_type": "OBJECT_REF",
+        "namespace": "unknown",
+        "type": "ANY",
+        "id": {
+          "_type": "GENERIC_ID",
+          "value": "948761c6-e2c4-3963-98b3-f3606eceb7d7",
+          "scheme": "scheme"
+        }
+      },
+      "subject": {
+        "_type": "PARTY_SELF"
+      },
+      "provider": {
+        "_type": "PARTY_SELF"
+      },
+      "guideline_id": {
+        "_type": "OBJECT_REF",
+        "namespace": "unknown",
+        "type": "ANY",
+        "id": {
+          "_type": "GENERIC_ID",
+          "value": "01da009b-732a-3f04-b08a-193861393921",
+          "scheme": "scheme"
+        }
+      },
+      "data": {
+        "name": {
+          "_type": "DV_TEXT",
+          "value": "History"
+        },
+        "origin": {
+          "_type": "DV_DATE_TIME",
+          "value": "2022-02-03T04:05:06"
+        },
+        "period": {
+          "_type": "DV_DURATION",
+          "value": "PT0S"
+        },
+        "duration": {
+          "_type": "DV_DURATION",
+          "value": "PT0S"
+        },
+        "events": [
+          {
+            "_type": "INTERVAL_EVENT",
+            "name": {
+              "_type": "DV_TEXT",
+              "value": "Last 14 days"
+            },
+            "time": {
+              "_type": "DV_DATE_TIME",
+              "value": "2022-02-03T04:05:06"
+            },
+            "data": {
+              "_type": "ITEM_TREE",
+              "name": {
+                "_type": "DV_TEXT",
+                "value": "Tree"
+              },
+              "items": [
+                {
+                  "_type": "ELEMENT",
+                  "name": {
+                    "_type": "DV_TEXT",
+                    "value": "Travel?"
+                  },
+                  "value": {
+                    "_type": "DV_CODED_TEXT",
+                    "value": "No",
+                    "defining_code": {
+                      "_type": "CODE_PHRASE",
+                      "terminology_id": {
+                        "_type": "TERMINOLOGY_ID",
+                        "value": "local"
+                      },
+                      "code_string": "at0005"
+                    }
+                  },
+                  "archetype_node_id": "at0004"
+                },
+                {
+                  "_type": "CLUSTER",
+                  "name": {
+                    "_type": "DV_TEXT",
+                    "value": "Trip detail"
+                  },
+                  "items": [
+                    {
+                      "_type": "ELEMENT",
+                      "name": {
+                        "_type": "DV_TEXT",
+                        "value": "Date of departure"
+                      },
+                      "value": {
+                        "_type": "DV_DATE_TIME",
+                        "value": "2022-02-03T04:05:06"
+                      },
+                      "archetype_node_id": "at0009"
+                    },
+                    {
+                      "_type": "ELEMENT",
+                      "name": {
+                        "_type": "DV_TEXT",
+                        "value": "Description"
+                      },
+                      "value": {
+                        "_type": "DV_TEXT",
+                        "value": "Lorem ipsum"
+                      },
+                      "archetype_node_id": "at0022"
+                    },
+                    {
+                      "_type": "CLUSTER",
+                      "name": {
+                        "_type": "DV_TEXT",
+                        "value": "Travel destination"
+                      },
+                      "items": [
+                        {
+                          "_type": "ELEMENT",
+                          "name": {
+                            "_type": "DV_TEXT",
+                            "value": "Country"
+                          },
+                          "value": {
+                            "_type": "DV_TEXT",
+                            "value": "Lorem ipsum"
+                          },
+                          "archetype_node_id": "at0011"
+                        },
+                        {
+                          "_type": "ELEMENT",
+                          "name": {
+                            "_type": "DV_TEXT",
+                            "value": "State/region"
+                          },
+                          "value": {
+                            "_type": "DV_TEXT",
+                            "value": "Lorem ipsum"
+                          },
+                          "archetype_node_id": "at0012"
+                        },
+                        {
+                          "_type": "ELEMENT",
+                          "name": {
+                            "_type": "DV_TEXT",
+                            "value": "City"
+                          },
+                          "value": {
+                            "_type": "DV_TEXT",
+                            "value": "Lorem ipsum"
+                          },
+                          "archetype_node_id": "at0013"
+                        },
+                        {
+                          "_type": "ELEMENT",
+                          "name": {
+                            "_type": "DV_TEXT",
+                            "value": "Date of entry"
+                          },
+                          "value": {
+                            "_type": "DV_DATE_TIME",
+                            "value": "2022-02-03T04:05:06"
+                          },
+                          "archetype_node_id": "at0014"
+                        },
+                        {
+                          "_type": "ELEMENT",
+                          "name": {
+                            "_type": "DV_TEXT",
+                            "value": "Date of exit"
+                          },
+                          "value": {
+                            "_type": "DV_DATE_TIME",
+                            "value": "2022-02-03T04:05:06"
+                          },
+                          "archetype_node_id": "at0015"
+                        },
+                        {
+                          "_type": "ELEMENT",
+                          "name": {
+                            "_type": "DV_TEXT",
+                            "value": "Description"
+                          },
+                          "value": {
+                            "_type": "DV_TEXT",
+                            "value": "Lorem ipsum"
+                          },
+                          "archetype_node_id": "at0016"
+                        },
+                        {
+                          "_type": "ELEMENT",
+                          "name": {
+                            "_type": "DV_TEXT",
+                            "value": "Comment"
+                          },
+                          "value": {
+                            "_type": "DV_TEXT",
+                            "value": "Lorem ipsum"
+                          },
+                          "archetype_node_id": "at0017"
+                        }
+                      ],
+                      "archetype_node_id": "at0010"
+                    },
+                    {
+                      "_type": "ELEMENT",
+                      "name": {
+                        "_type": "DV_TEXT",
+                        "value": "Return transport"
+                      },
+                      "value": {
+                        "_type": "DV_TEXT",
+                        "value": "Lorem ipsum"
+                      },
+                      "archetype_node_id": "at0018"
+                    },
+                    {
+                      "_type": "ELEMENT",
+                      "name": {
+                        "_type": "DV_TEXT",
+                        "value": "Date of return"
+                      },
+                      "value": {
+                        "_type": "DV_DATE_TIME",
+                        "value": "2022-02-03T04:05:06"
+                      },
+                      "archetype_node_id": "at0019"
+                    },
+                    {
+                      "_type": "ELEMENT",
+                      "name": {
+                        "_type": "DV_TEXT",
+                        "value": "Comment"
+                      },
+                      "value": {
+                        "_type": "DV_TEXT",
+                        "value": "Lorem ipsum"
+                      },
+                      "archetype_node_id": "at0020"
+                    }
+                  ],
+                  "archetype_node_id": "at0008"
+                }
+              ],
+              "archetype_node_id": "at0003"
+            },
+            "width": {
+              "_type": "DV_DURATION",
+              "value": "PT0S"
+            },
+            "math_function": {
+              "_type": "DV_CODED_TEXT",
+              "value": "minimum",
+              "defining_code": {
+                "_type": "CODE_PHRASE",
+                "terminology_id": {
+                  "_type": "TERMINOLOGY_ID",
+                  "value": "openehr"
+                },
+                "code_string": "145"
+              }
+            },
+            "archetype_node_id": "at0002"
+          }
+        ],
+        "archetype_node_id": "at0001"
+      },
+      "archetype_node_id": "openEHR-EHR-OBSERVATION.travel_event.v0"
+    },
+    {
+      "_type": "OBSERVATION",
+      "name": {
+        "_type": "DV_TEXT",
+        "value": "Household member travel event"
+      },
+      "archetype_details": {
+        "archetype_id": {
+          "value": "openEHR-EHR-OBSERVATION.travel_event.v0"
+        },
+        "rm_version": "1.0.4"
+      },
+      "language": {
+        "_type": "CODE_PHRASE",
+        "terminology_id": {
+          "_type": "TERMINOLOGY_ID",
+          "value": "ISO_639-1"
+        },
+        "code_string": "en"
+      },
+      "encoding": {
+        "_type": "CODE_PHRASE",
+        "terminology_id": {
+          "_type": "TERMINOLOGY_ID",
+          "value": "IANA_character-sets"
+        },
+        "code_string": "ISO-10646-UTF-1"
+      },
+      "workflow_id": {
+        "_type": "OBJECT_REF",
+        "namespace": "unknown",
+        "type": "ANY",
+        "id": {
+          "_type": "GENERIC_ID",
+          "value": "ecce5881-db24-3e68-96d5-3cb4656fa239",
+          "scheme": "scheme"
+        }
+      },
+      "subject": {
+        "_type": "PARTY_SELF"
+      },
+      "provider": {
+        "_type": "PARTY_SELF"
+      },
+      "guideline_id": {
+        "_type": "OBJECT_REF",
+        "namespace": "unknown",
+        "type": "ANY",
+        "id": {
+          "_type": "GENERIC_ID",
+          "value": "611d663c-bd0d-3839-8dfe-df2ba1fc2e0f",
+          "scheme": "scheme"
+        }
+      },
+      "data": {
+        "name": {
+          "_type": "DV_TEXT",
+          "value": "History"
+        },
+        "origin": {
+          "_type": "DV_DATE_TIME",
+          "value": "2022-02-03T04:05:06"
+        },
+        "period": {
+          "_type": "DV_DURATION",
+          "value": "PT0S"
+        },
+        "duration": {
+          "_type": "DV_DURATION",
+          "value": "PT0S"
+        },
+        "events": [
+          {
+            "_type": "INTERVAL_EVENT",
+            "name": {
+              "_type": "DV_TEXT",
+              "value": "Last 14 days"
+            },
+            "time": {
+              "_type": "DV_DATE_TIME",
+              "value": "2022-02-03T04:05:06"
+            },
+            "data": {
+              "_type": "ITEM_TREE",
+              "name": {
+                "_type": "DV_TEXT",
+                "value": "Tree"
+              },
+              "items": [
+                {
+                  "_type": "ELEMENT",
+                  "name": {
+                    "_type": "DV_TEXT",
+                    "value": "Travel?"
+                  },
+                  "value": {
+                    "_type": "DV_CODED_TEXT",
+                    "value": "No",
+                    "defining_code": {
+                      "_type": "CODE_PHRASE",
+                      "terminology_id": {
+                        "_type": "TERMINOLOGY_ID",
+                        "value": "local"
+                      },
+                      "code_string": "at0005"
+                    }
+                  },
+                  "archetype_node_id": "at0004"
+                },
+                {
+                  "_type": "CLUSTER",
+                  "name": {
+                    "_type": "DV_TEXT",
+                    "value": "Trip detail"
+                  },
+                  "items": [
+                    {
+                      "_type": "ELEMENT",
+                      "name": {
+                        "_type": "DV_TEXT",
+                        "value": "Date of departure"
+                      },
+                      "value": {
+                        "_type": "DV_DATE_TIME",
+                        "value": "2022-02-03T04:05:06"
+                      },
+                      "archetype_node_id": "at0009"
+                    },
+                    {
+                      "_type": "ELEMENT",
+                      "name": {
+                        "_type": "DV_TEXT",
+                        "value": "Description"
+                      },
+                      "value": {
+                        "_type": "DV_TEXT",
+                        "value": "Lorem ipsum"
+                      },
+                      "archetype_node_id": "at0022"
+                    },
+                    {
+                      "_type": "CLUSTER",
+                      "name": {
+                        "_type": "DV_TEXT",
+                        "value": "Travel destination"
+                      },
+                      "items": [
+                        {
+                          "_type": "ELEMENT",
+                          "name": {
+                            "_type": "DV_TEXT",
+                            "value": "Country"
+                          },
+                          "value": {
+                            "_type": "DV_TEXT",
+                            "value": "Lorem ipsum"
+                          },
+                          "archetype_node_id": "at0011"
+                        },
+                        {
+                          "_type": "ELEMENT",
+                          "name": {
+                            "_type": "DV_TEXT",
+                            "value": "State/region"
+                          },
+                          "value": {
+                            "_type": "DV_TEXT",
+                            "value": "Lorem ipsum"
+                          },
+                          "archetype_node_id": "at0012"
+                        },
+                        {
+                          "_type": "ELEMENT",
+                          "name": {
+                            "_type": "DV_TEXT",
+                            "value": "City"
+                          },
+                          "value": {
+                            "_type": "DV_TEXT",
+                            "value": "Lorem ipsum"
+                          },
+                          "archetype_node_id": "at0013"
+                        },
+                        {
+                          "_type": "ELEMENT",
+                          "name": {
+                            "_type": "DV_TEXT",
+                            "value": "Date of entry"
+                          },
+                          "value": {
+                            "_type": "DV_DATE_TIME",
+                            "value": "2022-02-03T04:05:06"
+                          },
+                          "archetype_node_id": "at0014"
+                        },
+                        {
+                          "_type": "ELEMENT",
+                          "name": {
+                            "_type": "DV_TEXT",
+                            "value": "Date of exit"
+                          },
+                          "value": {
+                            "_type": "DV_DATE_TIME",
+                            "value": "2022-02-03T04:05:06"
+                          },
+                          "archetype_node_id": "at0015"
+                        },
+                        {
+                          "_type": "ELEMENT",
+                          "name": {
+                            "_type": "DV_TEXT",
+                            "value": "Description"
+                          },
+                          "value": {
+                            "_type": "DV_TEXT",
+                            "value": "Lorem ipsum"
+                          },
+                          "archetype_node_id": "at0016"
+                        },
+                        {
+                          "_type": "ELEMENT",
+                          "name": {
+                            "_type": "DV_TEXT",
+                            "value": "Comment"
+                          },
+                          "value": {
+                            "_type": "DV_TEXT",
+                            "value": "Lorem ipsum"
+                          },
+                          "archetype_node_id": "at0017"
+                        }
+                      ],
+                      "archetype_node_id": "at0010"
+                    },
+                    {
+                      "_type": "ELEMENT",
+                      "name": {
+                        "_type": "DV_TEXT",
+                        "value": "Return transport"
+                      },
+                      "value": {
+                        "_type": "DV_TEXT",
+                        "value": "Lorem ipsum"
+                      },
+                      "archetype_node_id": "at0018"
+                    },
+                    {
+                      "_type": "ELEMENT",
+                      "name": {
+                        "_type": "DV_TEXT",
+                        "value": "Date of return"
+                      },
+                      "value": {
+                        "_type": "DV_DATE_TIME",
+                        "value": "2022-02-03T04:05:06"
+                      },
+                      "archetype_node_id": "at0019"
+                    },
+                    {
+                      "_type": "ELEMENT",
+                      "name": {
+                        "_type": "DV_TEXT",
+                        "value": "Comment"
+                      },
+                      "value": {
+                        "_type": "DV_TEXT",
+                        "value": "Lorem ipsum"
+                      },
+                      "archetype_node_id": "at0020"
+                    }
+                  ],
+                  "archetype_node_id": "at0008"
+                }
+              ],
+              "archetype_node_id": "at0003"
+            },
+            "width": {
+              "_type": "DV_DURATION",
+              "value": "PT0S"
+            },
+            "math_function": {
+              "_type": "DV_CODED_TEXT",
+              "value": "minimum",
+              "defining_code": {
+                "_type": "CODE_PHRASE",
+                "terminology_id": {
+                  "_type": "TERMINOLOGY_ID",
+                  "value": "openehr"
+                },
+                "code_string": "145"
+              }
+            },
+            "archetype_node_id": "at0002"
+          }
+        ],
+        "archetype_node_id": "at0001"
+      },
+      "archetype_node_id": "openEHR-EHR-OBSERVATION.travel_event.v0"
+    }
+  ],
+  "archetype_node_id": "openEHR-EHR-COMPOSITION.encounter.v1"
+}

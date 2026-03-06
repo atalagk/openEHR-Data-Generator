@@ -1,0 +1,1766 @@
+{
+  "templateId": "ePrescription(epSoS-Contsys)",
+  "version": "2.3",
+  "defaultLanguage": "en",
+  "languages": [
+    "en"
+  ],
+  "tree": {
+    "id": "prescription",
+    "name": "Prescription",
+    "localizedName": "Prescription",
+    "rmType": "COMPOSITION",
+    "nodeId": "openEHR-EHR-COMPOSITION.prescription.v0",
+    "min": 1,
+    "max": 1,
+    "localizedNames": {
+      "en": "Prescription"
+    },
+    "localizedDescriptions": {
+      "en": "Set of medication orders communicated to pharmacy."
+    },
+    "children": [
+      {
+        "id": "category",
+        "name": "category",
+        "localizedName": "category",
+        "rmType": "DV_CODED_TEXT",
+        "min": 1,
+        "max": 1,
+        "aqlPath": "/category",
+        "inputs": [
+          {
+            "suffix": "code",
+            "type": "CODED_TEXT",
+            "list": [
+              {
+                "value": "433",
+                "label": "event",
+                "localizedLabels": {
+                  "en": "event"
+                }
+              }
+            ],
+            "terminology": "openehr"
+          }
+        ],
+        "inContext": true
+      },
+      {
+        "id": "context",
+        "name": "context",
+        "localizedName": "context",
+        "rmType": "EVENT_CONTEXT",
+        "min": 1,
+        "max": 1,
+        "aqlPath": "/context",
+        "children": [
+          {
+            "id": "prescription_id",
+            "name": "Prescription Id",
+            "localizedName": "Prescription Id",
+            "rmType": "DV_IDENTIFIER",
+            "nodeId": "at0008",
+            "min": 0,
+            "max": 1,
+            "localizedNames": {
+              "en": "Prescription Id"
+            },
+            "localizedDescriptions": {
+              "en": "An identifier for the prescription as a whole."
+            },
+            "aqlPath": "/context/other_context[at0001]/items[at0008 and name/value='Prescription Id']/value",
+            "inputs": [
+              {
+                "suffix": "id",
+                "type": "TEXT"
+              },
+              {
+                "suffix": "type",
+                "type": "TEXT"
+              },
+              {
+                "suffix": "issuer",
+                "type": "TEXT"
+              },
+              {
+                "suffix": "assigner",
+                "type": "TEXT"
+              }
+            ]
+          },
+          {
+            "id": "start_time",
+            "name": "start_time",
+            "rmType": "DV_DATE_TIME",
+            "min": 1,
+            "max": 1,
+            "aqlPath": "/context/start_time",
+            "inputs": [
+              {
+                "type": "DATETIME"
+              }
+            ],
+            "inContext": true
+          },
+          {
+            "id": "setting",
+            "name": "setting",
+            "rmType": "DV_CODED_TEXT",
+            "min": 1,
+            "max": 1,
+            "aqlPath": "/context/setting",
+            "inputs": [
+              {
+                "suffix": "code",
+                "type": "TEXT"
+              },
+              {
+                "suffix": "value",
+                "type": "TEXT"
+              }
+            ],
+            "inContext": true
+          }
+        ]
+      },
+      {
+        "id": "medication_order",
+        "name": "Medication order",
+        "localizedName": "Medication order",
+        "rmType": "INSTRUCTION",
+        "nodeId": "openEHR-EHR-INSTRUCTION.medication_order.v0",
+        "min": 0,
+        "max": -1,
+        "localizedNames": {
+          "en": "Medication order"
+        },
+        "localizedDescriptions": {
+          "en": "Instructions for use of a medication, vaccine or other therapeutic item."
+        },
+        "aqlPath": "/content[openEHR-EHR-INSTRUCTION.medication_order.v0]",
+        "children": [
+          {
+            "id": "order",
+            "name": "Order",
+            "localizedName": "Order",
+            "rmType": "ACTIVITY",
+            "nodeId": "at0001",
+            "min": 0,
+            "max": -1,
+            "localizedNames": {
+              "en": "Order"
+            },
+            "localizedDescriptions": {
+              "en": "Order."
+            },
+            "aqlPath": "/content[openEHR-EHR-INSTRUCTION.medication_order.v0]/activities[at0001]",
+            "children": [
+              {
+                "id": "local_medicinal_product_brand",
+                "name": "Local medicinal product brand",
+                "localizedName": "Local medicinal product brand",
+                "rmType": "DV_TEXT",
+                "nodeId": "at0070",
+                "min": 1,
+                "max": 1,
+                "localizedNames": {
+                  "en": "Local medicinal product brand"
+                },
+                "localizedDescriptions": {
+                  "en": "Identification of the medication, vaccine or other therapeutic item being ordered."
+                },
+                "aqlPath": "/content[openEHR-EHR-INSTRUCTION.medication_order.v0]/activities[at0001]/description[at0002]/items[at0070 and name/value='Local medicinal product brand']/value",
+                "inputs": [
+                  {
+                    "type": "TEXT"
+                  }
+                ],
+                "annotations": {
+                  "comment": "It is strongly recommended that the 'Medication item' be coded with a terminology capable of triggering decision support, where possible. The extent of coding may vary from the simple name of the medication item through to structured details about the actual medication pack to be used. Free text entry should only be used if there is no appropriate terminology available."
+                }
+              },
+              {
+                "id": "preparation",
+                "name": "Preparation",
+                "localizedName": "Preparation",
+                "rmType": "CLUSTER",
+                "nodeId": "openEHR-EHR-CLUSTER.medication_substance.v0",
+                "min": 0,
+                "max": 1,
+                "localizedNames": {
+                  "en": "Preparation"
+                },
+                "localizedDescriptions": {
+                  "en": "The strength and form of the medication substance, including details of specific ingredients where required by an ad-hoc preparation or infusion."
+                },
+                "aqlPath": "/content[openEHR-EHR-INSTRUCTION.medication_order.v0]/activities[at0001]/description[at0002]/items[openEHR-EHR-CLUSTER.medication_substance.v0 and name/value='Preparation']",
+                "children": [
+                  {
+                    "id": "active_ingredient",
+                    "name": "Active ingredient",
+                    "localizedName": "Active ingredient",
+                    "rmType": "DV_TEXT",
+                    "nodeId": "at0132",
+                    "min": 0,
+                    "max": 1,
+                    "localizedNames": {
+                      "en": "Active ingredient"
+                    },
+                    "localizedDescriptions": {
+                      "en": "The name of the medication substance. This item should be coded if possible."
+                    },
+                    "aqlPath": "/content[openEHR-EHR-INSTRUCTION.medication_order.v0]/activities[at0001]/description[at0002]/items[openEHR-EHR-CLUSTER.medication_substance.v0 and name/value='Preparation']/items[at0132 and name/value='Active ingredient']/value",
+                    "inputs": [
+                      {
+                        "type": "TEXT"
+                      }
+                    ],
+                    "annotations": {
+                      "comment": "Usage of substance name will vary according to context of use."
+                    }
+                  },
+                  {
+                    "id": "pharmacecuetical_dose_form",
+                    "name": "Pharmacecuetical dose form",
+                    "localizedName": "Pharmacecuetical dose form",
+                    "rmType": "DV_TEXT",
+                    "nodeId": "at0071",
+                    "min": 0,
+                    "max": 1,
+                    "localizedNames": {
+                      "en": "Pharmacecuetical dose form"
+                    },
+                    "localizedDescriptions": {
+                      "en": "The formulation or presentation of the medication."
+                    },
+                    "aqlPath": "/content[openEHR-EHR-INSTRUCTION.medication_order.v0]/activities[at0001]/description[at0002]/items[openEHR-EHR-CLUSTER.medication_substance.v0 and name/value='Preparation']/items[at0071 and name/value='Pharmacecuetical dose form']/value",
+                    "inputs": [
+                      {
+                        "type": "TEXT"
+                      }
+                    ],
+                    "annotations": {
+                      "comment": "e.g. 'Tablet', 'Capsule', 'Liquid'."
+                    }
+                  },
+                  {
+                    "id": "strength_of_medicinal_product",
+                    "name": "Strength of medicinal product",
+                    "localizedName": "Strength of medicinal product",
+                    "rmType": "DV_QUANTITY",
+                    "nodeId": "at0115",
+                    "min": 0,
+                    "max": 1,
+                    "localizedNames": {
+                      "en": "Strength of medicinal product"
+                    },
+                    "localizedDescriptions": {
+                      "en": "The value of the strength of medication as a real number."
+                    },
+                    "aqlPath": "/content[openEHR-EHR-INSTRUCTION.medication_order.v0]/activities[at0001]/description[at0002]/items[openEHR-EHR-CLUSTER.medication_substance.v0 and name/value='Preparation']/items[at0115 and name/value='Strength of medicinal product']/value",
+                    "inputs": [
+                      {
+                        "suffix": "magnitude",
+                        "type": "DECIMAL",
+                        "validation": {
+                          "range": {
+                            "min": 0.0,
+                            "minOp": ">="
+                          }
+                        }
+                      },
+                      {
+                        "suffix": "unit",
+                        "type": "CODED_TEXT",
+                        "list": [
+                          {
+                            "value": "1",
+                            "label": "1",
+                            "validation": {
+                              "range": {
+                                "min": 0.0,
+                                "minOp": ">="
+                              }
+                            }
+                          }
+                        ]
+                      }
+                    ],
+                    "annotations": {
+                      "comment": "e.g. 1, 1.5, 0.125"
+                    }
+                  },
+                  {
+                    "id": "strength_of_medicinal_product_unit",
+                    "name": "Strength of medicinal product unit",
+                    "localizedName": "Strength of medicinal product unit",
+                    "rmType": "DV_TEXT",
+                    "nodeId": "at0116",
+                    "min": 0,
+                    "max": 1,
+                    "localizedNames": {
+                      "en": "Strength of medicinal product unit"
+                    },
+                    "localizedDescriptions": {
+                      "en": "The dose unit of the medication substance strength."
+                    },
+                    "aqlPath": "/content[openEHR-EHR-INSTRUCTION.medication_order.v0]/activities[at0001]/description[at0002]/items[openEHR-EHR-CLUSTER.medication_substance.v0 and name/value='Preparation']/items[at0116 and name/value='Strength of medicinal product unit']/value",
+                    "inputs": [
+                      {
+                        "type": "TEXT"
+                      }
+                    ],
+                    "annotations": {
+                      "comment": "e.g 'tablet','mg'. Often coded using a reference terminology such as SNOMED CT."
+                    }
+                  }
+                ],
+                "annotations": {
+                  "comment": "This is commonly carried as part of the medicine name and provided by the medicines terminology but in some cases must be specified separately."
+                }
+              },
+              {
+                "id": "routes_of_administration",
+                "name": "Routes of administration",
+                "localizedName": "Routes of administration",
+                "rmType": "DV_TEXT",
+                "nodeId": "at0091",
+                "min": 0,
+                "max": 1,
+                "localizedNames": {
+                  "en": "Routes of administration"
+                },
+                "localizedDescriptions": {
+                  "en": "The route of administration."
+                },
+                "aqlPath": "/content[openEHR-EHR-INSTRUCTION.medication_order.v0]/activities[at0001]/description[at0002]/items[at0091 and name/value='Routes of administration']/value",
+                "inputs": [
+                  {
+                    "type": "TEXT"
+                  }
+                ],
+                "annotations": {
+                  "comment": "For example: 'oral', 'intravenous', or 'topical'. \nCoding of the route with a terminology is preferred, where possible. Multiple potential routes may be specified."
+                }
+              },
+              {
+                "id": "dose_direction",
+                "name": "Dose direction",
+                "localizedName": "Dose direction",
+                "rmType": "CLUSTER",
+                "nodeId": "at0056",
+                "min": 0,
+                "max": 1,
+                "localizedNames": {
+                  "en": "Dose direction"
+                },
+                "localizedDescriptions": {
+                  "en": "Details about a dose direction for the medication order."
+                },
+                "aqlPath": "/content[openEHR-EHR-INSTRUCTION.medication_order.v0]/activities[at0001]/description[at0002]/items[at0056]",
+                "children": [
+                  {
+                    "id": "number_of_units_per_intake",
+                    "name": "Number of units per intake",
+                    "localizedName": "Number of units per intake",
+                    "rmType": "CLUSTER",
+                    "nodeId": "at0058",
+                    "min": 0,
+                    "max": 1,
+                    "localizedNames": {
+                      "en": "Number of units per intake"
+                    },
+                    "localizedDescriptions": {
+                      "en": "The combination of a medication amount associated with a single medication timing."
+                    },
+                    "aqlPath": "/content[openEHR-EHR-INSTRUCTION.medication_order.v0]/activities[at0001]/description[at0002]/items[at0056]/items[at0058 and name/value='Number of units per intake']",
+                    "children": [
+                      {
+                        "id": "pattern_sequence",
+                        "name": "Pattern sequence",
+                        "localizedName": "Pattern sequence",
+                        "rmType": "DV_COUNT",
+                        "nodeId": "at0164",
+                        "min": 0,
+                        "max": 1,
+                        "localizedNames": {
+                          "en": "Pattern sequence"
+                        },
+                        "localizedDescriptions": {
+                          "en": "The intended sequence of this dose pattern within the overall sequence of dose directions."
+                        },
+                        "aqlPath": "/content[openEHR-EHR-INSTRUCTION.medication_order.v0]/activities[at0001]/description[at0002]/items[at0056]/items[at0058 and name/value='Number of units per intake']/items[at0164]/value",
+                        "inputs": [
+                          {
+                            "type": "INTEGER",
+                            "validation": {
+                              "range": {
+                                "min": 1,
+                                "minOp": ">="
+                              }
+                            }
+                          }
+                        ]
+                      },
+                      {
+                        "id": "dose",
+                        "name": "Dose",
+                        "localizedName": "Dose",
+                        "rmType": "ELEMENT",
+                        "nodeId": "at0144",
+                        "min": 0,
+                        "max": 1,
+                        "localizedNames": {
+                          "en": "Dose"
+                        },
+                        "localizedDescriptions": {
+                          "en": "The value of the amount of medication as a real number."
+                        },
+                        "aqlPath": "/content[openEHR-EHR-INSTRUCTION.medication_order.v0]/activities[at0001]/description[at0002]/items[at0056]/items[at0058 and name/value='Number of units per intake']/items[at0144 and name/value='Dose']",
+                        "children": [
+                          {
+                            "id": "quantity_value",
+                            "name": "Dose",
+                            "localizedName": "Dose",
+                            "rmType": "DV_QUANTITY",
+                            "nodeId": "at0144",
+                            "min": 1,
+                            "max": 1,
+                            "localizedNames": {
+                              "en": "Dose"
+                            },
+                            "localizedDescriptions": {
+                              "en": "The value of the amount of medication as a real number."
+                            },
+                            "aqlPath": "/content[openEHR-EHR-INSTRUCTION.medication_order.v0]/activities[at0001]/description[at0002]/items[at0056]/items[at0058 and name/value='Number of units per intake']/items[at0144 and name/value='Dose']/value",
+                            "inputs": [
+                              {
+                                "suffix": "magnitude",
+                                "type": "DECIMAL",
+                                "validation": {
+                                  "range": {
+                                    "min": 0.0,
+                                    "minOp": ">="
+                                  }
+                                }
+                              },
+                              {
+                                "suffix": "unit",
+                                "type": "CODED_TEXT",
+                                "list": [
+                                  {
+                                    "value": "1",
+                                    "label": "1",
+                                    "validation": {
+                                      "range": {
+                                        "min": 0.0,
+                                        "minOp": ">="
+                                      }
+                                    }
+                                  }
+                                ]
+                              }
+                            ],
+                            "annotations": {
+                              "comment": "For example: 1, 1.5, 0.125 or 1-2, 12.5-20.5"
+                            }
+                          },
+                          {
+                            "id": "interval<dv_quantity>_value",
+                            "name": "Dose",
+                            "localizedName": "Dose",
+                            "rmType": "DV_INTERVAL<DV_QUANTITY>",
+                            "nodeId": "at0144",
+                            "min": 1,
+                            "max": 1,
+                            "localizedNames": {
+                              "en": "Dose"
+                            },
+                            "localizedDescriptions": {
+                              "en": "The value of the amount of medication as a real number."
+                            },
+                            "aqlPath": "/content[openEHR-EHR-INSTRUCTION.medication_order.v0]/activities[at0001]/description[at0002]/items[at0056]/items[at0058 and name/value='Number of units per intake']/items[at0144 and name/value='Dose']/value",
+                            "children": [
+                              {
+                                "id": "upper",
+                                "name": "upper",
+                                "localizedName": "upper",
+                                "rmType": "DV_QUANTITY",
+                                "min": 1,
+                                "max": 1,
+                                "aqlPath": "/content[openEHR-EHR-INSTRUCTION.medication_order.v0]/activities[at0001]/description[at0002]/items[at0056]/items[at0058 and name/value='Number of units per intake']/items[at0144 and name/value='Dose']/value/upper",
+                                "inputs": [
+                                  {
+                                    "suffix": "magnitude",
+                                    "type": "DECIMAL",
+                                    "validation": {
+                                      "range": {
+                                        "min": 0.0,
+                                        "minOp": ">="
+                                      }
+                                    }
+                                  },
+                                  {
+                                    "suffix": "unit",
+                                    "type": "CODED_TEXT",
+                                    "list": [
+                                      {
+                                        "value": "1",
+                                        "label": "1",
+                                        "validation": {
+                                          "range": {
+                                            "min": 0.0,
+                                            "minOp": ">="
+                                          }
+                                        }
+                                      }
+                                    ]
+                                  }
+                                ]
+                              },
+                              {
+                                "id": "lower",
+                                "name": "lower",
+                                "localizedName": "lower",
+                                "rmType": "DV_QUANTITY",
+                                "min": 1,
+                                "max": 1,
+                                "aqlPath": "/content[openEHR-EHR-INSTRUCTION.medication_order.v0]/activities[at0001]/description[at0002]/items[at0056]/items[at0058 and name/value='Number of units per intake']/items[at0144 and name/value='Dose']/value/lower",
+                                "inputs": [
+                                  {
+                                    "suffix": "magnitude",
+                                    "type": "DECIMAL",
+                                    "validation": {
+                                      "range": {
+                                        "min": 0.0,
+                                        "minOp": ">="
+                                      }
+                                    }
+                                  },
+                                  {
+                                    "suffix": "unit",
+                                    "type": "CODED_TEXT",
+                                    "list": [
+                                      {
+                                        "value": "1",
+                                        "label": "1",
+                                        "validation": {
+                                          "range": {
+                                            "min": 0.0,
+                                            "minOp": ">="
+                                          }
+                                        }
+                                      }
+                                    ]
+                                  }
+                                ]
+                              }
+                            ],
+                            "annotations": {
+                              "comment": "For example: 1, 1.5, 0.125 or 1-2, 12.5-20.5"
+                            }
+                          }
+                        ],
+                        "annotations": {
+                          "comment": "For example: 1, 1.5, 0.125 or 1-2, 12.5-20.5"
+                        }
+                      },
+                      {
+                        "id": "dose_unit",
+                        "name": "Dose unit",
+                        "localizedName": "Dose unit",
+                        "rmType": "DV_TEXT",
+                        "nodeId": "at0145",
+                        "min": 0,
+                        "max": 1,
+                        "localizedNames": {
+                          "en": "Dose unit"
+                        },
+                        "localizedDescriptions": {
+                          "en": "The dose unit of the amount of medication."
+                        },
+                        "aqlPath": "/content[openEHR-EHR-INSTRUCTION.medication_order.v0]/activities[at0001]/description[at0002]/items[at0056]/items[at0058 and name/value='Number of units per intake']/items[at0145]/value",
+                        "inputs": [
+                          {
+                            "type": "TEXT"
+                          }
+                        ],
+                        "annotations": {
+                          "comment": "For example: 'tablet','mg'. Coding of the dose unit with a terminology is preferred, where possible."
+                        }
+                      },
+                      {
+                        "id": "timing_-_daily",
+                        "name": "Timing - daily",
+                        "localizedName": "Timing - daily",
+                        "rmType": "CLUSTER",
+                        "nodeId": "openEHR-EHR-CLUSTER.timing_daily.v0",
+                        "min": 0,
+                        "max": 1,
+                        "localizedNames": {
+                          "en": "Timing - daily"
+                        },
+                        "localizedDescriptions": {
+                          "en": "Structured information about the timing (intended or actual) of administration or use of a medicine, other therapeutic good or other intervention that is given on a scheduled basis."
+                        },
+                        "aqlPath": "/content[openEHR-EHR-INSTRUCTION.medication_order.v0]/activities[at0001]/description[at0002]/items[at0056]/items[at0058 and name/value='Number of units per intake']/items[openEHR-EHR-CLUSTER.timing_daily.v0]",
+                        "children": [
+                          {
+                            "id": "frequency",
+                            "name": "Frequency",
+                            "localizedName": "Frequency",
+                            "rmType": "ELEMENT",
+                            "nodeId": "at0003",
+                            "min": 0,
+                            "max": 1,
+                            "localizedNames": {
+                              "en": "Frequency"
+                            },
+                            "localizedDescriptions": {
+                              "en": "The frequency as number of times per time period (limited to a single day) that the activity is to take place."
+                            },
+                            "aqlPath": "/content[openEHR-EHR-INSTRUCTION.medication_order.v0]/activities[at0001]/description[at0002]/items[at0056]/items[at0058 and name/value='Number of units per intake']/items[openEHR-EHR-CLUSTER.timing_daily.v0]/items[at0003]",
+                            "children": [
+                              {
+                                "id": "quantity_value",
+                                "name": "Frequency",
+                                "localizedName": "Frequency",
+                                "rmType": "DV_QUANTITY",
+                                "nodeId": "at0003",
+                                "min": 1,
+                                "max": 1,
+                                "localizedNames": {
+                                  "en": "Frequency"
+                                },
+                                "localizedDescriptions": {
+                                  "en": "The frequency as number of times per time period (limited to a single day) that the activity is to take place."
+                                },
+                                "aqlPath": "/content[openEHR-EHR-INSTRUCTION.medication_order.v0]/activities[at0001]/description[at0002]/items[at0056]/items[at0058 and name/value='Number of units per intake']/items[openEHR-EHR-CLUSTER.timing_daily.v0]/items[at0003]/value",
+                                "inputs": [
+                                  {
+                                    "suffix": "magnitude",
+                                    "type": "DECIMAL"
+                                  },
+                                  {
+                                    "suffix": "unit",
+                                    "type": "CODED_TEXT",
+                                    "list": [
+                                      {
+                                        "value": "1/d",
+                                        "label": "1/d",
+                                        "validation": {
+                                          "precision": {
+                                            "min": 0,
+                                            "minOp": ">=",
+                                            "max": 0,
+                                            "maxOp": "<="
+                                          },
+                                          "range": {
+                                            "min": 0.0,
+                                            "minOp": ">=",
+                                            "max": 1.0,
+                                            "maxOp": "<="
+                                          }
+                                        }
+                                      },
+                                      {
+                                        "value": "1/min",
+                                        "label": "1/min",
+                                        "validation": {
+                                          "range": {
+                                            "min": 0.0,
+                                            "minOp": ">="
+                                          }
+                                        }
+                                      },
+                                      {
+                                        "value": "1/s",
+                                        "label": "1/s",
+                                        "validation": {
+                                          "range": {
+                                            "min": 0.0,
+                                            "minOp": ">="
+                                          }
+                                        }
+                                      },
+                                      {
+                                        "value": "1/h",
+                                        "label": "1/h",
+                                        "validation": {
+                                          "range": {
+                                            "min": 0.0,
+                                            "minOp": ">="
+                                          }
+                                        }
+                                      }
+                                    ]
+                                  }
+                                ],
+                                "annotations": {
+                                  "comment": "e.g. \"4 times per day\" or \"\"3 to 4 times per hour\""
+                                }
+                              },
+                              {
+                                "id": "interval<dv_quantity>_value",
+                                "name": "Frequency",
+                                "localizedName": "Frequency",
+                                "rmType": "DV_INTERVAL<DV_QUANTITY>",
+                                "nodeId": "at0003",
+                                "min": 1,
+                                "max": 1,
+                                "localizedNames": {
+                                  "en": "Frequency"
+                                },
+                                "localizedDescriptions": {
+                                  "en": "The frequency as number of times per time period (limited to a single day) that the activity is to take place."
+                                },
+                                "aqlPath": "/content[openEHR-EHR-INSTRUCTION.medication_order.v0]/activities[at0001]/description[at0002]/items[at0056]/items[at0058 and name/value='Number of units per intake']/items[openEHR-EHR-CLUSTER.timing_daily.v0]/items[at0003]/value",
+                                "children": [
+                                  {
+                                    "id": "upper",
+                                    "name": "upper",
+                                    "localizedName": "upper",
+                                    "rmType": "DV_QUANTITY",
+                                    "min": 1,
+                                    "max": 1,
+                                    "aqlPath": "/content[openEHR-EHR-INSTRUCTION.medication_order.v0]/activities[at0001]/description[at0002]/items[at0056]/items[at0058 and name/value='Number of units per intake']/items[openEHR-EHR-CLUSTER.timing_daily.v0]/items[at0003]/value/upper",
+                                    "inputs": [
+                                      {
+                                        "suffix": "magnitude",
+                                        "type": "DECIMAL"
+                                      },
+                                      {
+                                        "suffix": "unit",
+                                        "type": "CODED_TEXT",
+                                        "list": [
+                                          {
+                                            "value": "1/d",
+                                            "label": "1/d",
+                                            "validation": {
+                                              "precision": {
+                                                "min": 0,
+                                                "minOp": ">=",
+                                                "max": 0,
+                                                "maxOp": "<="
+                                              },
+                                              "range": {
+                                                "max": 1.0,
+                                                "maxOp": "<="
+                                              }
+                                            }
+                                          },
+                                          {
+                                            "value": "1/min",
+                                            "label": "1/min",
+                                            "validation": {
+                                              "range": {
+                                                "min": 0.0,
+                                                "minOp": ">="
+                                              }
+                                            }
+                                          },
+                                          {
+                                            "value": "1/s",
+                                            "label": "1/s",
+                                            "validation": {
+                                              "range": {
+                                                "min": 0.0,
+                                                "minOp": ">="
+                                              }
+                                            }
+                                          },
+                                          {
+                                            "value": "1/h",
+                                            "label": "1/h",
+                                            "validation": {
+                                              "precision": {
+                                                "min": 0,
+                                                "minOp": ">=",
+                                                "max": 0,
+                                                "maxOp": "<="
+                                              },
+                                              "range": {
+                                                "min": 0.0,
+                                                "minOp": ">=",
+                                                "max": 24.0,
+                                                "maxOp": "<="
+                                              }
+                                            }
+                                          }
+                                        ]
+                                      }
+                                    ]
+                                  },
+                                  {
+                                    "id": "lower",
+                                    "name": "lower",
+                                    "localizedName": "lower",
+                                    "rmType": "DV_QUANTITY",
+                                    "min": 1,
+                                    "max": 1,
+                                    "aqlPath": "/content[openEHR-EHR-INSTRUCTION.medication_order.v0]/activities[at0001]/description[at0002]/items[at0056]/items[at0058 and name/value='Number of units per intake']/items[openEHR-EHR-CLUSTER.timing_daily.v0]/items[at0003]/value/lower",
+                                    "inputs": [
+                                      {
+                                        "suffix": "magnitude",
+                                        "type": "DECIMAL"
+                                      },
+                                      {
+                                        "suffix": "unit",
+                                        "type": "CODED_TEXT",
+                                        "list": [
+                                          {
+                                            "value": "1/d",
+                                            "label": "1/d",
+                                            "validation": {
+                                              "range": {
+                                                "min": 0.0,
+                                                "minOp": ">="
+                                              }
+                                            }
+                                          },
+                                          {
+                                            "value": "1/min",
+                                            "label": "1/min",
+                                            "validation": {
+                                              "range": {
+                                                "min": 0.0,
+                                                "minOp": ">="
+                                              }
+                                            }
+                                          },
+                                          {
+                                            "value": "1/s",
+                                            "label": "1/s",
+                                            "validation": {
+                                              "range": {
+                                                "min": 0.0,
+                                                "minOp": ">="
+                                              }
+                                            }
+                                          },
+                                          {
+                                            "value": "1/h",
+                                            "label": "1/h",
+                                            "validation": {
+                                              "range": {
+                                                "min": 0.0,
+                                                "minOp": ">="
+                                              }
+                                            }
+                                          }
+                                        ]
+                                      }
+                                    ]
+                                  }
+                                ],
+                                "annotations": {
+                                  "comment": "e.g. \"4 times per day\" or \"\"3 to 4 times per hour\""
+                                }
+                              }
+                            ],
+                            "annotations": {
+                              "comment": "e.g. \"4 times per day\" or \"\"3 to 4 times per hour\""
+                            }
+                          },
+                          {
+                            "id": "interval",
+                            "name": "Interval",
+                            "localizedName": "Interval",
+                            "rmType": "DV_DURATION",
+                            "nodeId": "at0014",
+                            "min": 0,
+                            "max": 1,
+                            "localizedNames": {
+                              "en": "Interval"
+                            },
+                            "localizedDescriptions": {
+                              "en": "The time interval or minimum and maximum range of an interval between each scheduled activity, limited to a single day."
+                            },
+                            "aqlPath": "/content[openEHR-EHR-INSTRUCTION.medication_order.v0]/activities[at0001]/description[at0002]/items[at0056]/items[at0058 and name/value='Number of units per intake']/items[openEHR-EHR-CLUSTER.timing_daily.v0]/items[at0014]/value",
+                            "inputs": [
+                              {
+                                "suffix": "hour",
+                                "type": "INTEGER",
+                                "validation": {
+                                  "range": {
+                                    "min": 0,
+                                    "minOp": ">=",
+                                    "max": 24,
+                                    "maxOp": "<="
+                                  }
+                                }
+                              },
+                              {
+                                "suffix": "second",
+                                "type": "INTEGER",
+                                "validation": {
+                                  "range": {
+                                    "min": 0,
+                                    "minOp": ">="
+                                  }
+                                }
+                              }
+                            ],
+                            "annotations": {
+                              "comment": "e.g. \"Every 4 hours\" or \"Every 4 to 6 hours\"."
+                            }
+                          },
+                          {
+                            "id": "specific_time",
+                            "name": "Specific time",
+                            "localizedName": "Specific time",
+                            "rmType": "ELEMENT",
+                            "nodeId": "at0004",
+                            "min": 0,
+                            "max": -1,
+                            "localizedNames": {
+                              "en": "Specific time"
+                            },
+                            "localizedDescriptions": {
+                              "en": "A specific time or interval of time  during a single day when the activity should occur."
+                            },
+                            "aqlPath": "/content[openEHR-EHR-INSTRUCTION.medication_order.v0]/activities[at0001]/description[at0002]/items[at0056]/items[at0058 and name/value='Number of units per intake']/items[openEHR-EHR-CLUSTER.timing_daily.v0]/items[at0004]",
+                            "children": [
+                              {
+                                "id": "time_value",
+                                "name": "Specific time",
+                                "localizedName": "Specific time",
+                                "rmType": "DV_TIME",
+                                "nodeId": "at0004",
+                                "min": 1,
+                                "max": 1,
+                                "localizedNames": {
+                                  "en": "Specific time"
+                                },
+                                "localizedDescriptions": {
+                                  "en": "A specific time or interval of time  during a single day when the activity should occur."
+                                },
+                                "aqlPath": "/content[openEHR-EHR-INSTRUCTION.medication_order.v0]/activities[at0001]/description[at0002]/items[at0056]/items[at0058 and name/value='Number of units per intake']/items[openEHR-EHR-CLUSTER.timing_daily.v0]/items[at0004]/value",
+                                "inputs": [
+                                  {
+                                    "type": "TIME"
+                                  }
+                                ],
+                                "annotations": {
+                                  "comment": "e.g \"at 0800, 1400, 15.25.\""
+                                }
+                              },
+                              {
+                                "id": "interval<dv_date_time>_value",
+                                "name": "Specific time",
+                                "localizedName": "Specific time",
+                                "rmType": "DV_INTERVAL<DV_DATE_TIME>",
+                                "nodeId": "at0004",
+                                "min": 1,
+                                "max": 1,
+                                "localizedNames": {
+                                  "en": "Specific time"
+                                },
+                                "localizedDescriptions": {
+                                  "en": "A specific time or interval of time  during a single day when the activity should occur."
+                                },
+                                "aqlPath": "/content[openEHR-EHR-INSTRUCTION.medication_order.v0]/activities[at0001]/description[at0002]/items[at0056]/items[at0058 and name/value='Number of units per intake']/items[openEHR-EHR-CLUSTER.timing_daily.v0]/items[at0004]/value",
+                                "children": [
+                                  {
+                                    "id": "upper",
+                                    "name": "upper",
+                                    "localizedName": "upper",
+                                    "rmType": "DV_DATE_TIME",
+                                    "min": 1,
+                                    "max": 1,
+                                    "aqlPath": "/content[openEHR-EHR-INSTRUCTION.medication_order.v0]/activities[at0001]/description[at0002]/items[at0056]/items[at0058 and name/value='Number of units per intake']/items[openEHR-EHR-CLUSTER.timing_daily.v0]/items[at0004]/value/upper",
+                                    "inputs": [
+                                      {
+                                        "type": "DATETIME"
+                                      }
+                                    ]
+                                  },
+                                  {
+                                    "id": "lower",
+                                    "name": "lower",
+                                    "localizedName": "lower",
+                                    "rmType": "DV_DATE_TIME",
+                                    "min": 1,
+                                    "max": 1,
+                                    "aqlPath": "/content[openEHR-EHR-INSTRUCTION.medication_order.v0]/activities[at0001]/description[at0002]/items[at0056]/items[at0058 and name/value='Number of units per intake']/items[openEHR-EHR-CLUSTER.timing_daily.v0]/items[at0004]/value/lower",
+                                    "inputs": [
+                                      {
+                                        "type": "DATETIME"
+                                      }
+                                    ]
+                                  }
+                                ],
+                                "annotations": {
+                                  "comment": "e.g \"at 0800, 1400, 15.25.\""
+                                }
+                              }
+                            ],
+                            "annotations": {
+                              "comment": "e.g \"at 0800, 1400, 15.25.\""
+                            }
+                          },
+                          {
+                            "id": "named_time_event",
+                            "name": "Named time event",
+                            "localizedName": "Named time event",
+                            "rmType": "DV_CODED_TEXT",
+                            "min": 0,
+                            "max": -1,
+                            "localizedNames": {
+                              "en": "Named time event"
+                            },
+                            "localizedDescriptions": {
+                              "en": "A specific, named time event within a single day, when the activity should occur."
+                            },
+                            "aqlPath": "/content[openEHR-EHR-INSTRUCTION.medication_order.v0]/activities[at0001]/description[at0002]/items[at0056]/items[at0058 and name/value='Number of units per intake']/items[openEHR-EHR-CLUSTER.timing_daily.v0]/items[at0026]/value",
+                            "inputs": [
+                              {
+                                "suffix": "code",
+                                "type": "CODED_TEXT",
+                                "list": [
+                                  {
+                                    "value": "at0031",
+                                    "label": "immediately (stat)",
+                                    "localizedLabels": {
+                                      "en": "immediately (stat)"
+                                    },
+                                    "localizedDescriptions": {
+                                      "en": "Perform the activity immediately."
+                                    }
+                                  },
+                                  {
+                                    "value": "at0032",
+                                    "label": "in the morning",
+                                    "localizedLabels": {
+                                      "en": "in the morning"
+                                    },
+                                    "localizedDescriptions": {
+                                      "en": "Perform the activity in the morning."
+                                    }
+                                  },
+                                  {
+                                    "value": "at0033",
+                                    "label": "at night",
+                                    "localizedLabels": {
+                                      "en": "at night"
+                                    },
+                                    "localizedDescriptions": {
+                                      "en": "Perform the activity at night."
+                                    }
+                                  },
+                                  {
+                                    "value": "at0034",
+                                    "label": "in the morning and at night",
+                                    "localizedLabels": {
+                                      "en": "in the morning and at night"
+                                    },
+                                    "localizedDescriptions": {
+                                      "en": "Perform the activity in the morning and at night."
+                                    }
+                                  }
+                                ],
+                                "listOpen": true,
+                                "terminology": "local"
+                              },
+                              {
+                                "suffix": "other",
+                                "type": "TEXT"
+                              }
+                            ],
+                            "annotations": {
+                              "comment": "e.g. before each meal, at bedtime, in the morning.\nIt is understood that these terms may not equate to the same exact times in different cultures."
+                            }
+                          },
+                          {
+                            "id": "as_required",
+                            "name": "As required",
+                            "localizedName": "As required",
+                            "rmType": "DV_BOOLEAN",
+                            "nodeId": "at0024",
+                            "min": 0,
+                            "max": 1,
+                            "localizedNames": {
+                              "en": "As required"
+                            },
+                            "localizedDescriptions": {
+                              "en": "The activity should only occur when the \"as required\" trigger condition is met."
+                            },
+                            "aqlPath": "/content[openEHR-EHR-INSTRUCTION.medication_order.v0]/activities[at0001]/description[at0002]/items[at0056]/items[at0058 and name/value='Number of units per intake']/items[openEHR-EHR-CLUSTER.timing_daily.v0]/items[at0024]/value",
+                            "inputs": [
+                              {
+                                "type": "BOOLEAN"
+                              }
+                            ],
+                            "annotations": {
+                              "comment": "Termed 'PRN' in some cultures."
+                            }
+                          },
+                          {
+                            "id": "as_required_criterion",
+                            "name": "As required criterion",
+                            "localizedName": "As required criterion",
+                            "rmType": "DV_TEXT",
+                            "nodeId": "at0025",
+                            "min": 0,
+                            "max": 1,
+                            "localizedNames": {
+                              "en": "As required criterion"
+                            },
+                            "localizedDescriptions": {
+                              "en": "The condition which triggers an 'as required' activity."
+                            },
+                            "aqlPath": "/content[openEHR-EHR-INSTRUCTION.medication_order.v0]/activities[at0001]/description[at0002]/items[at0056]/items[at0058 and name/value='Number of units per intake']/items[openEHR-EHR-CLUSTER.timing_daily.v0]/items[at0025]/value",
+                            "inputs": [
+                              {
+                                "type": "TEXT"
+                              }
+                            ],
+                            "annotations": {
+                              "comment": "e.g. as required for pain."
+                            }
+                          }
+                        ]
+                      }
+                    ],
+                    "annotations": {
+                      "comment": "For example: '2 tablets at 6pm' or '20mg three times per day'. Please note: this cluster allows multiple occurrences to enable representation of a complete set of dose patterns for a single dose direction."
+                    }
+                  },
+                  {
+                    "id": "duration_of_treatment",
+                    "name": "Duration of treatment",
+                    "localizedName": "Duration of treatment",
+                    "rmType": "ELEMENT",
+                    "nodeId": "at0066",
+                    "min": 0,
+                    "max": 1,
+                    "localizedNames": {
+                      "en": "Duration of treatment"
+                    },
+                    "localizedDescriptions": {
+                      "en": "The duration of this dose direction."
+                    },
+                    "aqlPath": "/content[openEHR-EHR-INSTRUCTION.medication_order.v0]/activities[at0001]/description[at0002]/items[at0056]/items[at0066 and name/value='Duration of treatment']",
+                    "children": [
+                      {
+                        "id": "coded_text_value",
+                        "name": "Duration of treatment",
+                        "localizedName": "Duration of treatment",
+                        "rmType": "DV_CODED_TEXT",
+                        "nodeId": "at0066",
+                        "min": 1,
+                        "max": 1,
+                        "localizedNames": {
+                          "en": "Duration of treatment"
+                        },
+                        "localizedDescriptions": {
+                          "en": "The duration of this dose direction."
+                        },
+                        "aqlPath": "/content[openEHR-EHR-INSTRUCTION.medication_order.v0]/activities[at0001]/description[at0002]/items[at0056]/items[at0066 and name/value='Duration of treatment']/value",
+                        "inputs": [
+                          {
+                            "suffix": "code",
+                            "type": "CODED_TEXT",
+                            "list": [
+                              {
+                                "value": "at0067",
+                                "label": "Indefinite",
+                                "localizedLabels": {
+                                  "en": "Indefinite"
+                                },
+                                "localizedDescriptions": {
+                                  "en": "The direction should be continued indefinitely."
+                                }
+                              },
+                              {
+                                "value": "at0068",
+                                "label": "Indefinite - Do not discontinue",
+                                "localizedLabels": {
+                                  "en": "Indefinite - Do not discontinue"
+                                },
+                                "localizedDescriptions": {
+                                  "en": "The direction should be continued indefinitely and discontinuation is not recommended."
+                                }
+                              }
+                            ],
+                            "terminology": "local"
+                          }
+                        ],
+                        "annotations": {
+                          "comment": "For example: 'for 7 days','Indefinite'."
+                        }
+                      },
+                      {
+                        "id": "duration_value",
+                        "name": "Duration of treatment",
+                        "localizedName": "Duration of treatment",
+                        "rmType": "DV_DURATION",
+                        "nodeId": "at0066",
+                        "min": 1,
+                        "max": 1,
+                        "localizedNames": {
+                          "en": "Duration of treatment"
+                        },
+                        "localizedDescriptions": {
+                          "en": "The duration of this dose direction."
+                        },
+                        "aqlPath": "/content[openEHR-EHR-INSTRUCTION.medication_order.v0]/activities[at0001]/description[at0002]/items[at0056]/items[at0066 and name/value='Duration of treatment']/value",
+                        "inputs": [
+                          {
+                            "suffix": "year",
+                            "type": "INTEGER",
+                            "validation": {
+                              "range": {
+                                "min": 0,
+                                "minOp": ">="
+                              }
+                            }
+                          },
+                          {
+                            "suffix": "month",
+                            "type": "INTEGER",
+                            "validation": {
+                              "range": {
+                                "min": 0,
+                                "minOp": ">="
+                              }
+                            }
+                          },
+                          {
+                            "suffix": "day",
+                            "type": "INTEGER",
+                            "validation": {
+                              "range": {
+                                "min": 0,
+                                "minOp": ">="
+                              }
+                            }
+                          },
+                          {
+                            "suffix": "week",
+                            "type": "INTEGER",
+                            "validation": {
+                              "range": {
+                                "min": 0,
+                                "minOp": ">="
+                              }
+                            }
+                          },
+                          {
+                            "suffix": "hour",
+                            "type": "INTEGER",
+                            "validation": {
+                              "range": {
+                                "min": 0,
+                                "minOp": ">="
+                              }
+                            }
+                          },
+                          {
+                            "suffix": "minute",
+                            "type": "INTEGER",
+                            "validation": {
+                              "range": {
+                                "min": 0,
+                                "minOp": ">="
+                              }
+                            }
+                          },
+                          {
+                            "suffix": "second",
+                            "type": "INTEGER",
+                            "validation": {
+                              "range": {
+                                "min": 0,
+                                "minOp": ">="
+                              }
+                            }
+                          }
+                        ],
+                        "annotations": {
+                          "comment": "For example: 'for 7 days','Indefinite'."
+                        }
+                      }
+                    ],
+                    "annotations": {
+                      "comment": "For example: 'for 7 days','Indefinite'."
+                    }
+                  }
+                ],
+                "annotations": {
+                  "comment": "For example: '1 tab in the morning, 1 tab at night, for 3 weeks, on Mondays, Wednesdays and Fridays'. This cluster allows multiple occurrences to enable representation of a complete set of dose directions for a single medication order."
+                }
+              },
+              {
+                "id": "instructions_to_patient",
+                "name": "Instructions to patient",
+                "localizedName": "Instructions to patient",
+                "rmType": "DV_TEXT",
+                "nodeId": "at0105",
+                "min": 0,
+                "max": 1,
+                "localizedNames": {
+                  "en": "Instructions to patient"
+                },
+                "localizedDescriptions": {
+                  "en": "An additional instruction directed primarily at the patient or carers."
+                },
+                "aqlPath": "/content[openEHR-EHR-INSTRUCTION.medication_order.v0]/activities[at0001]/description[at0002]/items[at0105 and name/value='Instructions to patient']/value",
+                "inputs": [
+                  {
+                    "type": "TEXT"
+                  }
+                ],
+                "annotations": {
+                  "comment": "For example: 'To reduce your blood pressure', 'To thin your blood'. This data element allows multiple occurrences and should be coded with a reference terminology, where possible. If required it is possible to use a LINK attribute to associate this element with, for example, the 'original diagnosis' in a separate Problem list composition but the indication should be explicitly recorded here, as the link target may change over time."
+                }
+              },
+              {
+                "id": "order_details",
+                "name": "Order details",
+                "localizedName": "Order details",
+                "rmType": "CLUSTER",
+                "nodeId": "at0113",
+                "min": 0,
+                "max": 1,
+                "localizedNames": {
+                  "en": "Order details"
+                },
+                "localizedDescriptions": {
+                  "en": "Details about the intended course of the medication."
+                },
+                "aqlPath": "/content[openEHR-EHR-INSTRUCTION.medication_order.v0]/activities[at0001]/description[at0002]/items[at0113]",
+                "children": [
+                  {
+                    "id": "date_of_onset",
+                    "name": "Date of onset",
+                    "localizedName": "Date of onset",
+                    "rmType": "DV_DATE_TIME",
+                    "nodeId": "at0012",
+                    "min": 0,
+                    "max": 1,
+                    "localizedNames": {
+                      "en": "Date of onset"
+                    },
+                    "localizedDescriptions": {
+                      "en": "The date and optional time to commence use of the medication, vaccine or other therapeutic good."
+                    },
+                    "aqlPath": "/content[openEHR-EHR-INSTRUCTION.medication_order.v0]/activities[at0001]/description[at0002]/items[at0113]/items[at0012 and name/value='Date of onset']/value",
+                    "inputs": [
+                      {
+                        "type": "DATETIME"
+                      }
+                    ]
+                  },
+                  {
+                    "id": "date_of_end_of_treatment",
+                    "name": "Date of end of treatment",
+                    "localizedName": "Date of end of treatment",
+                    "rmType": "DV_DATE_TIME",
+                    "nodeId": "at0013",
+                    "min": 0,
+                    "max": 1,
+                    "localizedNames": {
+                      "en": "Date of end of treatment"
+                    },
+                    "localizedDescriptions": {
+                      "en": "The date and optional time to cease use of the medication, vaccine or other therapeutic good."
+                    },
+                    "aqlPath": "/content[openEHR-EHR-INSTRUCTION.medication_order.v0]/activities[at0001]/description[at0002]/items[at0113]/items[at0013 and name/value='Date of end of treatment']/value",
+                    "inputs": [
+                      {
+                        "type": "DATETIME"
+                      }
+                    ]
+                  }
+                ]
+              },
+              {
+                "id": "dispense_directions",
+                "name": "Dispense directions",
+                "localizedName": "Dispense directions",
+                "rmType": "CLUSTER",
+                "nodeId": "at0129",
+                "min": 0,
+                "max": 1,
+                "localizedNames": {
+                  "en": "Dispense directions"
+                },
+                "localizedDescriptions": {
+                  "en": "Directions about the dispensing of the medication, vaccine or other therapeutic good."
+                },
+                "aqlPath": "/content[openEHR-EHR-INSTRUCTION.medication_order.v0]/activities[at0001]/description[at0002]/items[at0129]",
+                "children": [
+                  {
+                    "id": "advice_to_dispenser",
+                    "name": "Advice to dispenser",
+                    "localizedName": "Advice to dispenser",
+                    "rmType": "DV_TEXT",
+                    "nodeId": "at0106",
+                    "min": 0,
+                    "max": 1,
+                    "localizedNames": {
+                      "en": "Advice to dispenser"
+                    },
+                    "localizedDescriptions": {
+                      "en": "An additional instruction directed primarily at the person dispensing the medication, vaccine or therapeutic good."
+                    },
+                    "aqlPath": "/content[openEHR-EHR-INSTRUCTION.medication_order.v0]/activities[at0001]/description[at0002]/items[at0129]/items[at0106 and name/value='Advice to dispenser']/value",
+                    "inputs": [
+                      {
+                        "type": "TEXT"
+                      }
+                    ]
+                  },
+                  {
+                    "id": "dispense_amount",
+                    "name": "Dispense amount",
+                    "localizedName": "Dispense amount",
+                    "rmType": "CLUSTER",
+                    "nodeId": "openEHR-EHR-CLUSTER.medication_supply_amount.v0",
+                    "min": 0,
+                    "max": 1,
+                    "localizedNames": {
+                      "en": "Dispense amount"
+                    },
+                    "localizedDescriptions": {
+                      "en": "Details related to the amount of a medication, vaccine or other therapeutic item to be supplied or supplied to the patient, as part of authorisation, dispensing or administration."
+                    },
+                    "aqlPath": "/content[openEHR-EHR-INSTRUCTION.medication_order.v0]/activities[at0001]/description[at0002]/items[at0129]/items[openEHR-EHR-CLUSTER.medication_supply_amount.v0 and name/value='Dispense amount']",
+                    "children": [
+                      {
+                        "id": "amount",
+                        "name": "Amount",
+                        "localizedName": "Amount",
+                        "rmType": "DV_QUANTITY",
+                        "nodeId": "at0131",
+                        "min": 0,
+                        "max": 1,
+                        "localizedNames": {
+                          "en": "Amount"
+                        },
+                        "localizedDescriptions": {
+                          "en": "The amount of medication, vaccine or therapeutic good intended to be supplied or actually supplied."
+                        },
+                        "aqlPath": "/content[openEHR-EHR-INSTRUCTION.medication_order.v0]/activities[at0001]/description[at0002]/items[at0129]/items[openEHR-EHR-CLUSTER.medication_supply_amount.v0 and name/value='Dispense amount']/items[at0131]/value",
+                        "inputs": [
+                          {
+                            "suffix": "magnitude",
+                            "type": "DECIMAL",
+                            "validation": {
+                              "range": {
+                                "min": 0.0,
+                                "minOp": ">="
+                              }
+                            }
+                          },
+                          {
+                            "suffix": "unit",
+                            "type": "CODED_TEXT",
+                            "list": [
+                              {
+                                "value": "1",
+                                "label": "1",
+                                "validation": {
+                                  "range": {
+                                    "min": 0.0,
+                                    "minOp": ">="
+                                  }
+                                }
+                              }
+                            ]
+                          }
+                        ],
+                        "annotations": {
+                          "comment": "For example: 1, 1.5, or 0.125."
+                        }
+                      },
+                      {
+                        "id": "units",
+                        "name": "Units",
+                        "localizedName": "Units",
+                        "rmType": "DV_TEXT",
+                        "nodeId": "at0147",
+                        "min": 0,
+                        "max": 1,
+                        "localizedNames": {
+                          "en": "Units"
+                        },
+                        "localizedDescriptions": {
+                          "en": "The dose unit or pack unit associated with the dispense amount."
+                        },
+                        "aqlPath": "/content[openEHR-EHR-INSTRUCTION.medication_order.v0]/activities[at0001]/description[at0002]/items[at0129]/items[openEHR-EHR-CLUSTER.medication_supply_amount.v0 and name/value='Dispense amount']/items[at0147]/value",
+                        "inputs": [
+                          {
+                            "type": "TEXT"
+                          }
+                        ],
+                        "annotations": {
+                          "comment": "For example: 'tablets', 'packs', ml'."
+                        }
+                      }
+                    ]
+                  },
+                  {
+                    "id": "substitution",
+                    "name": "Substitution",
+                    "localizedName": "Substitution",
+                    "rmType": "DV_CODED_TEXT",
+                    "nodeId": "at0132",
+                    "min": 0,
+                    "max": 1,
+                    "localizedNames": {
+                      "en": "Substitution"
+                    },
+                    "localizedDescriptions": {
+                      "en": "Permission for substitution with a bioequivalent medication."
+                    },
+                    "aqlPath": "/content[openEHR-EHR-INSTRUCTION.medication_order.v0]/activities[at0001]/description[at0002]/items[at0129]/items[at0132 and name/value='Substitution']/value",
+                    "inputs": [
+                      {
+                        "suffix": "code",
+                        "type": "CODED_TEXT",
+                        "list": [
+                          {
+                            "value": "at0168",
+                            "label": "Permitted",
+                            "localizedLabels": {
+                              "en": "Permitted"
+                            },
+                            "localizedDescriptions": {
+                              "en": "Substitution of the Medication with a bioequivalent medication is allowed."
+                            }
+                          },
+                          {
+                            "value": "at0169",
+                            "label": "Not permitted",
+                            "localizedLabels": {
+                              "en": "Not permitted"
+                            },
+                            "localizedDescriptions": {
+                              "en": "Substitution of the Medication with a bioequivalent medication is not allowed."
+                            }
+                          }
+                        ],
+                        "terminology": "local"
+                      }
+                    ],
+                    "annotations": {
+                      "comment": "In many jurisdictions, substitution of a prescribed medication, vaccine or other therapeutic good as a generic form or with a different brand name, which has been determined as bioequivalent, is allowed at the point of dispense or supply. In other cases subsitution is assumed and the clinician has to explicitly request non-substitution."
+                    }
+                  }
+                ]
+              },
+              {
+                "id": "comment",
+                "name": "Comment",
+                "localizedName": "Comment",
+                "rmType": "DV_TEXT",
+                "nodeId": "at0167",
+                "min": 0,
+                "max": 1,
+                "localizedNames": {
+                  "en": "Comment"
+                },
+                "localizedDescriptions": {
+                  "en": "Additional narrative about the medication order not captured in other fields."
+                },
+                "aqlPath": "/content[openEHR-EHR-INSTRUCTION.medication_order.v0]/activities[at0001]/description[at0002]/items[at0167]/value",
+                "inputs": [
+                  {
+                    "type": "TEXT"
+                  }
+                ]
+              },
+              {
+                "id": "timing",
+                "name": "timing",
+                "rmType": "DV_PARSABLE",
+                "min": 0,
+                "max": 1,
+                "aqlPath": "/content[openEHR-EHR-INSTRUCTION.medication_order.v0]/activities[at0001]/timing",
+                "inputs": [
+                  {
+                    "suffix": "value",
+                    "type": "TEXT"
+                  },
+                  {
+                    "suffix": "formalism",
+                    "type": "TEXT"
+                  }
+                ],
+                "inContext": true
+              },
+              {
+                "id": "action_archetype_id",
+                "name": "action_archetype_id",
+                "rmType": "STRING",
+                "min": 1,
+                "max": 1,
+                "aqlPath": "/content[openEHR-EHR-INSTRUCTION.medication_order.v0]/activities[at0001]/action_archetype_id",
+                "inputs": [
+                  {
+                    "type": "TEXT"
+                  }
+                ],
+                "inContext": true
+              }
+            ]
+          },
+          {
+            "id": "prescription_item_id",
+            "name": "Prescription Item ID",
+            "localizedName": "Prescription Item ID",
+            "rmType": "DV_IDENTIFIER",
+            "nodeId": "at0004",
+            "min": 0,
+            "max": 1,
+            "localizedNames": {
+              "en": "Prescription Item ID"
+            },
+            "localizedDescriptions": {
+              "en": "Unique identifier for the medication order."
+            },
+            "aqlPath": "/content[openEHR-EHR-INSTRUCTION.medication_order.v0]/protocol[at0005]/items[at0004 and name/value='Prescription Item ID']/value",
+            "inputs": [
+              {
+                "suffix": "id",
+                "type": "TEXT"
+              },
+              {
+                "suffix": "type",
+                "type": "TEXT"
+              },
+              {
+                "suffix": "issuer",
+                "type": "TEXT"
+              },
+              {
+                "suffix": "assigner",
+                "type": "TEXT"
+              }
+            ]
+          },
+          {
+            "id": "subject",
+            "name": "subject",
+            "rmType": "PARTY_PROXY",
+            "min": 1,
+            "max": 1,
+            "aqlPath": "/content[openEHR-EHR-INSTRUCTION.medication_order.v0]/subject",
+            "inputs": [
+              {
+                "suffix": "id",
+                "type": "TEXT"
+              },
+              {
+                "suffix": "id_scheme",
+                "type": "TEXT"
+              },
+              {
+                "suffix": "id_namespace",
+                "type": "TEXT"
+              },
+              {
+                "suffix": "name",
+                "type": "TEXT"
+              }
+            ],
+            "inContext": true
+          },
+          {
+            "id": "narrative",
+            "name": "narrative",
+            "rmType": "DV_TEXT",
+            "min": 1,
+            "max": 1,
+            "aqlPath": "/content[openEHR-EHR-INSTRUCTION.medication_order.v0]/narrative",
+            "inputs": [
+              {
+                "type": "TEXT"
+              }
+            ],
+            "inContext": true
+          },
+          {
+            "id": "language",
+            "name": "language",
+            "rmType": "CODE_PHRASE",
+            "min": 1,
+            "max": 1,
+            "aqlPath": "/content[openEHR-EHR-INSTRUCTION.medication_order.v0]/language",
+            "inContext": true
+          },
+          {
+            "id": "encoding",
+            "name": "encoding",
+            "rmType": "CODE_PHRASE",
+            "min": 1,
+            "max": 1,
+            "aqlPath": "/content[openEHR-EHR-INSTRUCTION.medication_order.v0]/encoding",
+            "inContext": true
+          },
+          {
+            "id": "expiry_time",
+            "name": "expiry_time",
+            "rmType": "DV_DATE_TIME",
+            "min": 0,
+            "max": 1,
+            "aqlPath": "/content[openEHR-EHR-INSTRUCTION.medication_order.v0]/expiry_time",
+            "inputs": [
+              {
+                "type": "DATETIME"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "id": "composer",
+        "name": "composer",
+        "rmType": "PARTY_PROXY",
+        "min": 1,
+        "max": 1,
+        "aqlPath": "/composer",
+        "inputs": [
+          {
+            "suffix": "id",
+            "type": "TEXT"
+          },
+          {
+            "suffix": "id_scheme",
+            "type": "TEXT"
+          },
+          {
+            "suffix": "id_namespace",
+            "type": "TEXT"
+          },
+          {
+            "suffix": "name",
+            "type": "TEXT"
+          }
+        ],
+        "inContext": true
+      },
+      {
+        "id": "language",
+        "name": "language",
+        "rmType": "CODE_PHRASE",
+        "min": 1,
+        "max": 1,
+        "aqlPath": "/language",
+        "inContext": true
+      },
+      {
+        "id": "territory",
+        "name": "territory",
+        "rmType": "CODE_PHRASE",
+        "min": 1,
+        "max": 1,
+        "aqlPath": "/territory",
+        "inContext": true
+      }
+    ]
+  }
+}

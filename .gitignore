@@ -294,4 +294,10 @@ pyrightconfig.json
 # Project files
 /dist
 /archive
+*.bak
 
+# Claude Code session data
+.claude/
+
+# Windows alternate data streams
+*:Zone.Identifier

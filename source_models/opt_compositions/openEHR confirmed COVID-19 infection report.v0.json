@@ -1,0 +1,5520 @@
+{
+  "_type": "COMPOSITION",
+  "name": {
+    "_type": "DV_TEXT",
+    "value": "Confirmed COVID-19 infection report2"
+  },
+  "archetype_details": {
+    "archetype_id": {
+      "value": "openEHR-EHR-COMPOSITION.report.v1"
+    },
+    "template_id": {
+      "value": "openEHR confirmed COVID-19 infection report.v0"
+    },
+    "rm_version": "1.0.4"
+  },
+  "language": {
+    "_type": "CODE_PHRASE",
+    "terminology_id": {
+      "_type": "TERMINOLOGY_ID",
+      "value": "ISO_639-1"
+    },
+    "code_string": "en"
+  },
+  "territory": {
+    "_type": "CODE_PHRASE",
+    "terminology_id": {
+      "_type": "TERMINOLOGY_ID",
+      "value": "ISO_3166-1"
+    },
+    "code_string": "DE"
+  },
+  "category": {
+    "_type": "DV_CODED_TEXT",
+    "value": "event",
+    "defining_code": {
+      "_type": "CODE_PHRASE",
+      "terminology_id": {
+        "_type": "TERMINOLOGY_ID",
+        "value": "openehr"
+      },
+      "code_string": "433"
+    }
+  },
+  "composer": {
+    "_type": "PARTY_IDENTIFIED",
+    "name": "Max Mustermann"
+  },
+  "context": {
+    "_type": "EVENT_CONTEXT",
+    "start_time": {
+      "_type": "DV_DATE_TIME",
+      "value": "2022-02-03T04:05:06"
+    },
+    "end_time": {
+      "_type": "DV_DATE_TIME",
+      "value": "2022-02-03T04:05:06"
+    },
+    "setting": {
+      "_type": "DV_CODED_TEXT",
+      "value": "home",
+      "defining_code": {
+        "_type": "CODE_PHRASE",
+        "terminology_id": {
+          "_type": "TERMINOLOGY_ID",
+          "value": "openehr"
+        },
+        "code_string": "225"
+      }
+    },
+    "other_context": {
+      "_type": "ITEM_TREE",
+      "name": {
+        "_type": "DV_TEXT",
+        "value": "Tree"
+      },
+      "items": [
+        {
+          "_type": "ELEMENT",
+          "name": {
+            "_type": "DV_TEXT",
+            "value": "Country case ID"
+          },
+          "value": {
+            "_type": "DV_TEXT",
+            "value": "Lorem ipsum"
+          },
+          "archetype_node_id": "at0002"
+        },
+        {
+          "_type": "ELEMENT",
+          "name": {
+            "_type": "DV_TEXT",
+            "value": "Status"
+          },
+          "value": {
+            "_type": "DV_TEXT",
+            "value": "STATUS-NO"
+          },
+          "archetype_node_id": "at0005"
+        },
+        {
+          "_type": "CLUSTER",
+          "name": {
+            "_type": "DV_TEXT",
+            "value": "Patient information"
+          },
+          "archetype_details": {
+            "archetype_id": {
+              "value": "openEHR-EHR-CLUSTER.person_anonymised_parent.v0"
+            },
+            "rm_version": "1.0.4"
+          },
+          "items": [
+            {
+              "_type": "ELEMENT",
+              "name": {
+                "_type": "DV_TEXT",
+                "value": "Birth Sex"
+              },
+              "value": {
+                "_type": "DV_CODED_TEXT",
+                "value": "Male",
+                "defining_code": {
+                  "_type": "CODE_PHRASE",
+                  "terminology_id": {
+                    "_type": "TERMINOLOGY_ID",
+                    "value": "local"
+                  },
+                  "code_string": "at0009"
+                }
+              },
+              "archetype_node_id": "at0002"
+            },
+            {
+              "_type": "ELEMENT",
+              "name": {
+                "_type": "DV_TEXT",
+                "value": "Age"
+              },
+              "value": {
+                "_type": "DV_DURATION",
+                "value": "PT0S"
+              },
+              "archetype_node_id": "at0008"
+            }
+          ],
+          "archetype_node_id": "openEHR-EHR-CLUSTER.person_anonymised_parent.v0"
+        },
+        {
+          "_type": "CLUSTER",
+          "name": {
+            "_type": "DV_TEXT",
+            "value": "Where case diagnosed"
+          },
+          "archetype_details": {
+            "archetype_id": {
+              "value": "openEHR-EHR-CLUSTER.address_cc.v0"
+            },
+            "rm_version": "1.0.4"
+          },
+          "items": [
+            {
+              "_type": "ELEMENT",
+              "name": {
+                "_type": "DV_TEXT",
+                "value": "Use"
+              },
+              "value": {
+                "_type": "DV_CODED_TEXT",
+                "value": "Temp",
+                "defining_code": {
+                  "_type": "CODE_PHRASE",
+                  "terminology_id": {
+                    "_type": "TERMINOLOGY_ID",
+                    "value": "local"
+                  },
+                  "code_string": "at0004"
+                }
+              },
+              "archetype_node_id": "at0001"
+            },
+            {
+              "_type": "ELEMENT",
+              "name": {
+                "_type": "DV_TEXT",
+                "value": "Admin Level 1 (Province)"
+              },
+              "value": {
+                "_type": "DV_TEXT",
+                "value": "Lorem ipsum"
+              },
+              "archetype_node_id": "at0013"
+            },
+            {
+              "_type": "ELEMENT",
+              "name": {
+                "_type": "DV_TEXT",
+                "value": "Country"
+              },
+              "value": {
+                "_type": "DV_TEXT",
+                "value": "Lorem ipsum"
+              },
+              "archetype_node_id": "at0015"
+            }
+          ],
+          "archetype_node_id": "openEHR-EHR-CLUSTER.address_cc.v0"
+        },
+        {
+          "_type": "CLUSTER",
+          "name": {
+            "_type": "DV_TEXT",
+            "value": "Usual place of residency"
+          },
+          "archetype_details": {
+            "archetype_id": {
+              "value": "openEHR-EHR-CLUSTER.address_cc.v0"
+            },
+            "rm_version": "1.0.4"
+          },
+          "items": [
+            {
+              "_type": "ELEMENT",
+              "name": {
+                "_type": "DV_TEXT",
+                "value": "Use"
+              },
+              "value": {
+                "_type": "DV_CODED_TEXT",
+                "value": "Home",
+                "defining_code": {
+                  "_type": "CODE_PHRASE",
+                  "terminology_id": {
+                    "_type": "TERMINOLOGY_ID",
+                    "value": "local"
+                  },
+                  "code_string": "at0002"
+                }
+              },
+              "archetype_node_id": "at0001"
+            },
+            {
+              "_type": "ELEMENT",
+              "name": {
+                "_type": "DV_TEXT",
+                "value": "Country"
+              },
+              "value": {
+                "_type": "DV_TEXT",
+                "value": "Lorem ipsum"
+              },
+              "archetype_node_id": "at0015"
+            }
+          ],
+          "archetype_node_id": "openEHR-EHR-CLUSTER.address_cc.v0"
+        }
+      ],
+      "archetype_node_id": "at0001"
+    },
+    "health_care_facility": {
+      "_type": "PARTY_IDENTIFIED",
+      "name": "DOE, John"
+    }
+  },
+  "content": [
+    {
+      "_type": "SECTION",
+      "name": {
+        "_type": "DV_TEXT",
+        "value": "Reporting"
+      },
+      "archetype_details": {
+        "archetype_id": {
+          "value": "openEHR-EHR-SECTION.adhoc.v1"
+        },
+        "rm_version": "1.0.4"
+      },
+      "items": [
+        {
+          "_type": "OBSERVATION",
+          "name": {
+            "_type": "DV_TEXT",
+            "value": "First test"
+          },
+          "archetype_details": {
+            "archetype_id": {
+              "value": "openEHR-EHR-OBSERVATION.laboratory_test_result.v1"
+            },
+            "rm_version": "1.0.4"
+          },
+          "language": {
+            "_type": "CODE_PHRASE",
+            "terminology_id": {
+              "_type": "TERMINOLOGY_ID",
+              "value": "ISO_639-1"
+            },
+            "code_string": "en"
+          },
+          "encoding": {
+            "_type": "CODE_PHRASE",
+            "terminology_id": {
+              "_type": "TERMINOLOGY_ID",
+              "value": "IANA_character-sets"
+            },
+            "code_string": "ISO-10646-UTF-1"
+          },
+          "workflow_id": {
+            "_type": "OBJECT_REF",
+            "namespace": "unknown",
+            "type": "ANY",
+            "id": {
+              "_type": "GENERIC_ID",
+              "value": "f015b314-cf15-329a-b422-670be715ebe2",
+              "scheme": "scheme"
+            }
+          },
+          "subject": {
+            "_type": "PARTY_SELF"
+          },
+          "provider": {
+            "_type": "PARTY_SELF"
+          },
+          "guideline_id": {
+            "_type": "OBJECT_REF",
+            "namespace": "unknown",
+            "type": "ANY",
+            "id": {
+              "_type": "GENERIC_ID",
+              "value": "3d68c282-9ec4-3bf5-af1b-6cf66e6e9971",
+              "scheme": "scheme"
+            }
+          },
+          "data": {
+            "name": {
+              "_type": "DV_TEXT",
+              "value": "Event Series"
+            },
+            "origin": {
+              "_type": "DV_DATE_TIME",
+              "value": "2022-02-03T04:05:06"
+            },
+            "period": {
+              "_type": "DV_DURATION",
+              "value": "PT0S"
+            },
+            "duration": {
+              "_type": "DV_DURATION",
+              "value": "PT0S"
+            },
+            "events": [
+              {
+                "_type": "INTERVAL_EVENT",
+                "name": {
+                  "_type": "DV_TEXT",
+                  "value": "First test"
+                },
+                "time": {
+                  "_type": "DV_DATE_TIME",
+                  "value": "2022-02-03T04:05:06"
+                },
+                "data": {
+                  "_type": "ITEM_TREE",
+                  "name": {
+                    "_type": "DV_TEXT",
+                    "value": "Tree"
+                  },
+                  "items": [
+                    {
+                      "_type": "ELEMENT",
+                      "name": {
+                        "_type": "DV_TEXT",
+                        "value": "Test name"
+                      },
+                      "value": {
+                        "_type": "DV_CODED_TEXT",
+                        "value": "2019-nCoV (novel coronavirus) serology",
+                        "defining_code": {
+                          "_type": "CODE_PHRASE",
+                          "terminology_id": {
+                            "_type": "TERMINOLOGY_ID",
+                            "value": "SNOMED-CT"
+                          },
+                          "code_string": "1240741000000103"
+                        }
+                      },
+                      "archetype_node_id": "at0005"
+                    },
+                    {
+                      "_type": "ELEMENT",
+                      "name": {
+                        "_type": "DV_TEXT",
+                        "value": "Test reason"
+                      },
+                      "value": {
+                        "_type": "DV_CODED_TEXT",
+                        "value": "Contact of a case.",
+                        "defining_code": {
+                          "_type": "CODE_PHRASE",
+                          "terminology_id": {
+                            "_type": "TERMINOLOGY_ID",
+                            "value": "WHO-COVID-TEST_REASON"
+                          },
+                          "code_string": "CASE_CONTACT"
+                        }
+                      },
+                      "archetype_node_id": "at0100"
+                    },
+                    {
+                      "_type": "ELEMENT",
+                      "name": {
+                        "_type": "DV_TEXT",
+                        "value": "Test diagnosis"
+                      },
+                      "value": {
+                        "_type": "DV_CODED_TEXT",
+                        "value": "The Covid-19 test was positive.",
+                        "defining_code": {
+                          "_type": "CODE_PHRASE",
+                          "terminology_id": {
+                            "_type": "TERMINOLOGY_ID",
+                            "value": "WHO-COVID-TEST_RESULT"
+                          },
+                          "code_string": "POSITIVE"
+                        }
+                      },
+                      "archetype_node_id": "at0098"
+                    },
+                    {
+                      "_type": "ELEMENT",
+                      "name": {
+                        "_type": "DV_TEXT",
+                        "value": "Test reason other"
+                      },
+                      "value": {
+                        "_type": "DV_TEXT",
+                        "value": "Lorem ipsum"
+                      },
+                      "archetype_node_id": "at0101"
+                    }
+                  ],
+                  "archetype_node_id": "at0003"
+                },
+                "width": {
+                  "_type": "DV_DURATION",
+                  "value": "PT42H"
+                },
+                "math_function": {
+                  "_type": "DV_CODED_TEXT",
+                  "value": "minimum",
+                  "defining_code": {
+                    "_type": "CODE_PHRASE",
+                    "terminology_id": {
+                      "_type": "TERMINOLOGY_ID",
+                      "value": "openehr"
+                    },
+                    "code_string": "145"
+                  }
+                },
+                "archetype_node_id": "at0002"
+              },
+              {
+                "_type": "POINT_EVENT",
+                "name": {
+                  "_type": "DV_TEXT",
+                  "value": "First test"
+                },
+                "time": {
+                  "_type": "DV_DATE_TIME",
+                  "value": "2022-02-03T04:05:06"
+                },
+                "data": {
+                  "_type": "ITEM_TREE",
+                  "name": {
+                    "_type": "DV_TEXT",
+                    "value": "Tree"
+                  },
+                  "items": [
+                    {
+                      "_type": "ELEMENT",
+                      "name": {
+                        "_type": "DV_TEXT",
+                        "value": "Test name"
+                      },
+                      "value": {
+                        "_type": "DV_CODED_TEXT",
+                        "value": "2019-nCoV (novel coronavirus) serology",
+                        "defining_code": {
+                          "_type": "CODE_PHRASE",
+                          "terminology_id": {
+                            "_type": "TERMINOLOGY_ID",
+                            "value": "SNOMED-CT"
+                          },
+                          "code_string": "1240741000000103"
+                        }
+                      },
+                      "archetype_node_id": "at0005"
+                    },
+                    {
+                      "_type": "ELEMENT",
+                      "name": {
+                        "_type": "DV_TEXT",
+                        "value": "Test reason"
+                      },
+                      "value": {
+                        "_type": "DV_CODED_TEXT",
+                        "value": "Contact of a case.",
+                        "defining_code": {
+                          "_type": "CODE_PHRASE",
+                          "terminology_id": {
+                            "_type": "TERMINOLOGY_ID",
+                            "value": "WHO-COVID-TEST_REASON"
+                          },
+                          "code_string": "CASE_CONTACT"
+                        }
+                      },
+                      "archetype_node_id": "at0100"
+                    },
+                    {
+                      "_type": "ELEMENT",
+                      "name": {
+                        "_type": "DV_TEXT",
+                        "value": "Test diagnosis"
+                      },
+                      "value": {
+                        "_type": "DV_CODED_TEXT",
+                        "value": "The Covid-19 test was positive.",
+                        "defining_code": {
+                          "_type": "CODE_PHRASE",
+                          "terminology_id": {
+                            "_type": "TERMINOLOGY_ID",
+                            "value": "WHO-COVID-TEST_RESULT"
+                          },
+                          "code_string": "POSITIVE"
+                        }
+                      },
+                      "archetype_node_id": "at0098"
+                    },
+                    {
+                      "_type": "ELEMENT",
+                      "name": {
+                        "_type": "DV_TEXT",
+                        "value": "Test reason other"
+                      },
+                      "value": {
+                        "_type": "DV_TEXT",
+                        "value": "Lorem ipsum"
+                      },
+                      "archetype_node_id": "at0101"
+                    }
+                  ],
+                  "archetype_node_id": "at0003"
+                },
+                "archetype_node_id": "at0002"
+              },
+              {
+                "_type": "INTERVAL_EVENT",
+                "name": {
+                  "_type": "DV_TEXT",
+                  "value": "First test"
+                },
+                "time": {
+                  "_type": "DV_DATE_TIME",
+                  "value": "2022-02-03T04:05:06"
+                },
+                "data": {
+                  "_type": "ITEM_TREE",
+                  "name": {
+                    "_type": "DV_TEXT",
+                    "value": "Tree"
+                  },
+                  "items": [
+                    {
+                      "_type": "ELEMENT",
+                      "name": {
+                        "_type": "DV_TEXT",
+                        "value": "Test name"
+                      },
+                      "value": {
+                        "_type": "DV_CODED_TEXT",
+                        "value": "2019-nCoV (novel coronavirus) serology",
+                        "defining_code": {
+                          "_type": "CODE_PHRASE",
+                          "terminology_id": {
+                            "_type": "TERMINOLOGY_ID",
+                            "value": "SNOMED-CT"
+                          },
+                          "code_string": "1240741000000103"
+                        }
+                      },
+                      "archetype_node_id": "at0005"
+                    },
+                    {
+                      "_type": "ELEMENT",
+                      "name": {
+                        "_type": "DV_TEXT",
+                        "value": "Test reason"
+                      },
+                      "value": {
+                        "_type": "DV_CODED_TEXT",
+                        "value": "Contact of a case.",
+                        "defining_code": {
+                          "_type": "CODE_PHRASE",
+                          "terminology_id": {
+                            "_type": "TERMINOLOGY_ID",
+                            "value": "WHO-COVID-TEST_REASON"
+                          },
+                          "code_string": "CASE_CONTACT"
+                        }
+                      },
+                      "archetype_node_id": "at0100"
+                    },
+                    {
+                      "_type": "ELEMENT",
+                      "name": {
+                        "_type": "DV_TEXT",
+                        "value": "Test diagnosis"
+                      },
+                      "value": {
+                        "_type": "DV_CODED_TEXT",
+                        "value": "The Covid-19 test was positive.",
+                        "defining_code": {
+                          "_type": "CODE_PHRASE",
+                          "terminology_id": {
+                            "_type": "TERMINOLOGY_ID",
+                            "value": "WHO-COVID-TEST_RESULT"
+                          },
+                          "code_string": "POSITIVE"
+                        }
+                      },
+                      "archetype_node_id": "at0098"
+                    },
+                    {
+                      "_type": "ELEMENT",
+                      "name": {
+                        "_type": "DV_TEXT",
+                        "value": "Test reason other"
+                      },
+                      "value": {
+                        "_type": "DV_TEXT",
+                        "value": "Lorem ipsum"
+                      },
+                      "archetype_node_id": "at0101"
+                    }
+                  ],
+                  "archetype_node_id": "at0003"
+                },
+                "width": {
+                  "_type": "DV_DURATION",
+                  "value": "PT42H"
+                },
+                "math_function": {
+                  "_type": "DV_CODED_TEXT",
+                  "value": "minimum",
+                  "defining_code": {
+                    "_type": "CODE_PHRASE",
+                    "terminology_id": {
+                      "_type": "TERMINOLOGY_ID",
+                      "value": "openehr"
+                    },
+                    "code_string": "145"
+                  }
+                },
+                "archetype_node_id": "at0002"
+              }
+            ],
+            "archetype_node_id": "at0001"
+          },
+          "archetype_node_id": "openEHR-EHR-OBSERVATION.laboratory_test_result.v1"
+        }
+      ],
+      "archetype_node_id": "openEHR-EHR-SECTION.adhoc.v1"
+    },
+    {
+      "_type": "SECTION",
+      "name": {
+        "_type": "DV_TEXT",
+        "value": "Clinical status"
+      },
+      "archetype_details": {
+        "archetype_id": {
+          "value": "openEHR-EHR-SECTION.adhoc.v1"
+        },
+        "rm_version": "1.0.4"
+      },
+      "items": [
+        {
+          "_type": "OBSERVATION",
+          "name": {
+            "_type": "DV_TEXT",
+            "value": "Story/History"
+          },
+          "archetype_details": {
+            "archetype_id": {
+              "value": "openEHR-EHR-OBSERVATION.story.v1"
+            },
+            "rm_version": "1.0.4"
+          },
+          "language": {
+            "_type": "CODE_PHRASE",
+            "terminology_id": {
+              "_type": "TERMINOLOGY_ID",
+              "value": "ISO_639-1"
+            },
+            "code_string": "en"
+          },
+          "encoding": {
+            "_type": "CODE_PHRASE",
+            "terminology_id": {
+              "_type": "TERMINOLOGY_ID",
+              "value": "IANA_character-sets"
+            },
+            "code_string": "ISO-10646-UTF-1"
+          },
+          "workflow_id": {
+            "_type": "OBJECT_REF",
+            "namespace": "unknown",
+            "type": "ANY",
+            "id": {
+              "_type": "GENERIC_ID",
+              "value": "da982a6c-1901-30c5-8767-1c061e0be3c6",
+              "scheme": "scheme"
+            }
+          },
+          "subject": {
+            "_type": "PARTY_SELF"
+          },
+          "provider": {
+            "_type": "PARTY_SELF"
+          },
+          "guideline_id": {
+            "_type": "OBJECT_REF",
+            "namespace": "unknown",
+            "type": "ANY",
+            "id": {
+              "_type": "GENERIC_ID",
+              "value": "0a772cb9-16b4-3c13-9de4-7c1a49d2af99",
+              "scheme": "scheme"
+            }
+          },
+          "data": {
+            "name": {
+              "_type": "DV_TEXT",
+              "value": "Event Series"
+            },
+            "origin": {
+              "_type": "DV_DATE_TIME",
+              "value": "2022-02-03T04:05:06"
+            },
+            "period": {
+              "_type": "DV_DURATION",
+              "value": "PT0S"
+            },
+            "duration": {
+              "_type": "DV_DURATION",
+              "value": "PT0S"
+            },
+            "events": [
+              {
+                "_type": "INTERVAL_EVENT",
+                "name": {
+                  "_type": "DV_TEXT",
+                  "value": "Any event"
+                },
+                "time": {
+                  "_type": "DV_DATE_TIME",
+                  "value": "2022-02-03T04:05:06"
+                },
+                "data": {
+                  "_type": "ITEM_TREE",
+                  "name": {
+                    "_type": "DV_TEXT",
+                    "value": "Tree"
+                  },
+                  "items": [
+                    {
+                      "_type": "ELEMENT",
+                      "name": {
+                        "_type": "DV_TEXT",
+                        "value": "Story"
+                      },
+                      "value": {
+                        "_type": "DV_TEXT",
+                        "value": "Lorem ipsum"
+                      },
+                      "archetype_node_id": "at0004"
+                    }
+                  ],
+                  "archetype_node_id": "at0003"
+                },
+                "width": {
+                  "_type": "DV_DURATION",
+                  "value": "PT42H"
+                },
+                "math_function": {
+                  "_type": "DV_CODED_TEXT",
+                  "value": "minimum",
+                  "defining_code": {
+                    "_type": "CODE_PHRASE",
+                    "terminology_id": {
+                      "_type": "TERMINOLOGY_ID",
+                      "value": "openehr"
+                    },
+                    "code_string": "145"
+                  }
+                },
+                "archetype_node_id": "at0002"
+              },
+              {
+                "_type": "POINT_EVENT",
+                "name": {
+                  "_type": "DV_TEXT",
+                  "value": "Any event"
+                },
+                "time": {
+                  "_type": "DV_DATE_TIME",
+                  "value": "2022-02-03T04:05:06"
+                },
+                "data": {
+                  "_type": "ITEM_TREE",
+                  "name": {
+                    "_type": "DV_TEXT",
+                    "value": "Tree"
+                  },
+                  "items": [
+                    {
+                      "_type": "ELEMENT",
+                      "name": {
+                        "_type": "DV_TEXT",
+                        "value": "Story"
+                      },
+                      "value": {
+                        "_type": "DV_TEXT",
+                        "value": "Lorem ipsum"
+                      },
+                      "archetype_node_id": "at0004"
+                    }
+                  ],
+                  "archetype_node_id": "at0003"
+                },
+                "archetype_node_id": "at0002"
+              },
+              {
+                "_type": "INTERVAL_EVENT",
+                "name": {
+                  "_type": "DV_TEXT",
+                  "value": "Any event"
+                },
+                "time": {
+                  "_type": "DV_DATE_TIME",
+                  "value": "2022-02-03T04:05:06"
+                },
+                "data": {
+                  "_type": "ITEM_TREE",
+                  "name": {
+                    "_type": "DV_TEXT",
+                    "value": "Tree"
+                  },
+                  "items": [
+                    {
+                      "_type": "ELEMENT",
+                      "name": {
+                        "_type": "DV_TEXT",
+                        "value": "Story"
+                      },
+                      "value": {
+                        "_type": "DV_TEXT",
+                        "value": "Lorem ipsum"
+                      },
+                      "archetype_node_id": "at0004"
+                    }
+                  ],
+                  "archetype_node_id": "at0003"
+                },
+                "width": {
+                  "_type": "DV_DURATION",
+                  "value": "PT42H"
+                },
+                "math_function": {
+                  "_type": "DV_CODED_TEXT",
+                  "value": "minimum",
+                  "defining_code": {
+                    "_type": "CODE_PHRASE",
+                    "terminology_id": {
+                      "_type": "TERMINOLOGY_ID",
+                      "value": "openehr"
+                    },
+                    "code_string": "145"
+                  }
+                },
+                "archetype_node_id": "at0002"
+              }
+            ],
+            "archetype_node_id": "at0001"
+          },
+          "archetype_node_id": "openEHR-EHR-OBSERVATION.story.v1"
+        },
+        {
+          "_type": "OBSERVATION",
+          "name": {
+            "_type": "DV_TEXT",
+            "value": "Symptom/sign screening"
+          },
+          "archetype_details": {
+            "archetype_id": {
+              "value": "openEHR-EHR-OBSERVATION.symptom_sign_screening.v0"
+            },
+            "rm_version": "1.0.4"
+          },
+          "language": {
+            "_type": "CODE_PHRASE",
+            "terminology_id": {
+              "_type": "TERMINOLOGY_ID",
+              "value": "ISO_639-1"
+            },
+            "code_string": "en"
+          },
+          "encoding": {
+            "_type": "CODE_PHRASE",
+            "terminology_id": {
+              "_type": "TERMINOLOGY_ID",
+              "value": "IANA_character-sets"
+            },
+            "code_string": "ISO-10646-UTF-1"
+          },
+          "workflow_id": {
+            "_type": "OBJECT_REF",
+            "namespace": "unknown",
+            "type": "ANY",
+            "id": {
+              "_type": "GENERIC_ID",
+              "value": "2d1091e9-deae-3e72-b1af-9d16198317ee",
+              "scheme": "scheme"
+            }
+          },
+          "subject": {
+            "_type": "PARTY_SELF"
+          },
+          "provider": {
+            "_type": "PARTY_SELF"
+          },
+          "guideline_id": {
+            "_type": "OBJECT_REF",
+            "namespace": "unknown",
+            "type": "ANY",
+            "id": {
+              "_type": "GENERIC_ID",
+              "value": "6a37927d-61c1-3931-92ad-ee58444e5b85",
+              "scheme": "scheme"
+            }
+          },
+          "data": {
+            "name": {
+              "_type": "DV_TEXT",
+              "value": "History"
+            },
+            "origin": {
+              "_type": "DV_DATE_TIME",
+              "value": "2022-02-03T04:05:06"
+            },
+            "period": {
+              "_type": "DV_DURATION",
+              "value": "PT0S"
+            },
+            "duration": {
+              "_type": "DV_DURATION",
+              "value": "PT0S"
+            },
+            "events": [
+              {
+                "_type": "INTERVAL_EVENT",
+                "name": {
+                  "_type": "DV_TEXT",
+                  "value": "At test"
+                },
+                "time": {
+                  "_type": "DV_DATE_TIME",
+                  "value": "2022-02-03T04:05:06"
+                },
+                "data": {
+                  "_type": "ITEM_TREE",
+                  "name": {
+                    "_type": "DV_TEXT",
+                    "value": "Tree"
+                  },
+                  "items": [
+                    {
+                      "_type": "ELEMENT",
+                      "name": {
+                        "_type": "DV_TEXT",
+                        "value": "Screening purpose"
+                      },
+                      "value": {
+                        "_type": "DV_CODED_TEXT",
+                        "value": "Suspected COVID-19",
+                        "defining_code": {
+                          "_type": "CODE_PHRASE",
+                          "terminology_id": {
+                            "_type": "TERMINOLOGY_ID",
+                            "value": "SNOMED-CT"
+                          },
+                          "code_string": "840544004"
+                        }
+                      },
+                      "archetype_node_id": "at0034"
+                    },
+                    {
+                      "_type": "CLUSTER",
+                      "name": {
+                        "_type": "DV_TEXT",
+                        "value": "Specific symptom/sign"
+                      },
+                      "items": [
+                        {
+                          "_type": "ELEMENT",
+                          "name": {
+                            "_type": "DV_TEXT",
+                            "value": "Symptom or sign name"
+                          },
+                          "value": {
+                            "_type": "DV_CODED_TEXT",
+                            "value": "Influenza-like symptoms",
+                            "defining_code": {
+                              "_type": "CODE_PHRASE",
+                              "terminology_id": {
+                                "_type": "TERMINOLOGY_ID",
+                                "value": "SNOMED-CT"
+                              },
+                              "code_string": "315642008"
+                            }
+                          },
+                          "archetype_node_id": "at0004"
+                        },
+                        {
+                          "_type": "ELEMENT",
+                          "name": {
+                            "_type": "DV_TEXT",
+                            "value": "Has symptoms at specimen time"
+                          },
+                          "value": {
+                            "_type": "DV_CODED_TEXT",
+                            "value": "Present",
+                            "defining_code": {
+                              "_type": "CODE_PHRASE",
+                              "terminology_id": {
+                                "_type": "TERMINOLOGY_ID",
+                                "value": "local"
+                              },
+                              "code_string": "at0023"
+                            }
+                          },
+                          "archetype_node_id": "at0005"
+                        },
+                        {
+                          "_type": "ELEMENT",
+                          "name": {
+                            "_type": "DV_TEXT",
+                            "value": "Comment"
+                          },
+                          "value": {
+                            "_type": "DV_TEXT",
+                            "value": "Lorem ipsum"
+                          },
+                          "archetype_node_id": "at0035"
+                        }
+                      ],
+                      "archetype_node_id": "at0022"
+                    }
+                  ],
+                  "archetype_node_id": "at0003"
+                },
+                "width": {
+                  "_type": "DV_DURATION",
+                  "value": "PT42H"
+                },
+                "math_function": {
+                  "_type": "DV_CODED_TEXT",
+                  "value": "minimum",
+                  "defining_code": {
+                    "_type": "CODE_PHRASE",
+                    "terminology_id": {
+                      "_type": "TERMINOLOGY_ID",
+                      "value": "openehr"
+                    },
+                    "code_string": "145"
+                  }
+                },
+                "archetype_node_id": "at0002"
+              },
+              {
+                "_type": "POINT_EVENT",
+                "name": {
+                  "_type": "DV_TEXT",
+                  "value": "At test"
+                },
+                "time": {
+                  "_type": "DV_DATE_TIME",
+                  "value": "2022-02-03T04:05:06"
+                },
+                "data": {
+                  "_type": "ITEM_TREE",
+                  "name": {
+                    "_type": "DV_TEXT",
+                    "value": "Tree"
+                  },
+                  "items": [
+                    {
+                      "_type": "ELEMENT",
+                      "name": {
+                        "_type": "DV_TEXT",
+                        "value": "Screening purpose"
+                      },
+                      "value": {
+                        "_type": "DV_CODED_TEXT",
+                        "value": "Suspected COVID-19",
+                        "defining_code": {
+                          "_type": "CODE_PHRASE",
+                          "terminology_id": {
+                            "_type": "TERMINOLOGY_ID",
+                            "value": "SNOMED-CT"
+                          },
+                          "code_string": "840544004"
+                        }
+                      },
+                      "archetype_node_id": "at0034"
+                    },
+                    {
+                      "_type": "CLUSTER",
+                      "name": {
+                        "_type": "DV_TEXT",
+                        "value": "Specific symptom/sign"
+                      },
+                      "items": [
+                        {
+                          "_type": "ELEMENT",
+                          "name": {
+                            "_type": "DV_TEXT",
+                            "value": "Symptom or sign name"
+                          },
+                          "value": {
+                            "_type": "DV_CODED_TEXT",
+                            "value": "Influenza-like symptoms",
+                            "defining_code": {
+                              "_type": "CODE_PHRASE",
+                              "terminology_id": {
+                                "_type": "TERMINOLOGY_ID",
+                                "value": "SNOMED-CT"
+                              },
+                              "code_string": "315642008"
+                            }
+                          },
+                          "archetype_node_id": "at0004"
+                        },
+                        {
+                          "_type": "ELEMENT",
+                          "name": {
+                            "_type": "DV_TEXT",
+                            "value": "Has symptoms at specimen time"
+                          },
+                          "value": {
+                            "_type": "DV_CODED_TEXT",
+                            "value": "Present",
+                            "defining_code": {
+                              "_type": "CODE_PHRASE",
+                              "terminology_id": {
+                                "_type": "TERMINOLOGY_ID",
+                                "value": "local"
+                              },
+                              "code_string": "at0023"
+                            }
+                          },
+                          "archetype_node_id": "at0005"
+                        },
+                        {
+                          "_type": "ELEMENT",
+                          "name": {
+                            "_type": "DV_TEXT",
+                            "value": "Comment"
+                          },
+                          "value": {
+                            "_type": "DV_TEXT",
+                            "value": "Lorem ipsum"
+                          },
+                          "archetype_node_id": "at0035"
+                        }
+                      ],
+                      "archetype_node_id": "at0022"
+                    }
+                  ],
+                  "archetype_node_id": "at0003"
+                },
+                "archetype_node_id": "at0002"
+              },
+              {
+                "_type": "INTERVAL_EVENT",
+                "name": {
+                  "_type": "DV_TEXT",
+                  "value": "At test"
+                },
+                "time": {
+                  "_type": "DV_DATE_TIME",
+                  "value": "2022-02-03T04:05:06"
+                },
+                "data": {
+                  "_type": "ITEM_TREE",
+                  "name": {
+                    "_type": "DV_TEXT",
+                    "value": "Tree"
+                  },
+                  "items": [
+                    {
+                      "_type": "ELEMENT",
+                      "name": {
+                        "_type": "DV_TEXT",
+                        "value": "Screening purpose"
+                      },
+                      "value": {
+                        "_type": "DV_CODED_TEXT",
+                        "value": "Suspected COVID-19",
+                        "defining_code": {
+                          "_type": "CODE_PHRASE",
+                          "terminology_id": {
+                            "_type": "TERMINOLOGY_ID",
+                            "value": "SNOMED-CT"
+                          },
+                          "code_string": "840544004"
+                        }
+                      },
+                      "archetype_node_id": "at0034"
+                    },
+                    {
+                      "_type": "CLUSTER",
+                      "name": {
+                        "_type": "DV_TEXT",
+                        "value": "Specific symptom/sign"
+                      },
+                      "items": [
+                        {
+                          "_type": "ELEMENT",
+                          "name": {
+                            "_type": "DV_TEXT",
+                            "value": "Symptom or sign name"
+                          },
+                          "value": {
+                            "_type": "DV_CODED_TEXT",
+                            "value": "Influenza-like symptoms",
+                            "defining_code": {
+                              "_type": "CODE_PHRASE",
+                              "terminology_id": {
+                                "_type": "TERMINOLOGY_ID",
+                                "value": "SNOMED-CT"
+                              },
+                              "code_string": "315642008"
+                            }
+                          },
+                          "archetype_node_id": "at0004"
+                        },
+                        {
+                          "_type": "ELEMENT",
+                          "name": {
+                            "_type": "DV_TEXT",
+                            "value": "Has symptoms at specimen time"
+                          },
+                          "value": {
+                            "_type": "DV_CODED_TEXT",
+                            "value": "Present",
+                            "defining_code": {
+                              "_type": "CODE_PHRASE",
+                              "terminology_id": {
+                                "_type": "TERMINOLOGY_ID",
+                                "value": "local"
+                              },
+                              "code_string": "at0023"
+                            }
+                          },
+                          "archetype_node_id": "at0005"
+                        },
+                        {
+                          "_type": "ELEMENT",
+                          "name": {
+                            "_type": "DV_TEXT",
+                            "value": "Comment"
+                          },
+                          "value": {
+                            "_type": "DV_TEXT",
+                            "value": "Lorem ipsum"
+                          },
+                          "archetype_node_id": "at0035"
+                        }
+                      ],
+                      "archetype_node_id": "at0022"
+                    }
+                  ],
+                  "archetype_node_id": "at0003"
+                },
+                "width": {
+                  "_type": "DV_DURATION",
+                  "value": "PT42H"
+                },
+                "math_function": {
+                  "_type": "DV_CODED_TEXT",
+                  "value": "minimum",
+                  "defining_code": {
+                    "_type": "CODE_PHRASE",
+                    "terminology_id": {
+                      "_type": "TERMINOLOGY_ID",
+                      "value": "openehr"
+                    },
+                    "code_string": "145"
+                  }
+                },
+                "archetype_node_id": "at0002"
+              }
+            ],
+            "archetype_node_id": "at0001"
+          },
+          "archetype_node_id": "openEHR-EHR-OBSERVATION.symptom_sign_screening.v0"
+        },
+        {
+          "_type": "OBSERVATION",
+          "name": {
+            "_type": "DV_TEXT",
+            "value": "Condition screening"
+          },
+          "archetype_details": {
+            "archetype_id": {
+              "value": "openEHR-EHR-OBSERVATION.condition_screening.v0"
+            },
+            "rm_version": "1.0.4"
+          },
+          "language": {
+            "_type": "CODE_PHRASE",
+            "terminology_id": {
+              "_type": "TERMINOLOGY_ID",
+              "value": "ISO_639-1"
+            },
+            "code_string": "en"
+          },
+          "encoding": {
+            "_type": "CODE_PHRASE",
+            "terminology_id": {
+              "_type": "TERMINOLOGY_ID",
+              "value": "IANA_character-sets"
+            },
+            "code_string": "ISO-10646-UTF-1"
+          },
+          "workflow_id": {
+            "_type": "OBJECT_REF",
+            "namespace": "unknown",
+            "type": "ANY",
+            "id": {
+              "_type": "GENERIC_ID",
+              "value": "54706007-cb5c-31e1-a73a-b9f645bfa172",
+              "scheme": "scheme"
+            }
+          },
+          "subject": {
+            "_type": "PARTY_SELF"
+          },
+          "provider": {
+            "_type": "PARTY_SELF"
+          },
+          "guideline_id": {
+            "_type": "OBJECT_REF",
+            "namespace": "unknown",
+            "type": "ANY",
+            "id": {
+              "_type": "GENERIC_ID",
+              "value": "c1171d83-fbb6-3941-8ec3-f3a3d257d9a0",
+              "scheme": "scheme"
+            }
+          },
+          "data": {
+            "name": {
+              "_type": "DV_TEXT",
+              "value": "History"
+            },
+            "origin": {
+              "_type": "DV_DATE_TIME",
+              "value": "2022-02-03T04:05:06"
+            },
+            "period": {
+              "_type": "DV_DURATION",
+              "value": "PT0S"
+            },
+            "duration": {
+              "_type": "DV_DURATION",
+              "value": "PT0S"
+            },
+            "events": [
+              {
+                "_type": "INTERVAL_EVENT",
+                "name": {
+                  "_type": "DV_TEXT",
+                  "value": "At testing"
+                },
+                "time": {
+                  "_type": "DV_DATE_TIME",
+                  "value": "2022-02-03T04:05:06"
+                },
+                "data": {
+                  "_type": "ITEM_TREE",
+                  "name": {
+                    "_type": "DV_TEXT",
+                    "value": "Tree"
+                  },
+                  "items": [
+                    {
+                      "_type": "ELEMENT",
+                      "name": {
+                        "_type": "DV_TEXT",
+                        "value": "Screening purpose"
+                      },
+                      "value": {
+                        "_type": "DV_CODED_TEXT",
+                        "value": "Suspected COVID-19",
+                        "defining_code": {
+                          "_type": "CODE_PHRASE",
+                          "terminology_id": {
+                            "_type": "TERMINOLOGY_ID",
+                            "value": "SNOMED-CT"
+                          },
+                          "code_string": "840544004"
+                        }
+                      },
+                      "archetype_node_id": "at0034"
+                    },
+                    {
+                      "_type": "ELEMENT",
+                      "name": {
+                        "_type": "DV_TEXT",
+                        "value": "Any underlying conditions?"
+                      },
+                      "value": {
+                        "_type": "DV_CODED_TEXT",
+                        "value": "Present",
+                        "defining_code": {
+                          "_type": "CODE_PHRASE",
+                          "terminology_id": {
+                            "_type": "TERMINOLOGY_ID",
+                            "value": "local"
+                          },
+                          "code_string": "at0031"
+                        }
+                      },
+                      "archetype_node_id": "at0028"
+                    },
+                    {
+                      "_type": "CLUSTER",
+                      "name": {
+                        "_type": "DV_TEXT",
+                        "value": "Specific condition"
+                      },
+                      "items": [
+                        {
+                          "_type": "ELEMENT",
+                          "name": {
+                            "_type": "DV_TEXT",
+                            "value": "Condition name"
+                          },
+                          "value": {
+                            "_type": "DV_TEXT",
+                            "value": "Pregnancy"
+                          },
+                          "archetype_node_id": "at0004"
+                        },
+                        {
+                          "_type": "ELEMENT",
+                          "name": {
+                            "_type": "DV_TEXT",
+                            "value": "Presence?"
+                          },
+                          "value": {
+                            "_type": "DV_CODED_TEXT",
+                            "value": "Present",
+                            "defining_code": {
+                              "_type": "CODE_PHRASE",
+                              "terminology_id": {
+                                "_type": "TERMINOLOGY_ID",
+                                "value": "local"
+                              },
+                              "code_string": "at0023"
+                            }
+                          },
+                          "archetype_node_id": "at0005"
+                        }
+                      ],
+                      "archetype_node_id": "at0022"
+                    },
+                    {
+                      "_type": "CLUSTER",
+                      "name": {
+                        "_type": "DV_TEXT",
+                        "value": "Other condition"
+                      },
+                      "items": [
+                        {
+                          "_type": "ELEMENT",
+                          "name": {
+                            "_type": "DV_TEXT",
+                            "value": "Condition name"
+                          },
+                          "value": {
+                            "_type": "DV_TEXT",
+                            "value": "Lorem ipsum"
+                          },
+                          "archetype_node_id": "at0004"
+                        }
+                      ],
+                      "archetype_node_id": "at0022"
+                    }
+                  ],
+                  "archetype_node_id": "at0003"
+                },
+                "width": {
+                  "_type": "DV_DURATION",
+                  "value": "PT42H"
+                },
+                "math_function": {
+                  "_type": "DV_CODED_TEXT",
+                  "value": "minimum",
+                  "defining_code": {
+                    "_type": "CODE_PHRASE",
+                    "terminology_id": {
+                      "_type": "TERMINOLOGY_ID",
+                      "value": "openehr"
+                    },
+                    "code_string": "145"
+                  }
+                },
+                "archetype_node_id": "at0002"
+              },
+              {
+                "_type": "POINT_EVENT",
+                "name": {
+                  "_type": "DV_TEXT",
+                  "value": "At testing"
+                },
+                "time": {
+                  "_type": "DV_DATE_TIME",
+                  "value": "2022-02-03T04:05:06"
+                },
+                "data": {
+                  "_type": "ITEM_TREE",
+                  "name": {
+                    "_type": "DV_TEXT",
+                    "value": "Tree"
+                  },
+                  "items": [
+                    {
+                      "_type": "ELEMENT",
+                      "name": {
+                        "_type": "DV_TEXT",
+                        "value": "Screening purpose"
+                      },
+                      "value": {
+                        "_type": "DV_CODED_TEXT",
+                        "value": "Suspected COVID-19",
+                        "defining_code": {
+                          "_type": "CODE_PHRASE",
+                          "terminology_id": {
+                            "_type": "TERMINOLOGY_ID",
+                            "value": "SNOMED-CT"
+                          },
+                          "code_string": "840544004"
+                        }
+                      },
+                      "archetype_node_id": "at0034"
+                    },
+                    {
+                      "_type": "ELEMENT",
+                      "name": {
+                        "_type": "DV_TEXT",
+                        "value": "Any underlying conditions?"
+                      },
+                      "value": {
+                        "_type": "DV_CODED_TEXT",
+                        "value": "Present",
+                        "defining_code": {
+                          "_type": "CODE_PHRASE",
+                          "terminology_id": {
+                            "_type": "TERMINOLOGY_ID",
+                            "value": "local"
+                          },
+                          "code_string": "at0031"
+                        }
+                      },
+                      "archetype_node_id": "at0028"
+                    },
+                    {
+                      "_type": "CLUSTER",
+                      "name": {
+                        "_type": "DV_TEXT",
+                        "value": "Specific condition"
+                      },
+                      "items": [
+                        {
+                          "_type": "ELEMENT",
+                          "name": {
+                            "_type": "DV_TEXT",
+                            "value": "Condition name"
+                          },
+                          "value": {
+                            "_type": "DV_TEXT",
+                            "value": "Pregnancy"
+                          },
+                          "archetype_node_id": "at0004"
+                        },
+                        {
+                          "_type": "ELEMENT",
+                          "name": {
+                            "_type": "DV_TEXT",
+                            "value": "Presence?"
+                          },
+                          "value": {
+                            "_type": "DV_CODED_TEXT",
+                            "value": "Present",
+                            "defining_code": {
+                              "_type": "CODE_PHRASE",
+                              "terminology_id": {
+                                "_type": "TERMINOLOGY_ID",
+                                "value": "local"
+                              },
+                              "code_string": "at0023"
+                            }
+                          },
+                          "archetype_node_id": "at0005"
+                        }
+                      ],
+                      "archetype_node_id": "at0022"
+                    },
+                    {
+                      "_type": "CLUSTER",
+                      "name": {
+                        "_type": "DV_TEXT",
+                        "value": "Other condition"
+                      },
+                      "items": [
+                        {
+                          "_type": "ELEMENT",
+                          "name": {
+                            "_type": "DV_TEXT",
+                            "value": "Condition name"
+                          },
+                          "value": {
+                            "_type": "DV_TEXT",
+                            "value": "Lorem ipsum"
+                          },
+                          "archetype_node_id": "at0004"
+                        }
+                      ],
+                      "archetype_node_id": "at0022"
+                    }
+                  ],
+                  "archetype_node_id": "at0003"
+                },
+                "archetype_node_id": "at0002"
+              },
+              {
+                "_type": "INTERVAL_EVENT",
+                "name": {
+                  "_type": "DV_TEXT",
+                  "value": "At testing"
+                },
+                "time": {
+                  "_type": "DV_DATE_TIME",
+                  "value": "2022-02-03T04:05:06"
+                },
+                "data": {
+                  "_type": "ITEM_TREE",
+                  "name": {
+                    "_type": "DV_TEXT",
+                    "value": "Tree"
+                  },
+                  "items": [
+                    {
+                      "_type": "ELEMENT",
+                      "name": {
+                        "_type": "DV_TEXT",
+                        "value": "Screening purpose"
+                      },
+                      "value": {
+                        "_type": "DV_CODED_TEXT",
+                        "value": "Suspected COVID-19",
+                        "defining_code": {
+                          "_type": "CODE_PHRASE",
+                          "terminology_id": {
+                            "_type": "TERMINOLOGY_ID",
+                            "value": "SNOMED-CT"
+                          },
+                          "code_string": "840544004"
+                        }
+                      },
+                      "archetype_node_id": "at0034"
+                    },
+                    {
+                      "_type": "ELEMENT",
+                      "name": {
+                        "_type": "DV_TEXT",
+                        "value": "Any underlying conditions?"
+                      },
+                      "value": {
+                        "_type": "DV_CODED_TEXT",
+                        "value": "Present",
+                        "defining_code": {
+                          "_type": "CODE_PHRASE",
+                          "terminology_id": {
+                            "_type": "TERMINOLOGY_ID",
+                            "value": "local"
+                          },
+                          "code_string": "at0031"
+                        }
+                      },
+                      "archetype_node_id": "at0028"
+                    },
+                    {
+                      "_type": "CLUSTER",
+                      "name": {
+                        "_type": "DV_TEXT",
+                        "value": "Specific condition"
+                      },
+                      "items": [
+                        {
+                          "_type": "ELEMENT",
+                          "name": {
+                            "_type": "DV_TEXT",
+                            "value": "Condition name"
+                          },
+                          "value": {
+                            "_type": "DV_TEXT",
+                            "value": "Pregnancy"
+                          },
+                          "archetype_node_id": "at0004"
+                        },
+                        {
+                          "_type": "ELEMENT",
+                          "name": {
+                            "_type": "DV_TEXT",
+                            "value": "Presence?"
+                          },
+                          "value": {
+                            "_type": "DV_CODED_TEXT",
+                            "value": "Present",
+                            "defining_code": {
+                              "_type": "CODE_PHRASE",
+                              "terminology_id": {
+                                "_type": "TERMINOLOGY_ID",
+                                "value": "local"
+                              },
+                              "code_string": "at0023"
+                            }
+                          },
+                          "archetype_node_id": "at0005"
+                        }
+                      ],
+                      "archetype_node_id": "at0022"
+                    },
+                    {
+                      "_type": "CLUSTER",
+                      "name": {
+                        "_type": "DV_TEXT",
+                        "value": "Other condition"
+                      },
+                      "items": [
+                        {
+                          "_type": "ELEMENT",
+                          "name": {
+                            "_type": "DV_TEXT",
+                            "value": "Condition name"
+                          },
+                          "value": {
+                            "_type": "DV_TEXT",
+                            "value": "Lorem ipsum"
+                          },
+                          "archetype_node_id": "at0004"
+                        }
+                      ],
+                      "archetype_node_id": "at0022"
+                    }
+                  ],
+                  "archetype_node_id": "at0003"
+                },
+                "width": {
+                  "_type": "DV_DURATION",
+                  "value": "PT42H"
+                },
+                "math_function": {
+                  "_type": "DV_CODED_TEXT",
+                  "value": "minimum",
+                  "defining_code": {
+                    "_type": "CODE_PHRASE",
+                    "terminology_id": {
+                      "_type": "TERMINOLOGY_ID",
+                      "value": "openehr"
+                    },
+                    "code_string": "145"
+                  }
+                },
+                "archetype_node_id": "at0002"
+              }
+            ],
+            "archetype_node_id": "at0001"
+          },
+          "archetype_node_id": "openEHR-EHR-OBSERVATION.condition_screening.v0"
+        },
+        {
+          "_type": "OBSERVATION",
+          "name": {
+            "_type": "DV_TEXT",
+            "value": "Gestation"
+          },
+          "archetype_details": {
+            "archetype_id": {
+              "value": "openEHR-EHR-OBSERVATION.gestation.v0"
+            },
+            "rm_version": "1.0.4"
+          },
+          "language": {
+            "_type": "CODE_PHRASE",
+            "terminology_id": {
+              "_type": "TERMINOLOGY_ID",
+              "value": "ISO_639-1"
+            },
+            "code_string": "en"
+          },
+          "encoding": {
+            "_type": "CODE_PHRASE",
+            "terminology_id": {
+              "_type": "TERMINOLOGY_ID",
+              "value": "IANA_character-sets"
+            },
+            "code_string": "ISO-10646-UTF-1"
+          },
+          "workflow_id": {
+            "_type": "OBJECT_REF",
+            "namespace": "unknown",
+            "type": "ANY",
+            "id": {
+              "_type": "GENERIC_ID",
+              "value": "cdac833d-3477-363e-be1e-55242df6d68b",
+              "scheme": "scheme"
+            }
+          },
+          "subject": {
+            "_type": "PARTY_SELF"
+          },
+          "provider": {
+            "_type": "PARTY_SELF"
+          },
+          "guideline_id": {
+            "_type": "OBJECT_REF",
+            "namespace": "unknown",
+            "type": "ANY",
+            "id": {
+              "_type": "GENERIC_ID",
+              "value": "83ff69d6-ca3f-35bc-b775-2efdca212ec6",
+              "scheme": "scheme"
+            }
+          },
+          "data": {
+            "name": {
+              "_type": "DV_TEXT",
+              "value": "Event Series"
+            },
+            "origin": {
+              "_type": "DV_DATE_TIME",
+              "value": "2022-02-03T04:05:06"
+            },
+            "period": {
+              "_type": "DV_DURATION",
+              "value": "PT0S"
+            },
+            "duration": {
+              "_type": "DV_DURATION",
+              "value": "PT0S"
+            },
+            "events": [
+              {
+                "_type": "POINT_EVENT",
+                "name": {
+                  "_type": "DV_TEXT",
+                  "value": "Date of measurement"
+                },
+                "time": {
+                  "_type": "DV_DATE_TIME",
+                  "value": "2022-02-03T04:05:06"
+                },
+                "data": {
+                  "_type": "ITEM_TREE",
+                  "name": {
+                    "_type": "DV_TEXT",
+                    "value": "Tree"
+                  },
+                  "items": [
+                    {
+                      "_type": "ELEMENT",
+                      "name": {
+                        "_type": "DV_TEXT",
+                        "value": "Trimester if pregnant"
+                      },
+                      "value": {
+                        "_type": "DV_CODED_TEXT",
+                        "value": "First trimester",
+                        "defining_code": {
+                          "_type": "CODE_PHRASE",
+                          "terminology_id": {
+                            "_type": "TERMINOLOGY_ID",
+                            "value": "local"
+                          },
+                          "code_string": "at0021"
+                        }
+                      },
+                      "archetype_node_id": "at0020"
+                    },
+                    {
+                      "_type": "ELEMENT",
+                      "name": {
+                        "_type": "DV_TEXT",
+                        "value": "Comment"
+                      },
+                      "value": {
+                        "_type": "DV_TEXT",
+                        "value": "Lorem ipsum"
+                      },
+                      "archetype_node_id": "at0019"
+                    }
+                  ],
+                  "archetype_node_id": "at0003"
+                },
+                "archetype_node_id": "at0002"
+              }
+            ],
+            "archetype_node_id": "at0001"
+          },
+          "archetype_node_id": "openEHR-EHR-OBSERVATION.gestation.v0"
+        },
+        {
+          "_type": "OBSERVATION",
+          "name": {
+            "_type": "DV_TEXT",
+            "value": "Procedure screening"
+          },
+          "archetype_details": {
+            "archetype_id": {
+              "value": "openEHR-EHR-OBSERVATION.procedure_screening.v0"
+            },
+            "rm_version": "1.0.4"
+          },
+          "language": {
+            "_type": "CODE_PHRASE",
+            "terminology_id": {
+              "_type": "TERMINOLOGY_ID",
+              "value": "ISO_639-1"
+            },
+            "code_string": "en"
+          },
+          "encoding": {
+            "_type": "CODE_PHRASE",
+            "terminology_id": {
+              "_type": "TERMINOLOGY_ID",
+              "value": "IANA_character-sets"
+            },
+            "code_string": "ISO-10646-UTF-1"
+          },
+          "workflow_id": {
+            "_type": "OBJECT_REF",
+            "namespace": "unknown",
+            "type": "ANY",
+            "id": {
+              "_type": "GENERIC_ID",
+              "value": "1631e1c3-6a12-3a37-b6be-6bfebc2710ca",
+              "scheme": "scheme"
+            }
+          },
+          "subject": {
+            "_type": "PARTY_SELF"
+          },
+          "provider": {
+            "_type": "PARTY_SELF"
+          },
+          "guideline_id": {
+            "_type": "OBJECT_REF",
+            "namespace": "unknown",
+            "type": "ANY",
+            "id": {
+              "_type": "GENERIC_ID",
+              "value": "59002ed2-50b9-39ac-a931-964e7db90707",
+              "scheme": "scheme"
+            }
+          },
+          "data": {
+            "name": {
+              "_type": "DV_TEXT",
+              "value": "History"
+            },
+            "origin": {
+              "_type": "DV_DATE_TIME",
+              "value": "2022-02-03T04:05:06"
+            },
+            "period": {
+              "_type": "DV_DURATION",
+              "value": "PT0S"
+            },
+            "duration": {
+              "_type": "DV_DURATION",
+              "value": "PT0S"
+            },
+            "events": [
+              {
+                "_type": "INTERVAL_EVENT",
+                "name": {
+                  "_type": "DV_TEXT",
+                  "value": "At testing"
+                },
+                "time": {
+                  "_type": "DV_DATE_TIME",
+                  "value": "2022-02-03T04:05:06"
+                },
+                "data": {
+                  "_type": "ITEM_TREE",
+                  "name": {
+                    "_type": "DV_TEXT",
+                    "value": "Tree"
+                  },
+                  "items": [
+                    {
+                      "_type": "ELEMENT",
+                      "name": {
+                        "_type": "DV_TEXT",
+                        "value": "Screening purpose"
+                      },
+                      "value": {
+                        "_type": "DV_CODED_TEXT",
+                        "value": "Suspected COVID-19",
+                        "defining_code": {
+                          "_type": "CODE_PHRASE",
+                          "terminology_id": {
+                            "_type": "TERMINOLOGY_ID",
+                            "value": "SNOMED-CT"
+                          },
+                          "code_string": "840544004"
+                        }
+                      },
+                      "archetype_node_id": "at0034"
+                    },
+                    {
+                      "_type": "CLUSTER",
+                      "name": {
+                        "_type": "DV_TEXT",
+                        "value": "Specific procedure"
+                      },
+                      "items": [
+                        {
+                          "_type": "ELEMENT",
+                          "name": {
+                            "_type": "DV_TEXT",
+                            "value": "Procedure name"
+                          },
+                          "value": {
+                            "_type": "DV_TEXT",
+                            "value": "Ventilation"
+                          },
+                          "archetype_node_id": "at0004"
+                        },
+                        {
+                          "_type": "ELEMENT",
+                          "name": {
+                            "_type": "DV_TEXT",
+                            "value": "Performed?"
+                          },
+                          "value": {
+                            "_type": "DV_CODED_TEXT",
+                            "value": "Performed/carried out",
+                            "defining_code": {
+                              "_type": "CODE_PHRASE",
+                              "terminology_id": {
+                                "_type": "TERMINOLOGY_ID",
+                                "value": "local"
+                              },
+                              "code_string": "at0023"
+                            }
+                          },
+                          "archetype_node_id": "at0005"
+                        }
+                      ],
+                      "archetype_node_id": "at0022"
+                    }
+                  ],
+                  "archetype_node_id": "at0003"
+                },
+                "width": {
+                  "_type": "DV_DURATION",
+                  "value": "PT42H"
+                },
+                "math_function": {
+                  "_type": "DV_CODED_TEXT",
+                  "value": "minimum",
+                  "defining_code": {
+                    "_type": "CODE_PHRASE",
+                    "terminology_id": {
+                      "_type": "TERMINOLOGY_ID",
+                      "value": "openehr"
+                    },
+                    "code_string": "145"
+                  }
+                },
+                "archetype_node_id": "at0002"
+              },
+              {
+                "_type": "POINT_EVENT",
+                "name": {
+                  "_type": "DV_TEXT",
+                  "value": "At testing"
+                },
+                "time": {
+                  "_type": "DV_DATE_TIME",
+                  "value": "2022-02-03T04:05:06"
+                },
+                "data": {
+                  "_type": "ITEM_TREE",
+                  "name": {
+                    "_type": "DV_TEXT",
+                    "value": "Tree"
+                  },
+                  "items": [
+                    {
+                      "_type": "ELEMENT",
+                      "name": {
+                        "_type": "DV_TEXT",
+                        "value": "Screening purpose"
+                      },
+                      "value": {
+                        "_type": "DV_CODED_TEXT",
+                        "value": "Suspected COVID-19",
+                        "defining_code": {
+                          "_type": "CODE_PHRASE",
+                          "terminology_id": {
+                            "_type": "TERMINOLOGY_ID",
+                            "value": "SNOMED-CT"
+                          },
+                          "code_string": "840544004"
+                        }
+                      },
+                      "archetype_node_id": "at0034"
+                    },
+                    {
+                      "_type": "CLUSTER",
+                      "name": {
+                        "_type": "DV_TEXT",
+                        "value": "Specific procedure"
+                      },
+                      "items": [
+                        {
+                          "_type": "ELEMENT",
+                          "name": {
+                            "_type": "DV_TEXT",
+                            "value": "Procedure name"
+                          },
+                          "value": {
+                            "_type": "DV_TEXT",
+                            "value": "Ventilation"
+                          },
+                          "archetype_node_id": "at0004"
+                        },
+                        {
+                          "_type": "ELEMENT",
+                          "name": {
+                            "_type": "DV_TEXT",
+                            "value": "Performed?"
+                          },
+                          "value": {
+                            "_type": "DV_CODED_TEXT",
+                            "value": "Performed/carried out",
+                            "defining_code": {
+                              "_type": "CODE_PHRASE",
+                              "terminology_id": {
+                                "_type": "TERMINOLOGY_ID",
+                                "value": "local"
+                              },
+                              "code_string": "at0023"
+                            }
+                          },
+                          "archetype_node_id": "at0005"
+                        }
+                      ],
+                      "archetype_node_id": "at0022"
+                    }
+                  ],
+                  "archetype_node_id": "at0003"
+                },
+                "archetype_node_id": "at0002"
+              },
+              {
+                "_type": "INTERVAL_EVENT",
+                "name": {
+                  "_type": "DV_TEXT",
+                  "value": "At testing"
+                },
+                "time": {
+                  "_type": "DV_DATE_TIME",
+                  "value": "2022-02-03T04:05:06"
+                },
+                "data": {
+                  "_type": "ITEM_TREE",
+                  "name": {
+                    "_type": "DV_TEXT",
+                    "value": "Tree"
+                  },
+                  "items": [
+                    {
+                      "_type": "ELEMENT",
+                      "name": {
+                        "_type": "DV_TEXT",
+                        "value": "Screening purpose"
+                      },
+                      "value": {
+                        "_type": "DV_CODED_TEXT",
+                        "value": "Suspected COVID-19",
+                        "defining_code": {
+                          "_type": "CODE_PHRASE",
+                          "terminology_id": {
+                            "_type": "TERMINOLOGY_ID",
+                            "value": "SNOMED-CT"
+                          },
+                          "code_string": "840544004"
+                        }
+                      },
+                      "archetype_node_id": "at0034"
+                    },
+                    {
+                      "_type": "CLUSTER",
+                      "name": {
+                        "_type": "DV_TEXT",
+                        "value": "Specific procedure"
+                      },
+                      "items": [
+                        {
+                          "_type": "ELEMENT",
+                          "name": {
+                            "_type": "DV_TEXT",
+                            "value": "Procedure name"
+                          },
+                          "value": {
+                            "_type": "DV_TEXT",
+                            "value": "Ventilation"
+                          },
+                          "archetype_node_id": "at0004"
+                        },
+                        {
+                          "_type": "ELEMENT",
+                          "name": {
+                            "_type": "DV_TEXT",
+                            "value": "Performed?"
+                          },
+                          "value": {
+                            "_type": "DV_CODED_TEXT",
+                            "value": "Performed/carried out",
+                            "defining_code": {
+                              "_type": "CODE_PHRASE",
+                              "terminology_id": {
+                                "_type": "TERMINOLOGY_ID",
+                                "value": "local"
+                              },
+                              "code_string": "at0023"
+                            }
+                          },
+                          "archetype_node_id": "at0005"
+                        }
+                      ],
+                      "archetype_node_id": "at0022"
+                    }
+                  ],
+                  "archetype_node_id": "at0003"
+                },
+                "width": {
+                  "_type": "DV_DURATION",
+                  "value": "PT42H"
+                },
+                "math_function": {
+                  "_type": "DV_CODED_TEXT",
+                  "value": "minimum",
+                  "defining_code": {
+                    "_type": "CODE_PHRASE",
+                    "terminology_id": {
+                      "_type": "TERMINOLOGY_ID",
+                      "value": "openehr"
+                    },
+                    "code_string": "145"
+                  }
+                },
+                "archetype_node_id": "at0002"
+              }
+            ],
+            "archetype_node_id": "at0001"
+          },
+          "archetype_node_id": "openEHR-EHR-OBSERVATION.procedure_screening.v0"
+        },
+        {
+          "_type": "OBSERVATION",
+          "name": {
+            "_type": "DV_TEXT",
+            "value": "Management/treatment screening"
+          },
+          "archetype_details": {
+            "archetype_id": {
+              "value": "openEHR-EHR-OBSERVATION.management_screening.v0"
+            },
+            "rm_version": "1.0.4"
+          },
+          "language": {
+            "_type": "CODE_PHRASE",
+            "terminology_id": {
+              "_type": "TERMINOLOGY_ID",
+              "value": "ISO_639-1"
+            },
+            "code_string": "en"
+          },
+          "encoding": {
+            "_type": "CODE_PHRASE",
+            "terminology_id": {
+              "_type": "TERMINOLOGY_ID",
+              "value": "IANA_character-sets"
+            },
+            "code_string": "ISO-10646-UTF-1"
+          },
+          "workflow_id": {
+            "_type": "OBJECT_REF",
+            "namespace": "unknown",
+            "type": "ANY",
+            "id": {
+              "_type": "GENERIC_ID",
+              "value": "306dc77f-ff14-32ac-abf4-ad69bd0be47b",
+              "scheme": "scheme"
+            }
+          },
+          "subject": {
+            "_type": "PARTY_SELF"
+          },
+          "provider": {
+            "_type": "PARTY_SELF"
+          },
+          "guideline_id": {
+            "_type": "OBJECT_REF",
+            "namespace": "unknown",
+            "type": "ANY",
+            "id": {
+              "_type": "GENERIC_ID",
+              "value": "5c235649-0d0d-3afc-80d8-2295d4ac0a07",
+              "scheme": "scheme"
+            }
+          },
+          "data": {
+            "name": {
+              "_type": "DV_TEXT",
+              "value": "History"
+            },
+            "origin": {
+              "_type": "DV_DATE_TIME",
+              "value": "2022-02-03T04:05:06"
+            },
+            "period": {
+              "_type": "DV_DURATION",
+              "value": "PT0S"
+            },
+            "duration": {
+              "_type": "DV_DURATION",
+              "value": "PT0S"
+            },
+            "events": [
+              {
+                "_type": "INTERVAL_EVENT",
+                "name": {
+                  "_type": "DV_TEXT",
+                  "value": "At testing"
+                },
+                "time": {
+                  "_type": "DV_DATE_TIME",
+                  "value": "2022-02-03T04:05:06"
+                },
+                "data": {
+                  "_type": "ITEM_TREE",
+                  "name": {
+                    "_type": "DV_TEXT",
+                    "value": "Tree"
+                  },
+                  "items": [
+                    {
+                      "_type": "ELEMENT",
+                      "name": {
+                        "_type": "DV_TEXT",
+                        "value": "Screening purpose"
+                      },
+                      "value": {
+                        "_type": "DV_CODED_TEXT",
+                        "value": "Suspected COVID-19",
+                        "defining_code": {
+                          "_type": "CODE_PHRASE",
+                          "terminology_id": {
+                            "_type": "TERMINOLOGY_ID",
+                            "value": "SNOMED-CT"
+                          },
+                          "code_string": "840544004"
+                        }
+                      },
+                      "archetype_node_id": "at0034"
+                    },
+                    {
+                      "_type": "CLUSTER",
+                      "name": {
+                        "_type": "DV_TEXT",
+                        "value": "Specific management/treatment activity"
+                      },
+                      "items": [
+                        {
+                          "_type": "ELEMENT",
+                          "name": {
+                            "_type": "DV_TEXT",
+                            "value": "Activity name"
+                          },
+                          "value": {
+                            "_type": "DV_TEXT",
+                            "value": "Admitted to hospital"
+                          },
+                          "archetype_node_id": "at0004"
+                        },
+                        {
+                          "_type": "ELEMENT",
+                          "name": {
+                            "_type": "DV_TEXT",
+                            "value": "Status"
+                          },
+                          "value": {
+                            "_type": "DV_CODED_TEXT",
+                            "value": "Completed",
+                            "defining_code": {
+                              "_type": "CODE_PHRASE",
+                              "terminology_id": {
+                                "_type": "TERMINOLOGY_ID",
+                                "value": "local"
+                              },
+                              "code_string": "at0023"
+                            }
+                          },
+                          "archetype_node_id": "at0005"
+                        },
+                        {
+                          "_type": "ELEMENT",
+                          "name": {
+                            "_type": "DV_TEXT",
+                            "value": "Completed"
+                          },
+                          "value": {
+                            "_type": "DV_DATE_TIME",
+                            "value": "2022-02-03T04:05:06"
+                          },
+                          "archetype_node_id": "at0006"
+                        },
+                        {
+                          "_type": "ELEMENT",
+                          "name": {
+                            "_type": "DV_TEXT",
+                            "value": "Scheduled"
+                          },
+                          "value": {
+                            "_type": "DV_DATE_TIME",
+                            "value": "2022-02-03T04:05:06"
+                          },
+                          "archetype_node_id": "at0037"
+                        },
+                        {
+                          "_type": "ELEMENT",
+                          "name": {
+                            "_type": "DV_TEXT",
+                            "value": "Comment"
+                          },
+                          "value": {
+                            "_type": "DV_TEXT",
+                            "value": "Lorem ipsum"
+                          },
+                          "archetype_node_id": "at0035"
+                        }
+                      ],
+                      "archetype_node_id": "at0022"
+                    }
+                  ],
+                  "archetype_node_id": "at0003"
+                },
+                "width": {
+                  "_type": "DV_DURATION",
+                  "value": "PT42H"
+                },
+                "math_function": {
+                  "_type": "DV_CODED_TEXT",
+                  "value": "minimum",
+                  "defining_code": {
+                    "_type": "CODE_PHRASE",
+                    "terminology_id": {
+                      "_type": "TERMINOLOGY_ID",
+                      "value": "openehr"
+                    },
+                    "code_string": "145"
+                  }
+                },
+                "archetype_node_id": "at0002"
+              },
+              {
+                "_type": "POINT_EVENT",
+                "name": {
+                  "_type": "DV_TEXT",
+                  "value": "At testing"
+                },
+                "time": {
+                  "_type": "DV_DATE_TIME",
+                  "value": "2022-02-03T04:05:06"
+                },
+                "data": {
+                  "_type": "ITEM_TREE",
+                  "name": {
+                    "_type": "DV_TEXT",
+                    "value": "Tree"
+                  },
+                  "items": [
+                    {
+                      "_type": "ELEMENT",
+                      "name": {
+                        "_type": "DV_TEXT",
+                        "value": "Screening purpose"
+                      },
+                      "value": {
+                        "_type": "DV_CODED_TEXT",
+                        "value": "Suspected COVID-19",
+                        "defining_code": {
+                          "_type": "CODE_PHRASE",
+                          "terminology_id": {
+                            "_type": "TERMINOLOGY_ID",
+                            "value": "SNOMED-CT"
+                          },
+                          "code_string": "840544004"
+                        }
+                      },
+                      "archetype_node_id": "at0034"
+                    },
+                    {
+                      "_type": "CLUSTER",
+                      "name": {
+                        "_type": "DV_TEXT",
+                        "value": "Specific management/treatment activity"
+                      },
+                      "items": [
+                        {
+                          "_type": "ELEMENT",
+                          "name": {
+                            "_type": "DV_TEXT",
+                            "value": "Activity name"
+                          },
+                          "value": {
+                            "_type": "DV_TEXT",
+                            "value": "Admitted to hospital"
+                          },
+                          "archetype_node_id": "at0004"
+                        },
+                        {
+                          "_type": "ELEMENT",
+                          "name": {
+                            "_type": "DV_TEXT",
+                            "value": "Status"
+                          },
+                          "value": {
+                            "_type": "DV_CODED_TEXT",
+                            "value": "Completed",
+                            "defining_code": {
+                              "_type": "CODE_PHRASE",
+                              "terminology_id": {
+                                "_type": "TERMINOLOGY_ID",
+                                "value": "local"
+                              },
+                              "code_string": "at0023"
+                            }
+                          },
+                          "archetype_node_id": "at0005"
+                        },
+                        {
+                          "_type": "ELEMENT",
+                          "name": {
+                            "_type": "DV_TEXT",
+                            "value": "Completed"
+                          },
+                          "value": {
+                            "_type": "DV_DATE_TIME",
+                            "value": "2022-02-03T04:05:06"
+                          },
+                          "archetype_node_id": "at0006"
+                        },
+                        {
+                          "_type": "ELEMENT",
+                          "name": {
+                            "_type": "DV_TEXT",
+                            "value": "Scheduled"
+                          },
+                          "value": {
+                            "_type": "DV_DATE_TIME",
+                            "value": "2022-02-03T04:05:06"
+                          },
+                          "archetype_node_id": "at0037"
+                        },
+                        {
+                          "_type": "ELEMENT",
+                          "name": {
+                            "_type": "DV_TEXT",
+                            "value": "Comment"
+                          },
+                          "value": {
+                            "_type": "DV_TEXT",
+                            "value": "Lorem ipsum"
+                          },
+                          "archetype_node_id": "at0035"
+                        }
+                      ],
+                      "archetype_node_id": "at0022"
+                    }
+                  ],
+                  "archetype_node_id": "at0003"
+                },
+                "archetype_node_id": "at0002"
+              },
+              {
+                "_type": "INTERVAL_EVENT",
+                "name": {
+                  "_type": "DV_TEXT",
+                  "value": "At testing"
+                },
+                "time": {
+                  "_type": "DV_DATE_TIME",
+                  "value": "2022-02-03T04:05:06"
+                },
+                "data": {
+                  "_type": "ITEM_TREE",
+                  "name": {
+                    "_type": "DV_TEXT",
+                    "value": "Tree"
+                  },
+                  "items": [
+                    {
+                      "_type": "ELEMENT",
+                      "name": {
+                        "_type": "DV_TEXT",
+                        "value": "Screening purpose"
+                      },
+                      "value": {
+                        "_type": "DV_CODED_TEXT",
+                        "value": "Suspected COVID-19",
+                        "defining_code": {
+                          "_type": "CODE_PHRASE",
+                          "terminology_id": {
+                            "_type": "TERMINOLOGY_ID",
+                            "value": "SNOMED-CT"
+                          },
+                          "code_string": "840544004"
+                        }
+                      },
+                      "archetype_node_id": "at0034"
+                    },
+                    {
+                      "_type": "CLUSTER",
+                      "name": {
+                        "_type": "DV_TEXT",
+                        "value": "Specific management/treatment activity"
+                      },
+                      "items": [
+                        {
+                          "_type": "ELEMENT",
+                          "name": {
+                            "_type": "DV_TEXT",
+                            "value": "Activity name"
+                          },
+                          "value": {
+                            "_type": "DV_TEXT",
+                            "value": "Admitted to hospital"
+                          },
+                          "archetype_node_id": "at0004"
+                        },
+                        {
+                          "_type": "ELEMENT",
+                          "name": {
+                            "_type": "DV_TEXT",
+                            "value": "Status"
+                          },
+                          "value": {
+                            "_type": "DV_CODED_TEXT",
+                            "value": "Completed",
+                            "defining_code": {
+                              "_type": "CODE_PHRASE",
+                              "terminology_id": {
+                                "_type": "TERMINOLOGY_ID",
+                                "value": "local"
+                              },
+                              "code_string": "at0023"
+                            }
+                          },
+                          "archetype_node_id": "at0005"
+                        },
+                        {
+                          "_type": "ELEMENT",
+                          "name": {
+                            "_type": "DV_TEXT",
+                            "value": "Completed"
+                          },
+                          "value": {
+                            "_type": "DV_DATE_TIME",
+                            "value": "2022-02-03T04:05:06"
+                          },
+                          "archetype_node_id": "at0006"
+                        },
+                        {
+                          "_type": "ELEMENT",
+                          "name": {
+                            "_type": "DV_TEXT",
+                            "value": "Scheduled"
+                          },
+                          "value": {
+                            "_type": "DV_DATE_TIME",
+                            "value": "2022-02-03T04:05:06"
+                          },
+                          "archetype_node_id": "at0037"
+                        },
+                        {
+                          "_type": "ELEMENT",
+                          "name": {
+                            "_type": "DV_TEXT",
+                            "value": "Comment"
+                          },
+                          "value": {
+                            "_type": "DV_TEXT",
+                            "value": "Lorem ipsum"
+                          },
+                          "archetype_node_id": "at0035"
+                        }
+                      ],
+                      "archetype_node_id": "at0022"
+                    }
+                  ],
+                  "archetype_node_id": "at0003"
+                },
+                "width": {
+                  "_type": "DV_DURATION",
+                  "value": "PT42H"
+                },
+                "math_function": {
+                  "_type": "DV_CODED_TEXT",
+                  "value": "minimum",
+                  "defining_code": {
+                    "_type": "CODE_PHRASE",
+                    "terminology_id": {
+                      "_type": "TERMINOLOGY_ID",
+                      "value": "openehr"
+                    },
+                    "code_string": "145"
+                  }
+                },
+                "archetype_node_id": "at0002"
+              }
+            ],
+            "archetype_node_id": "at0001"
+          },
+          "archetype_node_id": "openEHR-EHR-OBSERVATION.management_screening.v0"
+        }
+      ],
+      "archetype_node_id": "openEHR-EHR-SECTION.adhoc.v1"
+    },
+    {
+      "_type": "SECTION",
+      "name": {
+        "_type": "DV_TEXT",
+        "value": "Exposure"
+      },
+      "archetype_details": {
+        "archetype_id": {
+          "value": "openEHR-EHR-SECTION.adhoc.v1"
+        },
+        "rm_version": "1.0.4"
+      },
+      "items": [
+        {
+          "_type": "EVALUATION",
+          "name": {
+            "_type": "DV_TEXT",
+            "value": "Infectious exposure investigation"
+          },
+          "archetype_details": {
+            "archetype_id": {
+              "value": "openEHR-EHR-EVALUATION.infectious_exposure.v0"
+            },
+            "rm_version": "1.0.4"
+          },
+          "language": {
+            "_type": "CODE_PHRASE",
+            "terminology_id": {
+              "_type": "TERMINOLOGY_ID",
+              "value": "ISO_639-1"
+            },
+            "code_string": "en"
+          },
+          "encoding": {
+            "_type": "CODE_PHRASE",
+            "terminology_id": {
+              "_type": "TERMINOLOGY_ID",
+              "value": "IANA_character-sets"
+            },
+            "code_string": "ISO-10646-UTF-1"
+          },
+          "workflow_id": {
+            "_type": "OBJECT_REF",
+            "namespace": "unknown",
+            "type": "ANY",
+            "id": {
+              "_type": "GENERIC_ID",
+              "value": "ab1082f5-9e07-37ca-a426-1124891f41f8",
+              "scheme": "scheme"
+            }
+          },
+          "subject": {
+            "_type": "PARTY_SELF"
+          },
+          "provider": {
+            "_type": "PARTY_SELF"
+          },
+          "guideline_id": {
+            "_type": "OBJECT_REF",
+            "namespace": "unknown",
+            "type": "ANY",
+            "id": {
+              "_type": "GENERIC_ID",
+              "value": "293a66b7-b0dc-36ea-82b3-03986c41bbe6",
+              "scheme": "scheme"
+            }
+          },
+          "time_asserted": {
+            "_type": "DV_DATE_TIME",
+            "value": "2022-02-03T04:05:06"
+          },
+          "data": {
+            "_type": "ITEM_TREE",
+            "name": {
+              "_type": "DV_TEXT",
+              "value": "Tree"
+            },
+            "items": [
+              {
+                "_type": "ELEMENT",
+                "name": {
+                  "_type": "DV_TEXT",
+                  "value": "Infectious agent"
+                },
+                "value": {
+                  "_type": "DV_CODED_TEXT",
+                  "value": "SARS-CoV-2",
+                  "defining_code": {
+                    "_type": "CODE_PHRASE",
+                    "terminology_id": {
+                      "_type": "TERMINOLOGY_ID",
+                      "value": "SNOMED-CT"
+                    },
+                    "code_string": "840533007"
+                  }
+                },
+                "archetype_node_id": "at0002"
+              },
+              {
+                "_type": "CLUSTER",
+                "name": {
+                  "_type": "DV_TEXT",
+                  "value": "Specific exposure details"
+                },
+                "items": [
+                  {
+                    "_type": "ELEMENT",
+                    "name": {
+                      "_type": "DV_TEXT",
+                      "value": "Confirmed exposure?"
+                    },
+                    "value": {
+                      "_type": "DV_CODED_TEXT",
+                      "value": "Confirmed",
+                      "defining_code": {
+                        "_type": "CODE_PHRASE",
+                        "terminology_id": {
+                          "_type": "TERMINOLOGY_ID",
+                          "value": "local"
+                        },
+                        "code_string": "at0028"
+                      }
+                    },
+                    "archetype_node_id": "at0027"
+                  },
+                  {
+                    "_type": "ELEMENT",
+                    "name": {
+                      "_type": "DV_TEXT",
+                      "value": "Exposure category"
+                    },
+                    "value": {
+                      "_type": "DV_TEXT",
+                      "value": "Travel"
+                    },
+                    "archetype_node_id": "at0024"
+                  },
+                  {
+                    "_type": "ELEMENT",
+                    "name": {
+                      "_type": "DV_TEXT",
+                      "value": "Date/time of first exposure"
+                    },
+                    "value": {
+                      "_type": "DV_DATE_TIME",
+                      "value": "2022-02-03T04:05:06"
+                    },
+                    "archetype_node_id": "at0007"
+                  },
+                  {
+                    "_type": "ELEMENT",
+                    "name": {
+                      "_type": "DV_TEXT",
+                      "value": "Date/time of last exposure"
+                    },
+                    "value": {
+                      "_type": "DV_DATE_TIME",
+                      "value": "2022-02-03T04:05:06"
+                    },
+                    "archetype_node_id": "at0007"
+                  },
+                  {
+                    "_type": "ELEMENT",
+                    "name": {
+                      "_type": "DV_TEXT",
+                      "value": "Physical location category"
+                    },
+                    "value": {
+                      "_type": "DV_TEXT",
+                      "value": "Lorem ipsum"
+                    },
+                    "archetype_node_id": "at0008"
+                  },
+                  {
+                    "_type": "ELEMENT",
+                    "name": {
+                      "_type": "DV_TEXT",
+                      "value": "Likely location for exposure"
+                    },
+                    "value": {
+                      "_type": "DV_TEXT",
+                      "value": "Lorem ipsum"
+                    },
+                    "archetype_node_id": "at0009"
+                  },
+                  {
+                    "_type": "ELEMENT",
+                    "name": {
+                      "_type": "DV_TEXT",
+                      "value": "Activity category"
+                    },
+                    "value": {
+                      "_type": "DV_TEXT",
+                      "value": "Lorem ipsum"
+                    },
+                    "archetype_node_id": "at0020"
+                  },
+                  {
+                    "_type": "ELEMENT",
+                    "name": {
+                      "_type": "DV_TEXT",
+                      "value": "Activity description"
+                    },
+                    "value": {
+                      "_type": "DV_TEXT",
+                      "value": "Lorem ipsum"
+                    },
+                    "archetype_node_id": "at0021"
+                  },
+                  {
+                    "_type": "ELEMENT",
+                    "name": {
+                      "_type": "DV_TEXT",
+                      "value": "Duration of exposure"
+                    },
+                    "value": {
+                      "_type": "DV_DURATION",
+                      "value": "PT0S"
+                    },
+                    "archetype_node_id": "at0011"
+                  },
+                  {
+                    "_type": "ELEMENT",
+                    "name": {
+                      "_type": "DV_TEXT",
+                      "value": "Proximity of contact"
+                    },
+                    "value": {
+                      "_type": "DV_TEXT",
+                      "value": "Lorem ipsum"
+                    },
+                    "archetype_node_id": "at0012"
+                  },
+                  {
+                    "_type": "ELEMENT",
+                    "name": {
+                      "_type": "DV_TEXT",
+                      "value": "Case identifier"
+                    },
+                    "value": {
+                      "_type": "DV_TEXT",
+                      "value": "Lorem ipsum"
+                    },
+                    "archetype_node_id": "at0025"
+                  },
+                  {
+                    "_type": "ELEMENT",
+                    "name": {
+                      "_type": "DV_TEXT",
+                      "value": "Date of notification/report"
+                    },
+                    "value": {
+                      "_type": "DV_DATE_TIME",
+                      "value": "2022-02-03T04:05:06"
+                    },
+                    "archetype_node_id": "at0004"
+                  }
+                ],
+                "archetype_node_id": "at0005"
+              },
+              {
+                "_type": "ELEMENT",
+                "name": {
+                  "_type": "DV_TEXT",
+                  "value": "Total number of contacts"
+                },
+                "value": {
+                  "_type": "DV_COUNT",
+                  "magnitude": 42
+                },
+                "archetype_node_id": "at0030"
+              }
+            ],
+            "archetype_node_id": "at0001"
+          },
+          "archetype_node_id": "openEHR-EHR-EVALUATION.infectious_exposure.v0"
+        },
+        {
+          "_type": "EVALUATION",
+          "name": {
+            "_type": "DV_TEXT",
+            "value": "Occupation"
+          },
+          "archetype_details": {
+            "archetype_id": {
+              "value": "openEHR-EHR-EVALUATION.occupation_summary.v1"
+            },
+            "rm_version": "1.0.4"
+          },
+          "language": {
+            "_type": "CODE_PHRASE",
+            "terminology_id": {
+              "_type": "TERMINOLOGY_ID",
+              "value": "ISO_639-1"
+            },
+            "code_string": "en"
+          },
+          "encoding": {
+            "_type": "CODE_PHRASE",
+            "terminology_id": {
+              "_type": "TERMINOLOGY_ID",
+              "value": "IANA_character-sets"
+            },
+            "code_string": "ISO-10646-UTF-1"
+          },
+          "workflow_id": {
+            "_type": "OBJECT_REF",
+            "namespace": "unknown",
+            "type": "ANY",
+            "id": {
+              "_type": "GENERIC_ID",
+              "value": "93b86761-367f-30b2-a174-26f6a65dabde",
+              "scheme": "scheme"
+            }
+          },
+          "subject": {
+            "_type": "PARTY_SELF"
+          },
+          "provider": {
+            "_type": "PARTY_SELF"
+          },
+          "guideline_id": {
+            "_type": "OBJECT_REF",
+            "namespace": "unknown",
+            "type": "ANY",
+            "id": {
+              "_type": "GENERIC_ID",
+              "value": "28ac3f72-d2f4-3782-a220-edf54195d809",
+              "scheme": "scheme"
+            }
+          },
+          "time_asserted": {
+            "_type": "DV_DATE_TIME",
+            "value": "2022-02-03T04:05:06"
+          },
+          "data": {
+            "_type": "ITEM_TREE",
+            "name": {
+              "_type": "DV_TEXT",
+              "value": "Tree"
+            },
+            "items": [
+              {
+                "_type": "CLUSTER",
+                "name": {
+                  "_type": "DV_TEXT",
+                  "value": "Occupation record"
+                },
+                "archetype_details": {
+                  "archetype_id": {
+                    "value": "openEHR-EHR-CLUSTER.occupation_record.v1"
+                  },
+                  "rm_version": "1.0.4"
+                },
+                "items": [
+                  {
+                    "_type": "ELEMENT",
+                    "name": {
+                      "_type": "DV_TEXT",
+                      "value": "Job title/role"
+                    },
+                    "value": {
+                      "_type": "DV_TEXT",
+                      "value": "Lorem ipsum"
+                    },
+                    "archetype_node_id": "at0005"
+                  },
+                  {
+                    "_type": "CLUSTER",
+                    "name": {
+                      "_type": "DV_TEXT",
+                      "value": "Facility"
+                    },
+                    "archetype_details": {
+                      "archetype_id": {
+                        "value": "openEHR-EHR-CLUSTER.organisation_cc.v0"
+                      },
+                      "rm_version": "1.0.4"
+                    },
+                    "items": [
+                      {
+                        "_type": "ELEMENT",
+                        "name": {
+                          "_type": "DV_TEXT",
+                          "value": "Facility name"
+                        },
+                        "value": {
+                          "_type": "DV_TEXT",
+                          "value": "Lorem ipsum"
+                        },
+                        "archetype_node_id": "at0012"
+                      },
+                      {
+                        "_type": "CLUSTER",
+                        "name": {
+                          "_type": "DV_TEXT",
+                          "value": "Address"
+                        },
+                        "archetype_details": {
+                          "archetype_id": {
+                            "value": "openEHR-EHR-CLUSTER.address_cc.v0"
+                          },
+                          "rm_version": "1.0.4"
+                        },
+                        "items": [
+                          {
+                            "_type": "ELEMENT",
+                            "name": {
+                              "_type": "DV_TEXT",
+                              "value": "City"
+                            },
+                            "value": {
+                              "_type": "DV_TEXT",
+                              "value": "Lorem ipsum"
+                            },
+                            "archetype_node_id": "at0012"
+                          },
+                          {
+                            "_type": "ELEMENT",
+                            "name": {
+                              "_type": "DV_TEXT",
+                              "value": "Country"
+                            },
+                            "value": {
+                              "_type": "DV_TEXT",
+                              "value": "Lorem ipsum"
+                            },
+                            "archetype_node_id": "at0015"
+                          }
+                        ],
+                        "archetype_node_id": "openEHR-EHR-CLUSTER.address_cc.v0"
+                      }
+                    ],
+                    "archetype_node_id": "openEHR-EHR-CLUSTER.organisation_cc.v0"
+                  }
+                ],
+                "archetype_node_id": "openEHR-EHR-CLUSTER.occupation_record.v1"
+              }
+            ],
+            "archetype_node_id": "at0001"
+          },
+          "archetype_node_id": "openEHR-EHR-EVALUATION.occupation_summary.v1"
+        },
+        {
+          "_type": "OBSERVATION",
+          "name": {
+            "_type": "DV_TEXT",
+            "value": "Travel event"
+          },
+          "archetype_details": {
+            "archetype_id": {
+              "value": "openEHR-EHR-OBSERVATION.travel_event.v0"
+            },
+            "rm_version": "1.0.4"
+          },
+          "language": {
+            "_type": "CODE_PHRASE",
+            "terminology_id": {
+              "_type": "TERMINOLOGY_ID",
+              "value": "ISO_639-1"
+            },
+            "code_string": "en"
+          },
+          "encoding": {
+            "_type": "CODE_PHRASE",
+            "terminology_id": {
+              "_type": "TERMINOLOGY_ID",
+              "value": "IANA_character-sets"
+            },
+            "code_string": "ISO-10646-UTF-1"
+          },
+          "workflow_id": {
+            "_type": "OBJECT_REF",
+            "namespace": "unknown",
+            "type": "ANY",
+            "id": {
+              "_type": "GENERIC_ID",
+              "value": "7be66a68-0d25-3629-8c38-c6ae5dd20eac",
+              "scheme": "scheme"
+            }
+          },
+          "subject": {
+            "_type": "PARTY_SELF"
+          },
+          "provider": {
+            "_type": "PARTY_SELF"
+          },
+          "guideline_id": {
+            "_type": "OBJECT_REF",
+            "namespace": "unknown",
+            "type": "ANY",
+            "id": {
+              "_type": "GENERIC_ID",
+              "value": "d154820c-5ba9-3322-a004-0cc4948d45c1",
+              "scheme": "scheme"
+            }
+          },
+          "data": {
+            "name": {
+              "_type": "DV_TEXT",
+              "value": "History"
+            },
+            "origin": {
+              "_type": "DV_DATE_TIME",
+              "value": "2022-02-03T04:05:06"
+            },
+            "period": {
+              "_type": "DV_DURATION",
+              "value": "PT0S"
+            },
+            "duration": {
+              "_type": "DV_DURATION",
+              "value": "PT0S"
+            },
+            "events": [
+              {
+                "_type": "INTERVAL_EVENT",
+                "name": {
+                  "_type": "DV_TEXT",
+                  "value": "Recent travel"
+                },
+                "time": {
+                  "_type": "DV_DATE_TIME",
+                  "value": "2022-02-03T04:05:06"
+                },
+                "data": {
+                  "_type": "ITEM_TREE",
+                  "name": {
+                    "_type": "DV_TEXT",
+                    "value": "Tree"
+                  },
+                  "items": [
+                    {
+                      "_type": "ELEMENT",
+                      "name": {
+                        "_type": "DV_TEXT",
+                        "value": "Recent travel?"
+                      },
+                      "value": {
+                        "_type": "DV_CODED_TEXT",
+                        "value": "Yes",
+                        "defining_code": {
+                          "_type": "CODE_PHRASE",
+                          "terminology_id": {
+                            "_type": "TERMINOLOGY_ID",
+                            "value": "local"
+                          },
+                          "code_string": "at0006"
+                        }
+                      },
+                      "archetype_node_id": "at0004"
+                    },
+                    {
+                      "_type": "CLUSTER",
+                      "name": {
+                        "_type": "DV_TEXT",
+                        "value": "Specific trip"
+                      },
+                      "items": [
+                        {
+                          "_type": "CLUSTER",
+                          "name": {
+                            "_type": "DV_TEXT",
+                            "value": "Specific destination"
+                          },
+                          "items": [
+                            {
+                              "_type": "ELEMENT",
+                              "name": {
+                                "_type": "DV_TEXT",
+                                "value": "Country"
+                              },
+                              "value": {
+                                "_type": "DV_TEXT",
+                                "value": "Lorem ipsum"
+                              },
+                              "archetype_node_id": "at0011"
+                            },
+                            {
+                              "_type": "ELEMENT",
+                              "name": {
+                                "_type": "DV_TEXT",
+                                "value": "State/region"
+                              },
+                              "value": {
+                                "_type": "DV_TEXT",
+                                "value": "Lorem ipsum"
+                              },
+                              "archetype_node_id": "at0012"
+                            },
+                            {
+                              "_type": "ELEMENT",
+                              "name": {
+                                "_type": "DV_TEXT",
+                                "value": "City"
+                              },
+                              "value": {
+                                "_type": "DV_TEXT",
+                                "value": "Lorem ipsum"
+                              },
+                              "archetype_node_id": "at0013"
+                            },
+                            {
+                              "_type": "ELEMENT",
+                              "name": {
+                                "_type": "DV_TEXT",
+                                "value": "Date left location"
+                              },
+                              "value": {
+                                "_type": "DV_DATE_TIME",
+                                "value": "2022-02-03T04:05:06"
+                              },
+                              "archetype_node_id": "at0015"
+                            }
+                          ],
+                          "archetype_node_id": "at0010"
+                        },
+                        {
+                          "_type": "ELEMENT",
+                          "name": {
+                            "_type": "DV_TEXT",
+                            "value": "Date of return"
+                          },
+                          "value": {
+                            "_type": "DV_DATE_TIME",
+                            "value": "2022-02-03T04:05:06"
+                          },
+                          "archetype_node_id": "at0019"
+                        }
+                      ],
+                      "archetype_node_id": "at0008"
+                    }
+                  ],
+                  "archetype_node_id": "at0003"
+                },
+                "width": {
+                  "_type": "DV_DURATION",
+                  "value": "PT0S"
+                },
+                "math_function": {
+                  "_type": "DV_CODED_TEXT",
+                  "value": "minimum",
+                  "defining_code": {
+                    "_type": "CODE_PHRASE",
+                    "terminology_id": {
+                      "_type": "TERMINOLOGY_ID",
+                      "value": "openehr"
+                    },
+                    "code_string": "145"
+                  }
+                },
+                "archetype_node_id": "at0002"
+              }
+            ],
+            "archetype_node_id": "at0001"
+          },
+          "archetype_node_id": "openEHR-EHR-OBSERVATION.travel_event.v0"
+        }
+      ],
+      "archetype_node_id": "openEHR-EHR-SECTION.adhoc.v1"
+    },
+    {
+      "_type": "SECTION",
+      "name": {
+        "_type": "DV_TEXT",
+        "value": "Outcome"
+      },
+      "archetype_details": {
+        "archetype_id": {
+          "value": "openEHR-EHR-SECTION.adhoc.v1"
+        },
+        "rm_version": "1.0.4"
+      },
+      "items": [
+        {
+          "_type": "OBSERVATION",
+          "name": {
+            "_type": "DV_TEXT",
+            "value": "Last test"
+          },
+          "archetype_details": {
+            "archetype_id": {
+              "value": "openEHR-EHR-OBSERVATION.laboratory_test_result.v1"
+            },
+            "rm_version": "1.0.4"
+          },
+          "language": {
+            "_type": "CODE_PHRASE",
+            "terminology_id": {
+              "_type": "TERMINOLOGY_ID",
+              "value": "ISO_639-1"
+            },
+            "code_string": "en"
+          },
+          "encoding": {
+            "_type": "CODE_PHRASE",
+            "terminology_id": {
+              "_type": "TERMINOLOGY_ID",
+              "value": "IANA_character-sets"
+            },
+            "code_string": "ISO-10646-UTF-1"
+          },
+          "workflow_id": {
+            "_type": "OBJECT_REF",
+            "namespace": "unknown",
+            "type": "ANY",
+            "id": {
+              "_type": "GENERIC_ID",
+              "value": "88384114-f370-37f6-be19-1c55463cbd0e",
+              "scheme": "scheme"
+            }
+          },
+          "subject": {
+            "_type": "PARTY_SELF"
+          },
+          "provider": {
+            "_type": "PARTY_SELF"
+          },
+          "protocol": {
+            "_type": "ITEM_TREE",
+            "name": {
+              "_type": "DV_TEXT",
+              "value": "Tree"
+            },
+            "items": [
+              {
+                "_type": "ELEMENT",
+                "name": {
+                  "_type": "DV_TEXT",
+                  "value": "Laboratory internal identifier"
+                },
+                "value": {
+                  "_type": "DV_IDENTIFIER",
+                  "id": "dev/null"
+                },
+                "archetype_node_id": "at0068"
+              },
+              {
+                "_type": "CLUSTER",
+                "name": {
+                  "_type": "DV_TEXT",
+                  "value": "Test request details"
+                },
+                "items": [
+                  {
+                    "_type": "ELEMENT",
+                    "name": {
+                      "_type": "DV_TEXT",
+                      "value": "Original test requested name"
+                    },
+                    "value": {
+                      "_type": "DV_TEXT",
+                      "value": "Lorem ipsum"
+                    },
+                    "archetype_node_id": "at0106"
+                  },
+                  {
+                    "_type": "ELEMENT",
+                    "name": {
+                      "_type": "DV_TEXT",
+                      "value": "Requester order identifier"
+                    },
+                    "value": {
+                      "_type": "DV_IDENTIFIER",
+                      "id": "dev/null"
+                    },
+                    "archetype_node_id": "at0062"
+                  },
+                  {
+                    "_type": "ELEMENT",
+                    "name": {
+                      "_type": "DV_TEXT",
+                      "value": "Receiver order identifier"
+                    },
+                    "value": {
+                      "_type": "DV_IDENTIFIER",
+                      "id": "dev/null"
+                    },
+                    "archetype_node_id": "at0063"
+                  }
+                ],
+                "archetype_node_id": "at0094"
+              },
+              {
+                "_type": "ELEMENT",
+                "name": {
+                  "_type": "DV_TEXT",
+                  "value": "Point-of-care test"
+                },
+                "value": {
+                  "_type": "DV_BOOLEAN",
+                  "value": true
+                },
+                "archetype_node_id": "at0111"
+              },
+              {
+                "_type": "ELEMENT",
+                "name": {
+                  "_type": "DV_TEXT",
+                  "value": "Test method"
+                },
+                "value": {
+                  "_type": "DV_BOOLEAN",
+                  "value": true
+                },
+                "archetype_node_id": "at0121"
+              }
+            ],
+            "archetype_node_id": "at0004"
+          },
+          "guideline_id": {
+            "_type": "OBJECT_REF",
+            "namespace": "unknown",
+            "type": "ANY",
+            "id": {
+              "_type": "GENERIC_ID",
+              "value": "73476644-babd-36be-b945-9e7049bc004c",
+              "scheme": "scheme"
+            }
+          },
+          "data": {
+            "name": {
+              "_type": "DV_TEXT",
+              "value": "Event Series"
+            },
+            "origin": {
+              "_type": "DV_DATE_TIME",
+              "value": "2022-02-03T04:05:06"
+            },
+            "period": {
+              "_type": "DV_DURATION",
+              "value": "PT0S"
+            },
+            "duration": {
+              "_type": "DV_DURATION",
+              "value": "PT0S"
+            },
+            "events": [
+              {
+                "_type": "INTERVAL_EVENT",
+                "name": {
+                  "_type": "DV_TEXT",
+                  "value": "Last test"
+                },
+                "time": {
+                  "_type": "DV_DATE_TIME",
+                  "value": "2022-02-03T04:05:06"
+                },
+                "state": {
+                  "_type": "ITEM_TREE",
+                  "name": {
+                    "_type": "DV_TEXT",
+                    "value": "Tree"
+                  },
+                  "items": [
+                    {
+                      "_type": "ELEMENT",
+                      "name": {
+                        "_type": "DV_TEXT",
+                        "value": "Confounding factors"
+                      },
+                      "value": {
+                        "_type": "DV_TEXT",
+                        "value": "Lorem ipsum"
+                      },
+                      "archetype_node_id": "at0113"
+                    }
+                  ],
+                  "archetype_node_id": "at0112"
+                },
+                "data": {
+                  "_type": "ITEM_TREE",
+                  "name": {
+                    "_type": "DV_TEXT",
+                    "value": "Tree"
+                  },
+                  "items": [
+                    {
+                      "_type": "ELEMENT",
+                      "name": {
+                        "_type": "DV_TEXT",
+                        "value": "Test name"
+                      },
+                      "value": {
+                        "_type": "DV_CODED_TEXT",
+                        "value": "2019-nCoV (novel coronavirus) serology",
+                        "defining_code": {
+                          "_type": "CODE_PHRASE",
+                          "terminology_id": {
+                            "_type": "TERMINOLOGY_ID",
+                            "value": "SNOMED-CT"
+                          },
+                          "code_string": "1240741000000103"
+                        }
+                      },
+                      "archetype_node_id": "at0005"
+                    },
+                    {
+                      "_type": "ELEMENT",
+                      "name": {
+                        "_type": "DV_TEXT",
+                        "value": "Overall test status"
+                      },
+                      "value": {
+                        "_type": "DV_CODED_TEXT",
+                        "value": "Registered",
+                        "defining_code": {
+                          "_type": "CODE_PHRASE",
+                          "terminology_id": {
+                            "_type": "TERMINOLOGY_ID",
+                            "value": "local"
+                          },
+                          "code_string": "at0107"
+                        }
+                      },
+                      "archetype_node_id": "at0073"
+                    },
+                    {
+                      "_type": "ELEMENT",
+                      "name": {
+                        "_type": "DV_TEXT",
+                        "value": "Overall test status timestamp"
+                      },
+                      "value": {
+                        "_type": "DV_DATE_TIME",
+                        "value": "2022-02-03T04:05:06"
+                      },
+                      "archetype_node_id": "at0075"
+                    },
+                    {
+                      "_type": "ELEMENT",
+                      "name": {
+                        "_type": "DV_TEXT",
+                        "value": "Diagnostic service category"
+                      },
+                      "value": {
+                        "_type": "DV_TEXT",
+                        "value": "Lorem ipsum"
+                      },
+                      "archetype_node_id": "at0077"
+                    },
+                    {
+                      "_type": "ELEMENT",
+                      "name": {
+                        "_type": "DV_TEXT",
+                        "value": "Test reason"
+                      },
+                      "value": {
+                        "_type": "DV_CODED_TEXT",
+                        "value": "Contact of a case.",
+                        "defining_code": {
+                          "_type": "CODE_PHRASE",
+                          "terminology_id": {
+                            "_type": "TERMINOLOGY_ID",
+                            "value": "WHO-COVID-TEST_REASON"
+                          },
+                          "code_string": "CASE_CONTACT"
+                        }
+                      },
+                      "archetype_node_id": "at0100"
+                    },
+                    {
+                      "_type": "ELEMENT",
+                      "name": {
+                        "_type": "DV_TEXT",
+                        "value": "Test rea"
+                      },
+                      "value": {
+                        "_type": "DV_TEXT",
+                        "value": "Lorem ipsum"
+                      },
+                      "archetype_node_id": "at0057"
+                    },
+                    {
+                      "_type": "ELEMENT",
+                      "name": {
+                        "_type": "DV_TEXT",
+                        "value": "Test diagnosis"
+                      },
+                      "value": {
+                        "_type": "DV_CODED_TEXT",
+                        "value": "The Covid-19 test was positive.",
+                        "defining_code": {
+                          "_type": "CODE_PHRASE",
+                          "terminology_id": {
+                            "_type": "TERMINOLOGY_ID",
+                            "value": "WHO-COVID-TEST_RESULT"
+                          },
+                          "code_string": "POSITIVE"
+                        }
+                      },
+                      "archetype_node_id": "at0098"
+                    },
+                    {
+                      "_type": "ELEMENT",
+                      "name": {
+                        "_type": "DV_TEXT",
+                        "value": "Test reason other"
+                      },
+                      "value": {
+                        "_type": "DV_TEXT",
+                        "value": "Lorem ipsum"
+                      },
+                      "archetype_node_id": "at0101"
+                    }
+                  ],
+                  "archetype_node_id": "at0003"
+                },
+                "width": {
+                  "_type": "DV_DURATION",
+                  "value": "PT42H"
+                },
+                "math_function": {
+                  "_type": "DV_CODED_TEXT",
+                  "value": "minimum",
+                  "defining_code": {
+                    "_type": "CODE_PHRASE",
+                    "terminology_id": {
+                      "_type": "TERMINOLOGY_ID",
+                      "value": "openehr"
+                    },
+                    "code_string": "145"
+                  }
+                },
+                "archetype_node_id": "at0002"
+              },
+              {
+                "_type": "POINT_EVENT",
+                "name": {
+                  "_type": "DV_TEXT",
+                  "value": "Last test"
+                },
+                "time": {
+                  "_type": "DV_DATE_TIME",
+                  "value": "2022-02-03T04:05:06"
+                },
+                "state": {
+                  "_type": "ITEM_TREE",
+                  "name": {
+                    "_type": "DV_TEXT",
+                    "value": "Tree"
+                  },
+                  "items": [
+                    {
+                      "_type": "ELEMENT",
+                      "name": {
+                        "_type": "DV_TEXT",
+                        "value": "Confounding factors"
+                      },
+                      "value": {
+                        "_type": "DV_TEXT",
+                        "value": "Lorem ipsum"
+                      },
+                      "archetype_node_id": "at0113"
+                    }
+                  ],
+                  "archetype_node_id": "at0112"
+                },
+                "data": {
+                  "_type": "ITEM_TREE",
+                  "name": {
+                    "_type": "DV_TEXT",
+                    "value": "Tree"
+                  },
+                  "items": [
+                    {
+                      "_type": "ELEMENT",
+                      "name": {
+                        "_type": "DV_TEXT",
+                        "value": "Test name"
+                      },
+                      "value": {
+                        "_type": "DV_CODED_TEXT",
+                        "value": "2019-nCoV (novel coronavirus) serology",
+                        "defining_code": {
+                          "_type": "CODE_PHRASE",
+                          "terminology_id": {
+                            "_type": "TERMINOLOGY_ID",
+                            "value": "SNOMED-CT"
+                          },
+                          "code_string": "1240741000000103"
+                        }
+                      },
+                      "archetype_node_id": "at0005"
+                    },
+                    {
+                      "_type": "ELEMENT",
+                      "name": {
+                        "_type": "DV_TEXT",
+                        "value": "Overall test status"
+                      },
+                      "value": {
+                        "_type": "DV_CODED_TEXT",
+                        "value": "Registered",
+                        "defining_code": {
+                          "_type": "CODE_PHRASE",
+                          "terminology_id": {
+                            "_type": "TERMINOLOGY_ID",
+                            "value": "local"
+                          },
+                          "code_string": "at0107"
+                        }
+                      },
+                      "archetype_node_id": "at0073"
+                    },
+                    {
+                      "_type": "ELEMENT",
+                      "name": {
+                        "_type": "DV_TEXT",
+                        "value": "Overall test status timestamp"
+                      },
+                      "value": {
+                        "_type": "DV_DATE_TIME",
+                        "value": "2022-02-03T04:05:06"
+                      },
+                      "archetype_node_id": "at0075"
+                    },
+                    {
+                      "_type": "ELEMENT",
+                      "name": {
+                        "_type": "DV_TEXT",
+                        "value": "Diagnostic service category"
+                      },
+                      "value": {
+                        "_type": "DV_TEXT",
+                        "value": "Lorem ipsum"
+                      },
+                      "archetype_node_id": "at0077"
+                    },
+                    {
+                      "_type": "ELEMENT",
+                      "name": {
+                        "_type": "DV_TEXT",
+                        "value": "Test reason"
+                      },
+                      "value": {
+                        "_type": "DV_CODED_TEXT",
+                        "value": "Contact of a case.",
+                        "defining_code": {
+                          "_type": "CODE_PHRASE",
+                          "terminology_id": {
+                            "_type": "TERMINOLOGY_ID",
+                            "value": "WHO-COVID-TEST_REASON"
+                          },
+                          "code_string": "CASE_CONTACT"
+                        }
+                      },
+                      "archetype_node_id": "at0100"
+                    },
+                    {
+                      "_type": "ELEMENT",
+                      "name": {
+                        "_type": "DV_TEXT",
+                        "value": "Test rea"
+                      },
+                      "value": {
+                        "_type": "DV_TEXT",
+                        "value": "Lorem ipsum"
+                      },
+                      "archetype_node_id": "at0057"
+                    },
+                    {
+                      "_type": "ELEMENT",
+                      "name": {
+                        "_type": "DV_TEXT",
+                        "value": "Test diagnosis"
+                      },
+                      "value": {
+                        "_type": "DV_CODED_TEXT",
+                        "value": "The Covid-19 test was positive.",
+                        "defining_code": {
+                          "_type": "CODE_PHRASE",
+                          "terminology_id": {
+                            "_type": "TERMINOLOGY_ID",
+                            "value": "WHO-COVID-TEST_RESULT"
+                          },
+                          "code_string": "POSITIVE"
+                        }
+                      },
+                      "archetype_node_id": "at0098"
+                    },
+                    {
+                      "_type": "ELEMENT",
+                      "name": {
+                        "_type": "DV_TEXT",
+                        "value": "Test reason other"
+                      },
+                      "value": {
+                        "_type": "DV_TEXT",
+                        "value": "Lorem ipsum"
+                      },
+                      "archetype_node_id": "at0101"
+                    }
+                  ],
+                  "archetype_node_id": "at0003"
+                },
+                "archetype_node_id": "at0002"
+              },
+              {
+                "_type": "INTERVAL_EVENT",
+                "name": {
+                  "_type": "DV_TEXT",
+                  "value": "Last test"
+                },
+                "time": {
+                  "_type": "DV_DATE_TIME",
+                  "value": "2022-02-03T04:05:06"
+                },
+                "state": {
+                  "_type": "ITEM_TREE",
+                  "name": {
+                    "_type": "DV_TEXT",
+                    "value": "Tree"
+                  },
+                  "items": [
+                    {
+                      "_type": "ELEMENT",
+                      "name": {
+                        "_type": "DV_TEXT",
+                        "value": "Confounding factors"
+                      },
+                      "value": {
+                        "_type": "DV_TEXT",
+                        "value": "Lorem ipsum"
+                      },
+                      "archetype_node_id": "at0113"
+                    }
+                  ],
+                  "archetype_node_id": "at0112"
+                },
+                "data": {
+                  "_type": "ITEM_TREE",
+                  "name": {
+                    "_type": "DV_TEXT",
+                    "value": "Tree"
+                  },
+                  "items": [
+                    {
+                      "_type": "ELEMENT",
+                      "name": {
+                        "_type": "DV_TEXT",
+                        "value": "Test name"
+                      },
+                      "value": {
+                        "_type": "DV_CODED_TEXT",
+                        "value": "2019-nCoV (novel coronavirus) serology",
+                        "defining_code": {
+                          "_type": "CODE_PHRASE",
+                          "terminology_id": {
+                            "_type": "TERMINOLOGY_ID",
+                            "value": "SNOMED-CT"
+                          },
+                          "code_string": "1240741000000103"
+                        }
+                      },
+                      "archetype_node_id": "at0005"
+                    },
+                    {
+                      "_type": "ELEMENT",
+                      "name": {
+                        "_type": "DV_TEXT",
+                        "value": "Overall test status"
+                      },
+                      "value": {
+                        "_type": "DV_CODED_TEXT",
+                        "value": "Registered",
+                        "defining_code": {
+                          "_type": "CODE_PHRASE",
+                          "terminology_id": {
+                            "_type": "TERMINOLOGY_ID",
+                            "value": "local"
+                          },
+                          "code_string": "at0107"
+                        }
+                      },
+                      "archetype_node_id": "at0073"
+                    },
+                    {
+                      "_type": "ELEMENT",
+                      "name": {
+                        "_type": "DV_TEXT",
+                        "value": "Overall test status timestamp"
+                      },
+                      "value": {
+                        "_type": "DV_DATE_TIME",
+                        "value": "2022-02-03T04:05:06"
+                      },
+                      "archetype_node_id": "at0075"
+                    },
+                    {
+                      "_type": "ELEMENT",
+                      "name": {
+                        "_type": "DV_TEXT",
+                        "value": "Diagnostic service category"
+                      },
+                      "value": {
+                        "_type": "DV_TEXT",
+                        "value": "Lorem ipsum"
+                      },
+                      "archetype_node_id": "at0077"
+                    },
+                    {
+                      "_type": "ELEMENT",
+                      "name": {
+                        "_type": "DV_TEXT",
+                        "value": "Test reason"
+                      },
+                      "value": {
+                        "_type": "DV_CODED_TEXT",
+                        "value": "Contact of a case.",
+                        "defining_code": {
+                          "_type": "CODE_PHRASE",
+                          "terminology_id": {
+                            "_type": "TERMINOLOGY_ID",
+                            "value": "WHO-COVID-TEST_REASON"
+                          },
+                          "code_string": "CASE_CONTACT"
+                        }
+                      },
+                      "archetype_node_id": "at0100"
+                    },
+                    {
+                      "_type": "ELEMENT",
+                      "name": {
+                        "_type": "DV_TEXT",
+                        "value": "Test rea"
+                      },
+                      "value": {
+                        "_type": "DV_TEXT",
+                        "value": "Lorem ipsum"
+                      },
+                      "archetype_node_id": "at0057"
+                    },
+                    {
+                      "_type": "ELEMENT",
+                      "name": {
+                        "_type": "DV_TEXT",
+                        "value": "Test diagnosis"
+                      },
+                      "value": {
+                        "_type": "DV_CODED_TEXT",
+                        "value": "The Covid-19 test was positive.",
+                        "defining_code": {
+                          "_type": "CODE_PHRASE",
+                          "terminology_id": {
+                            "_type": "TERMINOLOGY_ID",
+                            "value": "WHO-COVID-TEST_RESULT"
+                          },
+                          "code_string": "POSITIVE"
+                        }
+                      },
+                      "archetype_node_id": "at0098"
+                    },
+                    {
+                      "_type": "ELEMENT",
+                      "name": {
+                        "_type": "DV_TEXT",
+                        "value": "Test reason other"
+                      },
+                      "value": {
+                        "_type": "DV_TEXT",
+                        "value": "Lorem ipsum"
+                      },
+                      "archetype_node_id": "at0101"
+                    }
+                  ],
+                  "archetype_node_id": "at0003"
+                },
+                "width": {
+                  "_type": "DV_DURATION",
+                  "value": "PT42H"
+                },
+                "math_function": {
+                  "_type": "DV_CODED_TEXT",
+                  "value": "minimum",
+                  "defining_code": {
+                    "_type": "CODE_PHRASE",
+                    "terminology_id": {
+                      "_type": "TERMINOLOGY_ID",
+                      "value": "openehr"
+                    },
+                    "code_string": "145"
+                  }
+                },
+                "archetype_node_id": "at0002"
+              }
+            ],
+            "archetype_node_id": "at0001"
+          },
+          "archetype_node_id": "openEHR-EHR-OBSERVATION.laboratory_test_result.v1"
+        },
+        {
+          "_type": "OBSERVATION",
+          "name": {
+            "_type": "DV_TEXT",
+            "value": "Post test symptom/sign screening"
+          },
+          "archetype_details": {
+            "archetype_id": {
+              "value": "openEHR-EHR-OBSERVATION.symptom_sign_screening.v0"
+            },
+            "rm_version": "1.0.4"
+          },
+          "language": {
+            "_type": "CODE_PHRASE",
+            "terminology_id": {
+              "_type": "TERMINOLOGY_ID",
+              "value": "ISO_639-1"
+            },
+            "code_string": "en"
+          },
+          "encoding": {
+            "_type": "CODE_PHRASE",
+            "terminology_id": {
+              "_type": "TERMINOLOGY_ID",
+              "value": "IANA_character-sets"
+            },
+            "code_string": "ISO-10646-UTF-1"
+          },
+          "workflow_id": {
+            "_type": "OBJECT_REF",
+            "namespace": "unknown",
+            "type": "ANY",
+            "id": {
+              "_type": "GENERIC_ID",
+              "value": "805adf33-f9e1-34f8-ac97-542e5efb8633",
+              "scheme": "scheme"
+            }
+          },
+          "subject": {
+            "_type": "PARTY_SELF"
+          },
+          "provider": {
+            "_type": "PARTY_SELF"
+          },
+          "guideline_id": {
+            "_type": "OBJECT_REF",
+            "namespace": "unknown",
+            "type": "ANY",
+            "id": {
+              "_type": "GENERIC_ID",
+              "value": "7ea5091c-790e-34ea-9cdb-656a57e4a33e",
+              "scheme": "scheme"
+            }
+          },
+          "data": {
+            "name": {
+              "_type": "DV_TEXT",
+              "value": "History"
+            },
+            "origin": {
+              "_type": "DV_DATE_TIME",
+              "value": "2022-02-03T04:05:06"
+            },
+            "period": {
+              "_type": "DV_DURATION",
+              "value": "PT0S"
+            },
+            "duration": {
+              "_type": "DV_DURATION",
+              "value": "PT0S"
+            },
+            "events": [
+              {
+                "_type": "INTERVAL_EVENT",
+                "name": {
+                  "_type": "DV_TEXT",
+                  "value": "Post testing"
+                },
+                "time": {
+                  "_type": "DV_DATE_TIME",
+                  "value": "2022-02-03T04:05:06"
+                },
+                "data": {
+                  "_type": "ITEM_TREE",
+                  "name": {
+                    "_type": "DV_TEXT",
+                    "value": "Tree"
+                  },
+                  "items": [
+                    {
+                      "_type": "ELEMENT",
+                      "name": {
+                        "_type": "DV_TEXT",
+                        "value": "Screening purpose"
+                      },
+                      "value": {
+                        "_type": "DV_CODED_TEXT",
+                        "value": "Suspected COVID-19",
+                        "defining_code": {
+                          "_type": "CODE_PHRASE",
+                          "terminology_id": {
+                            "_type": "TERMINOLOGY_ID",
+                            "value": "SNOMED-CT"
+                          },
+                          "code_string": "840544004"
+                        }
+                      },
+                      "archetype_node_id": "at0034"
+                    },
+                    {
+                      "_type": "CLUSTER",
+                      "name": {
+                        "_type": "DV_TEXT",
+                        "value": "Specific symptom/sign"
+                      },
+                      "items": [
+                        {
+                          "_type": "ELEMENT",
+                          "name": {
+                            "_type": "DV_TEXT",
+                            "value": "Symptom or sign name"
+                          },
+                          "value": {
+                            "_type": "DV_CODED_TEXT",
+                            "value": "Influenza-like symptoms",
+                            "defining_code": {
+                              "_type": "CODE_PHRASE",
+                              "terminology_id": {
+                                "_type": "TERMINOLOGY_ID",
+                                "value": "SNOMED-CT"
+                              },
+                              "code_string": "315642008"
+                            }
+                          },
+                          "archetype_node_id": "at0004"
+                        },
+                        {
+                          "_type": "ELEMENT",
+                          "name": {
+                            "_type": "DV_TEXT",
+                            "value": "Presence?"
+                          },
+                          "value": {
+                            "_type": "DV_CODED_TEXT",
+                            "value": "Present",
+                            "defining_code": {
+                              "_type": "CODE_PHRASE",
+                              "terminology_id": {
+                                "_type": "TERMINOLOGY_ID",
+                                "value": "local"
+                              },
+                              "code_string": "at0023"
+                            }
+                          },
+                          "archetype_node_id": "at0005"
+                        },
+                        {
+                          "_type": "ELEMENT",
+                          "name": {
+                            "_type": "DV_TEXT",
+                            "value": "Comment"
+                          },
+                          "value": {
+                            "_type": "DV_TEXT",
+                            "value": "Lorem ipsum"
+                          },
+                          "archetype_node_id": "at0035"
+                        }
+                      ],
+                      "archetype_node_id": "at0022"
+                    }
+                  ],
+                  "archetype_node_id": "at0003"
+                },
+                "width": {
+                  "_type": "DV_DURATION",
+                  "value": "PT42H"
+                },
+                "math_function": {
+                  "_type": "DV_CODED_TEXT",
+                  "value": "minimum",
+                  "defining_code": {
+                    "_type": "CODE_PHRASE",
+                    "terminology_id": {
+                      "_type": "TERMINOLOGY_ID",
+                      "value": "openehr"
+                    },
+                    "code_string": "145"
+                  }
+                },
+                "archetype_node_id": "at0002"
+              },
+              {
+                "_type": "POINT_EVENT",
+                "name": {
+                  "_type": "DV_TEXT",
+                  "value": "Post testing"
+                },
+                "time": {
+                  "_type": "DV_DATE_TIME",
+                  "value": "2022-02-03T04:05:06"
+                },
+                "data": {
+                  "_type": "ITEM_TREE",
+                  "name": {
+                    "_type": "DV_TEXT",
+                    "value": "Tree"
+                  },
+                  "items": [
+                    {
+                      "_type": "ELEMENT",
+                      "name": {
+                        "_type": "DV_TEXT",
+                        "value": "Screening purpose"
+                      },
+                      "value": {
+                        "_type": "DV_CODED_TEXT",
+                        "value": "Suspected COVID-19",
+                        "defining_code": {
+                          "_type": "CODE_PHRASE",
+                          "terminology_id": {
+                            "_type": "TERMINOLOGY_ID",
+                            "value": "SNOMED-CT"
+                          },
+                          "code_string": "840544004"
+                        }
+                      },
+                      "archetype_node_id": "at0034"
+                    },
+                    {
+                      "_type": "CLUSTER",
+                      "name": {
+                        "_type": "DV_TEXT",
+                        "value": "Specific symptom/sign"
+                      },
+                      "items": [
+                        {
+                          "_type": "ELEMENT",
+                          "name": {
+                            "_type": "DV_TEXT",
+                            "value": "Symptom or sign name"
+                          },
+                          "value": {
+                            "_type": "DV_CODED_TEXT",
+                            "value": "Influenza-like symptoms",
+                            "defining_code": {
+                              "_type": "CODE_PHRASE",
+                              "terminology_id": {
+                                "_type": "TERMINOLOGY_ID",
+                                "value": "SNOMED-CT"
+                              },
+                              "code_string": "315642008"
+                            }
+                          },
+                          "archetype_node_id": "at0004"
+                        },
+                        {
+                          "_type": "ELEMENT",
+                          "name": {
+                            "_type": "DV_TEXT",
+                            "value": "Presence?"
+                          },
+                          "value": {
+                            "_type": "DV_CODED_TEXT",
+                            "value": "Present",
+                            "defining_code": {
+                              "_type": "CODE_PHRASE",
+                              "terminology_id": {
+                                "_type": "TERMINOLOGY_ID",
+                                "value": "local"
+                              },
+                              "code_string": "at0023"
+                            }
+                          },
+                          "archetype_node_id": "at0005"
+                        },
+                        {
+                          "_type": "ELEMENT",
+                          "name": {
+                            "_type": "DV_TEXT",
+                            "value": "Comment"
+                          },
+                          "value": {
+                            "_type": "DV_TEXT",
+                            "value": "Lorem ipsum"
+                          },
+                          "archetype_node_id": "at0035"
+                        }
+                      ],
+                      "archetype_node_id": "at0022"
+                    }
+                  ],
+                  "archetype_node_id": "at0003"
+                },
+                "archetype_node_id": "at0002"
+              },
+              {
+                "_type": "INTERVAL_EVENT",
+                "name": {
+                  "_type": "DV_TEXT",
+                  "value": "Post testing"
+                },
+                "time": {
+                  "_type": "DV_DATE_TIME",
+                  "value": "2022-02-03T04:05:06"
+                },
+                "data": {
+                  "_type": "ITEM_TREE",
+                  "name": {
+                    "_type": "DV_TEXT",
+                    "value": "Tree"
+                  },
+                  "items": [
+                    {
+                      "_type": "ELEMENT",
+                      "name": {
+                        "_type": "DV_TEXT",
+                        "value": "Screening purpose"
+                      },
+                      "value": {
+                        "_type": "DV_CODED_TEXT",
+                        "value": "Suspected COVID-19",
+                        "defining_code": {
+                          "_type": "CODE_PHRASE",
+                          "terminology_id": {
+                            "_type": "TERMINOLOGY_ID",
+                            "value": "SNOMED-CT"
+                          },
+                          "code_string": "840544004"
+                        }
+                      },
+                      "archetype_node_id": "at0034"
+                    },
+                    {
+                      "_type": "CLUSTER",
+                      "name": {
+                        "_type": "DV_TEXT",
+                        "value": "Specific symptom/sign"
+                      },
+                      "items": [
+                        {
+                          "_type": "ELEMENT",
+                          "name": {
+                            "_type": "DV_TEXT",
+                            "value": "Symptom or sign name"
+                          },
+                          "value": {
+                            "_type": "DV_CODED_TEXT",
+                            "value": "Influenza-like symptoms",
+                            "defining_code": {
+                              "_type": "CODE_PHRASE",
+                              "terminology_id": {
+                                "_type": "TERMINOLOGY_ID",
+                                "value": "SNOMED-CT"
+                              },
+                              "code_string": "315642008"
+                            }
+                          },
+                          "archetype_node_id": "at0004"
+                        },
+                        {
+                          "_type": "ELEMENT",
+                          "name": {
+                            "_type": "DV_TEXT",
+                            "value": "Presence?"
+                          },
+                          "value": {
+                            "_type": "DV_CODED_TEXT",
+                            "value": "Present",
+                            "defining_code": {
+                              "_type": "CODE_PHRASE",
+                              "terminology_id": {
+                                "_type": "TERMINOLOGY_ID",
+                                "value": "local"
+                              },
+                              "code_string": "at0023"
+                            }
+                          },
+                          "archetype_node_id": "at0005"
+                        },
+                        {
+                          "_type": "ELEMENT",
+                          "name": {
+                            "_type": "DV_TEXT",
+                            "value": "Comment"
+                          },
+                          "value": {
+                            "_type": "DV_TEXT",
+                            "value": "Lorem ipsum"
+                          },
+                          "archetype_node_id": "at0035"
+                        }
+                      ],
+                      "archetype_node_id": "at0022"
+                    }
+                  ],
+                  "archetype_node_id": "at0003"
+                },
+                "width": {
+                  "_type": "DV_DURATION",
+                  "value": "PT42H"
+                },
+                "math_function": {
+                  "_type": "DV_CODED_TEXT",
+                  "value": "minimum",
+                  "defining_code": {
+                    "_type": "CODE_PHRASE",
+                    "terminology_id": {
+                      "_type": "TERMINOLOGY_ID",
+                      "value": "openehr"
+                    },
+                    "code_string": "145"
+                  }
+                },
+                "archetype_node_id": "at0002"
+              }
+            ],
+            "archetype_node_id": "at0001"
+          },
+          "archetype_node_id": "openEHR-EHR-OBSERVATION.symptom_sign_screening.v0"
+        },
+        {
+          "_type": "OBSERVATION",
+          "name": {
+            "_type": "DV_TEXT",
+            "value": "Post test procedure screening"
+          },
+          "archetype_details": {
+            "archetype_id": {
+              "value": "openEHR-EHR-OBSERVATION.procedure_screening.v0"
+            },
+            "rm_version": "1.0.4"
+          },
+          "language": {
+            "_type": "CODE_PHRASE",
+            "terminology_id": {
+              "_type": "TERMINOLOGY_ID",
+              "value": "ISO_639-1"
+            },
+            "code_string": "en"
+          },
+          "encoding": {
+            "_type": "CODE_PHRASE",
+            "terminology_id": {
+              "_type": "TERMINOLOGY_ID",
+              "value": "IANA_character-sets"
+            },
+            "code_string": "ISO-10646-UTF-1"
+          },
+          "workflow_id": {
+            "_type": "OBJECT_REF",
+            "namespace": "unknown",
+            "type": "ANY",
+            "id": {
+              "_type": "GENERIC_ID",
+              "value": "7df20011-67d0-3d98-9b77-9bc96ea7378f",
+              "scheme": "scheme"
+            }
+          },
+          "subject": {
+            "_type": "PARTY_SELF"
+          },
+          "provider": {
+            "_type": "PARTY_SELF"
+          },
+          "guideline_id": {
+            "_type": "OBJECT_REF",
+            "namespace": "unknown",
+            "type": "ANY",
+            "id": {
+              "_type": "GENERIC_ID",
+              "value": "f5218d1f-0519-34d5-af40-06fd534aad43",
+              "scheme": "scheme"
+            }
+          },
+          "data": {
+            "name": {
+              "_type": "DV_TEXT",
+              "value": "History"
+            },
+            "origin": {
+              "_type": "DV_DATE_TIME",
+              "value": "2022-02-03T04:05:06"
+            },
+            "period": {
+              "_type": "DV_DURATION",
+              "value": "PT0S"
+            },
+            "duration": {
+              "_type": "DV_DURATION",
+              "value": "PT0S"
+            },
+            "events": [
+              {
+                "_type": "INTERVAL_EVENT",
+                "name": {
+                  "_type": "DV_TEXT",
+                  "value": "Post testing"
+                },
+                "time": {
+                  "_type": "DV_DATE_TIME",
+                  "value": "2022-02-03T04:05:06"
+                },
+                "data": {
+                  "_type": "ITEM_TREE",
+                  "name": {
+                    "_type": "DV_TEXT",
+                    "value": "Tree"
+                  },
+                  "items": [
+                    {
+                      "_type": "ELEMENT",
+                      "name": {
+                        "_type": "DV_TEXT",
+                        "value": "Screening purpose"
+                      },
+                      "value": {
+                        "_type": "DV_CODED_TEXT",
+                        "value": "Suspected COVID-19",
+                        "defining_code": {
+                          "_type": "CODE_PHRASE",
+                          "terminology_id": {
+                            "_type": "TERMINOLOGY_ID",
+                            "value": "SNOMED-CT"
+                          },
+                          "code_string": "840544004"
+                        }
+                      },
+                      "archetype_node_id": "at0034"
+                    },
+                    {
+                      "_type": "CLUSTER",
+                      "name": {
+                        "_type": "DV_TEXT",
+                        "value": "Specific procedure"
+                      },
+                      "items": [
+                        {
+                          "_type": "ELEMENT",
+                          "name": {
+                            "_type": "DV_TEXT",
+                            "value": "Procedure name"
+                          },
+                          "value": {
+                            "_type": "DV_TEXT",
+                            "value": "Ventilation"
+                          },
+                          "archetype_node_id": "at0004"
+                        },
+                        {
+                          "_type": "ELEMENT",
+                          "name": {
+                            "_type": "DV_TEXT",
+                            "value": "Performed?"
+                          },
+                          "value": {
+                            "_type": "DV_CODED_TEXT",
+                            "value": "Performed/carried out",
+                            "defining_code": {
+                              "_type": "CODE_PHRASE",
+                              "terminology_id": {
+                                "_type": "TERMINOLOGY_ID",
+                                "value": "local"
+                              },
+                              "code_string": "at0023"
+                            }
+                          },
+                          "archetype_node_id": "at0005"
+                        }
+                      ],
+                      "archetype_node_id": "at0022"
+                    }
+                  ],
+                  "archetype_node_id": "at0003"
+                },
+                "width": {
+                  "_type": "DV_DURATION",
+                  "value": "PT42H"
+                },
+                "math_function": {
+                  "_type": "DV_CODED_TEXT",
+                  "value": "minimum",
+                  "defining_code": {
+                    "_type": "CODE_PHRASE",
+                    "terminology_id": {
+                      "_type": "TERMINOLOGY_ID",
+                      "value": "openehr"
+                    },
+                    "code_string": "145"
+                  }
+                },
+                "archetype_node_id": "at0002"
+              },
+              {
+                "_type": "POINT_EVENT",
+                "name": {
+                  "_type": "DV_TEXT",
+                  "value": "Post testing"
+                },
+                "time": {
+                  "_type": "DV_DATE_TIME",
+                  "value": "2022-02-03T04:05:06"
+                },
+                "data": {
+                  "_type": "ITEM_TREE",
+                  "name": {
+                    "_type": "DV_TEXT",
+                    "value": "Tree"
+                  },
+                  "items": [
+                    {
+                      "_type": "ELEMENT",
+                      "name": {
+                        "_type": "DV_TEXT",
+                        "value": "Screening purpose"
+                      },
+                      "value": {
+                        "_type": "DV_CODED_TEXT",
+                        "value": "Suspected COVID-19",
+                        "defining_code": {
+                          "_type": "CODE_PHRASE",
+                          "terminology_id": {
+                            "_type": "TERMINOLOGY_ID",
+                            "value": "SNOMED-CT"
+                          },
+                          "code_string": "840544004"
+                        }
+                      },
+                      "archetype_node_id": "at0034"
+                    },
+                    {
+                      "_type": "CLUSTER",
+                      "name": {
+                        "_type": "DV_TEXT",
+                        "value": "Specific procedure"
+                      },
+                      "items": [
+                        {
+                          "_type": "ELEMENT",
+                          "name": {
+                            "_type": "DV_TEXT",
+                            "value": "Procedure name"
+                          },
+                          "value": {
+                            "_type": "DV_TEXT",
+                            "value": "Ventilation"
+                          },
+                          "archetype_node_id": "at0004"
+                        },
+                        {
+                          "_type": "ELEMENT",
+                          "name": {
+                            "_type": "DV_TEXT",
+                            "value": "Performed?"
+                          },
+                          "value": {
+                            "_type": "DV_CODED_TEXT",
+                            "value": "Performed/carried out",
+                            "defining_code": {
+                              "_type": "CODE_PHRASE",
+                              "terminology_id": {
+                                "_type": "TERMINOLOGY_ID",
+                                "value": "local"
+                              },
+                              "code_string": "at0023"
+                            }
+                          },
+                          "archetype_node_id": "at0005"
+                        }
+                      ],
+                      "archetype_node_id": "at0022"
+                    }
+                  ],
+                  "archetype_node_id": "at0003"
+                },
+                "archetype_node_id": "at0002"
+              },
+              {
+                "_type": "INTERVAL_EVENT",
+                "name": {
+                  "_type": "DV_TEXT",
+                  "value": "Post testing"
+                },
+                "time": {
+                  "_type": "DV_DATE_TIME",
+                  "value": "2022-02-03T04:05:06"
+                },
+                "data": {
+                  "_type": "ITEM_TREE",
+                  "name": {
+                    "_type": "DV_TEXT",
+                    "value": "Tree"
+                  },
+                  "items": [
+                    {
+                      "_type": "ELEMENT",
+                      "name": {
+                        "_type": "DV_TEXT",
+                        "value": "Screening purpose"
+                      },
+                      "value": {
+                        "_type": "DV_CODED_TEXT",
+                        "value": "Suspected COVID-19",
+                        "defining_code": {
+                          "_type": "CODE_PHRASE",
+                          "terminology_id": {
+                            "_type": "TERMINOLOGY_ID",
+                            "value": "SNOMED-CT"
+                          },
+                          "code_string": "840544004"
+                        }
+                      },
+                      "archetype_node_id": "at0034"
+                    },
+                    {
+                      "_type": "CLUSTER",
+                      "name": {
+                        "_type": "DV_TEXT",
+                        "value": "Specific procedure"
+                      },
+                      "items": [
+                        {
+                          "_type": "ELEMENT",
+                          "name": {
+                            "_type": "DV_TEXT",
+                            "value": "Procedure name"
+                          },
+                          "value": {
+                            "_type": "DV_TEXT",
+                            "value": "Ventilation"
+                          },
+                          "archetype_node_id": "at0004"
+                        },
+                        {
+                          "_type": "ELEMENT",
+                          "name": {
+                            "_type": "DV_TEXT",
+                            "value": "Performed?"
+                          },
+                          "value": {
+                            "_type": "DV_CODED_TEXT",
+                            "value": "Performed/carried out",
+                            "defining_code": {
+                              "_type": "CODE_PHRASE",
+                              "terminology_id": {
+                                "_type": "TERMINOLOGY_ID",
+                                "value": "local"
+                              },
+                              "code_string": "at0023"
+                            }
+                          },
+                          "archetype_node_id": "at0005"
+                        }
+                      ],
+                      "archetype_node_id": "at0022"
+                    }
+                  ],
+                  "archetype_node_id": "at0003"
+                },
+                "width": {
+                  "_type": "DV_DURATION",
+                  "value": "PT42H"
+                },
+                "math_function": {
+                  "_type": "DV_CODED_TEXT",
+                  "value": "minimum",
+                  "defining_code": {
+                    "_type": "CODE_PHRASE",
+                    "terminology_id": {
+                      "_type": "TERMINOLOGY_ID",
+                      "value": "openehr"
+                    },
+                    "code_string": "145"
+                  }
+                },
+                "archetype_node_id": "at0002"
+              }
+            ],
+            "archetype_node_id": "at0001"
+          },
+          "archetype_node_id": "openEHR-EHR-OBSERVATION.procedure_screening.v0"
+        },
+        {
+          "_type": "OBSERVATION",
+          "name": {
+            "_type": "DV_TEXT",
+            "value": "Post test management/treatment screening"
+          },
+          "archetype_details": {
+            "archetype_id": {
+              "value": "openEHR-EHR-OBSERVATION.management_screening.v0"
+            },
+            "rm_version": "1.0.4"
+          },
+          "language": {
+            "_type": "CODE_PHRASE",
+            "terminology_id": {
+              "_type": "TERMINOLOGY_ID",
+              "value": "ISO_639-1"
+            },
+            "code_string": "en"
+          },
+          "encoding": {
+            "_type": "CODE_PHRASE",
+            "terminology_id": {
+              "_type": "TERMINOLOGY_ID",
+              "value": "IANA_character-sets"
+            },
+            "code_string": "ISO-10646-UTF-1"
+          },
+          "workflow_id": {
+            "_type": "OBJECT_REF",
+            "namespace": "unknown",
+            "type": "ANY",
+            "id": {
+              "_type": "GENERIC_ID",
+              "value": "d86caa51-5527-358e-b8b1-b0b11cb5f296",
+              "scheme": "scheme"
+            }
+          },
+          "subject": {
+            "_type": "PARTY_SELF"
+          },
+          "provider": {
+            "_type": "PARTY_SELF"
+          },
+          "guideline_id": {
+            "_type": "OBJECT_REF",
+            "namespace": "unknown",
+            "type": "ANY",
+            "id": {
+              "_type": "GENERIC_ID",
+              "value": "5769951d-3818-3265-8965-03bad1d07f6f",
+              "scheme": "scheme"
+            }
+          },
+          "data": {
+            "name": {
+              "_type": "DV_TEXT",
+              "value": "History"
+            },
+            "origin": {
+              "_type": "DV_DATE_TIME",
+              "value": "2022-02-03T04:05:06"
+            },
+            "period": {
+              "_type": "DV_DURATION",
+              "value": "PT0S"
+            },
+            "duration": {
+              "_type": "DV_DURATION",
+              "value": "PT0S"
+            },
+            "events": [
+              {
+                "_type": "INTERVAL_EVENT",
+                "name": {
+                  "_type": "DV_TEXT",
+                  "value": "At testing"
+                },
+                "time": {
+                  "_type": "DV_DATE_TIME",
+                  "value": "2022-02-03T04:05:06"
+                },
+                "data": {
+                  "_type": "ITEM_TREE",
+                  "name": {
+                    "_type": "DV_TEXT",
+                    "value": "Tree"
+                  },
+                  "items": [
+                    {
+                      "_type": "ELEMENT",
+                      "name": {
+                        "_type": "DV_TEXT",
+                        "value": "Screening purpose"
+                      },
+                      "value": {
+                        "_type": "DV_CODED_TEXT",
+                        "value": "Suspected COVID-19",
+                        "defining_code": {
+                          "_type": "CODE_PHRASE",
+                          "terminology_id": {
+                            "_type": "TERMINOLOGY_ID",
+                            "value": "SNOMED-CT"
+                          },
+                          "code_string": "840544004"
+                        }
+                      },
+                      "archetype_node_id": "at0034"
+                    },
+                    {
+                      "_type": "CLUSTER",
+                      "name": {
+                        "_type": "DV_TEXT",
+                        "value": "Specific management/treatment activity"
+                      },
+                      "items": [
+                        {
+                          "_type": "ELEMENT",
+                          "name": {
+                            "_type": "DV_TEXT",
+                            "value": "Activity name"
+                          },
+                          "value": {
+                            "_type": "DV_TEXT",
+                            "value": "Admitted to hospital"
+                          },
+                          "archetype_node_id": "at0004"
+                        },
+                        {
+                          "_type": "ELEMENT",
+                          "name": {
+                            "_type": "DV_TEXT",
+                            "value": "Status"
+                          },
+                          "value": {
+                            "_type": "DV_CODED_TEXT",
+                            "value": "Completed",
+                            "defining_code": {
+                              "_type": "CODE_PHRASE",
+                              "terminology_id": {
+                                "_type": "TERMINOLOGY_ID",
+                                "value": "local"
+                              },
+                              "code_string": "at0023"
+                            }
+                          },
+                          "archetype_node_id": "at0005"
+                        },
+                        {
+                          "_type": "ELEMENT",
+                          "name": {
+                            "_type": "DV_TEXT",
+                            "value": "Date first admitted"
+                          },
+                          "value": {
+                            "_type": "DV_DATE_TIME",
+                            "value": "2022-02-03T04:05:06"
+                          },
+                          "archetype_node_id": "at0006"
+                        },
+                        {
+                          "_type": "ELEMENT",
+                          "name": {
+                            "_type": "DV_TEXT",
+                            "value": "Scheduled"
+                          },
+                          "value": {
+                            "_type": "DV_DATE_TIME",
+                            "value": "2022-02-03T04:05:06"
+                          },
+                          "archetype_node_id": "at0037"
+                        },
+                        {
+                          "_type": "ELEMENT",
+                          "name": {
+                            "_type": "DV_TEXT",
+                            "value": "Comment"
+                          },
+                          "value": {
+                            "_type": "DV_TEXT",
+                            "value": "Lorem ipsum"
+                          },
+                          "archetype_node_id": "at0035"
+                        }
+                      ],
+                      "archetype_node_id": "at0022"
+                    }
+                  ],
+                  "archetype_node_id": "at0003"
+                },
+                "width": {
+                  "_type": "DV_DURATION",
+                  "value": "PT42H"
+                },
+                "math_function": {
+                  "_type": "DV_CODED_TEXT",
+                  "value": "minimum",
+                  "defining_code": {
+                    "_type": "CODE_PHRASE",
+                    "terminology_id": {
+                      "_type": "TERMINOLOGY_ID",
+                      "value": "openehr"
+                    },
+                    "code_string": "145"
+                  }
+                },
+                "archetype_node_id": "at0002"
+              },
+              {
+                "_type": "POINT_EVENT",
+                "name": {
+                  "_type": "DV_TEXT",
+                  "value": "At testing"
+                },
+                "time": {
+                  "_type": "DV_DATE_TIME",
+                  "value": "2022-02-03T04:05:06"
+                },
+                "data": {
+                  "_type": "ITEM_TREE",
+                  "name": {
+                    "_type": "DV_TEXT",
+                    "value": "Tree"
+                  },
+                  "items": [
+                    {
+                      "_type": "ELEMENT",
+                      "name": {
+                        "_type": "DV_TEXT",
+                        "value": "Screening purpose"
+                      },
+                      "value": {
+                        "_type": "DV_CODED_TEXT",
+                        "value": "Suspected COVID-19",
+                        "defining_code": {
+                          "_type": "CODE_PHRASE",
+                          "terminology_id": {
+                            "_type": "TERMINOLOGY_ID",
+                            "value": "SNOMED-CT"
+                          },
+                          "code_string": "840544004"
+                        }
+                      },
+                      "archetype_node_id": "at0034"
+                    },
+                    {
+                      "_type": "CLUSTER",
+                      "name": {
+                        "_type": "DV_TEXT",
+                        "value": "Specific management/treatment activity"
+                      },
+                      "items": [
+                        {
+                          "_type": "ELEMENT",
+                          "name": {
+                            "_type": "DV_TEXT",
+                            "value": "Activity name"
+                          },
+                          "value": {
+                            "_type": "DV_TEXT",
+                            "value": "Admitted to hospital"
+                          },
+                          "archetype_node_id": "at0004"
+                        },
+                        {
+                          "_type": "ELEMENT",
+                          "name": {
+                            "_type": "DV_TEXT",
+                            "value": "Status"
+                          },
+                          "value": {
+                            "_type": "DV_CODED_TEXT",
+                            "value": "Completed",
+                            "defining_code": {
+                              "_type": "CODE_PHRASE",
+                              "terminology_id": {
+                                "_type": "TERMINOLOGY_ID",
+                                "value": "local"
+                              },
+                              "code_string": "at0023"
+                            }
+                          },
+                          "archetype_node_id": "at0005"
+                        },
+                        {
+                          "_type": "ELEMENT",
+                          "name": {
+                            "_type": "DV_TEXT",
+                            "value": "Date first admitted"
+                          },
+                          "value": {
+                            "_type": "DV_DATE_TIME",
+                            "value": "2022-02-03T04:05:06"
+                          },
+                          "archetype_node_id": "at0006"
+                        },
+                        {
+                          "_type": "ELEMENT",
+                          "name": {
+                            "_type": "DV_TEXT",
+                            "value": "Scheduled"
+                          },
+                          "value": {
+                            "_type": "DV_DATE_TIME",
+                            "value": "2022-02-03T04:05:06"
+                          },
+                          "archetype_node_id": "at0037"
+                        },
+                        {
+                          "_type": "ELEMENT",
+                          "name": {
+                            "_type": "DV_TEXT",
+                            "value": "Comment"
+                          },
+                          "value": {
+                            "_type": "DV_TEXT",
+                            "value": "Lorem ipsum"
+                          },
+                          "archetype_node_id": "at0035"
+                        }
+                      ],
+                      "archetype_node_id": "at0022"
+                    }
+                  ],
+                  "archetype_node_id": "at0003"
+                },
+                "archetype_node_id": "at0002"
+              },
+              {
+                "_type": "INTERVAL_EVENT",
+                "name": {
+                  "_type": "DV_TEXT",
+                  "value": "At testing"
+                },
+                "time": {
+                  "_type": "DV_DATE_TIME",
+                  "value": "2022-02-03T04:05:06"
+                },
+                "data": {
+                  "_type": "ITEM_TREE",
+                  "name": {
+                    "_type": "DV_TEXT",
+                    "value": "Tree"
+                  },
+                  "items": [
+                    {
+                      "_type": "ELEMENT",
+                      "name": {
+                        "_type": "DV_TEXT",
+                        "value": "Screening purpose"
+                      },
+                      "value": {
+                        "_type": "DV_CODED_TEXT",
+                        "value": "Suspected COVID-19",
+                        "defining_code": {
+                          "_type": "CODE_PHRASE",
+                          "terminology_id": {
+                            "_type": "TERMINOLOGY_ID",
+                            "value": "SNOMED-CT"
+                          },
+                          "code_string": "840544004"
+                        }
+                      },
+                      "archetype_node_id": "at0034"
+                    },
+                    {
+                      "_type": "CLUSTER",
+                      "name": {
+                        "_type": "DV_TEXT",
+                        "value": "Specific management/treatment activity"
+                      },
+                      "items": [
+                        {
+                          "_type": "ELEMENT",
+                          "name": {
+                            "_type": "DV_TEXT",
+                            "value": "Activity name"
+                          },
+                          "value": {
+                            "_type": "DV_TEXT",
+                            "value": "Admitted to hospital"
+                          },
+                          "archetype_node_id": "at0004"
+                        },
+                        {
+                          "_type": "ELEMENT",
+                          "name": {
+                            "_type": "DV_TEXT",
+                            "value": "Status"
+                          },
+                          "value": {
+                            "_type": "DV_CODED_TEXT",
+                            "value": "Completed",
+                            "defining_code": {
+                              "_type": "CODE_PHRASE",
+                              "terminology_id": {
+                                "_type": "TERMINOLOGY_ID",
+                                "value": "local"
+                              },
+                              "code_string": "at0023"
+                            }
+                          },
+                          "archetype_node_id": "at0005"
+                        },
+                        {
+                          "_type": "ELEMENT",
+                          "name": {
+                            "_type": "DV_TEXT",
+                            "value": "Date first admitted"
+                          },
+                          "value": {
+                            "_type": "DV_DATE_TIME",
+                            "value": "2022-02-03T04:05:06"
+                          },
+                          "archetype_node_id": "at0006"
+                        },
+                        {
+                          "_type": "ELEMENT",
+                          "name": {
+                            "_type": "DV_TEXT",
+                            "value": "Scheduled"
+                          },
+                          "value": {
+                            "_type": "DV_DATE_TIME",
+                            "value": "2022-02-03T04:05:06"
+                          },
+                          "archetype_node_id": "at0037"
+                        },
+                        {
+                          "_type": "ELEMENT",
+                          "name": {
+                            "_type": "DV_TEXT",
+                            "value": "Comment"
+                          },
+                          "value": {
+                            "_type": "DV_TEXT",
+                            "value": "Lorem ipsum"
+                          },
+                          "archetype_node_id": "at0035"
+                        }
+                      ],
+                      "archetype_node_id": "at0022"
+                    }
+                  ],
+                  "archetype_node_id": "at0003"
+                },
+                "width": {
+                  "_type": "DV_DURATION",
+                  "value": "PT42H"
+                },
+                "math_function": {
+                  "_type": "DV_CODED_TEXT",
+                  "value": "minimum",
+                  "defining_code": {
+                    "_type": "CODE_PHRASE",
+                    "terminology_id": {
+                      "_type": "TERMINOLOGY_ID",
+                      "value": "openehr"
+                    },
+                    "code_string": "145"
+                  }
+                },
+                "archetype_node_id": "at0002"
+              }
+            ],
+            "archetype_node_id": "at0001"
+          },
+          "archetype_node_id": "openEHR-EHR-OBSERVATION.management_screening.v0"
+        },
+        {
+          "_type": "ADMIN_ENTRY",
+          "name": {
+            "_type": "DV_TEXT",
+            "value": "Episode of care - institution"
+          },
+          "archetype_details": {
+            "archetype_id": {
+              "value": "openEHR-EHR-ADMIN_ENTRY.episode_institution.v0"
+            },
+            "rm_version": "1.0.4"
+          },
+          "language": {
+            "_type": "CODE_PHRASE",
+            "terminology_id": {
+              "_type": "TERMINOLOGY_ID",
+              "value": "ISO_639-1"
+            },
+            "code_string": "en"
+          },
+          "encoding": {
+            "_type": "CODE_PHRASE",
+            "terminology_id": {
+              "_type": "TERMINOLOGY_ID",
+              "value": "IANA_character-sets"
+            },
+            "code_string": "ISO-10646-UTF-1"
+          },
+          "workflow_id": {
+            "_type": "OBJECT_REF",
+            "namespace": "unknown",
+            "type": "ANY",
+            "id": {
+              "_type": "GENERIC_ID",
+              "value": "4121460b-68c1-3a2e-b94a-83b3c2581ba8",
+              "scheme": "scheme"
+            }
+          },
+          "subject": {
+            "_type": "PARTY_SELF"
+          },
+          "provider": {
+            "_type": "PARTY_SELF"
+          },
+          "data": {
+            "_type": "ITEM_TREE",
+            "name": {
+              "_type": "DV_TEXT",
+              "value": "Item tree"
+            },
+            "items": [
+              {
+                "_type": "ELEMENT",
+                "name": {
+                  "_type": "DV_TEXT",
+                  "value": "Admission date"
+                },
+                "value": {
+                  "_type": "DV_DATE_TIME",
+                  "value": "2022-02-03T04:05:06"
+                },
+                "archetype_node_id": "at0004"
+              },
+              {
+                "_type": "ELEMENT",
+                "name": {
+                  "_type": "DV_TEXT",
+                  "value": "Admitted from"
+                },
+                "value": {
+                  "_type": "DV_TEXT",
+                  "value": "Lorem ipsum"
+                },
+                "archetype_node_id": "at0007"
+              },
+              {
+                "_type": "ELEMENT",
+                "name": {
+                  "_type": "DV_TEXT",
+                  "value": "Date of release or death"
+                },
+                "value": {
+                  "_type": "DV_DATE_TIME",
+                  "value": "2022-02-03T04:05:06"
+                },
+                "archetype_node_id": "at0002"
+              },
+              {
+                "_type": "ELEMENT",
+                "name": {
+                  "_type": "DV_TEXT",
+                  "value": "Outcome"
+                },
+                "value": {
+                  "_type": "DV_TEXT",
+                  "value": "Recovered/healthy"
+                },
+                "archetype_node_id": "at0006"
+              }
+            ],
+            "archetype_node_id": "at0001"
+          },
+          "archetype_node_id": "openEHR-EHR-ADMIN_ENTRY.episode_institution.v0"
+        }
+      ],
+      "archetype_node_id": "openEHR-EHR-SECTION.adhoc.v1"
+    }
+  ],
+  "archetype_node_id": "openEHR-EHR-COMPOSITION.report.v1"
+}

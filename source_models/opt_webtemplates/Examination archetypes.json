@@ -1,0 +1,2750 @@
+{
+  "templateId": "Examination archetypes",
+  "version": "2.3",
+  "defaultLanguage": "en",
+  "languages": [
+    "en"
+  ],
+  "tree": {
+    "id": "example_template_for_examination_archetypes",
+    "name": "Example template for examination archetypes",
+    "localizedName": "Example template for examination archetypes",
+    "rmType": "COMPOSITION",
+    "nodeId": "openEHR-EHR-COMPOSITION.encounter.v1",
+    "min": 1,
+    "max": 1,
+    "localizedNames": {
+      "en": "Example template for examination archetypes"
+    },
+    "localizedDescriptions": {
+      "en": "Interaction, contact or care event between a subject of care and healthcare provider(s)."
+    },
+    "children": [
+      {
+        "id": "category",
+        "name": "category",
+        "localizedName": "category",
+        "rmType": "DV_CODED_TEXT",
+        "min": 1,
+        "max": 1,
+        "aqlPath": "/category",
+        "inputs": [
+          {
+            "suffix": "code",
+            "type": "CODED_TEXT",
+            "list": [
+              {
+                "value": "433",
+                "label": "event",
+                "localizedLabels": {
+                  "en": "event"
+                }
+              }
+            ],
+            "terminology": "openehr"
+          }
+        ],
+        "inContext": true
+      },
+      {
+        "id": "context",
+        "name": "context",
+        "localizedName": "context",
+        "rmType": "EVENT_CONTEXT",
+        "min": 1,
+        "max": 1,
+        "aqlPath": "/context",
+        "children": [
+          {
+            "id": "start_time",
+            "name": "start_time",
+            "rmType": "DV_DATE_TIME",
+            "min": 1,
+            "max": 1,
+            "aqlPath": "/context/start_time",
+            "inputs": [
+              {
+                "type": "DATETIME"
+              }
+            ],
+            "inContext": true
+          },
+          {
+            "id": "setting",
+            "name": "setting",
+            "rmType": "DV_CODED_TEXT",
+            "min": 1,
+            "max": 1,
+            "aqlPath": "/context/setting",
+            "inputs": [
+              {
+                "suffix": "code",
+                "type": "TEXT"
+              },
+              {
+                "suffix": "value",
+                "type": "TEXT"
+              }
+            ],
+            "inContext": true
+          }
+        ]
+      },
+      {
+        "id": "physical_examination_findings",
+        "name": "Physical examination findings",
+        "localizedName": "Physical examination findings",
+        "rmType": "OBSERVATION",
+        "nodeId": "openEHR-EHR-OBSERVATION.exam.v1",
+        "min": 0,
+        "max": -1,
+        "localizedNames": {
+          "en": "Physical examination findings"
+        },
+        "localizedDescriptions": {
+          "en": "Findings observed during the physical examination of a subject of care."
+        },
+        "aqlPath": "/content[openEHR-EHR-OBSERVATION.exam.v1]",
+        "children": [
+          {
+            "id": "any_event",
+            "name": "Any event",
+            "localizedName": "Any event",
+            "rmType": "EVENT",
+            "nodeId": "at0002",
+            "min": 0,
+            "max": -1,
+            "localizedNames": {
+              "en": "Any event"
+            },
+            "localizedDescriptions": {
+              "en": "Default, unspecified point in time or interval event which may be explicitly defined in a template or at run-time."
+            },
+            "aqlPath": "/content[openEHR-EHR-OBSERVATION.exam.v1]/data[at0001]/events[at0002]",
+            "children": [
+              {
+                "id": "description",
+                "name": "Description",
+                "localizedName": "Description",
+                "rmType": "DV_TEXT",
+                "nodeId": "at0004",
+                "min": 0,
+                "max": 1,
+                "localizedNames": {
+                  "en": "Description"
+                },
+                "localizedDescriptions": {
+                  "en": "Narrative description of the overall findings observed during a physical examination of a patient."
+                },
+                "aqlPath": "/content[openEHR-EHR-OBSERVATION.exam.v1]/data[at0001]/events[at0002]/data[at0003]/items[at0004]/value",
+                "inputs": [
+                  {
+                    "type": "TEXT"
+                  }
+                ],
+                "annotations": {
+                  "comment": "May be used to record a narrative summary of the complete clinical examination or key aspects of clinical examination findings, which will be supported by structured data. Details of specific structured findings can be included using CLUSTER archetypes in the 'Examination Detail' slot. This data element may be used to capture legacy data that is not available in a structured format."
+                }
+              },
+              {
+                "id": "examination_findings",
+                "name": "Examination findings",
+                "localizedName": "Examination findings",
+                "rmType": "CLUSTER",
+                "nodeId": "openEHR-EHR-CLUSTER.exam.v0",
+                "min": 0,
+                "max": -1,
+                "localizedNames": {
+                  "en": "Examination findings"
+                },
+                "localizedDescriptions": {
+                  "en": "Findings observed during the physical examination of a body system or anatomical structure."
+                },
+                "aqlPath": "/content[openEHR-EHR-OBSERVATION.exam.v1]/data[at0001]/events[at0002]/data[at0003]/items[openEHR-EHR-CLUSTER.exam.v0]",
+                "children": [
+                  {
+                    "id": "system_or_structure_examined",
+                    "name": "System or structure examined",
+                    "localizedName": "System or structure examined",
+                    "rmType": "DV_TEXT",
+                    "nodeId": "at0001",
+                    "min": 0,
+                    "max": 1,
+                    "localizedNames": {
+                      "en": "System or structure examined"
+                    },
+                    "localizedDescriptions": {
+                      "en": "Identification of the XYZ under examination."
+                    },
+                    "aqlPath": "/content[openEHR-EHR-OBSERVATION.exam.v1]/data[at0001]/events[at0002]/data[at0003]/items[openEHR-EHR-CLUSTER.exam.v0]/items[at0001]/value",
+                    "inputs": [
+                      {
+                        "type": "TEXT"
+                      }
+                    ]
+                  },
+                  {
+                    "id": "no_abnormality_detected",
+                    "name": "No abnormality detected",
+                    "localizedName": "No abnormality detected",
+                    "rmType": "DV_BOOLEAN",
+                    "nodeId": "at0002",
+                    "min": 0,
+                    "max": 1,
+                    "localizedNames": {
+                      "en": "No abnormality detected"
+                    },
+                    "localizedDescriptions": {
+                      "en": "Statement that no abnormality was detected (NAD) on physical examination."
+                    },
+                    "aqlPath": "/content[openEHR-EHR-OBSERVATION.exam.v1]/data[at0001]/events[at0002]/data[at0003]/items[openEHR-EHR-CLUSTER.exam.v0]/items[at0002]/value",
+                    "inputs": [
+                      {
+                        "type": "BOOLEAN",
+                        "list": [
+                          {
+                            "value": "true",
+                            "label": "true"
+                          }
+                        ]
+                      }
+                    ],
+                    "annotations": {
+                      "comment": "Record as True if no abnormality was detected on examination. Specific statements about the examination can be included in the 'Clinical Interpretation' data element."
+                    }
+                  },
+                  {
+                    "id": "clinical_description",
+                    "name": "Clinical description",
+                    "localizedName": "Clinical description",
+                    "rmType": "DV_TEXT",
+                    "nodeId": "at0003",
+                    "min": 0,
+                    "max": 1,
+                    "localizedNames": {
+                      "en": "Clinical description"
+                    },
+                    "localizedDescriptions": {
+                      "en": "Narrative description of the overall findings observed during the physical examination."
+                    },
+                    "aqlPath": "/content[openEHR-EHR-OBSERVATION.exam.v1]/data[at0001]/events[at0002]/data[at0003]/items[openEHR-EHR-CLUSTER.exam.v0]/items[at0003]/value",
+                    "inputs": [
+                      {
+                        "type": "TEXT"
+                      }
+                    ]
+                  },
+                  {
+                    "id": "clinical_interpretation",
+                    "name": "Clinical interpretation",
+                    "localizedName": "Clinical interpretation",
+                    "rmType": "DV_TEXT",
+                    "nodeId": "at0006",
+                    "min": 0,
+                    "max": -1,
+                    "localizedNames": {
+                      "en": "Clinical interpretation"
+                    },
+                    "localizedDescriptions": {
+                      "en": "Single word, phrase or brief description that represents the clinical meaning and significance of the physical examination findings."
+                    },
+                    "aqlPath": "/content[openEHR-EHR-OBSERVATION.exam.v1]/data[at0001]/events[at0002]/data[at0003]/items[openEHR-EHR-CLUSTER.exam.v0]/items[at0006]/value",
+                    "inputs": [
+                      {
+                        "type": "TEXT"
+                      }
+                    ]
+                  },
+                  {
+                    "id": "comment",
+                    "name": "Comment",
+                    "localizedName": "Comment",
+                    "rmType": "DV_TEXT",
+                    "nodeId": "at0007",
+                    "min": 0,
+                    "max": 1,
+                    "localizedNames": {
+                      "en": "Comment"
+                    },
+                    "localizedDescriptions": {
+                      "en": "Additional narrative about the physical examination findings, not captured in other fields."
+                    },
+                    "aqlPath": "/content[openEHR-EHR-OBSERVATION.exam.v1]/data[at0001]/events[at0002]/data[at0003]/items[openEHR-EHR-CLUSTER.exam.v0]/items[at0007]/value",
+                    "inputs": [
+                      {
+                        "type": "TEXT"
+                      }
+                    ]
+                  }
+                ]
+              },
+              {
+                "id": "examination_of_breasts",
+                "name": "Examination of breasts",
+                "localizedName": "Examination of breasts",
+                "rmType": "CLUSTER",
+                "nodeId": "openEHR-EHR-CLUSTER.exam_breasts.v0",
+                "min": 0,
+                "max": -1,
+                "localizedNames": {
+                  "en": "Examination of breasts"
+                },
+                "localizedDescriptions": {
+                  "en": "Findings observed during the physical examination of the breasts."
+                },
+                "aqlPath": "/content[openEHR-EHR-OBSERVATION.exam.v1]/data[at0001]/events[at0002]/data[at0003]/items[openEHR-EHR-CLUSTER.exam_breasts.v0]",
+                "children": [
+                  {
+                    "id": "no_abnormality_detected",
+                    "name": "No abnormality detected",
+                    "localizedName": "No abnormality detected",
+                    "rmType": "DV_BOOLEAN",
+                    "nodeId": "at0002",
+                    "min": 0,
+                    "max": 1,
+                    "localizedNames": {
+                      "en": "No abnormality detected"
+                    },
+                    "localizedDescriptions": {
+                      "en": "Statement that no abnormality was detected (NAD) on examination of both breasts."
+                    },
+                    "aqlPath": "/content[openEHR-EHR-OBSERVATION.exam.v1]/data[at0001]/events[at0002]/data[at0003]/items[openEHR-EHR-CLUSTER.exam_breasts.v0]/items[at0002]/value",
+                    "inputs": [
+                      {
+                        "type": "BOOLEAN",
+                        "list": [
+                          {
+                            "value": "true",
+                            "label": "true"
+                          }
+                        ]
+                      }
+                    ],
+                    "annotations": {
+                      "comment": "Record as True if no abnormality was detected on examination. Specific statements about the examination can be included in the 'Clinical Interpretation' data element."
+                    }
+                  },
+                  {
+                    "id": "clinical_description",
+                    "name": "Clinical description",
+                    "localizedName": "Clinical description",
+                    "rmType": "DV_TEXT",
+                    "nodeId": "at0003",
+                    "min": 0,
+                    "max": 1,
+                    "localizedNames": {
+                      "en": "Clinical description"
+                    },
+                    "localizedDescriptions": {
+                      "en": "Narrative description of the overall findings observed during the physical examination."
+                    },
+                    "aqlPath": "/content[openEHR-EHR-OBSERVATION.exam.v1]/data[at0001]/events[at0002]/data[at0003]/items[openEHR-EHR-CLUSTER.exam_breasts.v0]/items[at0003]/value",
+                    "inputs": [
+                      {
+                        "type": "TEXT"
+                      }
+                    ]
+                  },
+                  {
+                    "id": "symmetry",
+                    "name": "Symmetry?",
+                    "localizedName": "Symmetry?",
+                    "rmType": "DV_TEXT",
+                    "nodeId": "at0011",
+                    "min": 0,
+                    "max": 1,
+                    "localizedNames": {
+                      "en": "Symmetry?"
+                    },
+                    "localizedDescriptions": {
+                      "en": "Description of the appearance of symmetry of both breasts in comparison to one another."
+                    },
+                    "aqlPath": "/content[openEHR-EHR-OBSERVATION.exam.v1]/data[at0001]/events[at0002]/data[at0003]/items[openEHR-EHR-CLUSTER.exam_breasts.v0]/items[at0011]/value",
+                    "inputs": [
+                      {
+                        "type": "TEXT"
+                      }
+                    ]
+                  },
+                  {
+                    "id": "examination_of_left_breast",
+                    "name": "Examination of left breast",
+                    "localizedName": "Examination of left breast",
+                    "rmType": "CLUSTER",
+                    "nodeId": "openEHR-EHR-CLUSTER.exam_breast.v0",
+                    "min": 0,
+                    "max": 1,
+                    "localizedNames": {
+                      "en": "Examination of left breast"
+                    },
+                    "localizedDescriptions": {
+                      "en": "Findings observed during the physical examination of a single breast."
+                    },
+                    "aqlPath": "/content[openEHR-EHR-OBSERVATION.exam.v1]/data[at0001]/events[at0002]/data[at0003]/items[openEHR-EHR-CLUSTER.exam_breasts.v0]/items[openEHR-EHR-CLUSTER.exam_breast.v0 and name/value='Examination of left breast']",
+                    "children": [
+                      {
+                        "id": "breast_examined",
+                        "name": "Breast examined",
+                        "localizedName": "Breast examined",
+                        "rmType": "DV_CODED_TEXT",
+                        "nodeId": "at0001",
+                        "min": 0,
+                        "max": 1,
+                        "localizedNames": {
+                          "en": "Breast examined"
+                        },
+                        "localizedDescriptions": {
+                          "en": "Identification of the the breast under examination."
+                        },
+                        "aqlPath": "/content[openEHR-EHR-OBSERVATION.exam.v1]/data[at0001]/events[at0002]/data[at0003]/items[openEHR-EHR-CLUSTER.exam_breasts.v0]/items[openEHR-EHR-CLUSTER.exam_breast.v0 and name/value='Examination of left breast']/items[at0001]/value",
+                        "inputs": [
+                          {
+                            "suffix": "code",
+                            "type": "CODED_TEXT",
+                            "list": [
+                              {
+                                "value": "at0009",
+                                "label": "Left",
+                                "localizedLabels": {
+                                  "en": "Left"
+                                },
+                                "localizedDescriptions": {
+                                  "en": "The left breast was examined."
+                                }
+                              }
+                            ],
+                            "terminology": "local"
+                          }
+                        ]
+                      },
+                      {
+                        "id": "no_abnormality_detected",
+                        "name": "No abnormality detected",
+                        "localizedName": "No abnormality detected",
+                        "rmType": "DV_BOOLEAN",
+                        "nodeId": "at0002",
+                        "min": 0,
+                        "max": 1,
+                        "localizedNames": {
+                          "en": "No abnormality detected"
+                        },
+                        "localizedDescriptions": {
+                          "en": "Statement that no abnormality was detected (NAD) on physical examination."
+                        },
+                        "aqlPath": "/content[openEHR-EHR-OBSERVATION.exam.v1]/data[at0001]/events[at0002]/data[at0003]/items[openEHR-EHR-CLUSTER.exam_breasts.v0]/items[openEHR-EHR-CLUSTER.exam_breast.v0 and name/value='Examination of left breast']/items[at0002]/value",
+                        "inputs": [
+                          {
+                            "type": "BOOLEAN",
+                            "list": [
+                              {
+                                "value": "true",
+                                "label": "true"
+                              }
+                            ]
+                          }
+                        ],
+                        "annotations": {
+                          "comment": "Record as True if no abnormality was detected on examination. Specific statements about the examination can be included in the 'Clinical Interpretation' data element."
+                        }
+                      },
+                      {
+                        "id": "clinical_description",
+                        "name": "Clinical description",
+                        "localizedName": "Clinical description",
+                        "rmType": "DV_TEXT",
+                        "nodeId": "at0003",
+                        "min": 0,
+                        "max": 1,
+                        "localizedNames": {
+                          "en": "Clinical description"
+                        },
+                        "localizedDescriptions": {
+                          "en": "Narrative description of the overall findings observed during the physical examination."
+                        },
+                        "aqlPath": "/content[openEHR-EHR-OBSERVATION.exam.v1]/data[at0001]/events[at0002]/data[at0003]/items[openEHR-EHR-CLUSTER.exam_breasts.v0]/items[openEHR-EHR-CLUSTER.exam_breast.v0 and name/value='Examination of left breast']/items[at0003]/value",
+                        "inputs": [
+                          {
+                            "type": "TEXT"
+                          }
+                        ]
+                      },
+                      {
+                        "id": "clinical_interpretation",
+                        "name": "Clinical interpretation",
+                        "localizedName": "Clinical interpretation",
+                        "rmType": "DV_TEXT",
+                        "nodeId": "at0006",
+                        "min": 0,
+                        "max": -1,
+                        "localizedNames": {
+                          "en": "Clinical interpretation"
+                        },
+                        "localizedDescriptions": {
+                          "en": "Single word, phrase or brief description that represents the clinical meaning and significance of the physical examination findings."
+                        },
+                        "aqlPath": "/content[openEHR-EHR-OBSERVATION.exam.v1]/data[at0001]/events[at0002]/data[at0003]/items[openEHR-EHR-CLUSTER.exam_breasts.v0]/items[openEHR-EHR-CLUSTER.exam_breast.v0 and name/value='Examination of left breast']/items[at0006]/value",
+                        "inputs": [
+                          {
+                            "type": "TEXT"
+                          }
+                        ]
+                      },
+                      {
+                        "id": "comment",
+                        "name": "Comment",
+                        "localizedName": "Comment",
+                        "rmType": "DV_TEXT",
+                        "nodeId": "at0007",
+                        "min": 0,
+                        "max": 1,
+                        "localizedNames": {
+                          "en": "Comment"
+                        },
+                        "localizedDescriptions": {
+                          "en": "Additional narrative about the physical examination findings, not captured in other fields."
+                        },
+                        "aqlPath": "/content[openEHR-EHR-OBSERVATION.exam.v1]/data[at0001]/events[at0002]/data[at0003]/items[openEHR-EHR-CLUSTER.exam_breasts.v0]/items[openEHR-EHR-CLUSTER.exam_breast.v0 and name/value='Examination of left breast']/items[at0007]/value",
+                        "inputs": [
+                          {
+                            "type": "TEXT"
+                          }
+                        ]
+                      }
+                    ]
+                  },
+                  {
+                    "id": "examination_of_right_breast",
+                    "name": "Examination of right breast",
+                    "localizedName": "Examination of right breast",
+                    "rmType": "CLUSTER",
+                    "nodeId": "openEHR-EHR-CLUSTER.exam_breast.v0",
+                    "min": 0,
+                    "max": 1,
+                    "localizedNames": {
+                      "en": "Examination of right breast"
+                    },
+                    "localizedDescriptions": {
+                      "en": "Findings observed during the physical examination of a single breast."
+                    },
+                    "aqlPath": "/content[openEHR-EHR-OBSERVATION.exam.v1]/data[at0001]/events[at0002]/data[at0003]/items[openEHR-EHR-CLUSTER.exam_breasts.v0]/items[openEHR-EHR-CLUSTER.exam_breast.v0 and name/value='Examination of right breast']",
+                    "children": [
+                      {
+                        "id": "breast_examined",
+                        "name": "Breast examined",
+                        "localizedName": "Breast examined",
+                        "rmType": "DV_CODED_TEXT",
+                        "nodeId": "at0001",
+                        "min": 0,
+                        "max": 1,
+                        "localizedNames": {
+                          "en": "Breast examined"
+                        },
+                        "localizedDescriptions": {
+                          "en": "Identification of the the breast under examination."
+                        },
+                        "aqlPath": "/content[openEHR-EHR-OBSERVATION.exam.v1]/data[at0001]/events[at0002]/data[at0003]/items[openEHR-EHR-CLUSTER.exam_breasts.v0]/items[openEHR-EHR-CLUSTER.exam_breast.v0 and name/value='Examination of right breast']/items[at0001]/value",
+                        "inputs": [
+                          {
+                            "suffix": "code",
+                            "type": "CODED_TEXT",
+                            "list": [
+                              {
+                                "value": "at0010",
+                                "label": "Right",
+                                "localizedLabels": {
+                                  "en": "Right"
+                                },
+                                "localizedDescriptions": {
+                                  "en": "The right breast was examined."
+                                }
+                              }
+                            ],
+                            "terminology": "local"
+                          }
+                        ]
+                      },
+                      {
+                        "id": "no_abnormality_detected",
+                        "name": "No abnormality detected",
+                        "localizedName": "No abnormality detected",
+                        "rmType": "DV_BOOLEAN",
+                        "nodeId": "at0002",
+                        "min": 0,
+                        "max": 1,
+                        "localizedNames": {
+                          "en": "No abnormality detected"
+                        },
+                        "localizedDescriptions": {
+                          "en": "Statement that no abnormality was detected (NAD) on physical examination."
+                        },
+                        "aqlPath": "/content[openEHR-EHR-OBSERVATION.exam.v1]/data[at0001]/events[at0002]/data[at0003]/items[openEHR-EHR-CLUSTER.exam_breasts.v0]/items[openEHR-EHR-CLUSTER.exam_breast.v0 and name/value='Examination of right breast']/items[at0002]/value",
+                        "inputs": [
+                          {
+                            "type": "BOOLEAN",
+                            "list": [
+                              {
+                                "value": "true",
+                                "label": "true"
+                              }
+                            ]
+                          }
+                        ],
+                        "annotations": {
+                          "comment": "Record as True if no abnormality was detected on examination. Specific statements about the examination can be included in the 'Clinical Interpretation' data element."
+                        }
+                      },
+                      {
+                        "id": "clinical_description",
+                        "name": "Clinical description",
+                        "localizedName": "Clinical description",
+                        "rmType": "DV_TEXT",
+                        "nodeId": "at0003",
+                        "min": 0,
+                        "max": 1,
+                        "localizedNames": {
+                          "en": "Clinical description"
+                        },
+                        "localizedDescriptions": {
+                          "en": "Narrative description of the overall findings observed during the physical examination."
+                        },
+                        "aqlPath": "/content[openEHR-EHR-OBSERVATION.exam.v1]/data[at0001]/events[at0002]/data[at0003]/items[openEHR-EHR-CLUSTER.exam_breasts.v0]/items[openEHR-EHR-CLUSTER.exam_breast.v0 and name/value='Examination of right breast']/items[at0003]/value",
+                        "inputs": [
+                          {
+                            "type": "TEXT"
+                          }
+                        ]
+                      },
+                      {
+                        "id": "clinical_interpretation",
+                        "name": "Clinical interpretation",
+                        "localizedName": "Clinical interpretation",
+                        "rmType": "DV_TEXT",
+                        "nodeId": "at0006",
+                        "min": 0,
+                        "max": -1,
+                        "localizedNames": {
+                          "en": "Clinical interpretation"
+                        },
+                        "localizedDescriptions": {
+                          "en": "Single word, phrase or brief description that represents the clinical meaning and significance of the physical examination findings."
+                        },
+                        "aqlPath": "/content[openEHR-EHR-OBSERVATION.exam.v1]/data[at0001]/events[at0002]/data[at0003]/items[openEHR-EHR-CLUSTER.exam_breasts.v0]/items[openEHR-EHR-CLUSTER.exam_breast.v0 and name/value='Examination of right breast']/items[at0006]/value",
+                        "inputs": [
+                          {
+                            "type": "TEXT"
+                          }
+                        ]
+                      },
+                      {
+                        "id": "comment",
+                        "name": "Comment",
+                        "localizedName": "Comment",
+                        "rmType": "DV_TEXT",
+                        "nodeId": "at0007",
+                        "min": 0,
+                        "max": 1,
+                        "localizedNames": {
+                          "en": "Comment"
+                        },
+                        "localizedDescriptions": {
+                          "en": "Additional narrative about the physical examination findings, not captured in other fields."
+                        },
+                        "aqlPath": "/content[openEHR-EHR-OBSERVATION.exam.v1]/data[at0001]/events[at0002]/data[at0003]/items[openEHR-EHR-CLUSTER.exam_breasts.v0]/items[openEHR-EHR-CLUSTER.exam_breast.v0 and name/value='Examination of right breast']/items[at0007]/value",
+                        "inputs": [
+                          {
+                            "type": "TEXT"
+                          }
+                        ]
+                      }
+                    ]
+                  },
+                  {
+                    "id": "clinical_interpretation",
+                    "name": "Clinical interpretation",
+                    "localizedName": "Clinical interpretation",
+                    "rmType": "DV_TEXT",
+                    "nodeId": "at0006",
+                    "min": 0,
+                    "max": -1,
+                    "localizedNames": {
+                      "en": "Clinical interpretation"
+                    },
+                    "localizedDescriptions": {
+                      "en": "Single word, phrase or brief description that represents the clinical meaning and significance of the physical examination findings."
+                    },
+                    "aqlPath": "/content[openEHR-EHR-OBSERVATION.exam.v1]/data[at0001]/events[at0002]/data[at0003]/items[openEHR-EHR-CLUSTER.exam_breasts.v0]/items[at0006]/value",
+                    "inputs": [
+                      {
+                        "type": "TEXT"
+                      }
+                    ]
+                  },
+                  {
+                    "id": "comment",
+                    "name": "Comment",
+                    "localizedName": "Comment",
+                    "rmType": "DV_TEXT",
+                    "nodeId": "at0007",
+                    "min": 0,
+                    "max": 1,
+                    "localizedNames": {
+                      "en": "Comment"
+                    },
+                    "localizedDescriptions": {
+                      "en": "Additional narrative about the physical examination findings, not captured in other fields."
+                    },
+                    "aqlPath": "/content[openEHR-EHR-OBSERVATION.exam.v1]/data[at0001]/events[at0002]/data[at0003]/items[openEHR-EHR-CLUSTER.exam_breasts.v0]/items[at0007]/value",
+                    "inputs": [
+                      {
+                        "type": "TEXT"
+                      }
+                    ]
+                  }
+                ]
+              },
+              {
+                "id": "examination_of_the_chest",
+                "name": "Examination of the chest",
+                "localizedName": "Examination of the chest",
+                "rmType": "CLUSTER",
+                "nodeId": "openEHR-EHR-CLUSTER.exam_chest.v0",
+                "min": 0,
+                "max": -1,
+                "localizedNames": {
+                  "en": "Examination of the chest"
+                },
+                "localizedDescriptions": {
+                  "en": "Findings observed during the physical examination of the chest."
+                },
+                "aqlPath": "/content[openEHR-EHR-OBSERVATION.exam.v1]/data[at0001]/events[at0002]/data[at0003]/items[openEHR-EHR-CLUSTER.exam_chest.v0]",
+                "children": [
+                  {
+                    "id": "no_abnormality_detected",
+                    "name": "No abnormality detected",
+                    "localizedName": "No abnormality detected",
+                    "rmType": "DV_BOOLEAN",
+                    "nodeId": "at0002",
+                    "min": 0,
+                    "max": 1,
+                    "localizedNames": {
+                      "en": "No abnormality detected"
+                    },
+                    "localizedDescriptions": {
+                      "en": "Statement that no abnormality was detected (NAD) on physical examination."
+                    },
+                    "aqlPath": "/content[openEHR-EHR-OBSERVATION.exam.v1]/data[at0001]/events[at0002]/data[at0003]/items[openEHR-EHR-CLUSTER.exam_chest.v0]/items[at0002]/value",
+                    "inputs": [
+                      {
+                        "type": "BOOLEAN",
+                        "list": [
+                          {
+                            "value": "true",
+                            "label": "true"
+                          }
+                        ]
+                      }
+                    ],
+                    "annotations": {
+                      "comment": "Record as True if no abnormality was detected on examination. Specific statements about the examination can be included in the 'Clinical Interpretation' data element."
+                    }
+                  },
+                  {
+                    "id": "clinical_description",
+                    "name": "Clinical description",
+                    "localizedName": "Clinical description",
+                    "rmType": "DV_TEXT",
+                    "nodeId": "at0003",
+                    "min": 0,
+                    "max": 1,
+                    "localizedNames": {
+                      "en": "Clinical description"
+                    },
+                    "localizedDescriptions": {
+                      "en": "Narrative description of the overall findings observed during the physical examination."
+                    },
+                    "aqlPath": "/content[openEHR-EHR-OBSERVATION.exam.v1]/data[at0001]/events[at0002]/data[at0003]/items[openEHR-EHR-CLUSTER.exam_chest.v0]/items[at0003]/value",
+                    "inputs": [
+                      {
+                        "type": "TEXT"
+                      }
+                    ]
+                  },
+                  {
+                    "id": "auscultation_of_the_left_lung",
+                    "name": "Auscultation of the left lung",
+                    "localizedName": "Auscultation of the left lung",
+                    "rmType": "CLUSTER",
+                    "nodeId": "openEHR-EHR-CLUSTER.auscultation_lung.v0",
+                    "min": 0,
+                    "max": 1,
+                    "localizedNames": {
+                      "en": "Auscultation of the left lung"
+                    },
+                    "localizedDescriptions": {
+                      "en": "Findings observed during the auscultation of the lung."
+                    },
+                    "aqlPath": "/content[openEHR-EHR-OBSERVATION.exam.v1]/data[at0001]/events[at0002]/data[at0003]/items[openEHR-EHR-CLUSTER.exam_chest.v0]/items[openEHR-EHR-CLUSTER.auscultation_lung.v0 and name/value='Auscultation of the left lung']",
+                    "children": [
+                      {
+                        "id": "lung_examined",
+                        "name": "Lung examined",
+                        "localizedName": "Lung examined",
+                        "rmType": "DV_CODED_TEXT",
+                        "nodeId": "at0001",
+                        "min": 0,
+                        "max": 1,
+                        "localizedNames": {
+                          "en": "Lung examined"
+                        },
+                        "localizedDescriptions": {
+                          "en": "Identification of the lung under examination."
+                        },
+                        "aqlPath": "/content[openEHR-EHR-OBSERVATION.exam.v1]/data[at0001]/events[at0002]/data[at0003]/items[openEHR-EHR-CLUSTER.exam_chest.v0]/items[openEHR-EHR-CLUSTER.auscultation_lung.v0 and name/value='Auscultation of the left lung']/items[at0001]/value",
+                        "inputs": [
+                          {
+                            "suffix": "code",
+                            "type": "CODED_TEXT",
+                            "list": [
+                              {
+                                "value": "at0009",
+                                "label": "Left",
+                                "localizedLabels": {
+                                  "en": "Left"
+                                },
+                                "localizedDescriptions": {
+                                  "en": "The left lung was examined."
+                                }
+                              }
+                            ],
+                            "terminology": "local"
+                          }
+                        ],
+                        "annotations": {
+                          "comment": "If the side of the lung being examined has previously been identified in another archetype in which this archetype is nested, this data element becomes redundant."
+                        }
+                      },
+                      {
+                        "id": "no_abnormality_detected",
+                        "name": "No abnormality detected",
+                        "localizedName": "No abnormality detected",
+                        "rmType": "DV_BOOLEAN",
+                        "nodeId": "at0002",
+                        "min": 0,
+                        "max": 1,
+                        "localizedNames": {
+                          "en": "No abnormality detected"
+                        },
+                        "localizedDescriptions": {
+                          "en": "Statement that no abnormality was detected (NAD) on physical examination."
+                        },
+                        "aqlPath": "/content[openEHR-EHR-OBSERVATION.exam.v1]/data[at0001]/events[at0002]/data[at0003]/items[openEHR-EHR-CLUSTER.exam_chest.v0]/items[openEHR-EHR-CLUSTER.auscultation_lung.v0 and name/value='Auscultation of the left lung']/items[at0002]/value",
+                        "inputs": [
+                          {
+                            "type": "BOOLEAN",
+                            "list": [
+                              {
+                                "value": "true",
+                                "label": "true"
+                              }
+                            ]
+                          }
+                        ],
+                        "annotations": {
+                          "comment": "Record as True if no abnormality was detected on examination. Specific statements about the examination can be included in the 'Clinical Interpretation' data element."
+                        }
+                      },
+                      {
+                        "id": "clinical_description",
+                        "name": "Clinical description",
+                        "localizedName": "Clinical description",
+                        "rmType": "DV_TEXT",
+                        "nodeId": "at0003",
+                        "min": 0,
+                        "max": 1,
+                        "localizedNames": {
+                          "en": "Clinical description"
+                        },
+                        "localizedDescriptions": {
+                          "en": "Narrative description of the overall findings observed during the physical examination."
+                        },
+                        "aqlPath": "/content[openEHR-EHR-OBSERVATION.exam.v1]/data[at0001]/events[at0002]/data[at0003]/items[openEHR-EHR-CLUSTER.exam_chest.v0]/items[openEHR-EHR-CLUSTER.auscultation_lung.v0 and name/value='Auscultation of the left lung']/items[at0003]/value",
+                        "inputs": [
+                          {
+                            "type": "TEXT"
+                          }
+                        ]
+                      },
+                      {
+                        "id": "clinical_interpretation",
+                        "name": "Clinical interpretation",
+                        "localizedName": "Clinical interpretation",
+                        "rmType": "DV_TEXT",
+                        "nodeId": "at0006",
+                        "min": 0,
+                        "max": -1,
+                        "localizedNames": {
+                          "en": "Clinical interpretation"
+                        },
+                        "localizedDescriptions": {
+                          "en": "Single word, phrase or brief description that represents the clinical meaning and significance of the physical examination findings."
+                        },
+                        "aqlPath": "/content[openEHR-EHR-OBSERVATION.exam.v1]/data[at0001]/events[at0002]/data[at0003]/items[openEHR-EHR-CLUSTER.exam_chest.v0]/items[openEHR-EHR-CLUSTER.auscultation_lung.v0 and name/value='Auscultation of the left lung']/items[at0006]/value",
+                        "inputs": [
+                          {
+                            "type": "TEXT"
+                          }
+                        ]
+                      },
+                      {
+                        "id": "comment",
+                        "name": "Comment",
+                        "localizedName": "Comment",
+                        "rmType": "DV_TEXT",
+                        "nodeId": "at0007",
+                        "min": 0,
+                        "max": 1,
+                        "localizedNames": {
+                          "en": "Comment"
+                        },
+                        "localizedDescriptions": {
+                          "en": "Additional narrative about the physical examination findings, not captured in other fields."
+                        },
+                        "aqlPath": "/content[openEHR-EHR-OBSERVATION.exam.v1]/data[at0001]/events[at0002]/data[at0003]/items[openEHR-EHR-CLUSTER.exam_chest.v0]/items[openEHR-EHR-CLUSTER.auscultation_lung.v0 and name/value='Auscultation of the left lung']/items[at0007]/value",
+                        "inputs": [
+                          {
+                            "type": "TEXT"
+                          }
+                        ]
+                      }
+                    ]
+                  },
+                  {
+                    "id": "examination_of_a_lung",
+                    "name": "Examination of a lung",
+                    "localizedName": "Examination of a lung",
+                    "rmType": "CLUSTER",
+                    "nodeId": "openEHR-EHR-CLUSTER.exam_lung.v0",
+                    "min": 0,
+                    "max": -1,
+                    "localizedNames": {
+                      "en": "Examination of a lung"
+                    },
+                    "localizedDescriptions": {
+                      "en": "Findings observed during the physical examination of a single lung."
+                    },
+                    "aqlPath": "/content[openEHR-EHR-OBSERVATION.exam.v1]/data[at0001]/events[at0002]/data[at0003]/items[openEHR-EHR-CLUSTER.exam_chest.v0]/items[openEHR-EHR-CLUSTER.exam_lung.v0]",
+                    "children": [
+                      {
+                        "id": "lung_examined",
+                        "name": "Lung examined",
+                        "localizedName": "Lung examined",
+                        "rmType": "DV_CODED_TEXT",
+                        "nodeId": "at0001",
+                        "min": 0,
+                        "max": 1,
+                        "localizedNames": {
+                          "en": "Lung examined"
+                        },
+                        "localizedDescriptions": {
+                          "en": "Identification of the the lung under examination."
+                        },
+                        "aqlPath": "/content[openEHR-EHR-OBSERVATION.exam.v1]/data[at0001]/events[at0002]/data[at0003]/items[openEHR-EHR-CLUSTER.exam_chest.v0]/items[openEHR-EHR-CLUSTER.exam_lung.v0]/items[at0001]/value",
+                        "inputs": [
+                          {
+                            "suffix": "code",
+                            "type": "CODED_TEXT",
+                            "list": [
+                              {
+                                "value": "at0009",
+                                "label": "Left",
+                                "localizedLabels": {
+                                  "en": "Left"
+                                },
+                                "localizedDescriptions": {
+                                  "en": "The left lung was examined."
+                                }
+                              },
+                              {
+                                "value": "at0010",
+                                "label": "Right",
+                                "localizedLabels": {
+                                  "en": "Right"
+                                },
+                                "localizedDescriptions": {
+                                  "en": "The right lung was examined."
+                                }
+                              }
+                            ],
+                            "terminology": "local"
+                          }
+                        ]
+                      },
+                      {
+                        "id": "no_abnormality_detected",
+                        "name": "No abnormality detected",
+                        "localizedName": "No abnormality detected",
+                        "rmType": "DV_BOOLEAN",
+                        "nodeId": "at0002",
+                        "min": 0,
+                        "max": 1,
+                        "localizedNames": {
+                          "en": "No abnormality detected"
+                        },
+                        "localizedDescriptions": {
+                          "en": "Statement that no abnormality was detected (NAD) on physical examination."
+                        },
+                        "aqlPath": "/content[openEHR-EHR-OBSERVATION.exam.v1]/data[at0001]/events[at0002]/data[at0003]/items[openEHR-EHR-CLUSTER.exam_chest.v0]/items[openEHR-EHR-CLUSTER.exam_lung.v0]/items[at0002]/value",
+                        "inputs": [
+                          {
+                            "type": "BOOLEAN",
+                            "list": [
+                              {
+                                "value": "true",
+                                "label": "true"
+                              }
+                            ]
+                          }
+                        ],
+                        "annotations": {
+                          "comment": "Record as True if no abnormality was detected on examination. Specific statements about the examination can be included in the 'Clinical Interpretation' data element."
+                        }
+                      },
+                      {
+                        "id": "clinical_description",
+                        "name": "Clinical description",
+                        "localizedName": "Clinical description",
+                        "rmType": "DV_TEXT",
+                        "nodeId": "at0003",
+                        "min": 0,
+                        "max": 1,
+                        "localizedNames": {
+                          "en": "Clinical description"
+                        },
+                        "localizedDescriptions": {
+                          "en": "Narrative description of the overall findings observed during the physical examination."
+                        },
+                        "aqlPath": "/content[openEHR-EHR-OBSERVATION.exam.v1]/data[at0001]/events[at0002]/data[at0003]/items[openEHR-EHR-CLUSTER.exam_chest.v0]/items[openEHR-EHR-CLUSTER.exam_lung.v0]/items[at0003]/value",
+                        "inputs": [
+                          {
+                            "type": "TEXT"
+                          }
+                        ]
+                      },
+                      {
+                        "id": "clinical_interpretation",
+                        "name": "Clinical interpretation",
+                        "localizedName": "Clinical interpretation",
+                        "rmType": "DV_TEXT",
+                        "nodeId": "at0006",
+                        "min": 0,
+                        "max": -1,
+                        "localizedNames": {
+                          "en": "Clinical interpretation"
+                        },
+                        "localizedDescriptions": {
+                          "en": "Single word, phrase or brief description that represents the clinical meaning and significance of the physical examination findings."
+                        },
+                        "aqlPath": "/content[openEHR-EHR-OBSERVATION.exam.v1]/data[at0001]/events[at0002]/data[at0003]/items[openEHR-EHR-CLUSTER.exam_chest.v0]/items[openEHR-EHR-CLUSTER.exam_lung.v0]/items[at0006]/value",
+                        "inputs": [
+                          {
+                            "type": "TEXT"
+                          }
+                        ]
+                      },
+                      {
+                        "id": "comment",
+                        "name": "Comment",
+                        "localizedName": "Comment",
+                        "rmType": "DV_TEXT",
+                        "nodeId": "at0007",
+                        "min": 0,
+                        "max": 1,
+                        "localizedNames": {
+                          "en": "Comment"
+                        },
+                        "localizedDescriptions": {
+                          "en": "Additional narrative about the physical examination findings, not captured in other fields."
+                        },
+                        "aqlPath": "/content[openEHR-EHR-OBSERVATION.exam.v1]/data[at0001]/events[at0002]/data[at0003]/items[openEHR-EHR-CLUSTER.exam_chest.v0]/items[openEHR-EHR-CLUSTER.exam_lung.v0]/items[at0007]/value",
+                        "inputs": [
+                          {
+                            "type": "TEXT"
+                          }
+                        ]
+                      }
+                    ]
+                  },
+                  {
+                    "id": "examination_of_the_heart",
+                    "name": "Examination of the heart",
+                    "localizedName": "Examination of the heart",
+                    "rmType": "CLUSTER",
+                    "nodeId": "openEHR-EHR-CLUSTER.exam_heart.v0",
+                    "min": 0,
+                    "max": -1,
+                    "localizedNames": {
+                      "en": "Examination of the heart"
+                    },
+                    "localizedDescriptions": {
+                      "en": "Findings observed during the physical examination of the heart."
+                    },
+                    "aqlPath": "/content[openEHR-EHR-OBSERVATION.exam.v1]/data[at0001]/events[at0002]/data[at0003]/items[openEHR-EHR-CLUSTER.exam_chest.v0]/items[openEHR-EHR-CLUSTER.exam_heart.v0]",
+                    "children": [
+                      {
+                        "id": "no_abnormality_detected",
+                        "name": "No abnormality detected",
+                        "localizedName": "No abnormality detected",
+                        "rmType": "DV_BOOLEAN",
+                        "nodeId": "at0002",
+                        "min": 0,
+                        "max": 1,
+                        "localizedNames": {
+                          "en": "No abnormality detected"
+                        },
+                        "localizedDescriptions": {
+                          "en": "Statement that no abnormality was detected (NAD) on physical examination."
+                        },
+                        "aqlPath": "/content[openEHR-EHR-OBSERVATION.exam.v1]/data[at0001]/events[at0002]/data[at0003]/items[openEHR-EHR-CLUSTER.exam_chest.v0]/items[openEHR-EHR-CLUSTER.exam_heart.v0]/items[at0002]/value",
+                        "inputs": [
+                          {
+                            "type": "BOOLEAN",
+                            "list": [
+                              {
+                                "value": "true",
+                                "label": "true"
+                              }
+                            ]
+                          }
+                        ],
+                        "annotations": {
+                          "comment": "Record as True if no abnormality was detected on examination. Specific statements about the examination can be included in the 'Clinical Interpretation' data element."
+                        }
+                      },
+                      {
+                        "id": "clinical_description",
+                        "name": "Clinical description",
+                        "localizedName": "Clinical description",
+                        "rmType": "DV_TEXT",
+                        "nodeId": "at0003",
+                        "min": 0,
+                        "max": 1,
+                        "localizedNames": {
+                          "en": "Clinical description"
+                        },
+                        "localizedDescriptions": {
+                          "en": "Narrative description of the overall findings observed during the physical examination."
+                        },
+                        "aqlPath": "/content[openEHR-EHR-OBSERVATION.exam.v1]/data[at0001]/events[at0002]/data[at0003]/items[openEHR-EHR-CLUSTER.exam_chest.v0]/items[openEHR-EHR-CLUSTER.exam_heart.v0]/items[at0003]/value",
+                        "inputs": [
+                          {
+                            "type": "TEXT"
+                          }
+                        ]
+                      },
+                      {
+                        "id": "clinical_interpretation",
+                        "name": "Clinical interpretation",
+                        "localizedName": "Clinical interpretation",
+                        "rmType": "DV_TEXT",
+                        "nodeId": "at0006",
+                        "min": 0,
+                        "max": -1,
+                        "localizedNames": {
+                          "en": "Clinical interpretation"
+                        },
+                        "localizedDescriptions": {
+                          "en": "Single word, phrase or brief description that represents the clinical meaning and significance of the physical examination findings."
+                        },
+                        "aqlPath": "/content[openEHR-EHR-OBSERVATION.exam.v1]/data[at0001]/events[at0002]/data[at0003]/items[openEHR-EHR-CLUSTER.exam_chest.v0]/items[openEHR-EHR-CLUSTER.exam_heart.v0]/items[at0006]/value",
+                        "inputs": [
+                          {
+                            "type": "TEXT"
+                          }
+                        ]
+                      },
+                      {
+                        "id": "comment",
+                        "name": "Comment",
+                        "localizedName": "Comment",
+                        "rmType": "DV_TEXT",
+                        "nodeId": "at0007",
+                        "min": 0,
+                        "max": 1,
+                        "localizedNames": {
+                          "en": "Comment"
+                        },
+                        "localizedDescriptions": {
+                          "en": "Additional narrative about the physical examination findings, not captured in other fields."
+                        },
+                        "aqlPath": "/content[openEHR-EHR-OBSERVATION.exam.v1]/data[at0001]/events[at0002]/data[at0003]/items[openEHR-EHR-CLUSTER.exam_chest.v0]/items[openEHR-EHR-CLUSTER.exam_heart.v0]/items[at0007]/value",
+                        "inputs": [
+                          {
+                            "type": "TEXT"
+                          }
+                        ]
+                      }
+                    ]
+                  },
+                  {
+                    "id": "clinical_interpretation",
+                    "name": "Clinical interpretation",
+                    "localizedName": "Clinical interpretation",
+                    "rmType": "DV_TEXT",
+                    "nodeId": "at0006",
+                    "min": 0,
+                    "max": -1,
+                    "localizedNames": {
+                      "en": "Clinical interpretation"
+                    },
+                    "localizedDescriptions": {
+                      "en": "Single word, phrase or brief description that represents the clinical meaning and significance of the physical examination findings."
+                    },
+                    "aqlPath": "/content[openEHR-EHR-OBSERVATION.exam.v1]/data[at0001]/events[at0002]/data[at0003]/items[openEHR-EHR-CLUSTER.exam_chest.v0]/items[at0006]/value",
+                    "inputs": [
+                      {
+                        "type": "TEXT"
+                      }
+                    ]
+                  },
+                  {
+                    "id": "comment",
+                    "name": "Comment",
+                    "localizedName": "Comment",
+                    "rmType": "DV_TEXT",
+                    "nodeId": "at0007",
+                    "min": 0,
+                    "max": 1,
+                    "localizedNames": {
+                      "en": "Comment"
+                    },
+                    "localizedDescriptions": {
+                      "en": "Additional narrative about the physical examination findings, not captured in other fields."
+                    },
+                    "aqlPath": "/content[openEHR-EHR-OBSERVATION.exam.v1]/data[at0001]/events[at0002]/data[at0003]/items[openEHR-EHR-CLUSTER.exam_chest.v0]/items[at0007]/value",
+                    "inputs": [
+                      {
+                        "type": "TEXT"
+                      }
+                    ]
+                  }
+                ]
+              },
+              {
+                "id": "examination_of_nervous_system",
+                "name": "Examination of nervous system",
+                "localizedName": "Examination of nervous system",
+                "rmType": "CLUSTER",
+                "nodeId": "openEHR-EHR-CLUSTER.exam_nervous_system.v0",
+                "min": 0,
+                "max": -1,
+                "localizedNames": {
+                  "en": "Examination of nervous system"
+                },
+                "localizedDescriptions": {
+                  "en": "Findings observed during the physical examination of the nervous system as a whole."
+                },
+                "aqlPath": "/content[openEHR-EHR-OBSERVATION.exam.v1]/data[at0001]/events[at0002]/data[at0003]/items[openEHR-EHR-CLUSTER.exam_nervous_system.v0]",
+                "children": [
+                  {
+                    "id": "no_abnormality_detected",
+                    "name": "No abnormality detected",
+                    "localizedName": "No abnormality detected",
+                    "rmType": "DV_BOOLEAN",
+                    "nodeId": "at0002",
+                    "min": 0,
+                    "max": 1,
+                    "localizedNames": {
+                      "en": "No abnormality detected"
+                    },
+                    "localizedDescriptions": {
+                      "en": "Statement that no abnormality was detected (NAD) on physical examination."
+                    },
+                    "aqlPath": "/content[openEHR-EHR-OBSERVATION.exam.v1]/data[at0001]/events[at0002]/data[at0003]/items[openEHR-EHR-CLUSTER.exam_nervous_system.v0]/items[at0002]/value",
+                    "inputs": [
+                      {
+                        "type": "BOOLEAN",
+                        "list": [
+                          {
+                            "value": "true",
+                            "label": "true"
+                          }
+                        ]
+                      }
+                    ],
+                    "annotations": {
+                      "comment": "Record as True if no abnormality was detected on examination. Specific statements about the examination can be included in the 'Clinical Interpretation' data element."
+                    }
+                  },
+                  {
+                    "id": "clinical_description",
+                    "name": "Clinical description",
+                    "localizedName": "Clinical description",
+                    "rmType": "DV_TEXT",
+                    "nodeId": "at0003",
+                    "min": 0,
+                    "max": 1,
+                    "localizedNames": {
+                      "en": "Clinical description"
+                    },
+                    "localizedDescriptions": {
+                      "en": "Narrative description of the overall findings observed during the overall physical examination of the nervous system."
+                    },
+                    "aqlPath": "/content[openEHR-EHR-OBSERVATION.exam.v1]/data[at0001]/events[at0002]/data[at0003]/items[openEHR-EHR-CLUSTER.exam_nervous_system.v0]/items[at0003]/value",
+                    "inputs": [
+                      {
+                        "type": "TEXT"
+                      }
+                    ],
+                    "annotations": {
+                      "comment": "Use this data element to incorporate the unstructured descriptions of clinical findings of the nervous sysem within existing or legacy clinical systems into an archetyped format."
+                    }
+                  },
+                  {
+                    "id": "examination_findings_-_pupils",
+                    "name": "Examination Findings  - Pupils",
+                    "localizedName": "Examination Findings  - Pupils",
+                    "rmType": "CLUSTER",
+                    "nodeId": "openEHR-EHR-CLUSTER.exam_pupils.v1",
+                    "min": 0,
+                    "max": -1,
+                    "localizedNames": {
+                      "en": "Examination Findings  - Pupils"
+                    },
+                    "localizedDescriptions": {
+                      "en": "Findings on physical examination of the pupils."
+                    },
+                    "aqlPath": "/content[openEHR-EHR-OBSERVATION.exam.v1]/data[at0001]/events[at0002]/data[at0003]/items[openEHR-EHR-CLUSTER.exam_nervous_system.v0]/items[openEHR-EHR-CLUSTER.exam_pupils.v1]",
+                    "children": [
+                      {
+                        "id": "description",
+                        "name": "Description",
+                        "localizedName": "Description",
+                        "rmType": "DV_TEXT",
+                        "nodeId": "at0069",
+                        "min": 0,
+                        "max": 1,
+                        "localizedNames": {
+                          "en": "Description"
+                        },
+                        "localizedDescriptions": {
+                          "en": "Narrative description of findings observed during a physical examination of the pupil."
+                        },
+                        "aqlPath": "/content[openEHR-EHR-OBSERVATION.exam.v1]/data[at0001]/events[at0002]/data[at0003]/items[openEHR-EHR-CLUSTER.exam_nervous_system.v0]/items[openEHR-EHR-CLUSTER.exam_pupils.v1]/items[at0069]/value",
+                        "inputs": [
+                          {
+                            "type": "TEXT"
+                          }
+                        ],
+                        "annotations": {
+                          "comment": "Use this data element to provide additional, narrative description of any data elements that are represented only by structured values."
+                        }
+                      },
+                      {
+                        "id": "symmetry",
+                        "name": "Symmetry",
+                        "localizedName": "Symmetry",
+                        "rmType": "DV_CODED_TEXT",
+                        "nodeId": "at0071",
+                        "min": 0,
+                        "max": 1,
+                        "localizedNames": {
+                          "en": "Symmetry"
+                        },
+                        "localizedDescriptions": {
+                          "en": "An estimate of the equality of the size and shape of the pupils."
+                        },
+                        "aqlPath": "/content[openEHR-EHR-OBSERVATION.exam.v1]/data[at0001]/events[at0002]/data[at0003]/items[openEHR-EHR-CLUSTER.exam_nervous_system.v0]/items[openEHR-EHR-CLUSTER.exam_pupils.v1]/items[at0071]/value",
+                        "inputs": [
+                          {
+                            "suffix": "code",
+                            "type": "CODED_TEXT",
+                            "list": [
+                              {
+                                "value": "at0072",
+                                "label": "Equal",
+                                "localizedLabels": {
+                                  "en": "Equal"
+                                },
+                                "localizedDescriptions": {
+                                  "en": "The pupils are of equal size."
+                                }
+                              },
+                              {
+                                "value": "at0073",
+                                "label": "Unequal",
+                                "localizedLabels": {
+                                  "en": "Unequal"
+                                },
+                                "localizedDescriptions": {
+                                  "en": "The puils are of unequal size."
+                                }
+                              }
+                            ],
+                            "terminology": "local"
+                          }
+                        ]
+                      },
+                      {
+                        "id": "per_pupil",
+                        "name": "Per Pupil",
+                        "localizedName": "Per Pupil",
+                        "rmType": "CLUSTER",
+                        "nodeId": "at0075",
+                        "min": 0,
+                        "max": 2,
+                        "localizedNames": {
+                          "en": "Per Pupil"
+                        },
+                        "localizedDescriptions": {
+                          "en": "Physical examination findings of an identified pupil."
+                        },
+                        "aqlPath": "/content[openEHR-EHR-OBSERVATION.exam.v1]/data[at0001]/events[at0002]/data[at0003]/items[openEHR-EHR-CLUSTER.exam_nervous_system.v0]/items[openEHR-EHR-CLUSTER.exam_pupils.v1]/items[at0075]",
+                        "children": [
+                          {
+                            "id": "pupil_examined",
+                            "name": "Pupil Examined",
+                            "localizedName": "Pupil Examined",
+                            "rmType": "DV_CODED_TEXT",
+                            "nodeId": "at0015",
+                            "min": 1,
+                            "max": 1,
+                            "localizedNames": {
+                              "en": "Pupil Examined"
+                            },
+                            "localizedDescriptions": {
+                              "en": "Identification of the pupil under examination."
+                            },
+                            "aqlPath": "/content[openEHR-EHR-OBSERVATION.exam.v1]/data[at0001]/events[at0002]/data[at0003]/items[openEHR-EHR-CLUSTER.exam_nervous_system.v0]/items[openEHR-EHR-CLUSTER.exam_pupils.v1]/items[at0075]/items[at0015]/value",
+                            "inputs": [
+                              {
+                                "suffix": "code",
+                                "type": "CODED_TEXT",
+                                "list": [
+                                  {
+                                    "value": "at0016",
+                                    "label": "Left",
+                                    "localizedLabels": {
+                                      "en": "Left"
+                                    },
+                                    "localizedDescriptions": {
+                                      "en": "The left pupil."
+                                    }
+                                  },
+                                  {
+                                    "value": "at0017",
+                                    "label": "Right",
+                                    "localizedLabels": {
+                                      "en": "Right"
+                                    },
+                                    "localizedDescriptions": {
+                                      "en": "The right pupil."
+                                    }
+                                  },
+                                  {
+                                    "value": "at0018",
+                                    "label": "Both pupils",
+                                    "localizedLabels": {
+                                      "en": "Both pupils"
+                                    },
+                                    "localizedDescriptions": {
+                                      "en": "Both pupils."
+                                    }
+                                  }
+                                ],
+                                "terminology": "local"
+                              }
+                            ]
+                          },
+                          {
+                            "id": "shape",
+                            "name": "Shape",
+                            "localizedName": "Shape",
+                            "rmType": "DV_CODED_TEXT",
+                            "nodeId": "at0005",
+                            "min": 0,
+                            "max": 1,
+                            "localizedNames": {
+                              "en": "Shape"
+                            },
+                            "localizedDescriptions": {
+                              "en": "The shape of the pupil."
+                            },
+                            "aqlPath": "/content[openEHR-EHR-OBSERVATION.exam.v1]/data[at0001]/events[at0002]/data[at0003]/items[openEHR-EHR-CLUSTER.exam_nervous_system.v0]/items[openEHR-EHR-CLUSTER.exam_pupils.v1]/items[at0075]/items[at0005]/value",
+                            "inputs": [
+                              {
+                                "suffix": "code",
+                                "type": "CODED_TEXT",
+                                "list": [
+                                  {
+                                    "value": "at0049",
+                                    "label": "Normal, circular",
+                                    "localizedLabels": {
+                                      "en": "Normal, circular"
+                                    },
+                                    "localizedDescriptions": {
+                                      "en": "The pupil is a normal, circular shape."
+                                    }
+                                  },
+                                  {
+                                    "value": "at0050",
+                                    "label": "Abnormal",
+                                    "localizedLabels": {
+                                      "en": "Abnormal"
+                                    },
+                                    "localizedDescriptions": {
+                                      "en": "The pupil is an abnormal shape."
+                                    }
+                                  },
+                                  {
+                                    "value": "at0051",
+                                    "label": "Oval",
+                                    "localizedLabels": {
+                                      "en": "Oval"
+                                    },
+                                    "localizedDescriptions": {
+                                      "en": "The pupil is an oval shape."
+                                    }
+                                  },
+                                  {
+                                    "value": "at0052",
+                                    "label": "Irregular",
+                                    "localizedLabels": {
+                                      "en": "Irregular"
+                                    },
+                                    "localizedDescriptions": {
+                                      "en": "The pupil is irregular."
+                                    }
+                                  },
+                                  {
+                                    "value": "at0056",
+                                    "label": "Sectoral abnormaility",
+                                    "localizedLabels": {
+                                      "en": "Sectoral abnormaility"
+                                    },
+                                    "localizedDescriptions": {
+                                      "en": "A sectoral abnormality is present."
+                                    }
+                                  },
+                                  {
+                                    "value": "at0057",
+                                    "label": "Teardrop",
+                                    "localizedLabels": {
+                                      "en": "Teardrop"
+                                    },
+                                    "localizedDescriptions": {
+                                      "en": "The pupil is tear-drop shaped."
+                                    }
+                                  },
+                                  {
+                                    "value": "at0058",
+                                    "label": "Keyhole",
+                                    "localizedLabels": {
+                                      "en": "Keyhole"
+                                    },
+                                    "localizedDescriptions": {
+                                      "en": "The pupil is keyhole-shaped."
+                                    }
+                                  }
+                                ],
+                                "terminology": "local"
+                              }
+                            ]
+                          },
+                          {
+                            "id": "measured_size",
+                            "name": "Measured Size",
+                            "localizedName": "Measured Size",
+                            "rmType": "DV_QUANTITY",
+                            "nodeId": "at0002",
+                            "min": 0,
+                            "max": 1,
+                            "localizedNames": {
+                              "en": "Measured Size"
+                            },
+                            "localizedDescriptions": {
+                              "en": "Measured size of the pupil."
+                            },
+                            "aqlPath": "/content[openEHR-EHR-OBSERVATION.exam.v1]/data[at0001]/events[at0002]/data[at0003]/items[openEHR-EHR-CLUSTER.exam_nervous_system.v0]/items[openEHR-EHR-CLUSTER.exam_pupils.v1]/items[at0075]/items[at0002]/value",
+                            "inputs": [
+                              {
+                                "suffix": "magnitude",
+                                "type": "DECIMAL",
+                                "validation": {
+                                  "precision": {
+                                    "min": 0,
+                                    "minOp": ">=",
+                                    "max": 0,
+                                    "maxOp": "<="
+                                  },
+                                  "range": {
+                                    "min": 0.0,
+                                    "minOp": ">=",
+                                    "max": 30.0,
+                                    "maxOp": "<="
+                                  }
+                                }
+                              },
+                              {
+                                "suffix": "unit",
+                                "type": "CODED_TEXT",
+                                "list": [
+                                  {
+                                    "value": "mm",
+                                    "label": "mm",
+                                    "validation": {
+                                      "precision": {
+                                        "min": 0,
+                                        "minOp": ">=",
+                                        "max": 0,
+                                        "maxOp": "<="
+                                      },
+                                      "range": {
+                                        "min": 0.0,
+                                        "minOp": ">=",
+                                        "max": 30.0,
+                                        "maxOp": "<="
+                                      }
+                                    }
+                                  }
+                                ]
+                              }
+                            ]
+                          },
+                          {
+                            "id": "estimated_size",
+                            "name": "Estimated Size",
+                            "localizedName": "Estimated Size",
+                            "rmType": "DV_CODED_TEXT",
+                            "nodeId": "at0020",
+                            "min": 0,
+                            "max": 1,
+                            "localizedNames": {
+                              "en": "Estimated Size"
+                            },
+                            "localizedDescriptions": {
+                              "en": "A text description of the estimated pupil size."
+                            },
+                            "aqlPath": "/content[openEHR-EHR-OBSERVATION.exam.v1]/data[at0001]/events[at0002]/data[at0003]/items[openEHR-EHR-CLUSTER.exam_nervous_system.v0]/items[openEHR-EHR-CLUSTER.exam_pupils.v1]/items[at0075]/items[at0020]/value",
+                            "inputs": [
+                              {
+                                "suffix": "code",
+                                "type": "CODED_TEXT",
+                                "list": [
+                                  {
+                                    "value": "at0023",
+                                    "label": "Pin-point pupil",
+                                    "localizedLabels": {
+                                      "en": "Pin-point pupil"
+                                    },
+                                    "localizedDescriptions": {
+                                      "en": "The pupil is heavily constricted (<= 1mm)."
+                                    }
+                                  },
+                                  {
+                                    "value": "at0022",
+                                    "label": "Constricted pupil.",
+                                    "localizedLabels": {
+                                      "en": "Constricted pupil."
+                                    },
+                                    "localizedDescriptions": {
+                                      "en": "The pupil is constricted, relative to normal (1.5-2.5mm)."
+                                    }
+                                  },
+                                  {
+                                    "value": "at0021",
+                                    "label": "Normal sized pupil",
+                                    "localizedLabels": {
+                                      "en": "Normal sized pupil"
+                                    },
+                                    "localizedDescriptions": {
+                                      "en": "The pupil size is normal (3-5mm)."
+                                    }
+                                  },
+                                  {
+                                    "value": "at0024",
+                                    "label": "Dilated pupil",
+                                    "localizedLabels": {
+                                      "en": "Dilated pupil"
+                                    },
+                                    "localizedDescriptions": {
+                                      "en": "The pupil is dilated, relative to normal (>= 5.5mm)."
+                                    }
+                                  }
+                                ],
+                                "terminology": "local"
+                              }
+                            ]
+                          },
+                          {
+                            "id": "direct_light_reflex",
+                            "name": "Direct Light Reflex",
+                            "localizedName": "Direct Light Reflex",
+                            "rmType": "DV_CODED_TEXT",
+                            "nodeId": "at0003",
+                            "min": 0,
+                            "max": 1,
+                            "localizedNames": {
+                              "en": "Direct Light Reflex"
+                            },
+                            "localizedDescriptions": {
+                              "en": "Pupil constricts with light shone into that eye."
+                            },
+                            "aqlPath": "/content[openEHR-EHR-OBSERVATION.exam.v1]/data[at0001]/events[at0002]/data[at0003]/items[openEHR-EHR-CLUSTER.exam_nervous_system.v0]/items[openEHR-EHR-CLUSTER.exam_pupils.v1]/items[at0075]/items[at0003]/value",
+                            "inputs": [
+                              {
+                                "suffix": "code",
+                                "type": "CODED_TEXT",
+                                "list": [
+                                  {
+                                    "value": "at0025",
+                                    "label": "Present",
+                                    "localizedLabels": {
+                                      "en": "Present"
+                                    },
+                                    "localizedDescriptions": {
+                                      "en": "The direct light reflex is present."
+                                    }
+                                  },
+                                  {
+                                    "value": "at0026",
+                                    "label": "Absent",
+                                    "localizedLabels": {
+                                      "en": "Absent"
+                                    },
+                                    "localizedDescriptions": {
+                                      "en": "The direct light reflex is absent."
+                                    }
+                                  },
+                                  {
+                                    "value": "at0033",
+                                    "label": "Sluggish/slow (-)",
+                                    "localizedLabels": {
+                                      "en": "Sluggish/slow (-)"
+                                    },
+                                    "localizedDescriptions": {
+                                      "en": "The direct light reflex is slow or sluggish (-)."
+                                    }
+                                  },
+                                  {
+                                    "value": "at0034",
+                                    "label": "Normal speed (+/-)",
+                                    "localizedLabels": {
+                                      "en": "Normal speed (+/-)"
+                                    },
+                                    "localizedDescriptions": {
+                                      "en": "The direct light reflex is of normal speed (+/-)."
+                                    }
+                                  },
+                                  {
+                                    "value": "at0035",
+                                    "label": "Brisk(+)",
+                                    "localizedLabels": {
+                                      "en": "Brisk(+)"
+                                    },
+                                    "localizedDescriptions": {
+                                      "en": "The direct light reflex is brisk (+)."
+                                    }
+                                  },
+                                  {
+                                    "value": "at0036",
+                                    "label": "Very brisk (++)",
+                                    "localizedLabels": {
+                                      "en": "Very brisk (++)"
+                                    },
+                                    "localizedDescriptions": {
+                                      "en": "The direct light reflex is very brisk (++)."
+                                    }
+                                  }
+                                ],
+                                "terminology": "local"
+                              }
+                            ]
+                          },
+                          {
+                            "id": "consensual_light_reflex",
+                            "name": "Consensual Light Reflex",
+                            "localizedName": "Consensual Light Reflex",
+                            "rmType": "DV_CODED_TEXT",
+                            "nodeId": "at0004",
+                            "min": 0,
+                            "max": 1,
+                            "localizedNames": {
+                              "en": "Consensual Light Reflex"
+                            },
+                            "localizedDescriptions": {
+                              "en": "Findings of the consensual pupillary light reflex."
+                            },
+                            "aqlPath": "/content[openEHR-EHR-OBSERVATION.exam.v1]/data[at0001]/events[at0002]/data[at0003]/items[openEHR-EHR-CLUSTER.exam_nervous_system.v0]/items[openEHR-EHR-CLUSTER.exam_pupils.v1]/items[at0075]/items[at0004]/value",
+                            "inputs": [
+                              {
+                                "suffix": "code",
+                                "type": "CODED_TEXT",
+                                "list": [
+                                  {
+                                    "value": "at0037",
+                                    "label": "Present",
+                                    "localizedLabels": {
+                                      "en": "Present"
+                                    },
+                                    "localizedDescriptions": {
+                                      "en": "The consensual light reflex is present."
+                                    }
+                                  },
+                                  {
+                                    "value": "at0038",
+                                    "label": "Absent",
+                                    "localizedLabels": {
+                                      "en": "Absent"
+                                    },
+                                    "localizedDescriptions": {
+                                      "en": "The consensual light reflex is absent."
+                                    }
+                                  },
+                                  {
+                                    "value": "at0039",
+                                    "label": "Sluggish/slow (-)",
+                                    "localizedLabels": {
+                                      "en": "Sluggish/slow (-)"
+                                    },
+                                    "localizedDescriptions": {
+                                      "en": "The consensual light reflex is sluggish or slow (-)."
+                                    }
+                                  },
+                                  {
+                                    "value": "at0040",
+                                    "label": "Normal (+/-)",
+                                    "localizedLabels": {
+                                      "en": "Normal (+/-)"
+                                    },
+                                    "localizedDescriptions": {
+                                      "en": "The consensual light reflex is of normal speed (+/-)."
+                                    }
+                                  },
+                                  {
+                                    "value": "at0041",
+                                    "label": "Brisk (+)",
+                                    "localizedLabels": {
+                                      "en": "Brisk (+)"
+                                    },
+                                    "localizedDescriptions": {
+                                      "en": "The consensual light reflex is brisk (+)."
+                                    }
+                                  }
+                                ],
+                                "terminology": "local"
+                              }
+                            ]
+                          },
+                          {
+                            "id": "accommodation_reflex",
+                            "name": "Accommodation Reflex",
+                            "localizedName": "Accommodation Reflex",
+                            "rmType": "DV_CODED_TEXT",
+                            "nodeId": "at0006",
+                            "min": 0,
+                            "max": 1,
+                            "localizedNames": {
+                              "en": "Accommodation Reflex"
+                            },
+                            "localizedDescriptions": {
+                              "en": "Findings of the pupillary accommodation reflex."
+                            },
+                            "aqlPath": "/content[openEHR-EHR-OBSERVATION.exam.v1]/data[at0001]/events[at0002]/data[at0003]/items[openEHR-EHR-CLUSTER.exam_nervous_system.v0]/items[openEHR-EHR-CLUSTER.exam_pupils.v1]/items[at0075]/items[at0006]/value",
+                            "inputs": [
+                              {
+                                "suffix": "code",
+                                "type": "CODED_TEXT",
+                                "list": [
+                                  {
+                                    "value": "at0043",
+                                    "label": "Present",
+                                    "localizedLabels": {
+                                      "en": "Present"
+                                    },
+                                    "localizedDescriptions": {
+                                      "en": "The accomodation light reflex is present."
+                                    }
+                                  },
+                                  {
+                                    "value": "at0044",
+                                    "label": "Absent",
+                                    "localizedLabels": {
+                                      "en": "Absent"
+                                    },
+                                    "localizedDescriptions": {
+                                      "en": "The accommodation light reflex is absent."
+                                    }
+                                  },
+                                  {
+                                    "value": "at0045",
+                                    "label": "Sluggish/slow (-)",
+                                    "localizedLabels": {
+                                      "en": "Sluggish/slow (-)"
+                                    },
+                                    "localizedDescriptions": {
+                                      "en": "The accommodation light reflex is slow or sluggish (-)."
+                                    }
+                                  },
+                                  {
+                                    "value": "at0046",
+                                    "label": "Normal (-/+)",
+                                    "localizedLabels": {
+                                      "en": "Normal (-/+)"
+                                    },
+                                    "localizedDescriptions": {
+                                      "en": "The accommodation light reflex is of normal speed (+/-)."
+                                    }
+                                  },
+                                  {
+                                    "value": "at0047",
+                                    "label": "Brisk (+)",
+                                    "localizedLabels": {
+                                      "en": "Brisk (+)"
+                                    },
+                                    "localizedDescriptions": {
+                                      "en": "The accommodation light reflex is brisk (+)."
+                                    }
+                                  }
+                                ],
+                                "terminology": "local"
+                              }
+                            ]
+                          },
+                          {
+                            "id": "relative_afferent_pupillary_defect",
+                            "name": "Relative Afferent Pupillary Defect",
+                            "localizedName": "Relative Afferent Pupillary Defect",
+                            "rmType": "DV_CODED_TEXT",
+                            "nodeId": "at0053",
+                            "min": 0,
+                            "max": 1,
+                            "localizedNames": {
+                              "en": "Relative Afferent Pupillary Defect"
+                            },
+                            "localizedDescriptions": {
+                              "en": "Findings of the relative afferent pupillary defect."
+                            },
+                            "aqlPath": "/content[openEHR-EHR-OBSERVATION.exam.v1]/data[at0001]/events[at0002]/data[at0003]/items[openEHR-EHR-CLUSTER.exam_nervous_system.v0]/items[openEHR-EHR-CLUSTER.exam_pupils.v1]/items[at0075]/items[at0053]/value",
+                            "inputs": [
+                              {
+                                "suffix": "code",
+                                "type": "CODED_TEXT",
+                                "list": [
+                                  {
+                                    "value": "at0055",
+                                    "label": "Present",
+                                    "localizedLabels": {
+                                      "en": "Present"
+                                    },
+                                    "localizedDescriptions": {
+                                      "en": "A relative afferent afferent pupillary defect (RAPD) is present."
+                                    }
+                                  },
+                                  {
+                                    "value": "at0054",
+                                    "label": "Absent",
+                                    "localizedLabels": {
+                                      "en": "Absent"
+                                    },
+                                    "localizedDescriptions": {
+                                      "en": "A relative afferent afferent pupillary defect (RAPD) is absent."
+                                    }
+                                  }
+                                ],
+                                "terminology": "local"
+                              }
+                            ]
+                          },
+                          {
+                            "id": "interpretation",
+                            "name": "Interpretation",
+                            "localizedName": "Interpretation",
+                            "rmType": "DV_TEXT",
+                            "nodeId": "at0076",
+                            "min": 0,
+                            "max": -1,
+                            "localizedNames": {
+                              "en": "Interpretation"
+                            },
+                            "localizedDescriptions": {
+                              "en": "Single word, phrase or brief description representing a summary of the examination findings applying to a single pupil."
+                            },
+                            "aqlPath": "/content[openEHR-EHR-OBSERVATION.exam.v1]/data[at0001]/events[at0002]/data[at0003]/items[openEHR-EHR-CLUSTER.exam_nervous_system.v0]/items[openEHR-EHR-CLUSTER.exam_pupils.v1]/items[at0075]/items[at0076]/value",
+                            "inputs": [
+                              {
+                                "type": "TEXT"
+                              }
+                            ]
+                          },
+                          {
+                            "id": "image",
+                            "name": "Image",
+                            "localizedName": "Image",
+                            "rmType": "DV_MULTIMEDIA",
+                            "nodeId": "at0070",
+                            "min": 0,
+                            "max": -1,
+                            "localizedNames": {
+                              "en": "Image"
+                            },
+                            "localizedDescriptions": {
+                              "en": "Multimedia image taken during examination of the identified pupil."
+                            },
+                            "aqlPath": "/content[openEHR-EHR-OBSERVATION.exam.v1]/data[at0001]/events[at0002]/data[at0003]/items[openEHR-EHR-CLUSTER.exam_nervous_system.v0]/items[openEHR-EHR-CLUSTER.exam_pupils.v1]/items[at0075]/items[at0070]/value",
+                            "inputs": [
+                              {
+                                "type": "TEXT"
+                              }
+                            ]
+                          }
+                        ]
+                      },
+                      {
+                        "id": "interpretation",
+                        "name": "Interpretation",
+                        "localizedName": "Interpretation",
+                        "rmType": "DV_TEXT",
+                        "nodeId": "at0068",
+                        "min": 0,
+                        "max": -1,
+                        "localizedNames": {
+                          "en": "Interpretation"
+                        },
+                        "localizedDescriptions": {
+                          "en": "Single word, phrase or brief description representing a summary of the examination findings applying to both puplis."
+                        },
+                        "aqlPath": "/content[openEHR-EHR-OBSERVATION.exam.v1]/data[at0001]/events[at0002]/data[at0003]/items[openEHR-EHR-CLUSTER.exam_nervous_system.v0]/items[openEHR-EHR-CLUSTER.exam_pupils.v1]/items[at0068]/value",
+                        "inputs": [
+                          {
+                            "type": "TEXT"
+                          }
+                        ],
+                        "annotations": {
+                          "comment": "Coding with a terminology is preferred, if possible. For example, SNOMED-CT|386667005| Pupils equal, react to light and accommodation|."
+                        }
+                      },
+                      {
+                        "id": "image",
+                        "name": "Image",
+                        "localizedName": "Image",
+                        "rmType": "DV_MULTIMEDIA",
+                        "nodeId": "at0077",
+                        "min": 0,
+                        "max": -1,
+                        "localizedNames": {
+                          "en": "Image"
+                        },
+                        "localizedDescriptions": {
+                          "en": "Multimedia image taken during examination of both pupils."
+                        },
+                        "aqlPath": "/content[openEHR-EHR-OBSERVATION.exam.v1]/data[at0001]/events[at0002]/data[at0003]/items[openEHR-EHR-CLUSTER.exam_nervous_system.v0]/items[openEHR-EHR-CLUSTER.exam_pupils.v1]/items[at0077]/value",
+                        "inputs": [
+                          {
+                            "type": "TEXT"
+                          }
+                        ]
+                      },
+                      {
+                        "id": "comment",
+                        "name": "Comment",
+                        "localizedName": "Comment",
+                        "rmType": "DV_TEXT",
+                        "nodeId": "at0027",
+                        "min": 0,
+                        "max": 1,
+                        "localizedNames": {
+                          "en": "Comment"
+                        },
+                        "localizedDescriptions": {
+                          "en": "Additional narrative about the physical examination findings of the pupil, not captured in other fields."
+                        },
+                        "aqlPath": "/content[openEHR-EHR-OBSERVATION.exam.v1]/data[at0001]/events[at0002]/data[at0003]/items[openEHR-EHR-CLUSTER.exam_nervous_system.v0]/items[openEHR-EHR-CLUSTER.exam_pupils.v1]/items[at0027]/value",
+                        "inputs": [
+                          {
+                            "type": "TEXT"
+                          }
+                        ]
+                      }
+                    ]
+                  },
+                  {
+                    "id": "clinical_interpretation",
+                    "name": "Clinical interpretation",
+                    "localizedName": "Clinical interpretation",
+                    "rmType": "DV_TEXT",
+                    "nodeId": "at0006",
+                    "min": 0,
+                    "max": -1,
+                    "localizedNames": {
+                      "en": "Clinical interpretation"
+                    },
+                    "localizedDescriptions": {
+                      "en": "Single word, phrase or brief description that represents the clinical meaning and significance of the physical examination findings."
+                    },
+                    "aqlPath": "/content[openEHR-EHR-OBSERVATION.exam.v1]/data[at0001]/events[at0002]/data[at0003]/items[openEHR-EHR-CLUSTER.exam_nervous_system.v0]/items[at0006]/value",
+                    "inputs": [
+                      {
+                        "type": "TEXT"
+                      }
+                    ]
+                  },
+                  {
+                    "id": "comment",
+                    "name": "Comment",
+                    "localizedName": "Comment",
+                    "rmType": "DV_TEXT",
+                    "nodeId": "at0007",
+                    "min": 0,
+                    "max": 1,
+                    "localizedNames": {
+                      "en": "Comment"
+                    },
+                    "localizedDescriptions": {
+                      "en": "Additional narrative about the physical examination findings, not captured in other fields."
+                    },
+                    "aqlPath": "/content[openEHR-EHR-OBSERVATION.exam.v1]/data[at0001]/events[at0002]/data[at0003]/items[openEHR-EHR-CLUSTER.exam_nervous_system.v0]/items[at0007]/value",
+                    "inputs": [
+                      {
+                        "type": "TEXT"
+                      }
+                    ]
+                  }
+                ]
+              },
+              {
+                "id": "examination_of_cranial_nerves",
+                "name": "Examination of cranial nerves",
+                "localizedName": "Examination of cranial nerves",
+                "rmType": "CLUSTER",
+                "nodeId": "openEHR-EHR-CLUSTER.exam_cranial_nerves.v0",
+                "min": 0,
+                "max": -1,
+                "localizedNames": {
+                  "en": "Examination of cranial nerves"
+                },
+                "localizedDescriptions": {
+                  "en": "Findings observed during the physical examination of the cranial nerves."
+                },
+                "aqlPath": "/content[openEHR-EHR-OBSERVATION.exam.v1]/data[at0001]/events[at0002]/data[at0003]/items[openEHR-EHR-CLUSTER.exam_cranial_nerves.v0]",
+                "children": [
+                  {
+                    "id": "no_abnormality_detected",
+                    "name": "No abnormality detected",
+                    "localizedName": "No abnormality detected",
+                    "rmType": "DV_BOOLEAN",
+                    "nodeId": "at0002",
+                    "min": 0,
+                    "max": 1,
+                    "localizedNames": {
+                      "en": "No abnormality detected"
+                    },
+                    "localizedDescriptions": {
+                      "en": "Statement that no abnormality was detected (NAD) on physical examination."
+                    },
+                    "aqlPath": "/content[openEHR-EHR-OBSERVATION.exam.v1]/data[at0001]/events[at0002]/data[at0003]/items[openEHR-EHR-CLUSTER.exam_cranial_nerves.v0]/items[at0002]/value",
+                    "inputs": [
+                      {
+                        "type": "BOOLEAN",
+                        "list": [
+                          {
+                            "value": "true",
+                            "label": "true"
+                          }
+                        ]
+                      }
+                    ],
+                    "annotations": {
+                      "comment": "Record as True if no abnormality was detected on examination. Specific statements about the examination can be included in the 'Clinical Interpretation' data element."
+                    }
+                  },
+                  {
+                    "id": "clinical_description",
+                    "name": "Clinical description",
+                    "localizedName": "Clinical description",
+                    "rmType": "DV_TEXT",
+                    "nodeId": "at0003",
+                    "min": 0,
+                    "max": 1,
+                    "localizedNames": {
+                      "en": "Clinical description"
+                    },
+                    "localizedDescriptions": {
+                      "en": "Narrative description of the overall findings observed during the physical examination."
+                    },
+                    "aqlPath": "/content[openEHR-EHR-OBSERVATION.exam.v1]/data[at0001]/events[at0002]/data[at0003]/items[openEHR-EHR-CLUSTER.exam_cranial_nerves.v0]/items[at0003]/value",
+                    "inputs": [
+                      {
+                        "type": "TEXT"
+                      }
+                    ]
+                  },
+                  {
+                    "id": "examination_of_the_tongue",
+                    "name": "Examination of the tongue",
+                    "localizedName": "Examination of the tongue",
+                    "rmType": "CLUSTER",
+                    "nodeId": "openEHR-EHR-CLUSTER.exam_tongue.v0",
+                    "min": 0,
+                    "max": -1,
+                    "localizedNames": {
+                      "en": "Examination of the tongue"
+                    },
+                    "localizedDescriptions": {
+                      "en": "Findings observed during the physical examination of the tongue."
+                    },
+                    "aqlPath": "/content[openEHR-EHR-OBSERVATION.exam.v1]/data[at0001]/events[at0002]/data[at0003]/items[openEHR-EHR-CLUSTER.exam_cranial_nerves.v0]/items[openEHR-EHR-CLUSTER.exam_tongue.v0]",
+                    "children": [
+                      {
+                        "id": "no_abnormality_detected",
+                        "name": "No abnormality detected",
+                        "localizedName": "No abnormality detected",
+                        "rmType": "DV_BOOLEAN",
+                        "nodeId": "at0002",
+                        "min": 0,
+                        "max": 1,
+                        "localizedNames": {
+                          "en": "No abnormality detected"
+                        },
+                        "localizedDescriptions": {
+                          "en": "Statement that no abnormality was detected (NAD) on physical examination."
+                        },
+                        "aqlPath": "/content[openEHR-EHR-OBSERVATION.exam.v1]/data[at0001]/events[at0002]/data[at0003]/items[openEHR-EHR-CLUSTER.exam_cranial_nerves.v0]/items[openEHR-EHR-CLUSTER.exam_tongue.v0]/items[at0002]/value",
+                        "inputs": [
+                          {
+                            "type": "BOOLEAN",
+                            "list": [
+                              {
+                                "value": "true",
+                                "label": "true"
+                              }
+                            ]
+                          }
+                        ],
+                        "annotations": {
+                          "comment": "Record as True if no abnormality was detected on examination. Specific statements about the examination can be included in the 'Clinical Interpretation' data element."
+                        }
+                      },
+                      {
+                        "id": "clinical_description",
+                        "name": "Clinical description",
+                        "localizedName": "Clinical description",
+                        "rmType": "DV_TEXT",
+                        "nodeId": "at0003",
+                        "min": 0,
+                        "max": 1,
+                        "localizedNames": {
+                          "en": "Clinical description"
+                        },
+                        "localizedDescriptions": {
+                          "en": "Narrative description of the overall findings observed during the physical examination."
+                        },
+                        "aqlPath": "/content[openEHR-EHR-OBSERVATION.exam.v1]/data[at0001]/events[at0002]/data[at0003]/items[openEHR-EHR-CLUSTER.exam_cranial_nerves.v0]/items[openEHR-EHR-CLUSTER.exam_tongue.v0]/items[at0003]/value",
+                        "inputs": [
+                          {
+                            "type": "TEXT"
+                          }
+                        ]
+                      },
+                      {
+                        "id": "deviation_on_protrusion",
+                        "name": "Deviation on protrusion",
+                        "localizedName": "Deviation on protrusion",
+                        "rmType": "DV_CODED_TEXT",
+                        "nodeId": "at0011",
+                        "min": 0,
+                        "max": 1,
+                        "localizedNames": {
+                          "en": "Deviation on protrusion"
+                        },
+                        "localizedDescriptions": {
+                          "en": "Description of deviation on protrusion."
+                        },
+                        "aqlPath": "/content[openEHR-EHR-OBSERVATION.exam.v1]/data[at0001]/events[at0002]/data[at0003]/items[openEHR-EHR-CLUSTER.exam_cranial_nerves.v0]/items[openEHR-EHR-CLUSTER.exam_tongue.v0]/items[at0011]/value",
+                        "inputs": [
+                          {
+                            "suffix": "code",
+                            "type": "CODED_TEXT",
+                            "list": [
+                              {
+                                "value": "at0012",
+                                "label": "None",
+                                "localizedLabels": {
+                                  "en": "None"
+                                },
+                                "localizedDescriptions": {
+                                  "en": "The tongue does not deviate to either side on protrusion."
+                                }
+                              },
+                              {
+                                "value": "at0013",
+                                "label": "Deviates to right",
+                                "localizedLabels": {
+                                  "en": "Deviates to right"
+                                },
+                                "localizedDescriptions": {
+                                  "en": "The tongue deviates to the right side on protrusion."
+                                }
+                              },
+                              {
+                                "value": "at0014",
+                                "label": "Deviates to left",
+                                "localizedLabels": {
+                                  "en": "Deviates to left"
+                                },
+                                "localizedDescriptions": {
+                                  "en": "The tongue deviates to the left side on protrusion."
+                                }
+                              }
+                            ],
+                            "terminology": "local"
+                          }
+                        ]
+                      },
+                      {
+                        "id": "clinical_interpretation",
+                        "name": "Clinical interpretation",
+                        "localizedName": "Clinical interpretation",
+                        "rmType": "DV_TEXT",
+                        "nodeId": "at0006",
+                        "min": 0,
+                        "max": -1,
+                        "localizedNames": {
+                          "en": "Clinical interpretation"
+                        },
+                        "localizedDescriptions": {
+                          "en": "Single word, phrase or brief description that represents the clinical meaning and significance of the physical examination findings."
+                        },
+                        "aqlPath": "/content[openEHR-EHR-OBSERVATION.exam.v1]/data[at0001]/events[at0002]/data[at0003]/items[openEHR-EHR-CLUSTER.exam_cranial_nerves.v0]/items[openEHR-EHR-CLUSTER.exam_tongue.v0]/items[at0006]/value",
+                        "inputs": [
+                          {
+                            "type": "TEXT"
+                          }
+                        ]
+                      },
+                      {
+                        "id": "comment",
+                        "name": "Comment",
+                        "localizedName": "Comment",
+                        "rmType": "DV_TEXT",
+                        "nodeId": "at0007",
+                        "min": 0,
+                        "max": 1,
+                        "localizedNames": {
+                          "en": "Comment"
+                        },
+                        "localizedDescriptions": {
+                          "en": "Additional narrative about the physical examination findings, not captured in other fields."
+                        },
+                        "aqlPath": "/content[openEHR-EHR-OBSERVATION.exam.v1]/data[at0001]/events[at0002]/data[at0003]/items[openEHR-EHR-CLUSTER.exam_cranial_nerves.v0]/items[openEHR-EHR-CLUSTER.exam_tongue.v0]/items[at0007]/value",
+                        "inputs": [
+                          {
+                            "type": "TEXT"
+                          }
+                        ]
+                      }
+                    ]
+                  },
+                  {
+                    "id": "clinical_interpretation",
+                    "name": "Clinical interpretation",
+                    "localizedName": "Clinical interpretation",
+                    "rmType": "DV_TEXT",
+                    "nodeId": "at0006",
+                    "min": 0,
+                    "max": -1,
+                    "localizedNames": {
+                      "en": "Clinical interpretation"
+                    },
+                    "localizedDescriptions": {
+                      "en": "Single word, phrase or brief description that represents the clinical meaning and significance of the physical examination findings."
+                    },
+                    "aqlPath": "/content[openEHR-EHR-OBSERVATION.exam.v1]/data[at0001]/events[at0002]/data[at0003]/items[openEHR-EHR-CLUSTER.exam_cranial_nerves.v0]/items[at0006]/value",
+                    "inputs": [
+                      {
+                        "type": "TEXT"
+                      }
+                    ]
+                  },
+                  {
+                    "id": "comment",
+                    "name": "Comment",
+                    "localizedName": "Comment",
+                    "rmType": "DV_TEXT",
+                    "nodeId": "at0007",
+                    "min": 0,
+                    "max": 1,
+                    "localizedNames": {
+                      "en": "Comment"
+                    },
+                    "localizedDescriptions": {
+                      "en": "Additional narrative about the physical examination findings, not captured in other fields."
+                    },
+                    "aqlPath": "/content[openEHR-EHR-OBSERVATION.exam.v1]/data[at0001]/events[at0002]/data[at0003]/items[openEHR-EHR-CLUSTER.exam_cranial_nerves.v0]/items[at0007]/value",
+                    "inputs": [
+                      {
+                        "type": "TEXT"
+                      }
+                    ]
+                  }
+                ]
+              },
+              {
+                "id": "examination_of_the_abdomen",
+                "name": "Examination of the abdomen",
+                "localizedName": "Examination of the abdomen",
+                "rmType": "CLUSTER",
+                "nodeId": "openEHR-EHR-CLUSTER.exam_abdomen.v0",
+                "min": 0,
+                "max": -1,
+                "localizedNames": {
+                  "en": "Examination of the abdomen"
+                },
+                "localizedDescriptions": {
+                  "en": "Findings observed during the physical examination of the abdomen."
+                },
+                "aqlPath": "/content[openEHR-EHR-OBSERVATION.exam.v1]/data[at0001]/events[at0002]/data[at0003]/items[openEHR-EHR-CLUSTER.exam_abdomen.v0]",
+                "children": [
+                  {
+                    "id": "no_abnormality_detected",
+                    "name": "No abnormality detected",
+                    "localizedName": "No abnormality detected",
+                    "rmType": "DV_BOOLEAN",
+                    "nodeId": "at0002",
+                    "min": 0,
+                    "max": 1,
+                    "localizedNames": {
+                      "en": "No abnormality detected"
+                    },
+                    "localizedDescriptions": {
+                      "en": "Statement that no abnormality was detected (NAD) on physical examination."
+                    },
+                    "aqlPath": "/content[openEHR-EHR-OBSERVATION.exam.v1]/data[at0001]/events[at0002]/data[at0003]/items[openEHR-EHR-CLUSTER.exam_abdomen.v0]/items[at0002]/value",
+                    "inputs": [
+                      {
+                        "type": "BOOLEAN",
+                        "list": [
+                          {
+                            "value": "true",
+                            "label": "true"
+                          }
+                        ]
+                      }
+                    ],
+                    "annotations": {
+                      "comment": "Record as True if no abnormality was detected on examination. Specific statements about the examination can be included in the 'Clinical Interpretation' data element."
+                    }
+                  },
+                  {
+                    "id": "clinical_description",
+                    "name": "Clinical description",
+                    "localizedName": "Clinical description",
+                    "rmType": "DV_TEXT",
+                    "nodeId": "at0003",
+                    "min": 0,
+                    "max": 1,
+                    "localizedNames": {
+                      "en": "Clinical description"
+                    },
+                    "localizedDescriptions": {
+                      "en": "Narrative description of the overall findings observed during the physical examination."
+                    },
+                    "aqlPath": "/content[openEHR-EHR-OBSERVATION.exam.v1]/data[at0001]/events[at0002]/data[at0003]/items[openEHR-EHR-CLUSTER.exam_abdomen.v0]/items[at0003]/value",
+                    "inputs": [
+                      {
+                        "type": "TEXT"
+                      }
+                    ]
+                  },
+                  {
+                    "id": "clinical_interpretation",
+                    "name": "Clinical interpretation",
+                    "localizedName": "Clinical interpretation",
+                    "rmType": "DV_TEXT",
+                    "nodeId": "at0006",
+                    "min": 0,
+                    "max": -1,
+                    "localizedNames": {
+                      "en": "Clinical interpretation"
+                    },
+                    "localizedDescriptions": {
+                      "en": "Single word, phrase or brief description that represents the clinical meaning and significance of the physical examination findings."
+                    },
+                    "aqlPath": "/content[openEHR-EHR-OBSERVATION.exam.v1]/data[at0001]/events[at0002]/data[at0003]/items[openEHR-EHR-CLUSTER.exam_abdomen.v0]/items[at0006]/value",
+                    "inputs": [
+                      {
+                        "type": "TEXT"
+                      }
+                    ]
+                  },
+                  {
+                    "id": "comment",
+                    "name": "Comment",
+                    "localizedName": "Comment",
+                    "rmType": "DV_TEXT",
+                    "nodeId": "at0007",
+                    "min": 0,
+                    "max": 1,
+                    "localizedNames": {
+                      "en": "Comment"
+                    },
+                    "localizedDescriptions": {
+                      "en": "Additional narrative about the physical examination findings, not captured in other fields."
+                    },
+                    "aqlPath": "/content[openEHR-EHR-OBSERVATION.exam.v1]/data[at0001]/events[at0002]/data[at0003]/items[openEHR-EHR-CLUSTER.exam_abdomen.v0]/items[at0007]/value",
+                    "inputs": [
+                      {
+                        "type": "TEXT"
+                      }
+                    ]
+                  },
+                  {
+                    "id": "exclusion_of_examination",
+                    "name": "Exclusion of examination",
+                    "localizedName": "Exclusion of examination",
+                    "rmType": "CLUSTER",
+                    "nodeId": "openEHR-EHR-CLUSTER.exclusion_exam.v1",
+                    "min": 0,
+                    "max": -1,
+                    "localizedNames": {
+                      "en": "Exclusion of examination"
+                    },
+                    "localizedDescriptions": {
+                      "en": "Positive statement to record that the physical examination, or a specified part of the physical examination, was not performed."
+                    },
+                    "aqlPath": "/content[openEHR-EHR-OBSERVATION.exam.v1]/data[at0001]/events[at0002]/data[at0003]/items[openEHR-EHR-CLUSTER.exam_abdomen.v0]/items[openEHR-EHR-CLUSTER.exclusion_exam.v1]",
+                    "children": [
+                      {
+                        "id": "examination_not_done",
+                        "name": "Examination not done",
+                        "localizedName": "Examination not done",
+                        "rmType": "DV_BOOLEAN",
+                        "nodeId": "at0001",
+                        "min": 0,
+                        "max": 1,
+                        "localizedNames": {
+                          "en": "Examination not done"
+                        },
+                        "localizedDescriptions": {
+                          "en": "Statement to explicity record that the examination was not performed."
+                        },
+                        "aqlPath": "/content[openEHR-EHR-OBSERVATION.exam.v1]/data[at0001]/events[at0002]/data[at0003]/items[openEHR-EHR-CLUSTER.exam_abdomen.v0]/items[openEHR-EHR-CLUSTER.exclusion_exam.v1]/items[at0001]/value",
+                        "inputs": [
+                          {
+                            "type": "BOOLEAN",
+                            "list": [
+                              {
+                                "value": "true",
+                                "label": "true"
+                              }
+                            ]
+                          }
+                        ],
+                        "annotations": {
+                          "comment": "Record as True if the examination was not performed."
+                        }
+                      },
+                      {
+                        "id": "reason",
+                        "name": "Reason",
+                        "localizedName": "Reason",
+                        "rmType": "DV_TEXT",
+                        "nodeId": "at0002",
+                        "min": 0,
+                        "max": 1,
+                        "localizedNames": {
+                          "en": "Reason"
+                        },
+                        "localizedDescriptions": {
+                          "en": "Reason for the 'not done' statement."
+                        },
+                        "aqlPath": "/content[openEHR-EHR-OBSERVATION.exam.v1]/data[at0001]/events[at0002]/data[at0003]/items[openEHR-EHR-CLUSTER.exam_abdomen.v0]/items[openEHR-EHR-CLUSTER.exclusion_exam.v1]/items[at0002]/value",
+                        "inputs": [
+                          {
+                            "type": "TEXT"
+                          }
+                        ],
+                        "annotations": {
+                          "comment": "For example: patient factors, equipment factors, time constraints."
+                        }
+                      }
+                    ]
+                  }
+                ]
+              },
+              {
+                "id": "interpretation",
+                "name": "Interpretation",
+                "localizedName": "Interpretation",
+                "rmType": "DV_TEXT",
+                "nodeId": "at0006",
+                "min": 0,
+                "max": -1,
+                "localizedNames": {
+                  "en": "Interpretation"
+                },
+                "localizedDescriptions": {
+                  "en": "Single word, phrase or brief description which represents the clinical meaning and significance of the physical examination findings."
+                },
+                "aqlPath": "/content[openEHR-EHR-OBSERVATION.exam.v1]/data[at0001]/events[at0002]/data[at0003]/items[at0006]/value",
+                "inputs": [
+                  {
+                    "type": "TEXT"
+                  }
+                ],
+                "annotations": {
+                  "comment": "Coding with a terminology is preferred, if possible. For example, 'normal examination' or 'tympanic membrane perforation'."
+                }
+              },
+              {
+                "id": "comment",
+                "name": "Comment",
+                "localizedName": "Comment",
+                "rmType": "DV_TEXT",
+                "nodeId": "at0011",
+                "min": 0,
+                "max": 1,
+                "localizedNames": {
+                  "en": "Comment"
+                },
+                "localizedDescriptions": {
+                  "en": "Additional narrative about the overall physical examination findings not captured in other fields."
+                },
+                "aqlPath": "/content[openEHR-EHR-OBSERVATION.exam.v1]/data[at0001]/events[at0002]/data[at0003]/items[at0011]/value",
+                "inputs": [
+                  {
+                    "type": "TEXT"
+                  }
+                ]
+              },
+              {
+                "id": "confounding_factors",
+                "name": "Confounding factors",
+                "localizedName": "Confounding factors",
+                "rmType": "DV_TEXT",
+                "nodeId": "at0008",
+                "min": 0,
+                "max": -1,
+                "localizedNames": {
+                  "en": "Confounding factors"
+                },
+                "localizedDescriptions": {
+                  "en": "Description of any incidental factors that may have contributed to the physical examination findings."
+                },
+                "aqlPath": "/content[openEHR-EHR-OBSERVATION.exam.v1]/data[at0001]/events[at0002]/state[at0009]/items[at0008]/value",
+                "inputs": [
+                  {
+                    "type": "TEXT"
+                  }
+                ]
+              },
+              {
+                "id": "time",
+                "name": "time",
+                "rmType": "DV_DATE_TIME",
+                "min": 1,
+                "max": 1,
+                "aqlPath": "/content[openEHR-EHR-OBSERVATION.exam.v1]/data[at0001]/events[at0002]/time",
+                "inputs": [
+                  {
+                    "type": "DATETIME"
+                  }
+                ],
+                "inContext": true
+              }
+            ]
+          },
+          {
+            "id": "subject",
+            "name": "subject",
+            "rmType": "PARTY_PROXY",
+            "min": 1,
+            "max": 1,
+            "aqlPath": "/content[openEHR-EHR-OBSERVATION.exam.v1]/subject",
+            "inputs": [
+              {
+                "suffix": "id",
+                "type": "TEXT"
+              },
+              {
+                "suffix": "id_scheme",
+                "type": "TEXT"
+              },
+              {
+                "suffix": "id_namespace",
+                "type": "TEXT"
+              },
+              {
+                "suffix": "name",
+                "type": "TEXT"
+              }
+            ],
+            "inContext": true
+          },
+          {
+            "id": "language",
+            "name": "language",
+            "rmType": "CODE_PHRASE",
+            "min": 1,
+            "max": 1,
+            "aqlPath": "/content[openEHR-EHR-OBSERVATION.exam.v1]/language",
+            "inContext": true
+          },
+          {
+            "id": "encoding",
+            "name": "encoding",
+            "rmType": "CODE_PHRASE",
+            "min": 1,
+            "max": 1,
+            "aqlPath": "/content[openEHR-EHR-OBSERVATION.exam.v1]/encoding",
+            "inContext": true
+          }
+        ]
+      },
+      {
+        "id": "composer",
+        "name": "composer",
+        "rmType": "PARTY_PROXY",
+        "min": 1,
+        "max": 1,
+        "aqlPath": "/composer",
+        "inputs": [
+          {
+            "suffix": "id",
+            "type": "TEXT"
+          },
+          {
+            "suffix": "id_scheme",
+            "type": "TEXT"
+          },
+          {
+            "suffix": "id_namespace",
+            "type": "TEXT"
+          },
+          {
+            "suffix": "name",
+            "type": "TEXT"
+          }
+        ],
+        "inContext": true
+      },
+      {
+        "id": "language",
+        "name": "language",
+        "rmType": "CODE_PHRASE",
+        "min": 1,
+        "max": 1,
+        "aqlPath": "/language",
+        "inContext": true
+      },
+      {
+        "id": "territory",
+        "name": "territory",
+        "rmType": "CODE_PHRASE",
+        "min": 1,
+        "max": 1,
+        "aqlPath": "/territory",
+        "inContext": true
+      }
+    ]
+  }
+}
