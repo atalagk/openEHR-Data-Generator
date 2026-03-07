@@ -4,23 +4,28 @@ openEHR Synthetic Data Generator
 """
 
 import os
-import re
 import json
 import copy
+import datetime as dt
+import xml.etree.ElementTree as ET
 import random
 import asyncio
+import urllib.parse
 import aiohttp
 from typing import Optional, Tuple
 
 # ── directories ────────────────────────────────────────────────────────────────
 
-BASE      = "source_models"
-OPT_DIR   = os.path.join(BASE, "opts")
-WT_DIR    = os.path.join(BASE, "opt_webtemplates")
-COMPS_DIR = os.path.join(BASE, "opt_compositions")
-FLAT_DIR  = os.path.join(BASE, "flat_composition_skeletons")
+BASE              = "source_models"
+OPT_DIR           = os.path.join(BASE, "opts")
+WT_DIR            = os.path.join(BASE, "opt_webtemplates")
+USER_WT_DIR       = os.path.join(BASE, "user_webtemplates")
+COMPS_DIR         = os.path.join(BASE, "opt_compositions")
+USER_COMPS_DIR    = os.path.join(BASE, "user_compositions")
+FLAT_DIR          = os.path.join(BASE, "flat_composition_skeletons")
+DIST_DIR          = os.path.join("dist", "compositions")
 
-for d in (OPT_DIR, WT_DIR, COMPS_DIR, FLAT_DIR):
+for d in (OPT_DIR, WT_DIR, USER_WT_DIR, COMPS_DIR, USER_COMPS_DIR, FLAT_DIR, DIST_DIR):
     os.makedirs(d, exist_ok=True)
 
 
@@ -46,6 +51,11 @@ def load_wt_index(template_id: str) -> Optional[dict[str, dict]]:
     with open(path) as f:
         wt = json.load(f)
     root = wt.get("tree") or wt
+    # The WT tree root 'id' may be the COMPOSITION archetype id (e.g. 'encounter')
+    # rather than the template_id. Use the authoritative 'templateId' field from
+    # the WT so paths align with normalized flat keys.
+    tid = wt.get("templateId") or template_id
+    root = dict(root, id=tid)
     return build_wt_index(root)
 
 
@@ -59,73 +69,186 @@ def wt_path_of(flat_key: str) -> str:
     return "/".join(parts)
 
 
-# ── jitter ─────────────────────────────────────────────────────────────────────
+# ── mutation ───────────────────────────────────────────────────────────────────
 
-_COMPOSITION_PROPS  = frozenset({"archetype_details", "language", "territory", "category", "composer", "context"})
-_PROTECTED_SEGMENTS = frozenset({"_work_flow_id", "_guideline_id", "_ism_transition"})
-
-
-def _is_protected(key: str) -> bool:
-    parts = key.split("/")
-    if len(parts) >= 2 and parts[1].split("|")[0].split(":")[0] in _COMPOSITION_PROPS:
-        return True
-    return any(p.split("|")[0].split(":")[0] in _PROTECTED_SEGMENTS for p in parts)
+_PROTECTED_SEGMENTS = frozenset({
+    "category", "context", "language", "territory", "composer",
+    "_work_flow_id", "_guideline_id",
+})
 
 
-def jitter_flat(flat: dict, wt_index: dict[str, dict]) -> dict:
+def _is_protected(base: str) -> bool:
+    """True if any path segment (index-stripped) is in the protected set."""
+    return bool(
+        _PROTECTED_SEGMENTS & {seg.split(":")[0] for seg in base.split("/")}
+    )
+
+
+def _jitter_datetime(value: str, rm_type: str) -> str:
+    """Jitter a date/time string within ±15% of one day (86 400 s)."""
+    delta_s = random.uniform(-0.15 * 86400, 0.15 * 86400)
+
+    if rm_type == "DV_DATE_TIME":
+        for fmt in ("%Y-%m-%dT%H:%M:%S", "%Y-%m-%dT%H:%M:%SZ"):
+            try:
+                parsed = dt.datetime.strptime(value, fmt)
+                return (parsed + dt.timedelta(seconds=delta_s)).strftime("%Y-%m-%dT%H:%M:%S")
+            except ValueError:
+                pass
+
+    elif rm_type == "DV_DATE":
+        try:
+            parsed = dt.date.fromisoformat(value)
+            return (parsed + dt.timedelta(days=int(delta_s / 86400))).isoformat()
+        except ValueError:
+            pass
+
+    elif rm_type == "DV_TIME":
+        try:
+            h, m, s = map(int, value.split(":"))
+            total = max(0, min(86399, int(h * 3600 + m * 60 + s + delta_s)))
+            return f"{total // 3600:02d}:{(total % 3600) // 60:02d}:{total % 60:02d}"
+        except ValueError:
+            pass
+
+    return value  # unchanged if parsing failed
+
+
+def mutate_flat(flat: dict, wt_index: dict[str, dict]) -> dict:
     """
-    Return a copy of flat with DV_QUANTITY magnitudes jittered within WT range.
+    Return a mutated copy of a flat composition using WT constraints.
 
     Rules:
-      - Only |magnitude keys are mutated
-      - Protected keys (COMPOSITION props, _work_flow_id, _guideline_id, _ism_transition) skipped
-      - |unit is never touched
-      - DV_CODED_TEXT with openehr terminology is untouched (has no |magnitude)
-      - ±10 % jitter, clamped to WT validation range when present
+      b) Skip paths containing: category, context, language, territory, composer,
+         _work_flow_id, _guideline_id
+      c) DV_CODED_TEXT with terminology "openehr" → untouched
+      d) DV_QUANTITY → jitter |magnitude within WT min/max range, leave |unit alone
+      e) DV_DURATION → untouched
+      g) DV_CODED_TEXT with terminology "local" and WT list → pick randomly from list
+      h) DV_TEXT → prepend random digit 1–5 to existing string
+      i) DV_DATE_TIME / DV_DATE / DV_TIME → jitter within ±15% of one day
     """
     out = copy.deepcopy(flat)
 
-    for key, val in flat.items():
-        if not key.endswith("|magnitude"):
-            continue
-        if not isinstance(val, (int, float)):
-            continue
-        if _is_protected(key):
-            continue
+    # Group keys by base path (strip |suffix so coded-text triplets are together)
+    groups: dict[str, list[str]] = {}
+    for key in flat:
+        groups.setdefault(key.split("|")[0], []).append(key)
 
-        wt_node = wt_index.get(wt_path_of(key))
-        if wt_node is None or wt_node.get("rmType") != "DV_QUANTITY":
+    for base, keys in groups.items():
+        if _is_protected(base):
             continue
 
-        inputs = wt_node.get("inputs") or []
-        mag_inp = next(
-            (i for i in inputs if i.get("suffix") in (None, "", "magnitude")), None
-        )
-        rng = (mag_inp.get("validation") or {}).get("range") if mag_inp else None
+        wt_node = wt_index.get(wt_path_of(base))
+        if wt_node is None:
+            continue
 
-        jittered = float(val) * random.uniform(0.9, 1.1)
-        if rng:
-            lo = float(rng.get("min", jittered))
-            hi = float(rng.get("max", jittered))
-            if hi < lo:
-                hi = lo
-            jittered = max(lo, min(hi, jittered))
+        rm_type = wt_node.get("rmType", "")
 
-        out[key] = round(jittered, 2) if isinstance(val, float) else round(jittered)
+        # ── DV_QUANTITY ────────────────────────────────────────────────────────
+        if rm_type == "DV_QUANTITY":
+            inputs = wt_node.get("inputs") or []
+            mag_inp = next(
+                (i for i in inputs if i.get("suffix") in (None, "", "magnitude")), None
+            )
+            rng = (mag_inp.get("validation") or {}).get("range") if mag_inp else None
+            for key in keys:
+                if not key.endswith("|magnitude"):
+                    continue
+                val = out[key]
+                if not isinstance(val, (int, float)):
+                    continue
+                jittered = float(val) * random.uniform(0.9, 1.1)
+                if rng:
+                    lo = float(rng.get("min", jittered))
+                    hi = float(rng.get("max", jittered))
+                    if hi < lo:
+                        hi = lo
+                    jittered = max(lo, min(hi, jittered))
+                out[key] = round(jittered, 2) if isinstance(val, float) else round(jittered)
+
+        # ── DV_CODED_TEXT ──────────────────────────────────────────────────────
+        elif rm_type == "DV_CODED_TEXT":
+            term_key = next((k for k in keys if k.endswith("|terminology")), None)
+            terminology = flat.get(term_key, "") if term_key else ""
+            if terminology == "openehr":
+                continue
+            if terminology == "local":
+                inputs = wt_node.get("inputs") or []
+                code_inp = next(
+                    (i for i in inputs if i.get("suffix") == "code" and i.get("list")),
+                    None,
+                )
+                if code_inp:
+                    chosen = random.choice(code_inp["list"])
+                    for key in keys:
+                        if key.endswith("|code"):
+                            out[key] = chosen["value"]
+                        elif key.endswith("|value"):
+                            out[key] = chosen.get("label", chosen["value"])
+
+        # ── DV_TEXT ────────────────────────────────────────────────────────────
+        elif rm_type == "DV_TEXT":
+            for key in keys:
+                if "|" not in key and isinstance(out[key], str):
+                    out[key] = str(random.randint(1, 5)) + out[key]
+
+        # ── DV_DATE_TIME / DV_DATE / DV_TIME ──────────────────────────────────
+        elif rm_type in ("DV_DATE_TIME", "DV_DATE", "DV_TIME"):
+            for key in keys:
+                if "|" not in key and isinstance(out[key], str):
+                    out[key] = _jitter_datetime(out[key], rm_type)
+
+        # DV_DURATION and everything else → skip
 
     return out
 
 
 # ── flat composition helpers ───────────────────────────────────────────────────
 
-def get_template_id(flat: dict) -> Optional[str]:
-    for key in flat:
-        return key.split("/")[0]
-    return None
-
 
 def strip_flat_uid(flat: dict) -> dict:
     return {k: v for k, v in flat.items() if k.rsplit("/", 1)[-1] != "_uid"}
+
+
+def normalize_flat_prefix(flat: dict, template_id: str) -> dict:
+    """
+    Replace the first path segment of every flat key with template_id.
+
+    EHRbase uses the COMPOSITION archetype id (e.g. 'encounter') as the flat
+    key prefix for CKM-sourced templates, but the webtemplate tree root id is
+    the template_id (e.g. 'Demo with hide-on-form'). Normalizing at save time
+    means jitter can always match keys to the webtemplate index at no extra cost.
+    """
+    result = {}
+    for key, val in flat.items():
+        parts = key.split("/", 1)
+        result[f"{template_id}/{parts[1]}" if len(parts) == 2 else key] = val
+    return result
+
+
+def prune_to_first_occurrence(flat: dict) -> dict:
+    """
+    Drop any flat key where a path segment has an occurrence index > 0.
+
+    EHRbase /example compositions include every allowed occurrence (e.g.
+    any_event:0, any_event:1, any_event:2). Posting multiple occurrences
+    back via the flat endpoint causes 400 "Could not consume Parts" even
+    though EHRbase itself generated those keys. Keeping only :0 (or bare,
+    unindexed) segments gives a minimal single-occurrence skeleton that
+    round-trips cleanly.
+    """
+    result = {}
+    for key, val in flat.items():
+        base = key.split("|")[0]
+        if any(
+            seg.split(":")[1:] and int(seg.rsplit(":", 1)[1]) > 0
+            for seg in base.split("/")
+            if ":" in seg and seg.rsplit(":", 1)[1].isdigit()
+        ):
+            continue
+        result[key] = val
+    return result
 
 
 def strip_canonical_uid(comp: dict) -> dict:
@@ -156,16 +279,6 @@ async def create_ehr(session: aiohttp.ClientSession, url: str) -> str:
             return loc.rstrip("/").rsplit("/", 1)[-1]
 
 
-async def list_template_ids(session: aiohttp.ClientSession, url: str) -> list[str]:
-    async with session.get(
-        f"{url}/definition/template/adl1.4", headers={"Accept": "application/json"}
-    ) as r:
-        if r.status != 200:
-            raise RuntimeError(f"List templates failed {r.status}: {await r.text()[:200]}")
-        data = await r.json(content_type=None)
-        return [t["template_id"] for t in data]
-
-
 async def fetch_webtemplate(
     session: aiohttp.ClientSession, url: str, template_id: str
 ) -> dict:
@@ -190,6 +303,19 @@ async def fetch_example_canonical(
         return await r.json(content_type=None)
 
 
+async def fetch_example_flat(
+    session: aiohttp.ClientSession, url: str, template_id: str
+) -> dict:
+    async with session.get(
+        f"{url}/definition/template/adl1.4/{template_id}/example",
+        params={"format": "FLAT"},
+        headers={"Accept": "application/json"},
+    ) as r:
+        if r.status != 200:
+            raise RuntimeError(f"Flat example fetch failed {r.status}: {await r.text()[:200]}")
+        return await r.json(content_type=None)
+
+
 async def post_canonical(
     session: aiohttp.ClientSession, url: str, ehr_id: str, comp: dict
 ) -> str:
@@ -201,8 +327,11 @@ async def post_canonical(
     async with session.post(
         f"{url}/ehr/{ehr_id}/composition", json=comp, headers=headers
     ) as r:
-        if r.status not in (200, 201):
+        if r.status not in (200, 201, 204):
             raise RuntimeError(f"POST canonical failed {r.status}: {await r.text()[:300]}")
+        if r.status == 204:
+            loc = r.headers.get("Location", "")
+            return loc.rstrip("/").rsplit("/", 1)[-1]
         body = await r.json(content_type=None)
         uid = (body.get("uid") or {}).get("value") or body.get("_uid")
         if not uid:
@@ -215,8 +344,8 @@ async def fetch_flat(
     session: aiohttp.ClientSession, url: str, ehr_id: str, uid: str
 ) -> dict:
     async with session.get(
-        f"{url}/ehr/{ehr_id}/composition/{uid}?format=FLAT",
-        headers={"Accept": "application/json"},
+        f"{url}/ehr/{ehr_id}/composition/{uid}",
+        headers={"Accept": "application/openehr.wt.flat.schema+json"},
     ) as r:
         if r.status != 200:
             raise RuntimeError(f"FLAT fetch failed {r.status}: {await r.text()[:200]}")
@@ -236,6 +365,28 @@ async def post_flat(
         return r.status, await r.text()
 
 
+# ── OPT helpers ────────────────────────────────────────────────────────────────
+
+_OPT_NS = "http://schemas.openehr.org/v1"
+
+def extract_opt_template_id(xml_text: str) -> Optional[str]:
+    """Extract <template_id><value> from OPT XML (with or without namespace)."""
+    try:
+        root = ET.fromstring(xml_text)
+        for tag in (f"{{{_OPT_NS}}}template_id", "template_id"):
+            elem = root.find(f"{tag}/{tag.replace('template_id', 'value')}")
+            # handle mixed ns: try both ns and bare value child
+            if elem is None:
+                parent = root.find(tag)
+                if parent is not None:
+                    elem = parent.find(f"{{{_OPT_NS}}}value") or parent.find("value")
+            if elem is not None and elem.text:
+                return elem.text.strip()
+    except Exception:
+        pass
+    return None
+
+
 # ── mode 3: upload OPTs ────────────────────────────────────────────────────────
 
 async def upload_opts(session: aiohttp.ClientSession, url: str) -> None:
@@ -246,6 +397,8 @@ async def upload_opts(session: aiohttp.ClientSession, url: str) -> None:
 
     print(f"[*] Uploading {len(opt_files)} OPT(s) ...")
     ok = failed = skipped = 0
+    uploaded_ids: list[str] = []
+
     for fname in sorted(opt_files):
         with open(os.path.join(OPT_DIR, fname), "r", encoding="utf-8") as f:
             xml = f.read()
@@ -257,10 +410,18 @@ async def upload_opts(session: aiohttp.ClientSession, url: str) -> None:
             ) as r:
                 if r.status in (200, 201):
                     ok += 1
-                    print(f"  [+] {fname}")
+                    loc = r.headers.get("Location", "")
+                    tid = urllib.parse.unquote(loc.rstrip("/").rsplit("/", 1)[-1]) if loc else fname[:-4]
+                    uploaded_ids.append(tid)
+                    print(f"  [+] {fname} -> {tid}")
                 elif r.status == 409:
                     skipped += 1
-                    print(f"  [~] Already exists: {fname}")
+                    tid = extract_opt_template_id(xml)
+                    if tid:
+                        uploaded_ids.append(tid)
+                        print(f"  [~] Already exists: {fname} -> fetching WT for {tid!r}")
+                    else:
+                        print(f"  [~] Already exists: {fname} (could not extract template_id from OPT)")
                 else:
                     failed += 1
                     print(f"  [!] {fname} ({r.status}): {await r.text()[:120]}")
@@ -270,155 +431,134 @@ async def upload_opts(session: aiohttp.ClientSession, url: str) -> None:
 
     print(f"\n[*] OPTs uploaded (ok:{ok} | skipped:{skipped} | fail:{failed} | total:{len(opt_files)})")
 
-
-# ── mode 4: setup ──────────────────────────────────────────────────────────────
-
-async def setup_fetch_webtemplates(session: aiohttp.ClientSession, url: str) -> None:
-    """Step 1: Fetch webtemplates from CDR -> opt_webtemplates/"""
-    try:
-        template_ids = await list_template_ids(session, url)
-    except Exception as e:
-        print(f"  [!] Could not list templates: {e}")
+    if not uploaded_ids:
         return
 
-    ok = failed = 0
+    print(f"\n[*] Fetching webtemplates for {len(uploaded_ids)} uploaded template(s) -> {WT_DIR}")
+    wt_ok = wt_fail = 0
     sem = asyncio.Semaphore(10)
 
-    async def one(tid: str) -> None:
-        nonlocal ok, failed
+    async def fetch_one(tid: str) -> None:
+        nonlocal wt_ok, wt_fail
         async with sem:
             try:
                 wt = await fetch_webtemplate(session, url, tid)
                 with open(os.path.join(WT_DIR, f"{tid}.json"), "w") as f:
                     json.dump(wt, f, indent=2)
-                ok += 1
-            except Exception:
-                failed += 1
+                wt_ok += 1
+            except Exception as e:
+                wt_fail += 1
+                print(f"  [!] WT fetch failed for {tid!r}: {e}")
 
-    await asyncio.gather(*[one(tid) for tid in template_ids])
-    total = len(template_ids)
-    print(f"  Webtemplates fetched from openEHR CDR (success:{ok} | fail:{failed} | total:{total})")
+    await asyncio.gather(*[fetch_one(tid) for tid in uploaded_ids])
+    print(f"[*] Webtemplates saved (success:{wt_ok} | fail:{wt_fail} | total:{len(uploaded_ids)})")
 
 
-async def setup_fetch_sample_compositions(session: aiohttp.ClientSession, url: str) -> None:
-    """Step 2: Fetch /example canonical compositions -> opt_compositions/"""
-    template_ids = sorted(f[:-5] for f in os.listdir(WT_DIR) if f.endswith(".json"))
-    if not template_ids:
-        print("  [!] No webtemplates found — run step 1 first")
+# ── mode 4: setup ──────────────────────────────────────────────────────────────
+
+async def run_setup(session: aiohttp.ClientSession, url: str) -> None:
+    # ── step 1: check webtemplates ────────────────────────────────────────────
+    wt_files = sorted(f for f in os.listdir(WT_DIR) if f.endswith(".json"))
+    if not wt_files:
+        print("[!] No webtemplates found in source_models/opt_webtemplates/")
+        print("    Run Mode 3 first to upload OPTs and fetch webtemplates.")
         return
 
+    print(f"[*] Step 1: {len(wt_files)} webtemplate(s) found in {WT_DIR}")
+
+    # ── step 2: fetch flat example compositions ───────────────────────────────
+    print(f"\n[*] Step 2: Fetch flat example compositions -> {FLAT_DIR}")
     ok = failed = 0
     sem = asyncio.Semaphore(10)
-
-    async def one(tid: str) -> None:
-        nonlocal ok, failed
-        async with sem:
-            try:
-                comp = await fetch_example_canonical(session, url, tid)
-                with open(os.path.join(COMPS_DIR, f"{tid}.json"), "w") as f:
-                    json.dump(comp, f, indent=2)
-                ok += 1
-            except Exception:
-                failed += 1
-
-    await asyncio.gather(*[one(tid) for tid in template_ids])
-    total = len(template_ids)
-    print(f"  Sample compositions from CDR fetched (success:{ok} | fail:{failed} | total:{total})")
-
-
-async def setup_post_sample_compositions(
-    session: aiohttp.ClientSession, url: str, ehr_id: str
-) -> dict[str, str]:
-    """Step 3: POST each canonical skeleton -> collect UIDs for flat fetch."""
-    comp_files = sorted(f for f in os.listdir(COMPS_DIR) if f.endswith(".json"))
-    if not comp_files:
-        print("  [!] No sample compositions found — run step 2 first")
-        return {}
-
-    ok = failed = 0
-    uids: dict[str, str] = {}
-    sem = asyncio.Semaphore(5)
 
     async def one(fname: str) -> None:
         nonlocal ok, failed
         async with sem:
-            template_id = fname[:-5]
             try:
-                with open(os.path.join(COMPS_DIR, fname)) as f:
-                    comp = json.load(f)
-                comp = strip_canonical_uid(copy.deepcopy(comp))
-                uid = await post_canonical(session, url, ehr_id, comp)
-                uids[template_id] = uid
+                with open(os.path.join(WT_DIR, fname)) as f:
+                    wt = json.load(f)
+                tid = wt.get("templateId") or fname[:-5]
+                flat = await fetch_example_flat(session, url, tid)
+                envelope = {"template_id": tid, "flat_comp": flat}
+                with open(os.path.join(FLAT_DIR, f"{tid}.json"), "w") as f:
+                    json.dump(envelope, f, indent=2)
                 ok += 1
-            except Exception:
+            except Exception as e:
                 failed += 1
+                print(f"  [!] {fname}: {e}")
 
-    await asyncio.gather(*[one(f) for f in comp_files])
-    total = len(comp_files)
-    print(f"  Sample compositions sent to CDR to get flat compositions (success:{ok} | fail:{failed} | total:{total})")
-    return uids
+    await asyncio.gather(*[one(f) for f in wt_files])
+    print(f"  Flat examples fetched (success:{ok} | fail:{failed} | total:{len(wt_files)})")
 
 
-async def setup_fetch_flat_compositions(
-    session: aiohttp.ClientSession, url: str, ehr_id: str, uids: dict[str, str]
+# ── mode 1: duplicate canonical compositions ───────────────────────────────────
+
+async def run_duplicate(
+    dest: str,
+    count: int,
+    session: Optional[aiohttp.ClientSession] = None,
+    url: str = "",
+    ehr_id: str = "",
 ) -> None:
-    """Step 4: GET each posted composition as FLAT -> flat_composition_skeletons/"""
-    if not uids:
-        print("  [!] No composition UIDs available — run step 3 first")
+    comp_files = sorted(f for f in os.listdir(USER_COMPS_DIR) if f.endswith(".json"))
+    if not comp_files:
+        print(f"[!] No compositions in {USER_COMPS_DIR}.")
         return
 
+    send_cdr   = dest in ("b", "c") and session is not None
+    save_local = dest in ("a", "c")
     ok = failed = 0
-    sem = asyncio.Semaphore(5)
+    first_errors: dict[str, str] = {}
+    counters: dict[str, int] = {}
+    sem = asyncio.Semaphore(10)
 
-    async def one(template_id: str, uid: str) -> None:
+    async def one(fname: str) -> None:
         nonlocal ok, failed
         async with sem:
             try:
-                flat = await fetch_flat(session, url, ehr_id, uid)
-                flat = strip_flat_uid(flat)
-                with open(os.path.join(FLAT_DIR, f"{template_id}.json"), "w") as f:
-                    json.dump(flat, f, indent=2)
-                ok += 1
-            except Exception:
+                with open(os.path.join(USER_COMPS_DIR, fname)) as f:
+                    comp = json.load(f)
+                for _ in range(count):
+                    clean = strip_canonical_uid(copy.deepcopy(comp))
+                    if send_cdr:
+                        await post_canonical(session, url, ehr_id, clean)
+                    if save_local:
+                        n = counters.get(fname, 0)
+                        counters[fname] = n + 1
+                        out_name = f"{fname[:-5]}_{n:06d}.json"
+                        with open(os.path.join(DIST_DIR, out_name), "w") as f2:
+                            json.dump(clean, f2, indent=2)
+                    ok += 1
+            except Exception as e:
                 failed += 1
+                if fname not in first_errors:
+                    first_errors[fname] = str(e)
 
-    await asyncio.gather(*[one(tid, uid) for tid, uid in uids.items()])
-    total = len(uids)
-    print(f"  FLAT json compositions fetched (success:{ok} | fail:{failed} | total:{total})")
-
-
-async def run_setup(session: aiohttp.ClientSession, url: str) -> None:
-    print("\n[*] Step 1: Fetch Webtemplates from openEHR CDR -> source_models/opt_webtemplates")
-    await setup_fetch_webtemplates(session, url)
-
-    print("\n[*] Step 2: Fetch sample compositions from CDR -> source_models/opt_compositions")
-    await setup_fetch_sample_compositions(session, url)
-
-    print("\n[*] Step 3: POST sample compositions to CDR")
-    ehr_id = await create_ehr(session, url)
-    uids = await setup_post_sample_compositions(session, url, ehr_id)
-
-    print("\n[*] Step 4: Fetch FLAT json compositions -> source_models/flat_composition_skeletons")
-    await setup_fetch_flat_compositions(session, url, ehr_id, uids)
+    await asyncio.gather(*[one(f) for f in comp_files])
+    print(f"\n[*] Done. OK: {ok} | Failed: {failed}")
+    for fname, err in first_errors.items():
+        print(f"  [!] {fname}: {err}")
 
 
-# ── modes 1 & 2: generate compositions ────────────────────────────────────────
+# ── mode 2: jitter flat compositions ──────────────────────────────────────────
 
 async def run_generate(
-    session: aiohttp.ClientSession,
-    url: str,
-    ehr_id: str,
+    dest: str,
     count: int,
-    do_jitter: bool,
+    session: Optional[aiohttp.ClientSession] = None,
+    url: str = "",
+    ehr_id: str = "",
 ) -> None:
     flat_files = sorted(f for f in os.listdir(FLAT_DIR) if f.endswith(".json"))
     if not flat_files:
         print(f"[!] No flat skeletons in {FLAT_DIR}. Run mode 4 first.")
         return
 
-    ok = 0
-    failed = 0
+    send_cdr   = dest in ("b", "c") and session is not None
+    save_local = dest in ("a", "c")
+    ok = failed = 0
     first_errors: dict[str, str] = {}
+    counters: dict[str, int] = {}
     sem = asyncio.Semaphore(10)
 
     async def one(fname: str) -> None:
@@ -426,36 +566,37 @@ async def run_generate(
         async with sem:
             try:
                 with open(os.path.join(FLAT_DIR, fname)) as f:
-                    skeleton = json.load(f)
+                    envelope = json.load(f)
 
-                template_id = get_template_id(skeleton)
-                if not template_id:
-                    raise ValueError("Cannot determine template_id from flat keys")
+                template_id = envelope.get("template_id")
+                skeleton = envelope.get("flat_comp")
+                if not template_id or not skeleton:
+                    raise ValueError("Missing template_id or flat_comp in envelope")
 
-                wt_index = None
-                if do_jitter:
-                    wt_index = load_wt_index(template_id)
-                    if wt_index is None:
-                        raise ValueError(f"No webtemplate found for {template_id}")
+                wt_index = load_wt_index(template_id)
+                if wt_index is None:
+                    raise ValueError(f"No webtemplate found for {template_id}")
 
                 for _ in range(count):
                     flat = strip_flat_uid(copy.deepcopy(skeleton))
-                    if do_jitter:
-                        flat = jitter_flat(flat, wt_index)
-                    status, txt = await post_flat(session, url, ehr_id, template_id, flat)
-                    if status in (200, 201):
-                        ok += 1
-                    else:
-                        failed += 1
-                        if fname not in first_errors:
-                            first_errors[fname] = f"{status} {txt[:120]}"
+                    flat = mutate_flat(flat, wt_index)
+                    if send_cdr:
+                        status, txt = await post_flat(session, url, ehr_id, template_id, flat)
+                        if status not in (200, 201, 204):
+                            raise RuntimeError(f"{status} {txt[:120]}")
+                    if save_local:
+                        n = counters.get(fname, 0)
+                        counters[fname] = n + 1
+                        out_name = f"{fname[:-5]}_{n:06d}.json"
+                        with open(os.path.join(DIST_DIR, out_name), "w") as f2:
+                            json.dump(flat, f2, indent=2)
+                    ok += 1
             except Exception as e:
                 failed += 1
                 if fname not in first_errors:
                     first_errors[fname] = str(e)
 
     await asyncio.gather(*[one(f) for f in flat_files])
-
     print(f"\n[*] Done. OK: {ok} | Failed: {failed}")
     for fname, err in first_errors.items():
         print(f"  [!] {fname}: {err}")
@@ -491,25 +632,53 @@ async def main() -> None:
             await run_setup(session, url)
         return
 
-    if mode not in ("1", "2"):
-        print("[!] Unknown mode.")
+    if mode == "1":
+        comp_files = sorted(f for f in os.listdir(USER_COMPS_DIR) if f.endswith(".json"))
+        if not comp_files:
+            print(f"[!] No compositions in {USER_COMPS_DIR}.")
+            return
+        count = int(
+            input(f"Compositions found: {len(comp_files)}. Count per composition [1]: ").strip() or "1"
+        )
+        print("  (a) Save to local disk (dist/compositions/)")
+        print("  (b) Send to openEHR CDR")
+        print("  (c) Both")
+        dest = input("  Destination [a/b/c]: ").strip().lower()
+        if dest in ("b", "c"):
+            url, auth = prompt_api()
+            async with aiohttp.ClientSession(auth=auth) as session:
+                print("\n[*] Creating EHR ...")
+                ehr_id = await create_ehr(session, url)
+                print(f"[*] EHR: {ehr_id}\n")
+                await run_duplicate(dest, count, session, url, ehr_id)
+        else:
+            await run_duplicate(dest, count)
         return
 
-    flat_files = sorted(f for f in os.listdir(FLAT_DIR) if f.endswith(".json"))
-    if not flat_files:
-        print(f"[!] No flat skeletons in {FLAT_DIR}. Run mode 4 first.")
+    if mode == "2":
+        flat_files = sorted(f for f in os.listdir(FLAT_DIR) if f.endswith(".json"))
+        if not flat_files:
+            print(f"[!] No flat skeletons in {FLAT_DIR}. Run mode 4 first.")
+            return
+        count = int(
+            input(f"Skeletons found: {len(flat_files)}. Count per skeleton [1]: ").strip() or "1"
+        )
+        print("  (a) Save to local disk (dist/compositions/)")
+        print("  (b) Send to openEHR CDR")
+        print("  (c) Both")
+        dest = input("  Destination [a/b/c]: ").strip().lower()
+        if dest in ("b", "c"):
+            url, auth = prompt_api()
+            async with aiohttp.ClientSession(auth=auth) as session:
+                print("\n[*] Creating EHR ...")
+                ehr_id = await create_ehr(session, url)
+                print(f"[*] EHR: {ehr_id}\n")
+                await run_generate(dest, count, session, url, ehr_id)
+        else:
+            await run_generate(dest, count)
         return
 
-    count = int(
-        input(f"Skeletons found: {len(flat_files)}. Count per skeleton [1]: ").strip() or "1"
-    )
-    url, auth = prompt_api()
-
-    async with aiohttp.ClientSession(auth=auth) as session:
-        print("\n[*] Creating EHR ...")
-        ehr_id = await create_ehr(session, url)
-        print(f"[*] EHR: {ehr_id}\n")
-        await run_generate(session, url, ehr_id, count, do_jitter=(mode == "2"))
+    print("[!] Unknown mode.")
 
 
 if __name__ == "__main__":
