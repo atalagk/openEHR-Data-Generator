@@ -12,20 +12,18 @@ import random
 import asyncio
 import urllib.parse
 import aiohttp
-from typing import Optional, Tuple
+from typing import Optional
 
 # ── directories ────────────────────────────────────────────────────────────────
 
-BASE              = "source_models"
-OPT_DIR           = os.path.join(BASE, "opts")
-WT_DIR            = os.path.join(BASE, "opt_webtemplates")
-USER_WT_DIR       = os.path.join(BASE, "user_webtemplates")
-COMPS_DIR         = os.path.join(BASE, "opt_compositions")
-USER_COMPS_DIR    = os.path.join(BASE, "user_compositions")
-FLAT_DIR          = os.path.join(BASE, "flat_composition_skeletons")
-DIST_DIR          = os.path.join("dist", "compositions")
+BASE           = "source_models"
+OPT_DIR        = os.path.join(BASE, "opts")
+WT_DIR         = os.path.join(BASE, "opt_webtemplates")
+USER_COMPS_DIR = os.path.join(BASE, "user_compositions")
+FLAT_DIR       = os.path.join(BASE, "flat_composition_skeletons")
+DIST_DIR       = os.path.join("dist", "compositions")
 
-for d in (OPT_DIR, WT_DIR, USER_WT_DIR, COMPS_DIR, USER_COMPS_DIR, FLAT_DIR, DIST_DIR):
+for d in (OPT_DIR, WT_DIR, USER_COMPS_DIR, FLAT_DIR, DIST_DIR):
     os.makedirs(d, exist_ok=True)
 
 
@@ -211,44 +209,6 @@ def strip_flat_uid(flat: dict) -> dict:
     return {k: v for k, v in flat.items() if k.rsplit("/", 1)[-1] != "_uid"}
 
 
-def normalize_flat_prefix(flat: dict, template_id: str) -> dict:
-    """
-    Replace the first path segment of every flat key with template_id.
-
-    EHRbase uses the COMPOSITION archetype id (e.g. 'encounter') as the flat
-    key prefix for CKM-sourced templates, but the webtemplate tree root id is
-    the template_id (e.g. 'Demo with hide-on-form'). Normalizing at save time
-    means jitter can always match keys to the webtemplate index at no extra cost.
-    """
-    result = {}
-    for key, val in flat.items():
-        parts = key.split("/", 1)
-        result[f"{template_id}/{parts[1]}" if len(parts) == 2 else key] = val
-    return result
-
-
-def prune_to_first_occurrence(flat: dict) -> dict:
-    """
-    Drop any flat key where a path segment has an occurrence index > 0.
-
-    EHRbase /example compositions include every allowed occurrence (e.g.
-    any_event:0, any_event:1, any_event:2). Posting multiple occurrences
-    back via the flat endpoint causes 400 "Could not consume Parts" even
-    though EHRbase itself generated those keys. Keeping only :0 (or bare,
-    unindexed) segments gives a minimal single-occurrence skeleton that
-    round-trips cleanly.
-    """
-    result = {}
-    for key, val in flat.items():
-        base = key.split("|")[0]
-        if any(
-            seg.split(":")[1:] and int(seg.rsplit(":", 1)[1]) > 0
-            for seg in base.split("/")
-            if ":" in seg and seg.rsplit(":", 1)[1].isdigit()
-        ):
-            continue
-        result[key] = val
-    return result
 
 
 def strip_canonical_uid(comp: dict) -> dict:
@@ -260,23 +220,16 @@ def strip_canonical_uid(comp: dict) -> dict:
 # ── EHRbase REST ───────────────────────────────────────────────────────────────
 
 async def create_ehr(session: aiohttp.ClientSession, url: str) -> str:
-    payload = {
-        "_type": "EHR_STATUS",
-        "archetype_node_id": "openEHR-EHR-EHR_STATUS.generic.v1",
-        "name": {"_type": "DV_TEXT", "value": "EHR status"},
-        "subject": {"_type": "PARTY_SELF"},
-        "is_queryable": True,
-        "is_modifiable": True,
+    headers = {
+        "Accept": "application/json",
+        "Prefer": "return=minimal",
+        "Content-Type": "application/json",
     }
-    async with session.post(f"{url}/ehr", json=payload) as r:
-        if r.status not in (200, 201):
+    async with session.post(f"{url}/ehr", headers=headers) as r:
+        if r.status not in (200, 201, 204):
             raise RuntimeError(f"Create EHR failed {r.status}: {await r.text()}")
-        try:
-            body = await r.json(content_type=None)
-            return body["ehr_id"]["value"]
-        except Exception:
-            loc = r.headers.get("Location", "")
-            return loc.rstrip("/").rsplit("/", 1)[-1]
+        loc = r.headers.get("Location", "")
+        return loc.rstrip("/").rsplit("/", 1)[-1]
 
 
 async def fetch_webtemplate(
@@ -290,17 +243,6 @@ async def fetch_webtemplate(
             raise RuntimeError(f"WT fetch failed {r.status}: {await r.text()[:200]}")
         return await r.json(content_type=None)
 
-
-async def fetch_example_canonical(
-    session: aiohttp.ClientSession, url: str, template_id: str
-) -> dict:
-    async with session.get(
-        f"{url}/definition/template/adl1.4/{template_id}/example",
-        headers={"Accept": "application/json"},
-    ) as r:
-        if r.status != 200:
-            raise RuntimeError(f"Example fetch failed {r.status}: {await r.text()[:200]}")
-        return await r.json(content_type=None)
 
 
 async def fetch_example_flat(
@@ -340,17 +282,6 @@ async def post_canonical(
         return uid
 
 
-async def fetch_flat(
-    session: aiohttp.ClientSession, url: str, ehr_id: str, uid: str
-) -> dict:
-    async with session.get(
-        f"{url}/ehr/{ehr_id}/composition/{uid}",
-        headers={"Accept": "application/openehr.wt.flat.schema+json"},
-    ) as r:
-        if r.status != 200:
-            raise RuntimeError(f"FLAT fetch failed {r.status}: {await r.text()[:200]}")
-        return await r.json(content_type=None)
-
 
 async def post_flat(
     session: aiohttp.ClientSession,
@@ -358,7 +289,7 @@ async def post_flat(
     ehr_id: str,
     template_id: str,
     flat: dict,
-) -> Tuple[int, str]:
+) -> tuple[int, str]:
     endpoint = f"{url}/ehr/{ehr_id}/composition?format=FLAT&templateId={template_id}"
     headers = {"Content-Type": "application/json", "Accept": "application/json"}
     async with session.post(endpoint, json=flat, headers=headers) as r:
@@ -505,8 +436,8 @@ async def run_duplicate(
         print(f"[!] No compositions in {USER_COMPS_DIR}.")
         return
 
-    send_cdr   = dest in ("b", "c") and session is not None
-    save_local = dest in ("a", "c")
+    send_cdr   = dest == "b" and session is not None
+    save_local = dest == "a"
     ok = failed = 0
     first_errors: dict[str, str] = {}
     counters: dict[str, int] = {}
@@ -554,8 +485,8 @@ async def run_generate(
         print(f"[!] No flat skeletons in {FLAT_DIR}. Run mode 4 first.")
         return
 
-    send_cdr   = dest in ("b", "c") and session is not None
-    save_local = dest in ("a", "c")
+    send_cdr   = dest == "b" and session is not None
+    save_local = dest == "a"
     ok = failed = 0
     first_errors: dict[str, str] = {}
     counters: dict[str, int] = {}
@@ -604,7 +535,7 @@ async def run_generate(
 
 # ── entry point ────────────────────────────────────────────────────────────────
 
-def prompt_api() -> Tuple[str, aiohttp.BasicAuth]:
+def prompt_api() -> tuple[str, aiohttp.BasicAuth]:
     raw = input("API URL [http://localhost:8080/ehrbase/rest/openehr/v1]: ").strip().rstrip("/")
     url = raw or "http://localhost:8080/ehrbase/rest/openehr/v1"
     user = input("User [ehrbase-admin]: ").strip() or "ehrbase-admin"
@@ -642,9 +573,8 @@ async def main() -> None:
         )
         print("  (a) Save to local disk (dist/compositions/)")
         print("  (b) Send to openEHR CDR")
-        print("  (c) Both")
-        dest = input("  Destination [a/b/c]: ").strip().lower()
-        if dest in ("b", "c"):
+        dest = input("  Destination [a/b]: ").strip().lower()
+        if dest == "b":
             url, auth = prompt_api()
             async with aiohttp.ClientSession(auth=auth) as session:
                 print("\n[*] Creating EHR ...")
@@ -665,9 +595,8 @@ async def main() -> None:
         )
         print("  (a) Save to local disk (dist/compositions/)")
         print("  (b) Send to openEHR CDR")
-        print("  (c) Both")
-        dest = input("  Destination [a/b/c]: ").strip().lower()
-        if dest in ("b", "c"):
+        dest = input("  Destination [a/b]: ").strip().lower()
+        if dest == "b":
             url, auth = prompt_api()
             async with aiohttp.ClientSession(auth=auth) as session:
                 print("\n[*] Creating EHR ...")
