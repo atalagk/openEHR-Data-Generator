@@ -438,6 +438,9 @@ async def run_duplicate(
 
     send_cdr   = dest == "b" and session is not None
     save_local = dest == "a"
+    if save_local:
+        for f in os.listdir(DIST_DIR):
+            os.remove(os.path.join(DIST_DIR, f))
     ok = failed = 0
     first_errors: dict[str, str] = {}
     counters: dict[str, int] = {}
@@ -487,6 +490,9 @@ async def run_generate(
 
     send_cdr   = dest == "b" and session is not None
     save_local = dest == "a"
+    if save_local:
+        for f in os.listdir(DIST_DIR):
+            os.remove(os.path.join(DIST_DIR, f))
     ok = failed = 0
     first_errors: dict[str, str] = {}
     counters: dict[str, int] = {}
@@ -546,7 +552,7 @@ def prompt_api() -> tuple[str, aiohttp.BasicAuth]:
 async def main() -> None:
     print("--- openEHR Synthetic Data Generator ---")
     print("1. Generate compositions from existing compositions (duplicate)")
-    print("2. Generate compositions from templates")
+    print("2. Generate compositions from templates and jitter")
     print("3. Upload OPTs to openEHR CDR (run this when you want to add new opts)")
     print("4. Setup modelling environment")
     mode = input("Select mode: ").strip()
