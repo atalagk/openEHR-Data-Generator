@@ -71,7 +71,7 @@ def wt_path_of(flat_key: str) -> str:
 
 _PROTECTED_SEGMENTS = frozenset({
     "category", "context", "language", "territory", "composer",
-    "_work_flow_id", "_guideline_id",
+    "_work_flow_id", "_guideline_id", "_instruction_details", "ism_transition",
 })
 
 
@@ -525,7 +525,7 @@ async def run_generate(
                     if send_cdr:
                         status, txt = await post_flat(session, url, ehr_id, template_id, flat)
                         if status not in (200, 201, 204):
-                            raise RuntimeError(f"{status} {txt[:120]}")
+                            raise RuntimeError(f"{status} {txt[:600]}")
                     if save_local:
                         n = counters.get(fname, 0)
                         counters[fname] = n + 1
