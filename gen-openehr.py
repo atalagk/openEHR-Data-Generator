@@ -189,7 +189,12 @@ def mutate_flat(flat: dict, wt_index: dict[str, dict]) -> dict:
         elif rm_type == "DV_TEXT":
             for key in keys:
                 if "|" not in key and isinstance(out[key], str):
-                    out[key] = str(random.randint(1, 5)) + out[key]
+                    words = out[key].split()
+                    if len(words) > 1:
+                        random.shuffle(words)
+                        out[key] = " ".join(words)
+                    else:
+                        out[key] = out[key] + " " + hex(random.randint(0, 0xFFFF))[2:]
 
         # ── DV_DATE_TIME / DV_DATE / DV_TIME ──────────────────────────────────
         elif rm_type in ("DV_DATE_TIME", "DV_DATE", "DV_TIME"):
