@@ -11,8 +11,11 @@ import xml.etree.ElementTree as ET
 import random
 import asyncio
 import urllib.parse
+import zipfile
+import time
 import aiohttp
 from typing import Optional
+
 
 # ── directories ────────────────────────────────────────────────────────────────
 
@@ -23,6 +26,8 @@ USER_COMPS_DIR = os.path.join(BASE, "user_compositions")
 FLAT_DIR       = os.path.join(BASE, "flat_composition_skeletons")
 DIST_DIR       = os.path.join("dist", "compositions")
 CONFIG_FILE    = "ehrbase_config.json"
+
+_AQL_PAGE: int = 10  # compositions per paginated AQL query
 
 for d in (OPT_DIR, WT_DIR, USER_COMPS_DIR, FLAT_DIR, DIST_DIR):
     os.makedirs(d, exist_ok=True)
@@ -188,14 +193,16 @@ def mutate_flat(flat: dict, wt_index: dict[str, dict]) -> dict:
 
         # ── DV_TEXT ────────────────────────────────────────────────────────────
         elif rm_type == "DV_TEXT":
+            name_raw = wt_node.get("name") or ""
+            base = name_raw.get("value", "") if isinstance(name_raw, dict) else name_raw
             for key in keys:
                 if "|" not in key and isinstance(out[key], str):
-                    words = out[key].split()
+                    words = (base or out[key]).split()
                     if len(words) > 1:
                         random.shuffle(words)
                         out[key] = " ".join(words)
                     else:
-                        out[key] = out[key] + " " + hex(random.randint(0, 0xFFFF))[2:]
+                        out[key] = (base or out[key]) + " " + hex(random.randint(0, 0xFFFF))[2:]
 
         # ── DV_DATE_TIME / DV_DATE / DV_TIME ──────────────────────────────────
         elif rm_type in ("DV_DATE_TIME", "DV_DATE", "DV_TIME"):
@@ -236,6 +243,18 @@ async def create_ehr(session: aiohttp.ClientSession, url: str) -> str:
             raise RuntimeError(f"Create EHR failed {r.status}: {await r.text()}")
         loc = r.headers.get("Location", "")
         return loc.rstrip("/").rsplit("/", 1)[-1]
+
+
+async def create_ehr_pool(
+    session: aiohttp.ClientSession, url: str, size: int
+) -> list[str]:
+    sem = asyncio.Semaphore(10)
+    async def one() -> str:
+        async with sem:
+            return await create_ehr(session, url)
+    pool = await asyncio.gather(*[one() for _ in range(size)])
+    print(f"[*] Created {size} EHR(s)\n")
+    return list(pool)
 
 
 async def fetch_webtemplate(
@@ -295,11 +314,20 @@ async def post_flat(
     ehr_id: str,
     template_id: str,
     flat: dict,
-) -> tuple[int, str]:
+    prefer_repr: bool = False,
+) -> tuple[int, str | dict, str]:
+    """Returns (status, body, uid). uid extracted from Location header."""
     endpoint = f"{url}/ehr/{ehr_id}/composition?format=FLAT&templateId={template_id}"
-    headers = {"Content-Type": "application/json", "Accept": "application/json"}
+    headers = {
+        "Content-Type": "application/json",
+        "Accept": "application/json",
+        "Prefer": "return=representation" if prefer_repr else "return=minimal",
+    }
     async with session.post(endpoint, json=flat, headers=headers) as r:
-        return r.status, await r.text()
+        uid = r.headers.get("Location", "").rstrip("/").rsplit("/", 1)[-1]
+        if prefer_repr and r.status in (200, 201):
+            return r.status, await r.json(content_type=None), uid
+        return r.status, await r.text(), uid
 
 
 # ── OPT helpers ────────────────────────────────────────────────────────────────
@@ -439,7 +467,8 @@ async def run_duplicate(
     count: int,
     session: Optional[aiohttp.ClientSession] = None,
     url: str = "",
-    ehr_id: str = "",
+    ehr_pool: list[str] = [],
+    packaging: str = "a",
 ) -> None:
     comp_files = sorted(f for f in os.listdir(USER_COMPS_DIR) if f.endswith(".json"))
     if not comp_files:
@@ -456,6 +485,23 @@ async def run_duplicate(
     counters: dict[str, int] = {}
     sem = asyncio.Semaphore(10)
 
+    zf = (
+        zipfile.ZipFile(os.path.join(DIST_DIR, "compositions.zip"), "w", zipfile.ZIP_DEFLATED)
+        if save_local and packaging == "b" else None
+    )
+
+    total     = count * len(comp_files)
+    tick_size = max(1, total // 10)
+    last_tick = 0
+
+    def _tick() -> None:
+        nonlocal last_tick
+        current = min(10, (ok + failed) // tick_size)
+        if current > last_tick:
+            last_tick = current
+            bar = "X" * last_tick + " " * (10 - last_tick)
+            print(f"\r[{bar}]", end="", flush=True)
+
     async def one(fname: str) -> None:
         nonlocal ok, failed
         async with sem:
@@ -465,21 +511,34 @@ async def run_duplicate(
                 for _ in range(count):
                     clean = strip_canonical_uid(copy.deepcopy(comp))
                     if send_cdr:
-                        await post_canonical(session, url, ehr_id, clean)
+                        await post_canonical(session, url, random.choice(ehr_pool), clean)
                     if save_local:
                         n = counters.get(fname, 0)
                         counters[fname] = n + 1
                         out_name = f"{fname[:-5]}_{n:06d}.json"
-                        with open(os.path.join(DIST_DIR, out_name), "w") as f2:
-                            json.dump(clean, f2, indent=2)
+                        data = json.dumps(clean, indent=2)
+                        if zf:
+                            zf.writestr(out_name, data)
+                        else:
+                            with open(os.path.join(DIST_DIR, out_name), "w") as f2:
+                                f2.write(data)
                     ok += 1
+                    _tick()
             except Exception as e:
                 failed += 1
                 if fname not in first_errors:
                     first_errors[fname] = str(e)
+                _tick()
 
-    await asyncio.gather(*[one(f) for f in comp_files])
-    print(f"\n[*] Done. OK: {ok} | Failed: {failed}")
+    if total > 0:
+        print("[          ]", end="", flush=True)
+    try:
+        await asyncio.gather(*[one(f) for f in comp_files])
+        print(f"\r[XXXXXXXXXX] {ok + failed:,} done")
+    finally:
+        if zf:
+            zf.close()
+    print(f"[*] OK: {ok} | Failed: {failed}")
     for fname, err in first_errors.items():
         print(f"  [!] {fname}: {err}")
 
@@ -491,22 +550,44 @@ async def run_generate(
     count: int,
     session: Optional[aiohttp.ClientSession] = None,
     url: str = "",
-    ehr_id: str = "",
+    ehr_pool: list[str] = [],
+    fmt: str = "a",
+    packaging: str = "a",
 ) -> None:
     flat_files = sorted(f for f in os.listdir(FLAT_DIR) if f.endswith(".json"))
     if not flat_files:
         print("[!] No example skeleton compositions are found; run Setup (mode 3) first.")
         return
 
-    send_cdr   = dest == "b" and session is not None
+    canonical  = fmt == "b"
+    send_cdr   = (dest == "b" or canonical) and session is not None
     save_local = dest == "a"
+
     if save_local:
         for f in os.listdir(DIST_DIR):
             os.remove(os.path.join(DIST_DIR, f))
     ok = failed = 0
     first_errors: dict[str, str] = {}
     counters: dict[str, int] = {}
+    uid_records: list[tuple[str, str, str]] = []  # (out_name, ehr_id, uid)
     sem = asyncio.Semaphore(10)
+
+    zf = (
+        zipfile.ZipFile(os.path.join(DIST_DIR, "compositions.zip"), "w", zipfile.ZIP_DEFLATED)
+        if save_local and packaging == "b" else None
+    )
+
+    total     = count * len(flat_files)
+    tick_size = max(1, total // 10)
+    last_tick = 0
+
+    def _tick() -> None:
+        nonlocal last_tick
+        current = min(10, (ok + failed) // tick_size)
+        if current > last_tick:
+            last_tick = current
+            bar = "X" * last_tick + " " * (10 - last_tick)
+            print(f"\r[{bar}]", end="", flush=True)
 
     async def one(fname: str) -> None:
         nonlocal ok, failed
@@ -524,29 +605,159 @@ async def run_generate(
                 if wt_index is None:
                     raise ValueError(f"No webtemplate found for {template_id}")
 
+                stripped = strip_flat_uid(skeleton)
                 for _ in range(count):
-                    flat = strip_flat_uid(copy.deepcopy(skeleton))
+                    flat = copy.deepcopy(stripped)
                     flat = mutate_flat(flat, wt_index)
+                    ehr_id = random.choice(ehr_pool) if ehr_pool else ""
+                    n = counters.get(fname, 0)
+                    counters[fname] = n + 1
+                    out_name = f"{fname[:-5]}_{n:06d}.json"
                     if send_cdr:
-                        status, txt = await post_flat(session, url, ehr_id, template_id, flat)
+                        status, response, uid = await post_flat(
+                            session, url, ehr_id, template_id, flat
+                        )
                         if status not in (200, 201, 204):
-                            raise RuntimeError(f"{status} {txt[:600]}")
-                    if save_local:
-                        n = counters.get(fname, 0)
-                        counters[fname] = n + 1
-                        out_name = f"{fname[:-5]}_{n:06d}.json"
-                        with open(os.path.join(DIST_DIR, out_name), "w") as f2:
-                            json.dump(flat, f2, indent=2)
+                            raise RuntimeError(f"{status} {str(response)[:600]}")
+                        if canonical and uid:
+                            uid_records.append((out_name, ehr_id, uid))
+                    if save_local and not canonical:
+                        data = json.dumps(flat, indent=2)
+                        if zf:
+                            zf.writestr(out_name, data)
+                        else:
+                            with open(os.path.join(DIST_DIR, out_name), "w") as f2:
+                                f2.write(data)
                     ok += 1
+                    _tick()
             except Exception as e:
                 failed += 1
                 if fname not in first_errors:
                     first_errors[fname] = str(e)
+                _tick()
 
-    await asyncio.gather(*[one(f) for f in flat_files])
-    print(f"\n[*] Done. OK: {ok} | Failed: {failed}")
-    for fname, err in first_errors.items():
-        print(f"  [!] {fname}: {err}")
+    if total > 0:
+        print(f"[*] Posting {total:,} compositions ...")
+        print("[          ]", end="", flush=True)
+    try:
+        t0 = time.monotonic()
+        await asyncio.gather(*[one(f) for f in flat_files])
+        print(f"\r[XXXXXXXXXX] {ok + failed:,} done")
+        print(f"[*] OK: {ok} | Failed: {failed}")
+        for fname, err in first_errors.items():
+            print(f"  [!] {fname}: {err}")
+        _elapsed = int(time.monotonic() - t0)
+        _mins, _secs = divmod(_elapsed, 60)
+        print(f"[*] Time: {_mins}m {_secs}s" if _mins else f"[*] Time: {_secs}s")
+        if canonical and uid_records:
+            await fetch_canonical_aql(session, url, uid_records, zf)
+    finally:
+        if zf:
+            zf.close()
+
+
+# ── canonical fetch via AQL ────────────────────────────────────────────────────
+
+async def fetch_canonical_aql(
+    session: aiohttp.ClientSession,
+    url: str,
+    uid_records: list[tuple[str, str, str]],
+    zf: Optional[zipfile.ZipFile],
+) -> None:
+    """Fetch canonical compositions per EHR via AQL and save to disk."""
+    if not uid_records:
+        print("[!] No UID records — nothing to fetch via AQL.")
+        return
+
+    # Group by EHR. Track exact count separately — don't derive it from bucket
+    # size, since the bare-UUID fallback key may or may not be added (only when
+    # the UID contains '::'), making len(bucket) unreliable as a count.
+    ehr_buckets: dict[str, dict[str, str]] = {}  # ehr_id -> {uid_key: out_name}
+    ehr_counts:  dict[str, int]            = {}  # ehr_id -> n compositions posted
+    for out_name, ehr_id, uid in uid_records:
+        bucket = ehr_buckets.setdefault(ehr_id, {})
+        bucket[uid] = out_name
+        bare = uid.split("::")[0]
+        if bare != uid:
+            bucket.setdefault(bare, out_name)  # fallback only when actually different
+        ehr_counts[ehr_id] = ehr_counts.get(ehr_id, 0) + 1
+
+    total = len(uid_records)
+    ok = failed = resolved = 0
+    tick_size = max(1, total // 10)
+    last_tick = 0
+    sem = asyncio.Semaphore(10)
+
+    def _tick(n: int = 1) -> None:
+        nonlocal last_tick, resolved
+        resolved += n
+        current = min(10, resolved // tick_size)
+        if current > last_tick:
+            last_tick = current
+            bar = "X" * last_tick + " " * (10 - last_tick)
+            print(f"\r[{bar}]", end="", flush=True)
+
+    async def one_ehr(ehr_id: str, bucket: dict[str, str], expected: int) -> None:
+        nonlocal ok, failed
+        async with sem:
+            ehr_ok = 0
+            offset = 0
+            try:
+                while True:
+                    query = (
+                        f"SELECT c FROM EHR e[ehr_id/value='{ehr_id}'] "
+                        f"CONTAINS COMPOSITION c LIMIT {_AQL_PAGE} OFFSET {offset}"
+                    )
+                    async with session.post(
+                        f"{url}/query/aql",
+                        json={"q": query},
+                        headers={"Content-Type": "application/json", "Accept": "application/json"},
+                    ) as r:
+                        if r.status != 200:
+                            raise RuntimeError(f"AQL {r.status}: {await r.text()[:200]}")
+                        rows = (await r.json(content_type=None)).get("rows", [])
+                        for row in rows:
+                            comp = row[0] if row else None
+                            if not isinstance(comp, dict):
+                                continue
+                            uid_val = (comp.get("uid") or {}).get("value") or comp.get("_uid", "")
+                            out_name = bucket.get(uid_val)
+                            if out_name is None and "::" in uid_val:
+                                out_name = bucket.get(uid_val.split("::")[0])
+                            if out_name is None:
+                                continue  # composition belongs to this EHR but not this run
+                            data = json.dumps(comp, indent=2)
+                            if zf:
+                                zf.writestr(out_name, data)
+                            else:
+                                with open(os.path.join(DIST_DIR, out_name), "w") as f:
+                                    f.write(data)
+                            ehr_ok += 1
+                            ok += 1
+                            _tick()
+                        if len(rows) < _AQL_PAGE or ehr_ok >= expected:
+                            break
+                        offset += _AQL_PAGE
+                not_found = max(0, expected - ehr_ok)
+                if not_found:
+                    failed += not_found
+                    _tick(not_found)
+            except Exception as e:
+                shortfall = max(0, expected - ehr_ok)
+                failed += shortfall
+                _tick(shortfall)
+                print(f"\n  [!] AQL failed for EHR {ehr_id[:8]}…: {e}")
+
+    n_ehrs = len(ehr_buckets)
+    print(f"[*] Fetching canonical compositions for {n_ehrs} EHR(s) via AQL ...")
+    print("[          ]", end="", flush=True)
+    t0 = time.monotonic()
+    await asyncio.gather(*[one_ehr(eid, bkt, ehr_counts[eid]) for eid, bkt in ehr_buckets.items()])
+    print(f"\r[XXXXXXXXXX] {ok + failed:,} done")
+    print(f"[*] OK: {ok} | Failed: {failed}")
+    _elapsed = int(time.monotonic() - t0)
+    _mins, _secs = divmod(_elapsed, 60)
+    print(f"[*] Time: {_mins}m {_secs}s" if _mins else f"[*] Time: {_secs}s")
 
 
 # ── entry point ────────────────────────────────────────────────────────────────
@@ -590,64 +801,86 @@ async def main() -> None:
     print("3. Setup: upload opts and set up modelling environment")
     mode = input("Select mode: ").strip()
 
-    if mode == "3":
-        url, auth = prompt_api()
-        async with aiohttp.ClientSession(auth=auth) as session:
-            await upload_opts(session, url)
-            await run_setup(session, url)
-        return
-
-    if mode == "1":
-        comp_files = sorted(f for f in os.listdir(USER_COMPS_DIR) if f.endswith(".json"))
-        if not comp_files:
-            print(f"[!] No compositions in {USER_COMPS_DIR}.")
-            return
-        count = int(
-            input(f"Compositions found: {len(comp_files)}. Count per composition [1]: ").strip() or "1"
-        )
-        print("  (a) Save to local disk (dist/compositions/)")
-        print("  (b) Send to openEHR CDR")
-        dest = input("  Destination [a/b]: ").strip().lower()
-        if dest == "b":
-            api = load_api()
-            if not api:
-                return
-            url, auth = api
+    start = time.monotonic()
+    try:
+        if mode == "3":
+            url, auth = prompt_api()
             async with aiohttp.ClientSession(auth=auth) as session:
-                print("\n[*] Creating EHR ...")
-                ehr_id = await create_ehr(session, url)
-                print(f"[*] EHR: {ehr_id}\n")
-                await run_duplicate(dest, count, session, url, ehr_id)
-        else:
-            await run_duplicate(dest, count)
-        return
-
-    if mode == "2":
-        flat_files = sorted(f for f in os.listdir(FLAT_DIR) if f.endswith(".json"))
-        if not flat_files:
-            print("[!] No example skeleton compositions are found; run Setup (mode 3) first.")
+                await upload_opts(session, url)
+                await run_setup(session, url)
             return
-        count = int(
-            input(f"Skeletons found: {len(flat_files)}. Count per skeleton [1]: ").strip() or "1"
-        )
-        print("  (a) Save to local disk (dist/compositions/)")
-        print("  (b) Send to openEHR CDR")
-        dest = input("  Destination [a/b]: ").strip().lower()
-        if dest == "b":
-            api = load_api()
-            if not api:
-                return
-            url, auth = api
-            async with aiohttp.ClientSession(auth=auth) as session:
-                print("\n[*] Creating EHR ...")
-                ehr_id = await create_ehr(session, url)
-                print(f"[*] EHR: {ehr_id}\n")
-                await run_generate(dest, count, session, url, ehr_id)
-        else:
-            await run_generate(dest, count)
-        return
 
-    print("[!] Unknown mode.")
+        if mode == "1":
+            comp_files = sorted(f for f in os.listdir(USER_COMPS_DIR) if f.endswith(".json"))
+            if not comp_files:
+                print(f"[!] No compositions in {USER_COMPS_DIR}.")
+                return
+            count = int(
+                input(f"Compositions found: {len(comp_files)}. Count per composition [1]: ").strip() or "1"
+            )
+            print("  (a) Save to local disk (dist/compositions/)")
+            print("  (b) Send to openEHR CDR")
+            dest = input("  Destination [a/b]: ").strip().lower()
+            packaging = "a"
+            if dest == "a":
+                total = count * len(comp_files)
+                if total > 10000:
+                    pkg = input(f"  {total:,} compositions to save: (a) Individual files / (b) Zip [default]: ").strip().lower()
+                    packaging = "a" if pkg == "a" else "b"
+            if dest == "b":
+                api = load_api()
+                if not api:
+                    return
+                url, auth = api
+                async with aiohttp.ClientSession(auth=auth) as session:
+                    pool_size = max(1, (count * len(comp_files)) // 100)
+                    print(f"\n[*] Creating {pool_size} EHR(s) ...")
+                    ehr_pool = await create_ehr_pool(session, url, pool_size)
+                    await run_duplicate(dest, count, session, url, ehr_pool, packaging)
+            else:
+                await run_duplicate(dest, count, packaging=packaging)
+            return
+
+        if mode == "2":
+            flat_files = sorted(f for f in os.listdir(FLAT_DIR) if f.endswith(".json"))
+            if not flat_files:
+                print("[!] No example skeleton compositions are found; run Setup (mode 3) first.")
+                return
+            count = int(
+                input(f"Skeletons found: {len(flat_files)}. Count per skeleton [1]: ").strip() or "1"
+            )
+            print("  (a) Save to local disk (dist/compositions/)")
+            print("  (b) Send to openEHR CDR")
+            dest = input("  Destination [a/b]: ").strip().lower()
+            fmt = "a"
+            packaging = "a"
+            if dest == "a":
+                fmt_raw = input("  Format: (a) Flat [default] / (b) Canonical (via AQL): ").strip().lower()
+                fmt = fmt_raw if fmt_raw in ("a", "b") else "a"
+                total = count * len(flat_files)
+                if total > 10000:
+                    pkg = input(f"  {total:,} compositions to save: (a) Individual files / (b) Zip [default]: ").strip().lower()
+                    packaging = "a" if pkg == "a" else "b"
+            needs_cdr = dest == "b" or fmt == "b"
+            if needs_cdr:
+                api = load_api()
+                if not api:
+                    return
+                url, auth = api
+                async with aiohttp.ClientSession(auth=auth) as session:
+                    pool_size = max(1, (count * len(flat_files)) // 100)
+                    print(f"\n[*] Creating {pool_size} EHR(s) ...")
+                    ehr_pool = await create_ehr_pool(session, url, pool_size)
+                    await run_generate(dest, count, session, url, ehr_pool, fmt, packaging)
+            else:
+                await run_generate(dest, count, packaging=packaging)
+            return
+
+        print("[!] Unknown mode.")
+    finally:
+        elapsed = time.monotonic() - start
+        mins, secs = divmod(int(elapsed), 60)
+        print(f"[*] Total time: {mins}m {secs}s" if mins else f"[*] Total time: {secs}s")
 
 
 if __name__ == "__main__":
