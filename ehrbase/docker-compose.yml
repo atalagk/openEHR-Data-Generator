@@ -1,0 +1,72 @@
+#
+# Minimal setup for a running EHRbase. Contains the server component as well as the required postgres instance.
+# By Dr Koray Atalag, 24 Feb 2025
+#
+services:
+  #
+  # Pre-configured EHRbase Postgres Database
+  #
+  ehrbase-postgres:
+    image: ${EHRBASE_POSTGRES_IMAGE:-ehrbase/ehrbase-v2-postgres:16.2}
+    container_name: postgres_db
+    restart: unless-stopped
+    env_file:
+      - .env.ehrbase
+    healthcheck:
+      test: [ "CMD-SHELL", "pg_isready -U postgres" ]
+      interval: 5s
+      timeout: 5s
+      retries: 12
+    ports:
+      - "5432:5432"
+    networks:
+      - ehrbase-net
+    volumes:
+      - postgresdata:/var/lib/postgresql/data
+  #
+  # EHRBase container. see `.env.ehrbase` for configuration details.
+  #
+  ehrbase:
+    image: ${EHRBASE_IMAGE:-ehrbase/ehrbase}
+    container_name: ehrbase
+    restart: unless-stopped
+    env_file:
+      - .env.ehrbase
+    links:
+      - ehrbase-postgres
+      - keycloak
+    depends_on:
+      ehrbase-postgres:
+        condition: service_healthy
+      keycloak:
+        condition: service_started
+    ports:
+      - "8080:8080"
+    networks:
+      - ehrbase-net
+#
+# Keycloak container. Checks health of other containers
+#
+  keycloak:
+    image: quay.io/keycloak/keycloak:24.0.3
+    container_name: keycloak
+    command: "start-dev --import-realm"
+    ports:
+      - "8081:8080"
+    environment:
+      KEYCLOAK_ADMIN: admin
+      KEYCLOAK_ADMIN_PASSWORD: admin
+      KC_HTTP_RELATIVE_PATH: /auth
+      KC_HTTP_PORT: 8080
+    volumes:
+      - ./tests/keycloak/import:/opt/keycloak/data/import
+    networks:
+      - ehrbase-net
+#
+# internal network connecting containers
+#
+networks:
+  ehrbase-net: { }
+  
+volumes:
+  postgresdata:
