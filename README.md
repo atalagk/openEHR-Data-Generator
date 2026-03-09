@@ -1,106 +1,151 @@
 # openEHR Data Generator
-This is a fork of Berlin-Institute-of-Health / Genkidata (https://github.com/Berlin-Institute-of-Health/Genkidata)
 
-It has significant changes:
-- fixed quite a few validation issues
-- instead of just duplicating existing Compositions, it uses:
-    - An NLP library to change text to synonyms for DV_TEXT. While not perfect from a clinical semantics point of view, it's much better than lorem ipsum stuff!
-    - For quantities it changes values randomly between -15 <> +15 percent so it's likely to be clinically plausable.
-- in addition a new feature to create canonical Compositions from Webtemplates
+## For mere mortals :)
 
-Compositions are taken from test data from https://github.com/ehrbase/openEHR_SDK so they pretty much cover all possible variations.
+This tool generates synthetic openEHR with variation that does not break the original archetype or template constraints. You give it clinical templates or your existing canonical compositions — and it produces thousands (or more!) of realistic-looking records with varied values.
+Useful for testing, demonstrations, or training environments without using real patient data.
 
-The amount of Compositions and EHRs is defined by user input. 
+---
 
-## Requirements:
-* Running openEHR server (e.g. ehrbase) or openEHR v1 API wrapper to store em as canonical json.
-* python3.12
+## Overview
 
-### Assumptions:
-- Project is located on a LOCAL drive (not Google Drive / OneDrive)
-- Python 3.12 is installed
-- requirements.txt exists
-- gen-openehr-wt.py is the entry point
+Fork of [Berlin-Institute-of-Health / Genkidata](https://github.com/Berlin-Institute-of-Health/Genkidata), heavily refactored:
 
-### Setup
+- Mutation is driven by webtemplate (WT) constraints per rmType, not random guessing
+- Flat format (FLAT) used for generation; canonical format supported for duplication
+- Targets ehrbase via openEHR REST API v1; any spec-compliant CDR should work
+- Entry point: `gen-openehr.py`
 
-1. Open Terminal (Bash / PowerShell)
-2. Set current location to project directory
-3. Verify Python 3.12 is available; if not install
+Original app is also in project folder: `genkidata.py`
 
-#### Windows
+### EHRbase Setup (if needed)
+If you don't have access to an openEHR CDR, check /ehrbase folder for docker setup stuff (.env.ehrbase and docker-compose.yml which I improved from original ehrbase distribution; e.g. persistent DB and health checks to containers and more). 
+- go into `/ehrbase` folder
+- run docker compose up -d
 
-> `py -3.12 -V`
+And voila - in most cases it should be up and running on: `http://localhost:8080/ehrbase/rest/openehr/v1`
 
-#### Linux
+---
 
-> `python3.12 -V`
+## Modes
 
-   Expected: Python 3.12.x; if not found install
+### Mode 1 — Duplicate
+Reads canonical JSON compositions from `source_models/user_compositions/`, strips UIDs (if any),
+and posts each one N times to the CDR or saves to `dist/compositions/`.
+Use this when you have known-good canonical compositions and want to replicate them.
 
-   **Install Python 3.12**
+### Mode 2 — Generate
+Reads flat composition skeletons from `source_models/flat_composition_skeletons/`,
+applies WT-driven mutation per rmType, and posts or saves the result.
+Requires Mode 3 to have been run first to populate skeletons and webtemplates.
 
-#### Windows
+### Mode 3 — Setup
+Full environment preparation in one step:
+1. Clears `opt_webtemplates/` and `flat_composition_skeletons/`
+2. Prompts for ehrbase URL and credentials (saved to `ehrbase_config.json`)
+3. Uploads all `.opt` files from `source_models/opts/` to the CDR
+   - 200/201: extracts `template_id` from `Location` header
+   - 409 (already exists): extracts `template_id` from OPT XML body
+4. Fetches and saves webtemplates to `source_models/opt_webtemplates/`
+5. Fetches flat example compositions per WT and saves envelopes to `source_models/flat_composition_skeletons/`
 
-> Download and install from Web
+Re-running Mode 3 wipes and regenerates all artefacts. Credentials can be updated at this point.
 
-#### Linux
+---
 
-> sudo apt update
+## Mutation Rules (Mode 2)
 
-> sudo apt install python3.12 python3.12-venv
+Mutation is applied per WT node rmType. Keys matching protected path segments are always skipped.
 
+| rmType | Behaviour |
+|---|---|
+| `DV_QUANTITY` | ±10% jitter on `\|magnitude`; clamped to WT min/max range; `\|unit` untouched |
+| `DV_CODED_TEXT` (local) | Random pick from WT input code list |
+| `DV_CODED_TEXT` (openehr) | Untouched |
+| `DV_TEXT` | Shuffle words (multi-word); append random hex suffix (single word) |
+| `DV_DATE_TIME / DV_DATE / DV_TIME` | ±15% of one day (86 400 s) |
+| `DV_DURATION` | Untouched |
 
-4. Create a new virtual environment using Python 3.12
+**Protected path segments** (any key containing these is skipped entirely):
+`category`, `context`, `language`, `territory`, `composer`,
+`_work_flow_id`, `_guideline_id`, `_instruction_details`, `ism_transition`
 
-#### Windows
-> py -3.12 -m venv venv
+`ism_transition` is fully protected because `careflow_step`, `current_state`, and `transition`
+are tightly coupled — mutating one without the others produces invalid ISM state machine transitions.
 
-#### Linux
-> python3.12 -m venv venv
+---
 
+## Directory Layout
 
-5. Activate the virtual environment
+```
+source_models/
+  opts/                        # Input: OPT files to upload
+  opt_webtemplates/            # Generated by Mode 3: webtemplate JSONs
+  flat_composition_skeletons/  # Generated by Mode 3: flat example envelopes
+  user_compositions/           # Input: canonical JSONs for Mode 1
+dist/
+  compositions/                # Output: generated compositions
+ehrbase_config.json            # Saved API credentials (gitignored)
+ehrbase/
+```
 
-#### Windows
+Flat skeleton files are wrapped in an envelope:
+```json
+{ "template_id": "...", "flat_comp": { ... } }
+```
 
->  .\venv\Scripts\Activate.ps1
+---
 
-#### Linux
-> source venv/bin/activate
+## Requirements
 
-Expected prompt prefix: (venv)
+- Python 3.10+
+- Running ehrbase (or any openEHR REST API v1 compliant CDR)
+- `source_models/opts/` populated with your OPT files before running Mode 3
 
-6. Upgrade pip and install dependencies
+---
 
->  python -m pip install --upgrade pip setuptools wheel
+## Setup
 
->  python -m pip install -r requirements.txt
+### 1. Create and activate a virtual environment
 
+**Windows**
+```
+py -3.12 -m venv venv
+.\venv\Scripts\Activate.ps1
+```
 
-## Run the application
->  python gen-openehr-wt.py
+**Linux / macOS**
+```
+python3 -m venv venv
+source venv/bin/activate
+```
 
-It will prompt 3 options:
-1. API Upload
-2. Jitter Existing
-3. Stored (Source Webtemplates) 
+### 2. Install dependencies
+```
+python -m pip install --upgrade pip
+python -m pip install -r requirements.txt
+```
 
-Note: option 2 uses existing Compositions (\source_models\compositions) but rather than just duplicating in the original app it creates new values)
+### 3. Run
+```
+python3 gen-openehr.py
+```
 
-Important rules:
-- Do NOT move the venv directory after creation
-- Do NOT store venvs in Google Drive / OneDrive
-- If project folder is moved, delete and recreate venv
-- Treat venv as disposable; source files are the asset
+---
 
-If running in an IDE the getpass won't work, use static variable then as contained in the code.
+## Typical Workflow
 
-## Saving Generated Compositions as Canonical JSON
+1. Place `.opt` files in `source_models/opts/`
+2. Run **Mode 3** — enter ehrbase URL and credentials once; credentials saved to `ehrbase_config.json`
+3. Run **Mode 2** — choose count per skeleton and destination (local disk or CDR)
+4. Optionally place canonical JSONs in `source_models/user_compositions/` and use **Mode 1**
 
-Run the api2file app
+---
 
-    python api2file.py
+## Notes
 
-## Original App
-genkidata.py is also available in repo for reference.
+- `ehrbase_config.json` is gitignored. Re-run Mode 3 to update credentials or URL.
+- Mode 3 wipes `opt_webtemplates/` and `flat_composition_skeletons/` on every run — any manual edits to skeletons will be lost.
+- `dist/compositions/` is wiped at the start of every Mode 1 or Mode 2 local-save run.
+- Concurrency is capped at 10 parallel requests (asyncio semaphore) for all CDR calls.
+- Project must be on a local drive; do not store the venv in synced folders (OneDrive, Google Drive).

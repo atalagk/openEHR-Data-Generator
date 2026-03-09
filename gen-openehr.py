@@ -22,6 +22,7 @@ WT_DIR         = os.path.join(BASE, "opt_webtemplates")
 USER_COMPS_DIR = os.path.join(BASE, "user_compositions")
 FLAT_DIR       = os.path.join(BASE, "flat_composition_skeletons")
 DIST_DIR       = os.path.join("dist", "compositions")
+CONFIG_FILE    = "ehrbase_config.json"
 
 for d in (OPT_DIR, WT_DIR, USER_COMPS_DIR, FLAT_DIR, DIST_DIR):
     os.makedirs(d, exist_ok=True)
@@ -326,6 +327,8 @@ def extract_opt_template_id(xml_text: str) -> Optional[str]:
 # ── mode 3: upload OPTs ────────────────────────────────────────────────────────
 
 async def upload_opts(session: aiohttp.ClientSession, url: str) -> None:
+    for f in os.listdir(WT_DIR):
+        os.remove(os.path.join(WT_DIR, f))
     opt_files = [f for f in os.listdir(OPT_DIR) if f.endswith(".opt")]
     if not opt_files:
         print(f"[!] No .opt files found in {OPT_DIR}")
@@ -390,20 +393,20 @@ async def upload_opts(session: aiohttp.ClientSession, url: str) -> None:
     print(f"[*] Webtemplates saved (success:{wt_ok} | fail:{wt_fail} | total:{len(uploaded_ids)})")
 
 
-# ── mode 4: setup ──────────────────────────────────────────────────────────────
+# ── mode 3 step 2: fetch flat skeletons ───────────────────────────────────────
 
 async def run_setup(session: aiohttp.ClientSession, url: str) -> None:
-    # ── step 1: check webtemplates ────────────────────────────────────────────
+    # ── clear stale flat skeletons ────────────────────────────────────────────
+    for f in os.listdir(FLAT_DIR):
+        os.remove(os.path.join(FLAT_DIR, f))
+
+    # ── re-fetch webtemplates ─────────────────────────────────────────────────
     wt_files = sorted(f for f in os.listdir(WT_DIR) if f.endswith(".json"))
     if not wt_files:
-        print("[!] No webtemplates found in source_models/opt_webtemplates/")
-        print("    Run Mode 3 first to upload OPTs and fetch webtemplates.")
+        print("[!] No webtemplates found after upload — nothing to set up.")
         return
 
-    print(f"[*] Step 1: {len(wt_files)} webtemplate(s) found in {WT_DIR}")
-
-    # ── step 2: fetch flat example compositions ───────────────────────────────
-    print(f"\n[*] Step 2: Fetch flat example compositions -> {FLAT_DIR}")
+    print(f"[*] {len(wt_files)} webtemplate(s) found. Fetching flat examples -> {FLAT_DIR}")
     ok = failed = 0
     sem = asyncio.Semaphore(10)
 
@@ -413,7 +416,9 @@ async def run_setup(session: aiohttp.ClientSession, url: str) -> None:
             try:
                 with open(os.path.join(WT_DIR, fname)) as f:
                     wt = json.load(f)
-                tid = wt.get("templateId") or fname[:-5]
+                tid = wt.get("templateId")
+                if not tid:
+                    raise ValueError(f"No templateId in {fname}")
                 flat = await fetch_example_flat(session, url, tid)
                 envelope = {"template_id": tid, "flat_comp": flat}
                 with open(os.path.join(FLAT_DIR, f"{tid}.json"), "w") as f:
@@ -424,7 +429,7 @@ async def run_setup(session: aiohttp.ClientSession, url: str) -> None:
                 print(f"  [!] {fname}: {e}")
 
     await asyncio.gather(*[one(f) for f in wt_files])
-    print(f"  Flat examples fetched (success:{ok} | fail:{failed} | total:{len(wt_files)})")
+    print(f"[*] Flat examples fetched (success:{ok} | fail:{failed} | total:{len(wt_files)})")
 
 
 # ── mode 1: duplicate canonical compositions ───────────────────────────────────
@@ -490,7 +495,7 @@ async def run_generate(
 ) -> None:
     flat_files = sorted(f for f in os.listdir(FLAT_DIR) if f.endswith(".json"))
     if not flat_files:
-        print(f"[!] No flat skeletons in {FLAT_DIR}. Run mode 4 first.")
+        print("[!] No example skeleton compositions are found; run Setup (mode 3) first.")
         return
 
     send_cdr   = dest == "b" and session is not None
@@ -547,30 +552,48 @@ async def run_generate(
 # ── entry point ────────────────────────────────────────────────────────────────
 
 def prompt_api() -> tuple[str, aiohttp.BasicAuth]:
-    raw = input("API URL [http://localhost:8080/ehrbase/rest/openehr/v1]: ").strip().rstrip("/")
-    url = raw or "http://localhost:8080/ehrbase/rest/openehr/v1"
-    user = input("User [ehrbase-admin]: ").strip() or "ehrbase-admin"
-    pwd = input("Pass [ehrbase]: ").strip() or "ehrbase"
+    """Prompt for API credentials (Mode 3 only). Saves to config file."""
+    saved: dict = {}
+    if os.path.exists(CONFIG_FILE):
+        with open(CONFIG_FILE) as f:
+            saved = json.load(f)
+
+    default_url  = saved.get("url",      "http://localhost:8080/ehrbase/rest/openehr/v1")
+    default_user = saved.get("user",     "ehrbase-user")
+    default_pass = saved.get("password", "SuperSecretPassword")
+
+    raw  = input(f"API URL [{default_url}]: ").strip().rstrip("/")
+    url  = raw or default_url
+    user = input(f"User [{default_user}]: ").strip() or default_user
+    pwd  = input(f"Pass [{'*' * len(default_pass)}]: ").strip() or default_pass
+
+    with open(CONFIG_FILE, "w") as f:
+        json.dump({"url": url, "user": user, "password": pwd}, f, indent=2)
+
     return url, aiohttp.BasicAuth(user, pwd)
+
+
+def load_api() -> Optional[tuple[str, aiohttp.BasicAuth]]:
+    """Load saved API credentials silently. Returns None if config missing."""
+    if not os.path.exists(CONFIG_FILE):
+        print("[!] No API config found. Run Setup (mode 3) first.")
+        return None
+    with open(CONFIG_FILE) as f:
+        cfg = json.load(f)
+    return cfg["url"], aiohttp.BasicAuth(cfg["user"], cfg["password"])
 
 
 async def main() -> None:
     print("--- openEHR Synthetic Data Generator ---")
     print("1. Generate compositions from existing compositions (duplicate)")
     print("2. Generate compositions from templates and jitter")
-    print("3. Upload OPTs to openEHR CDR (run this when you want to add new opts)")
-    print("4. Setup modelling environment")
+    print("3. Setup: upload opts and set up modelling environment")
     mode = input("Select mode: ").strip()
 
     if mode == "3":
         url, auth = prompt_api()
         async with aiohttp.ClientSession(auth=auth) as session:
             await upload_opts(session, url)
-        return
-
-    if mode == "4":
-        url, auth = prompt_api()
-        async with aiohttp.ClientSession(auth=auth) as session:
             await run_setup(session, url)
         return
 
@@ -586,7 +609,10 @@ async def main() -> None:
         print("  (b) Send to openEHR CDR")
         dest = input("  Destination [a/b]: ").strip().lower()
         if dest == "b":
-            url, auth = prompt_api()
+            api = load_api()
+            if not api:
+                return
+            url, auth = api
             async with aiohttp.ClientSession(auth=auth) as session:
                 print("\n[*] Creating EHR ...")
                 ehr_id = await create_ehr(session, url)
@@ -599,7 +625,7 @@ async def main() -> None:
     if mode == "2":
         flat_files = sorted(f for f in os.listdir(FLAT_DIR) if f.endswith(".json"))
         if not flat_files:
-            print(f"[!] No flat skeletons in {FLAT_DIR}. Run mode 4 first.")
+            print("[!] No example skeleton compositions are found; run Setup (mode 3) first.")
             return
         count = int(
             input(f"Skeletons found: {len(flat_files)}. Count per skeleton [1]: ").strip() or "1"
@@ -608,7 +634,10 @@ async def main() -> None:
         print("  (b) Send to openEHR CDR")
         dest = input("  Destination [a/b]: ").strip().lower()
         if dest == "b":
-            url, auth = prompt_api()
+            api = load_api()
+            if not api:
+                return
+            url, auth = api
             async with aiohttp.ClientSession(auth=auth) as session:
                 print("\n[*] Creating EHR ...")
                 ehr_id = await create_ehr(session, url)

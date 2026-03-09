@@ -295,6 +295,7 @@ pyrightconfig.json
 /dist
 /archive
 *.bak
+ehrbase_config.json
 
 # Claude Code session data
 .claude/
