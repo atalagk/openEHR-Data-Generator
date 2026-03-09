@@ -296,6 +296,8 @@ pyrightconfig.json
 /archive
 *.bak
 ehrbase_config.json
+/source_models/opt_webtemplates
+/source_models/flat_composition_skeletons
 
 # Claude Code session data
 .claude/

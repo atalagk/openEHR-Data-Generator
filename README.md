@@ -34,10 +34,32 @@ Reads canonical JSON compositions from `source_models/user_compositions/`, strip
 and posts each one N times to the CDR or saves to `dist/compositions/`.
 Use this when you have known-good canonical compositions and want to replicate them.
 
+When saving locally (`a`), if the total composition count exceeds **10,000** the tool asks:
+```
+  12,000 compositions to save: (a) Individual files / (b) Zip [default]:
+```
+- Default (Enter or `b`) → single `dist/compositions/compositions.zip` (DEFLATE compressed)
+- `a` → individual `.json` files as before
+
 ### Mode 2 — Generate
 Reads flat composition skeletons from `source_models/flat_composition_skeletons/`,
 applies WT-driven mutation per rmType, and posts or saves the result.
 Requires Mode 3 to have been run first to populate skeletons and webtemplates.
+
+When saving locally (`a`), the tool first asks for the output format:
+```
+  Format: (a) Flat [default] / (b) Canonical (via AQL):
+```
+- **Flat** (default, `a`): saves the mutated flat JSON directly — no CDR connection needed.
+- **Canonical (via AQL)** (`b`): posts each flat composition to the CDR, then fetches the
+  canonical JSON back using paginated AQL (`SELECT c FROM EHR ... CONTAINS COMPOSITION c LIMIT 10 OFFSET n`)
+  and saves the CDR-returned canonical representation. Requires a live ehrbase connection.
+
+The same zip threshold applies: if total compositions exceed **10,000**, a packaging prompt appears
+(same wording as Mode 1). Per-phase elapsed time is printed after the generate and AQL-fetch phases:
+```
+[*] Time: 1m 23s
+```
 
 ### Mode 3 — Setup
 Full environment preparation in one step:
@@ -148,4 +170,5 @@ python3 gen-openehr.py
 - Mode 3 wipes `opt_webtemplates/` and `flat_composition_skeletons/` on every run — any manual edits to skeletons will be lost.
 - `dist/compositions/` is wiped at the start of every Mode 1 or Mode 2 local-save run.
 - Concurrency is capped at 10 parallel requests (asyncio semaphore) for all CDR calls.
+- Total elapsed time is always printed on exit: `[*] Total time: Xm Ys`.
 - Project must be on a local drive; do not store the venv in synced folders (OneDrive, Google Drive).
