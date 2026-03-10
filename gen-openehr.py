@@ -55,11 +55,6 @@ def load_wt_index(template_id: str) -> Optional[dict[str, dict]]:
     with open(path) as f:
         wt = json.load(f)
     root = wt.get("tree") or wt
-    # The WT tree root 'id' may be the COMPOSITION archetype id (e.g. 'encounter')
-    # rather than the template_id. Use the authoritative 'templateId' field from
-    # the WT so paths align with normalized flat keys.
-    tid = wt.get("templateId") or template_id
-    root = dict(root, id=tid)
     return build_wt_index(root)
 
 
@@ -395,7 +390,7 @@ async def upload_opts(session: aiohttp.ClientSession, url: str) -> None:
                         print(f"  [~] Already exists: {fname} (could not extract template_id from OPT)")
                 else:
                     failed += 1
-                    print(f"  [!] {fname} ({r.status}): {await r.text()[:120]}")
+                    print(f"  [!] {fname} ({r.status}): {(await r.text())[:120]}")
         except Exception as e:
             failed += 1
             print(f"  [!] {fname}: {e}")
