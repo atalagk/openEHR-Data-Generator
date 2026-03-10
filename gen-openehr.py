@@ -248,13 +248,17 @@ async def create_ehr(session: aiohttp.ClientSession, url: str) -> str:
 async def create_ehr_pool(
     session: aiohttp.ClientSession, url: str, size: int
 ) -> list[str]:
+    # Create one EHR first to initialize the server-side user record,
+    # avoiding a race condition when concurrent requests all try to create it.
+    first = await create_ehr(session, url)
     sem = asyncio.Semaphore(10)
     async def one() -> str:
         async with sem:
             return await create_ehr(session, url)
-    pool = await asyncio.gather(*[one() for _ in range(size)])
+    rest = await asyncio.gather(*[one() for _ in range(size - 1)])
+    pool = [first, *rest]
     print(f"[*] Created {size} EHR(s)\n")
-    return list(pool)
+    return pool
 
 
 async def fetch_webtemplate(
