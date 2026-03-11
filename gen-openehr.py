@@ -11,7 +11,8 @@ import xml.etree.ElementTree as ET
 import random
 import asyncio
 import urllib.parse
-import zipfile
+import tarfile
+import io
 import time
 import aiohttp
 from typing import Optional
@@ -73,6 +74,7 @@ def wt_path_of(flat_key: str) -> str:
 _PROTECTED_SEGMENTS = frozenset({
     "category", "context", "language", "territory", "composer",
     "_work_flow_id", "_guideline_id", "_instruction_details", "ism_transition",
+    "annotations",
 })
 
 
@@ -118,14 +120,19 @@ def mutate_flat(flat: dict, wt_index: dict[str, dict]) -> dict:
     Return a mutated copy of a flat composition using WT constraints.
 
     Rules:
-      b) Skip paths containing: category, context, language, territory, composer,
-         _work_flow_id, _guideline_id
+      b) Skip protected path segments (category, context, language, territory,
+         composer, _work_flow_id, _guideline_id, _instruction_details,
+         ism_transition, annotations)
       c) DV_CODED_TEXT with terminology "openehr" → untouched
       d) DV_QUANTITY → jitter |magnitude within WT min/max range, leave |unit alone
       e) DV_DURATION → untouched
       g) DV_CODED_TEXT with terminology "local" and WT list → pick randomly from list
-      h) DV_TEXT → prepend random digit 1–5 to existing string
-      i) DV_DATE_TIME / DV_DATE / DV_TIME → jitter within ±15% of one day
+      h) DV_ORDINAL → pick random entry from WT list; set |ordinal, |value, |code
+      i) DV_COUNT → random integer within WT validation range
+      j) DV_TEXT → if constrained list (listOpen=false): pick randomly from list; else shuffle words from node name, append hex if single word
+      k) DV_DATE_TIME / DV_DATE / DV_TIME → jitter within ±15% of one day
+      l) null_flavour → find mandatory null_flavour via aqlPath; inject as
+         element/<nf_wt_id>|code/value/terminology; value keys kept (both can be mandatory)
     """
     out = copy.deepcopy(flat)
 
@@ -186,18 +193,59 @@ def mutate_flat(flat: dict, wt_index: dict[str, dict]) -> dict:
                         elif key.endswith("|value"):
                             out[key] = chosen.get("label", chosen["value"])
 
+        # ── DV_ORDINAL ─────────────────────────────────────────────────────────
+        elif rm_type == "DV_ORDINAL":
+            inputs = wt_node.get("inputs") or []
+            coded_inp = next(
+                (i for i in inputs if i.get("type") == "CODED_TEXT" and i.get("list")),
+                None,
+            )
+            if coded_inp:
+                chosen = random.choice(coded_inp["list"])
+                for key in keys:
+                    if key.endswith("|ordinal"):
+                        out[key] = chosen["ordinal"]
+                    elif key.endswith("|value"):
+                        out[key] = chosen.get("label", chosen["value"])
+                    elif key.endswith("|code"):
+                        out[key] = chosen["value"]
+
+        # ── DV_COUNT ───────────────────────────────────────────────────────────
+        elif rm_type == "DV_COUNT":
+            inputs = wt_node.get("inputs") or []
+            int_inp = next((i for i in inputs if i.get("type") == "INTEGER"), None)
+            rng = (int_inp.get("validation") or {}).get("range") if int_inp else None
+            for key in keys:
+                if "|" not in key and isinstance(out[key], int):
+                    if rng:
+                        lo = int(rng.get("min", out[key]))
+                        hi = int(rng.get("max", out[key]))
+                        out[key] = random.randint(lo, hi)
+                    else:
+                        out[key] = max(0, out[key] + random.randint(-5, 5))
+
         # ── DV_TEXT ────────────────────────────────────────────────────────────
         elif rm_type == "DV_TEXT":
-            name_raw = wt_node.get("name") or ""
-            base = name_raw.get("value", "") if isinstance(name_raw, dict) else name_raw
-            for key in keys:
-                if "|" not in key and isinstance(out[key], str):
-                    words = (base or out[key]).split()
-                    if len(words) > 1:
-                        random.shuffle(words)
-                        out[key] = " ".join(words)
-                    else:
-                        out[key] = (base or out[key]) + " " + hex(random.randint(0, 0xFFFF))[2:]
+            inputs = wt_node.get("inputs") or []
+            text_inp = next((i for i in inputs if i.get("type") == "TEXT"), None)
+            enum_list = (text_inp.get("list") or []) if text_inp else []
+            list_open = text_inp.get("listOpen", True) if text_inp else True
+            if enum_list and not list_open:
+                # Constrained DV_TEXT: value must be one of the listed options
+                for key in keys:
+                    if "|" not in key and isinstance(out[key], str):
+                        out[key] = random.choice(enum_list)["value"]
+            else:
+                name_raw = wt_node.get("name") or ""
+                node_name = name_raw.get("value", "") if isinstance(name_raw, dict) else name_raw
+                for key in keys:
+                    if "|" not in key and isinstance(out[key], str):
+                        words = (node_name or out[key]).split()
+                        if len(words) > 1:
+                            random.shuffle(words)
+                            out[key] = " ".join(words)
+                        else:
+                            out[key] = (node_name or out[key]) + " " + hex(random.randint(0, 0xFFFF))[2:]
 
         # ── DV_DATE_TIME / DV_DATE / DV_TIME ──────────────────────────────────
         elif rm_type in ("DV_DATE_TIME", "DV_DATE", "DV_TIME"):
@@ -206,6 +254,55 @@ def mutate_flat(flat: dict, wt_index: dict[str, dict]) -> dict:
                     out[key] = _jitter_datetime(out[key], rm_type)
 
         # DV_DURATION and everything else → skip
+
+    # ── Inject mandatory null_flavour attributes ────────────────────────────────
+    # In ehrbase FLAT, null_flavour is represented via the WT id-based path of the
+    # null_flavour node (e.g. element/coded_text_value|code), NOT element/_null_flavour.
+    # Both the element value and null_flavour can be mandatory simultaneously —
+    # so we inject null_flavour WITHOUT removing existing value keys.
+
+    # Pre-build: parent ELEMENT WT path → (null_flavour WT node id, WT node)
+    nf_by_parent_wt: dict[str, tuple[str, dict]] = {}
+    for _p, _n in wt_index.items():
+        if _n.get("aqlPath", "").endswith("/null_flavour") and _n.get("min", 0) >= 1:
+            parent = _p.rsplit("/", 1)[0]
+            nf_id = _p.rsplit("/", 1)[1]  # e.g., "coded_text_value"
+            nf_by_parent_wt[parent] = (nf_id, _n)
+
+    for base in list(groups.keys()):
+        if _is_protected(base):
+            continue
+        wt_path = wt_path_of(base)
+        # Case 1: base IS the element (DV_CODED_TEXT / DV_TEXT elements)
+        nf_entry = nf_by_parent_wt.get(wt_path)
+        if nf_entry is not None:
+            nf_id, nf_wt_node = nf_entry
+            nf_base = base + "/" + nf_id
+        else:
+            # Case 2: base is value child under the element (DV_ORDINAL / DV_QUANTITY)
+            parent_wt_path = wt_path.rsplit("/", 1)[0]
+            nf_entry = nf_by_parent_wt.get(parent_wt_path)
+            if nf_entry is None:
+                continue
+            nf_id, nf_wt_node = nf_entry
+            nf_base = base.rsplit("/", 1)[0] + "/" + nf_id
+        # Skip if already present
+        if any(k.startswith(nf_base + "|") for k in out):
+            continue
+        # Get constrained list
+        inputs = nf_wt_node.get("inputs") or []
+        coded_inp = next((i for i in inputs if i.get("type") == "CODED_TEXT"), None)
+        if not coded_inp:
+            continue
+        nf_list = coded_inp.get("list") or []
+        nf_term = coded_inp.get("terminology", "openehr")
+        if not nf_list:
+            continue
+        # Inject null_flavour — value keys are kept; both can be mandatory in the same template
+        chosen = random.choice(nf_list)
+        out[nf_base + "|code"] = chosen["value"]
+        out[nf_base + "|value"] = chosen.get("label", chosen["value"])
+        out[nf_base + "|terminology"] = nf_term
 
     return out
 
@@ -512,7 +609,7 @@ async def run_duplicate(
     sem = asyncio.Semaphore(10)
 
     zf = (
-        zipfile.ZipFile(os.path.join(DIST_DIR, "compositions.zip"), "w", zipfile.ZIP_DEFLATED)
+        tarfile.open(os.path.join(DIST_DIR, "compositions.tar.gz"), "w:gz")
         if save_local and packaging == "b" else None
     )
 
@@ -544,7 +641,10 @@ async def run_duplicate(
                         out_name = f"{fname[:-5]}_{n:06d}.json"
                         data = json.dumps(clean, indent=2)
                         if zf:
-                            zf.writestr(out_name, data)
+                            buf = data.encode()
+                            ti = tarfile.TarInfo(name=out_name)
+                            ti.size = len(buf)
+                            zf.addfile(ti, io.BytesIO(buf))
                         else:
                             with open(os.path.join(DIST_DIR, out_name), "w") as f2:
                                 f2.write(data)
@@ -599,7 +699,7 @@ async def run_generate(
     sem = asyncio.Semaphore(10)
 
     zf = (
-        zipfile.ZipFile(os.path.join(DIST_DIR, "compositions.zip"), "w", zipfile.ZIP_DEFLATED)
+        tarfile.open(os.path.join(DIST_DIR, "compositions.tar.gz"), "w:gz")
         if save_local and packaging == "b" else None
     )
 
@@ -650,7 +750,10 @@ async def run_generate(
                     if save_local and not canonical:
                         data = json.dumps(flat, indent=2)
                         if zf:
-                            zf.writestr(out_name, data)
+                            buf = data.encode()
+                            ti = tarfile.TarInfo(name=out_name)
+                            ti.size = len(buf)
+                            zf.addfile(ti, io.BytesIO(buf))
                         else:
                             with open(os.path.join(DIST_DIR, out_name), "w") as f2:
                                 f2.write(data)
@@ -688,7 +791,7 @@ async def fetch_canonical_aql(
     session: aiohttp.ClientSession,
     url: str,
     uid_records: list[tuple[str, str, str]],
-    zf: Optional[zipfile.ZipFile],
+    zf: Optional[tarfile.TarFile],
 ) -> None:
     """Fetch canonical compositions per EHR via AQL and save to disk."""
     if not uid_records:
@@ -754,7 +857,10 @@ async def fetch_canonical_aql(
                                 continue  # composition belongs to this EHR but not this run
                             data = json.dumps(comp, indent=2)
                             if zf:
-                                zf.writestr(out_name, data)
+                                buf = data.encode()
+                                ti = tarfile.TarInfo(name=out_name)
+                                ti.size = len(buf)
+                                zf.addfile(ti, io.BytesIO(buf))
                             else:
                                 with open(os.path.join(DIST_DIR, out_name), "w") as f:
                                     f.write(data)
@@ -851,7 +957,7 @@ async def main() -> None:
             if dest == "a":
                 total = count * len(comp_files)
                 if total > 10000:
-                    pkg = input(f"  {total:,} compositions to save: (a) Individual files / (b) Zip [default]: ").strip().lower()
+                    pkg = input(f"  {total:,} compositions to save: (a) Individual files / (b) tar.gz [default]:").strip().lower()
                     packaging = "a" if pkg == "a" else "b"
             if dest == "b":
                 api = load_api()
@@ -885,7 +991,7 @@ async def main() -> None:
                 fmt = fmt_raw if fmt_raw in ("a", "b") else "a"
                 total = count * len(flat_files)
                 if total > 10000:
-                    pkg = input(f"  {total:,} compositions to save: (a) Individual files / (b) Zip [default]: ").strip().lower()
+                    pkg = input(f"  {total:,} compositions to save: (a) Individual files / (b) tar.gz [default]:").strip().lower()
                     packaging = "a" if pkg == "a" else "b"
             needs_cdr = dest == "b" or fmt == "b"
             if needs_cdr:

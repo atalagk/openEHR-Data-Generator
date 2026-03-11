@@ -296,6 +296,7 @@ pyrightconfig.json
 /archive
 *.bak
 ehrbase_config.json
+api2file.py
 /source_models/opt_webtemplates
 /source_models/flat_composition_skeletons
 

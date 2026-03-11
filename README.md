@@ -2,21 +2,17 @@
 
 ## For mere mortals :)
 
-This tool generates synthetic openEHR with variation that does not break the original archetype or template constraints. You give it clinical templates or your existing canonical compositions — and it produces thousands (or more!) of realistic-looking records with varied values.
+This tool generates synthetic openEHR with variation that does not break the original archetype or template constraints. You can upload operational templates (opt) or your existing canonical compositions — and it produces as many flat or canonical compositions as you want (>10k files will be given as tar.gz )
 Useful for testing, demonstrations, or training environments without using real patient data.
 
 ---
 
 ## Overview
 
-Fork of [Berlin-Institute-of-Health / Genkidata](https://github.com/Berlin-Institute-of-Health/Genkidata), heavily refactored:
-
 - Mutation is driven by webtemplate (WT) constraints per rmType, not random guessing
 - Flat format (FLAT) used for generation; canonical format supported for duplication
-- Targets ehrbase via openEHR REST API v1; any spec-compliant CDR should work
+- Targets ehrbase via openEHR REST API v1; any openEHR REST API v1 spec-compliant CDR should work
 - Entry point: `gen-openehr.py`
-
-Original app is also in project folder: `genkidata.py`
 
 ### EHRbase Setup (if needed)
 If you don't have access to an openEHR CDR, check /ehrbase folder for docker setup stuff (.env.ehrbase and docker-compose.yml which I improved from original ehrbase distribution; e.g. persistent DB and health checks to containers and more). 
@@ -32,13 +28,13 @@ And voila - in most cases it should be up and running on: `http://localhost:8080
 ### Mode 1 — Duplicate
 Reads canonical JSON compositions from `source_models/user_compositions/`, strips UIDs (if any),
 and posts each one N times to the CDR or saves to `dist/compositions/`.
-Use this when you have known-good canonical compositions and want to replicate them.
+Use this when you have known-good canonical compositions and want to replicate them. Obviously you should have opt in the CDR (you can use Mode 3 to upload opt)
 
 When saving locally (`a`), if the total composition count exceeds **10,000** the tool asks:
 ```
-  12,000 compositions to save: (a) Individual files / (b) Zip [default]:
+  e.g. 12,000 compositions to save: (a) Individual files / (b) Zip [default]:
 ```
-- Default (Enter or `b`) → single `dist/compositions/compositions.zip` (DEFLATE compressed)
+- Default (Enter or `b`) → single `dist/compositions/compositions.tar.gz` (gzip compressed)
 - `a` → individual `.json` files as before
 
 ### Mode 2 — Generate
@@ -53,13 +49,10 @@ When saving locally (`a`), the tool first asks for the output format:
 - **Flat** (default, `a`): saves the mutated flat JSON directly — no CDR connection needed.
 - **Canonical (via AQL)** (`b`): posts each flat composition to the CDR, then fetches the
   canonical JSON back using paginated AQL (`SELECT c FROM EHR ... CONTAINS COMPOSITION c LIMIT 10 OFFSET n`)
-  and saves the CDR-returned canonical representation. Requires a live ehrbase connection.
+  and saves the CDR-returned canonical representation. Requires a live CDR connection.
 
-The same zip threshold applies: if total compositions exceed **10,000**, a packaging prompt appears
-(same wording as Mode 1). Per-phase elapsed time is printed after the generate and AQL-fetch phases:
-```
-[*] Time: 1m 23s
-```
+The same tar.gz threshold applies: if total compositions exceed **10,000**, a packaging prompt appears
+(same wording as Mode 1). 
 
 ### Mode 3 — Setup
 Full environment preparation in one step:
@@ -87,10 +80,13 @@ Mutation is applied per WT node rmType. Keys matching protected path segments ar
 | `DV_TEXT` | Shuffle words (multi-word); append random hex suffix (single word) |
 | `DV_DATE_TIME / DV_DATE / DV_TIME` | ±15% of one day (86 400 s) |
 | `DV_DURATION` | Untouched |
+| `DV_ORDINAL` | Random pick from WT list; sets `\|ordinal`, `\|value`, `\|code` |
+| `DV_COUNT` | Random integer within WT validation range |
+| `null_flavour` (mandatory) | Injected via WT id path (e.g. `element/coded_text_value\|code`); value keys kept |
 
 **Protected path segments** (any key containing these is skipped entirely):
 `category`, `context`, `language`, `territory`, `composer`,
-`_work_flow_id`, `_guideline_id`, `_instruction_details`, `ism_transition`
+`_work_flow_id`, `_guideline_id`, `_instruction_details`, `ism_transition`, `annotations`
 
 `ism_transition` is fully protected because `careflow_step`, `current_state`, and `transition`
 are tightly coupled — mutating one without the others produces invalid ISM state machine transitions.
