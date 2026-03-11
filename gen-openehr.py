@@ -270,16 +270,22 @@ async def fetch_webtemplate(
 
 
 async def fetch_example_flat(
-    session: aiohttp.ClientSession, url: str, template_id: str
+    session: aiohttp.ClientSession, url: str, template_id: str, retries: int = 3, delay: float = 2.0
 ) -> dict:
-    async with session.get(
-        f"{url}/definition/template/adl1.4/{template_id}/example",
-        params={"format": "FLAT"},
-        headers={"Accept": "application/json"},
-    ) as r:
-        if r.status != 200:
-            raise RuntimeError(f"Flat example fetch failed {r.status}: {await r.text()[:200]}")
-        return await r.json(content_type=None)
+    for attempt in range(1, retries + 1):
+        async with session.get(
+            f"{url}/definition/template/adl1.4/{template_id}/example",
+            params={"format": "FLAT"},
+            headers={"Accept": "application/json"},
+        ) as r:
+            if r.status == 200:
+                return await r.json(content_type=None)
+            err = (await r.text())[:200]
+            if r.status == 500 and attempt < retries:
+                await asyncio.sleep(delay)
+                continue
+            raise RuntimeError(f"Flat example fetch failed {r.status}: {err}")
+    raise RuntimeError("fetch_example_flat: unreachable")
 
 
 async def post_canonical(
@@ -390,7 +396,14 @@ async def upload_opts(session: aiohttp.ClientSession, url: str) -> None:
                         print(f"  [~] Already exists: {fname} (could not extract template_id from OPT)")
                 else:
                     failed += 1
-                    print(f"  [!] {fname} ({r.status}): {(await r.text())[:120]}")
+                    err_body = await r.text()
+                    print(f"  [!] {fname} ({r.status}): {err_body[:200]}")
+                    print(f"      Refer to openEHR specs to fix this template.")
+                    opt_path = os.path.join(OPT_DIR, fname)
+                    answer = input(f"  Rename to {fname}_invalid to skip in future runs? [y/n]: ").strip().lower()
+                    if answer == "y":
+                        os.rename(opt_path, opt_path + "_invalid")
+                        print(f"  Renamed to {fname}_invalid.")
         except Exception as e:
             failed += 1
             print(f"  [!] {fname}: {e}")
@@ -434,17 +447,19 @@ async def run_setup(session: aiohttp.ClientSession, url: str) -> None:
         return
 
     print(f"[*] {len(wt_files)} webtemplate(s) found. Fetching flat examples -> {FLAT_DIR}")
-    ok = failed = 0
+    ok = 0
+    failures: list[tuple[str, str, str]] = []  # (fname, wt_path, tid)
     sem = asyncio.Semaphore(10)
 
     async def one(fname: str) -> None:
-        nonlocal ok, failed
+        nonlocal ok
         async with sem:
+            tid: str = fname[:-5]  # fallback: strip .json
             try:
                 with open(os.path.join(WT_DIR, fname)) as f:
                     wt = json.load(f)
-                tid = wt.get("templateId")
-                if not tid:
+                tid = wt.get("templateId") or tid
+                if not wt.get("templateId"):
                     raise ValueError(f"No templateId in {fname}")
                 flat = await fetch_example_flat(session, url, tid)
                 envelope = {"template_id": tid, "flat_comp": flat}
@@ -452,11 +467,23 @@ async def run_setup(session: aiohttp.ClientSession, url: str) -> None:
                     json.dump(envelope, f, indent=2)
                 ok += 1
             except Exception as e:
-                failed += 1
+                failures.append((fname, os.path.join(WT_DIR, fname), tid))
                 print(f"  [!] {fname}: {e}")
 
     await asyncio.gather(*[one(f) for f in wt_files])
-    print(f"[*] Flat examples fetched (success:{ok} | fail:{failed} | total:{len(wt_files)})")
+    print(f"[*] Flat examples fetched (success:{ok} | fail:{len(failures)} | total:{len(wt_files)})")
+
+    for fname, wt_path, tid in failures:
+        opt_path = os.path.join(OPT_DIR, f"{tid}.opt")
+        answer = input(f"  Mark {tid}.opt as invalid and delete its webtemplate? [y/n]: ").strip().lower()
+        if answer == "y":
+            if os.path.exists(opt_path):
+                os.rename(opt_path, opt_path + "_invalid")
+                print(f"  Renamed {tid}.opt -> {tid}.opt_invalid.")
+            else:
+                print(f"  [!] OPT not found at {opt_path} — skipping rename.")
+            os.remove(wt_path)
+            print(f"  Deleted webtemplate {fname}.")
 
 
 # ── mode 1: duplicate canonical compositions ───────────────────────────────────
@@ -854,7 +881,7 @@ async def main() -> None:
             fmt = "a"
             packaging = "a"
             if dest == "a":
-                fmt_raw = input("  Format: (a) Flat [default] / (b) Canonical (via AQL): ").strip().lower()
+                fmt_raw = input("  Format: (a) Flat [default] / (b) Canonical (via AQL-note this requires POST to CDR): ").strip().lower()
                 fmt = fmt_raw if fmt_raw in ("a", "b") else "a"
                 total = count * len(flat_files)
                 if total > 10000:
